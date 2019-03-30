@@ -43,7 +43,7 @@ It can be interesting for:
 
 * We maintain a single-writer, append-only log per user, for which [bamboo](https://github.com/AljoschaMeyer/bamboo) is used.
 * We need a datascheme for log messages to describe announcement, changes of `events` and `resources` plus authorization of `resources`.
-* Inspired by [Secure Scuttlebut](https://www.scuttlebutt.nz/) a gossip protocol is used to replicate the logs over an overlay network. The gossip Protocol implementation must run in a webbrowser and therefore uses WebRTC. This might reuse [pray-wrtc](https://ran3d.github.io/spray-wrtc/), if not in implementation then in spirit.
+* Inspired by [Secure Scuttlebut](https://www.scuttlebutt.nz/) a gossip protocol is used to replicate the logs over an overlay network. The gossip Protocol implementation must run in a webbrowser and therefore uses WebRTC. This might reuse [spray-wrtc](https://ran3d.github.io/spray-wrtc/), if not in implementation then in spirit.
 * `p2panda` reads and writes messages from the logs and offers a simple web UI (via React) to manage `resources` and `events` and the `authorizations`.
 * An API for resource authorization mechanisms makes `authorization` pluggable (default is *first-come-first-serve* but you could think of clicking a reject or confirm button, a telephone interview or having to play a computer game first :smile:).
 
