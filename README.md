@@ -67,3 +67,4 @@ Further work might consist of lifting any of these constraints. There are also s
 ## References
 
 * [HOFFNUNG 3000](https://github.com/adzialocha/hoffnung3000) - Platform for self-curated festivals
+* [Shirokuma Cafe](https://en.wikipedia.org/wiki/Shirokuma_Cafe) - :panda_face:
