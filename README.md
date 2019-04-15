@@ -15,21 +15,21 @@ A particularly important class of resources are locations. While internally loca
 
 It can be interesting for:
 
-* Houseprojects, Hackerspaces or places which have multiple rooms and tools to share internally
-* Organisations, initiatives or (art) projects which are active over whole cities, regions or the world
-* Conferences, museums, galleries, festivals which want to experiment with alternative ways of curation
-* Multiple collectives and initiatives reusing places and resources in different cities at different times
-* Fun or esoteric things like a festival in only virtual spaces or even *no* places
+* Houseprojects, Hackerspaces or places which have multiple rooms and tools to share internally.
+* Organisations, initiatives or (art) projects which are active over whole cities, regions or the world.
+* Conferences, museums, galleries, festivals which want to experiment with alternative ways of curation.
+* Multiple collectives and initiatives reusing places and resources in different cities at different times.
+* Fun or esoteric things like a festival in only virtual spaces or even *no* places.
 
 ## Goals
 
-* Work offline and without a privileged server. `p2panda` distributes all data in a server-less peer-to-peer network structure using a [Gossip](https://en.wikipedia.org/wiki/Gossip_protocol) protocol
-* `p2panda` does not require any form of authentication except of keypair verification based on self-generated cryptographic keys
-* User applications should be simple, to be used by as many people as possible / accessible and non-technical
-* `p2panda` should run in a browser
+* Work offline and without a privileged server. `p2panda` distributes all data in a server-less peer-to-peer network structure using a [Gossip](https://en.wikipedia.org/wiki/Gossip_protocol) protocol.
+* `p2panda` does not require any form of authentication except of keypair verification based on self-generated cryptographic keys.
+* User applications should be simple, to be used by as many people as possible / accessible and non-technical.
+* `p2panda` should run in a browser.
 * Policies should not necessarily be decided in the technical architecture to keep `p2panda` as simple and uncomplicated as possible. We believe that time, space and availability policies can be discussed and announced in social ways or via other platforms (webpage).
 * Separate user applications and core libraries in separate modules to allow alternative implementations, clients etc.
-* Ensure a fork-able data structure (eg. imagine a festival which can be "cloned")
+* Ensure a fork-able data structure (eg. imagine a festival which can be "cloned").
 
 ## Semantics
 
