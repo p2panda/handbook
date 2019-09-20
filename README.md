@@ -1,4 +1,4 @@
-@p2panda/design-document
+p2panda design document
 ===
 
 This document serves as an architectural specification and design of `p2panda` for development. All content is in draft status and open for discussion.
