@@ -7,9 +7,9 @@ This document serves as an architectural specification and design of `p2panda` f
 
 `p2panda` is **p2:panda_face:**
 
-A collection of applications, libraries and tools for users and developers to set up groups, festivals, gatherings, events or spaces that focus on flat hierarchies, corruption prevention, self-organization, decentralization and generally alternative ways of organizing.
+A collection of applications, libraries and tools for users, bots and developers to set up groups, festivals, gatherings, events or spaces that focus on self-organization, decentralization and generally alternative ways of organizing.
 
-The basic data structures of `p2panda` are: `users`, `resources`, and `events`. Users create and share resources and events. Events need some set of resources to be executed. P2:panda_face: helps users coordinate the process of mapping available resources to the events that need them.
+The basic data structures of `p2panda` are: `users`, `resources`, and `events` (terminology might change soon as it is too strictly tied to festivals right now). Users create and share resources and events. Events need some set of resources to be executed. P2:panda_face: helps users coordinate the process of mapping available resources to the events that need them.
 
 A particularly important class of resources are locations. While internally locations can be modelled as ordinary resources, the UI gives them special treatment.
 
@@ -29,7 +29,6 @@ It can be interesting for:
 * `p2panda` should run in a browser.
 * Policies should not necessarily be decided in the technical architecture to keep `p2panda` as simple and uncomplicated as possible. We believe that time, space and availability policies can be discussed and announced in social ways or via other platforms (webpage).
 * Separate user applications and core libraries in separate modules to allow alternative implementations, clients etc.
-* Ensure a fork-able data structure (eg. imagine a festival which can be "cloned").
 
 ## Semantics
 
