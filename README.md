@@ -80,3 +80,8 @@ These use cases describe how we imagine p2panda to be used. This does not preclu
 - p2panda can be used to "hijack" other festivals. Groups can enter other festivals and register their infrastructure / events etc. to enact p2panda upon it.
 - Have sub-curators during a defined (festival) time-frame. Do a "call for festivals" or a "call for collectives", curating independently but interdependently their festival logic within p2panda. They can be based on competently different clients / plugins / aesthetics / ideas / philosophies, take place in different parts of the world, but still be parse-able by others as long as they follow the p2panda data structure. Another idea is to have a "call for AIs" and ask for teams who want to contribute bot curators.
 - Have virtual spaces the festival can take place in, like a 3D world / game. Users can create events in X/Y/Z positions in this 3D space.
+
+## References
+
+* [HOFFNUNG 3000](https://github.com/adzialocha/hoffnung3000) - Platform for self-curated festivals
+* [Shirokuma Cafe](https://en.wikipedia.org/wiki/Shirokuma_Cafe) - :panda_face:
