@@ -6,10 +6,10 @@ A festival can be anything you want to plan with your friends, your circle, your
 
 What is in it?
 
-- **Decentralised Infrastructure for Self-Organized Events:** Let your festival unfold on its own. Every connected device can register venues, materials and ressources that can then be put together by everybody to plan and document a series of events.
+- **Decentralised Infrastructure for Self-Organized Events:** Let your festival unfold on its own. Every connected device can register venues, materials and resources that can then be put together by everybody to plan and document a series of events.
 - **Radical Authorization:** Just install a p2panda client to get started, no need to make an account, set a password, etc. Connect with other devices to start making plans together. Everybody starts out equally: Whether you are an organizer, performer or visitor is just decided by your actions and not determined by the type of account you have.
 - **Offline first:** Every device has its own copy of all information, which lets p2panda work independent of an Internet connection, obliterates a cloud infrastructure and creates an ephemeral archive for every participant. p2panda clients create a peer-to-peer network to exchange and sync information.
-- **Open Protocol:** Like to code? p2panda is an easy-to-extend protocol that records the connection of users, ressources and events. You can create a serendipity bot that occasionally creates random meeting events for your festival goers, or a hardware display with a live update of the festival schedule, or an archive bot that makes available a permanent copy of the festival on the world wide web or … just imagine.
+- **Open Protocol:** Like to code? p2panda is an easy-to-extend protocol that records the connection of users, resources and events. You can create a serendipity bot that occasionally creates random meeting events for your festival goers, or a hardware display with a live update of the festival schedule, or an archive bot that makes available a permanent copy of the festival on the world wide web or … just imagine.
 - **Warmth:** Computers make it easy to get carried away by their rigidly structured ways. However, every computer also contains an undeniable sparkle of pure chaos. We want to capture that spark to ignite a campfire for you to gather around and get cosy.
 
 ## Status Quo: October 2019
@@ -27,11 +27,11 @@ The following lists goals and non-goals for the schema and implementations in an
 ### Goals for the p2panda schema
 
 - Open schema that can be distributed by any kind of client that implements it. Make it easy for devs to extend the protocol and to create their own stuff with it.
-- The schema records users, ressources, authorizations, events and festivals
+- The schema records users, resources, authorizations, events and festivals
   - every p2panda installation is a user but bots can also be users. `user` is a cryptographic key pair stored on a device. `users` announce new `resources` or `events` and authorize `resource` requests of `resources` they created.
-  - resource` is very loosely defined and can be anything users want to share with others (a physical object, a skill, etc.), `locations` are also `resources` and can be defined by a GPS position, (a physical address?) or a virtual address (a URL, 3D coordinate etc. ?). Resources can be created by `users`, the single creator of a resource becomes its `owner`.
-  - authorization` is an `owner` confirming or denying a requested `resource` for an `event`. The policy by which an owner authorizes a resource is up to that owner. P2:panda_face: will initially implement the *first-come-first-served* policy and the *manual confirmation* policy.
-  - festivals` are the nestable contexts that contain resources `resources`, `events` and `authorizations`. They also provide the boundaries for gossip exchange.
+  - `resource` is very loosely defined and can be anything users want to share with others (a physical object, a skill, etc.), `locations` are also `resources` and can be defined by a GPS position, (a physical address?) or a virtual address (a URL, 3D coordinate etc. ?). Resources can be created by `users`, the single creator of a resource becomes its `owner`.
+  - `authorization` is an `owner` confirming or denying a requested `resource` for an `event`. The policy by which an owner authorizes a resource is up to that owner. P2:panda_face: will initially implement the *first-come-first-served* policy and the *manual confirmation* policy.
+  - `festivals` are the nestable contexts that contain resources `resources`, `events` and `authorizations`. They also provide the boundaries for gossip exchange.
 - An implementation should generate a unique cryptographic key-pair on every first start, this is enough to make sure that every message the key owner sends can be verified and connected to it (if someone changed the message afterwards it will fail).
 - Flexibility with regards to how ressource usage is authorized. Base case would be: A user requests usage of a ressource registered to another user. The owner confirms this request manually. Other possibilites: majority vote, automatic allocation unless there are conflicts, require multiple confirmations (e.g. any two other users must confirm)
 - Plurality: Since p2panda is decentralized it is not consistent by nature, meaning that every peer sees a different part and state of it.
@@ -54,8 +54,8 @@ The following lists goals and non-goals for the schema and implementations in an
 These use cases describe how we imagine p2panda to be used. This does not preclude other use cases – on the contrary, our design decisions should allow for flexibility and hackability.
 
 - Let users see a festival schedule and create events for it
-- Let users schedule usage of many ressources owned by a collective / organization
-- Let users setup a bot that creates random meetings between other users with random assigned ressources
+- Let users schedule usage of many resources owned by a collective / organization
+- Let users setup a bot that creates random meetings between other users with random assigned resources
 - p2panda is strictly speaking just a definition of data schemas which can be distributed and interpreted by any kind of client which follows this definition. However, the use, interface and purpose on how p2panda is used is not further defined, which gives some freedom in what a client actually could be. Examples:
   - A festival tool which displays a calendar and gives the user the possibility to create own events, manage and share resources with others (this is the BLATT 3000 use-case).
   - A simple widget one can display on a page / dashboard / projector to show the next events.
