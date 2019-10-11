@@ -2,7 +2,7 @@
 
 p2panda is a futuristic way to get together in self-organized festivals. 
 
-A festival can be anything you want to plan with your friends, your circle, your collective – or people you have never met before: Give p2panda to your devices and create workshops, gatherings, concerts or conferences using just the computers and phones you already have – independent of any cloud infrastructure.
+A festival can be anything you want to plan with your friends, your circle, your collective, your commune – or people you have never met before: Give p2panda to your devices and create workshops, gatherings, initiatives, concerts or conferences using just the computers and phones you already have – independent of any commercial cloud infrastructure.
 
 What is in it?
 
@@ -19,6 +19,14 @@ Currently, the p2panda protocol schema and implementations are being designed. T
 ## Design and Implementation
 
 p2panda will be a collection of applications, libraries and tools for users, bots and developers to set up groups, festivals, gatherings, events or spaces that focus on self-organization, decentralization and generally alternative ways of organizing. 
+
+It can be interesting for:
+
+* Houseprojects, Hackerspaces or places which have multiple rooms and tools to share internally.
+* Organisations, initiatives or (art) projects which are active over whole cities, regions or the world.
+* Conferences, museums, galleries, festivals which want to experiment with alternative ways of curation.
+* Multiple collectives and initiatives reusing places and resources in different cities at different times.
+* Fun or esoteric things like a festival in only virtual spaces or even no places.
 
 They are connected by the p2panda protocol, which is yet to be defined. It could be an extension to an existing protocol like Secure Scuttlebutt or it could be a completely new schema.
 
