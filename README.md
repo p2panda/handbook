@@ -32,7 +32,34 @@ They are connected by the p2panda protocol, which is yet to be defined. It could
 
 The following lists goals and non-goals for the schema and implementations in an open basket fashion. How these are prioritised is to be declared.
 
-### Goals for the p2panda schema
+### Setup
+
+p2panda consists of two components which are mostly identical to the setup of a typical [SSB](https://www.scuttlebutt.nz/) application:
+
+* **Server**, holding all data and offering an API to query and update it
+* **Client**, renders requested data and sends signed new messages to the Server
+
+With these two components a few setup configurations for p2panda are imaginable:
+
+* Website (mobile / desktop) with external server (hosted on dedicated p2panda hardware or any other machine)
+* Electron Client (or similar) which contains both server and client
+* Website (mobile / desktop) which contains both server and client (not possible right now due to browser limitations / performance bottlenecks)
+
+#### Server
+
+* Holds all known append-only logs. Awaits signed messages from clients which then are added to the logs via an API (database)
+* Accepts queries to filter currently known data and returns it to the client via an API 
+* Verifies the consistency and signature of logs and removes invalid ones
+* Finds other servers (discovery)
+* Replicates / syncs logs with other servers (replication)
+
+#### Client
+
+* Renders data to view which gets requested from Server via API
+* Holds the generated keypair and sensitive informations (private key)
+* Signs new messages with private key and sends signed message via API to Server
+
+### Schema
 
 - Open schema that can be distributed by any kind of client that implements it. Make it easy for devs to extend the protocol and to create their own stuff with it.
 - The schema records users, resources, authorizations, events and festivals
@@ -46,16 +73,19 @@ The following lists goals and non-goals for the schema and implementations in an
 - Anonymity: p2panda only needs the cryptographic key-pair to verify peers and therefore does not need any authentication through email address etc. - technically speaking its not anonymous (you are still being connected to your IP address for example), but even this can be solved with the SSB Tor plugin and VPNs.
 - Security: p2panda should be usable for politically sensitive plannings by offering e2e encryption. This is not implemented by default but one could think of clients which uses the NOISE protocol, Tor and private messaging / e2e encryption feature of SSB.
 
-### Goals for p2panda implementations
+### Client UI / UX
+
+- Indicate the current "health" status of yourself, how much do you "replicate" your data with others right now / how connected are you with others? This is an important indicator to make users understand about their impact on the "reach ability" by others. Since everyone serves their own data it comes with a larger responsibility to distribute it yourself / make yourself available.
+- Indicate the "last active" status of others (not necessarily in time). This can be an indicator on how reliable a peer is.
+- Show to everyone (not only to the organizer) how much an event is confirmed, so you can get a feeling on how realistic it is that this event will take place. This is realized by showing the confirmed state of all the requested event resources. Eg. "The event is 75% confirmed".
+
+### Further Goals
 
 - Runs in a browser, app store submission must be optional
 - low energy usage 
 - Allows archiving: Festival servers might be shut off one day, but since the data is on everyones machine it automatically got "backed up" by many.
-
-### Non-Goals
-
 - If p2panda is implemented as an extension/superset of SSB, it should be created as its own network without the need to download all of the wider SSB history
-- While p2panda is intended to be flexible in use, its core use case remains organising festivals happening in a physical space with a set beginning and end and mostly human participants. 
+- While p2panda is intended to be flexible in use, its core use case remains organising festivals happening in a physical space with a set beginning and end and mostly human participants.
 
 ## Use cases
 
@@ -76,12 +106,6 @@ These use cases describe how we imagine p2panda to be used. This does not preclu
   - Money can be a resource (for example in 1, 10 or 100 Euro quantities) which can be requested by anyone to realize their events. A special client holding these resources could have an authorization mechanism which distributes the funds accordingly.
   - Any URL, virtual address is a resource, so events can take place in shared documents, live streams, chats etc. Also external programs can be addressed this way, for example Dat / IPFS / SSB hashes.
   - A 3D position could be a resource, which could be used for events taking place in virtual spaces, like a computer game / VR world or any other 3D environment. One could think of a sound installation where users place sound sources and 3D objects on a X/Y/Z axis.
-
-### Client UI / UX
-
-- Indicate the current "health" status of yourself, how much do you "replicate" your data with others right now / how connected are you with others? This is an important indicator to make users understand about their impact on the "reach ability" by others. Since everyone serves their own data it comes with a larger responsibility to distribute it yourself / make yourself available.
-- Indicate the "last active" status of others (not necessarily in time). This can be an indicator on how reliable a peer is.
-- Show to everyone (not only to the organizer) how much an event is confirmed, so you can get a feeling on how realistic it is that this event will take place. This is realized by showing the confirmed state of all the requested event resources. Eg. "The event is 75% confirmed".
 
 ### Further use cases
 
