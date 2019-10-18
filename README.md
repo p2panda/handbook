@@ -22,10 +22,10 @@ p2panda will be a collection of applications, libraries and tools for users, bot
 
 It can be interesting for:
 
-* Houseprojects, Hackerspaces or places which have multiple rooms and tools to share internally.
-* Organisations, initiatives or (art) projects which are active over whole cities, regions or the world.
-* Conferences, museums, galleries, festivals which want to experiment with alternative ways of curation.
-* Multiple collectives and initiatives reusing places and resources in different cities at different times.
+* Housing projects, hackerspaces and other shared spaces that want to make available tools and rooms to a group of people
+* Organisations, initiatives or (art) projects that are active throughout whole cities, regions or the world.
+* Conferences, museums, galleries, festivals that want to experiment with alternative ways of curation.
+* Metacollectives, which offer spaces and resources across cities to be used by varying collectives and initiatives over time
 * Fun or esoteric things like a festival in only virtual spaces or even no places.
 
 They are connected by the p2panda protocol, which is yet to be defined. It could be an extension to an existing protocol like Secure Scuttlebutt or it could be a completely new schema.
