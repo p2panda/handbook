@@ -12,13 +12,29 @@ What is in it?
 - **Open Protocol:** p2panda is an easy-to-extend protocol that records the connection of users, resources and events. You can create a serendipity bot that occasionally creates random meeting events for your festival goers, or a hardware display with a live update of the festival schedule, or an archive bot that makes available a permanent copy of the festival on the world wide web.
 - **Warmth:** Computers make it easy to get carried away by their rigidly structured ways. However, every computer also contains an undeniable sparkle of pure chaos. We want to capture that spark to ignite a campfire for you to gather around and get cosy.
 
-## Learn more & get involved
+p2panda can be interesting for:
+
+- **Housing projects, hackerspaces and other shared spaces** that want to make available tools and rooms to a group of people.
+- **Organisations, initiatives or (art) projects** that are active throughout whole cities, regions or the world.
+- **Conferences, museums, galleries, festivals** that want to experiment with alternative ways of curation.
+- **Metacollectives**, which offer spaces and resources across cities to be used by varying collectives and initiatives over time.
+- **Fun or esoteric things** like a festival in only virtual spaces or even no places.
+
+## Learn more
+
+* [Code of Conduct](https://github.com/p2panda/design-document/blob/separate-documents/CODE_OF_CONDUCT.md)
+* [Technical design](https://github.com/p2panda/design-document/blob/separate-documents/DESIGN.md) and implementation specifications
+* [Many ideas](https://github.com/p2panda/design-document/blob/separate-documents/IDEAS.md) on how to use p2:panda_face:
+
+## Get involved
 
 :tv: Chatroom *#p2panda*: https://wald.liebechaos.org/channel/p2panda
 
 :lollipop: Meetings & documents: https://wolke.liebechaos.org/s/nN9Waf5sHB2dFzw
 
 :octocat: GitHub: https://github.com/p2panda
+
+:sparkling_heart: Liebe Chaos Verein e. V.: https://liebechaos.org/
 
 ## References
 
