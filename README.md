@@ -22,9 +22,11 @@ p2panda can be interesting for:
 
 ## Learn more
 
-* [Code of Conduct](https://github.com/p2panda/design-document/blob/separate-documents/CODE_OF_CONDUCT.md)
-* [Technical design](https://github.com/p2panda/design-document/blob/separate-documents/DESIGN.md) and implementation specifications
-* [Many ideas](https://github.com/p2panda/design-document/blob/separate-documents/IDEAS.md) on how to use p2:panda_face:
+:eight_spoked_asterisk: [Code of Conduct](https://github.com/p2panda/design-document/blob/separate-documents/CODE_OF_CONDUCT.md)
+
+:eight_spoked_asterisk: [Technical design](https://github.com/p2panda/design-document/blob/separate-documents/DESIGN.md) and implementation specifications
+
+:eight_spoked_asterisk: [Many ideas](https://github.com/p2panda/design-document/blob/separate-documents/IDEAS.md) on how to use p2:panda_face:
 
 ## Get involved
 
@@ -38,5 +40,6 @@ p2panda can be interesting for:
 
 ## References
 
-* [HOFFNUNG 3000](https://github.com/adzialocha/hoffnung3000) - Platform for self-curated festivals
-* [Shirokuma Cafe](https://en.wikipedia.org/wiki/Shirokuma_Cafe) - :panda_face:
+:diamond_shape_with_a_dot_inside: [HOFFNUNG 3000](https://github.com/adzialocha/hoffnung3000) - Platform for self-curated festivals
+
+:diamond_shape_with_a_dot_inside: [Shirokuma Cafe](https://en.wikipedia.org/wiki/Shirokuma_Cafe) - :panda_face:
