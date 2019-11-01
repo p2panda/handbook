@@ -22,11 +22,11 @@ p2panda can be interesting for:
 
 ## Learn more
 
-:eight_spoked_asterisk: [Code of Conduct](https://github.com/p2panda/design-document/blob/separate-documents/CODE_OF_CONDUCT.md)
+:eight_spoked_asterisk: [Code of Conduct](https://github.com/p2panda/design-document/blob/master/CODE_OF_CONDUCT.md)
 
-:eight_spoked_asterisk: [Technical design](https://github.com/p2panda/design-document/blob/separate-documents/DESIGN.md) and implementation specifications
+:eight_spoked_asterisk: [Technical design](https://github.com/p2panda/design-document/blob/master/DESIGN.md) and implementation specifications
 
-:eight_spoked_asterisk: [Many ideas](https://github.com/p2panda/design-document/blob/separate-documents/IDEAS.md) on how to use p2:panda_face:
+:eight_spoked_asterisk: [Many ideas](https://github.com/p2panda/design-document/blob/master/IDEAS.md) on how to use p2:panda_face:
 
 ## Get involved
 
