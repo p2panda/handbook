@@ -32,7 +32,7 @@ p2panda can be interesting for:
 
 :tv: Chatroom *#p2panda*: https://wald.liebechaos.org/channel/p2panda
 
-:lollipop: Meetings & documents: https://wolke.liebechaos.org/s/nN9Waf5sHB2dFzw
+:lollipop: Meeting notes: https://wolke.liebechaos.org/s/oEErg5TMqZM9HB6
 
 :octocat: GitHub: https://github.com/p2panda
 
