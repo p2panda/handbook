@@ -9,11 +9,12 @@ p2panda will be a collection of applications, libraries and tools for users, bot
 ## Goals
 
 - Work offline and without a privileged server. p2panda distributes all data in a server-less peer-to-peer network structure using a Gossip protocol.
-- p2panda does not require any form of authentication except of keypair verification based on self-generated cryptographic keys.
+- p2panda generates a unique cryptographic key-pair on every first start, this is enough to make sure that every message the key owner sends can be verified and connected to it (if someone changed the message afterwards it will fail). This is a rather radical setup as it does not distinct between a "admin", "participant" and a "visitor". Everyone has the same permissions to interact with p2panda. The only things you can control individually are what you share with others on p2panda (block malicious peers) and how you authorize your resources. A client should implement good UX / UI to build "trust" into other peers (see below for some ideas).
 - User applications should be simple, to be used by as many people as possible / accessible and non-technical.
-- p2panda should run in a browser.
+- p2panda should run in a browser. This should allow spontaneous setups since no server setup is required. Can be realized by everyone, even without technical knowledge (a client has to be downloaded or hosted / accessed on a website somewhere though).
 - Policies should not necessarily be decided in the technical architecture to keep p2panda as simple and uncomplicated as possible. We believe that time, space and availability policies can be discussed and announced in social ways or via other platforms (webpage).
 - Separate user applications and core libraries in separate modules to allow alternative implementations, clients etc.
+- Use p2panda in places where there is no internet access. Use short-distance protocols like Bluetooth to talk to each other / exchange / replicate data.
 
 ## Schema
 
