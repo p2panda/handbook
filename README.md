@@ -20,6 +20,8 @@ p2panda can be interesting for:
 - **Metacollectives**, which offer spaces and resources across cities to be used by varying collectives and initiatives over time.
 - **Fun or esoteric things** like a festival in only virtual spaces or even no places.
 
+![p2panda](https://raw.githubusercontent.com/p2panda/design-document/master/images/pandas.jpg)
+
 ## Learn more
 
 :eight_spoked_asterisk: [Code of Conduct](https://github.com/p2panda/design-document/blob/master/CODE_OF_CONDUCT.md)
@@ -43,3 +45,5 @@ p2panda can be interesting for:
 :diamond_shape_with_a_dot_inside: [HOFFNUNG 3000](https://github.com/adzialocha/hoffnung3000) - Platform for self-curated festivals
 
 :diamond_shape_with_a_dot_inside: [Shirokuma Cafe](https://en.wikipedia.org/wiki/Shirokuma_Cafe) - :panda_face:
+
+:diamond_shape_with_a_dot_inside: [Laura Weber](http://www.lauraweber.net) - Cute panda illustrations
