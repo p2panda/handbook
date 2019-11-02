@@ -1,4 +1,4 @@
-# Code of Conduct
+# p2:panda_face: Code of Conduct
 
 ## Purpose
 
@@ -50,4 +50,4 @@ We expect all community participants (contributors, paid or otherwise; sponsors;
 
 ## License and attribution
 
-This Code of Conduct is based on [Berlin Code of Conduct](https://berlincodeofconduct.org/) which is distributed under a Creative Commons Attribution-ShareAlike 4.0 International ([CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)) license. It is based on the [pdx.rb](https://pdxruby.org/CONDUCT) Code of Conduct.
+This Code of Conduct is based on the [Berlin Code of Conduct](https://berlincodeofconduct.org/) which is distributed under a Creative Commons Attribution-ShareAlike 4.0 International ([CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)) license. It is based on the [pdx.rb](https://pdxruby.org/CONDUCT) Code of Conduct.
