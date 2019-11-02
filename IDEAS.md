@@ -2,19 +2,6 @@
 
 These use cases describe how we imagine p2panda to be used. This does not preclude other use cases – on the contrary, our design decisions should allow for flexibility and hackability.
 
-## Decentralization
-
-p2panda just runs on your own computer, which makes it interesting for different sorts of contexts:
-
-- Spontaneous setups since no server setup is required. Can be realized by everyone, even without technical knowledge (a client has to be downloaded or hosted / accessed on a website somewhere though).
-- Use p2panda in places where there is no internet access.
-- Use short-distance protocols like Bluetooth to talk to each other / exchange / replicate data.
-- Ephemeral data / setups, they might disappear as soon as every computer is shut off.
-
-## Users
-
-p2panda generates a unique cryptographic key-pair on every first start, this is enough to make sure that every message the key owner sends can be verified and connected to it (if someone changed the message afterwards it will fail). This is a rather radical setup as it does not distinct between a "admin", "participant" and a "visitor". Everyone has the same permissions to interact with p2panda. The only things you can control individually are what you share with others on p2panda (block malicious peers) and how you authorize your resources. A client should implement good UX / UI to build "trust" into other peers (see below for some ideas).
-
 ## Clients
 
 p2panda is strictly speaking just a definition of data schemas which can be distributed and interpreted by any kind of client which follows this definition. However, the use, interface and purpose on how p2panda is used is not further defined, which gives some freedom in what a client actually could be. Examples:
