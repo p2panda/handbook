@@ -1,4 +1,4 @@
-## p2:panda_face: Philosophy
+# p2:panda_face: Philosophy
 
 - **Offline first:** Data can directly be created as no server has to be requested first. This is interesting for local and global dynamics: A group might be active with p2panda for one week doing something without internet, go back into the city and start to sync with the global space again.
 - **Energy saving:** A bunch of laptops or raspberry PIs needs much less electricity than a server farm.
