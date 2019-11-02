@@ -28,6 +28,8 @@ p2panda can be interesting for:
 
 :eight_spoked_asterisk: [Technical design](https://github.com/p2panda/design-document/blob/master/DESIGN.md) and implementation specifications
 
+:eight_spoked_asterisk: [Philosophy](https://github.com/p2panda/design-document/blob/master/PHILOSOPHY.md) of p2panda
+
 :eight_spoked_asterisk: [Many ideas](https://github.com/p2panda/design-document/blob/master/IDEAS.md) on how to use p2:panda_face:
 
 ## Get involved
