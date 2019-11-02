@@ -30,6 +30,8 @@ This open schema that can be distributed by any kind of client that implements i
 
 ![Schema](https://raw.githubusercontent.com/p2panda/design-document/master/images/datatypes.jpg)
 
+![Message feeds](https://raw.githubusercontent.com/p2panda/design-document/master/images/messages.jpg)
+
 ## Architecture
 
 - We maintain a single-writer, append-only log per user, for which [bamboo](https://github.com/AljoschaMeyer/bamboo) can be used.
