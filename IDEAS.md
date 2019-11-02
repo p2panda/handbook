@@ -33,6 +33,10 @@ Using p2p protocol raises many UI/UX questions, here are a few ideas on how to c
 - Indicate the "last active" status of others (not necessarily in time). This can be an indicator on how reliable a peer is.
 - Show to everyone (not only to the organizer) how much an event is confirmed, so you can get a feeling on how realistic it is that this event will take place. This is realized by showing the confirmed state of all the requested event resources. Eg. "The event is 75% confirmed".
 
+![UX ideas](https://raw.githubusercontent.com/p2panda/design-document/master/images/client.jpg)
+
+![UX ideas](https://raw.githubusercontent.com/p2panda/design-document/master/images/client-pro.jpg)
+
 ## Resources
 
 Since a resource is just defined by an arbitrary title, description and image, it can be anything. Examples and possible use-cases could be:
