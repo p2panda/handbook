@@ -1,4 +1,4 @@
-# Design and Implementation
+# p2:panda_face: Design & implementation
 
 *Status Quo October 2019: Currently, the p2panda protocol schema and implementations are being designed. This includes deciding on goals, non-goals, requirements and use cases. This document will be updated once this process has been completed.*
 
@@ -64,4 +64,3 @@ With these two components a few setup configurations for p2panda are imaginable:
 - Allows archiving: Festival servers might be shut off one day, but since the data is on everyones machine it automatically got "backed up" by many.
 - If p2panda is implemented as an extension/superset of SSB, it should be created as its own network without the need to download all of the wider SSB history
 - While p2panda is intended to be flexible in use, its core use case remains organising festivals happening in a physical space with a set beginning and end and mostly human participants.
-
