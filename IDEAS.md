@@ -40,7 +40,7 @@ Authorization is simply a client broadcasting a signed message if a certain reso
 - An straightforward way would be to use a "first come, first serve" logic, "random" or a manual user feedback, asking the user to click "confirm" or "reject" in an interface.
 - A movie has to be watched first, a game played, a question asked .. time and duration are interesting "validators".
 - A group of people has to vote first.
-- An AI decides bot decides based on what data it has seen before.
+- An AI bot decides based on what data it has seen before.
 
 ## Festival ideas
 
