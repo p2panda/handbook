@@ -14,7 +14,7 @@ What is in it?
 
 p2panda can be interesting for:
 
-- **Housing projects, hackerspaces and other shared spaces** that want to make available tools and rooms to a group of people.
+- **House projects, hackerspaces and other shared spaces** that want to make available tools and rooms to a group of people.
 - **Organisations, initiatives or (art) projects** that are active throughout whole cities, regions or the world.
 - **Conferences, museums, galleries, festivals** that want to experiment with alternative ways of curation.
 - **Metacollectives**, which offer spaces and resources across cities to be used by varying collectives and initiatives over time.
