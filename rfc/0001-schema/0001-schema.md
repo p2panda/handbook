@@ -1,6 +1,20 @@
 # RFC 0001: Schema
 
-A schema describes a PostgreSQL database schema and a message specification through a series of schema migrations. Each schema migration is an entry on a bamboo log. Every schema has a version number, which is identical to the hash of the last message in its log.
+A schema describes data that is stored and indexed on a server. It defines  message types that can be created by clients in the network. From another perspective one could understand a schema as a specification of materialized views over all bamboo logs (inspired by Kappa Database Architecture). Having the possibility to define custom schemas for the server allows for a flexible and fast introduction of new message types, use-cases and clients in the network.
+
+Each schema can be installed, changed or removed on a server by running schema migrations. A schema migration is a message type by itself and is stored as an entry on a bamboo log. Each schema migration message consists of a simple description of message fields including their names and types.
+
+## Terminology
+
+- **entry**: An entry in a [bamboo log](https://github.com/AljoschaMeyer/bamboo)
+- **message**: A p2panda message contained in an entry, can be either a *schema message* or an *instance message*
+- **schema message**: Contains instructions used to define a database schema and a specification for *instance messages*.
+- **instance message**: Contains instructions that can be applied to a database schema in order to instantiate *instances*.
+- **instance**: A row in a database that represents an object within a p2panda-based application
+
+## Overview
+
+A schema describes a database schema and a message specification through a series of schema migrations. A schema is represented by a bamboo log. Every message on the log is a schema migration. Thereby, the version number of a schema is defined by the *sequence number* of the migration's log entry.
 
 Each schema migration is one of:
 
