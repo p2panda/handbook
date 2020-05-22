@@ -8,7 +8,7 @@ Each schema migration is one of:
 - migrate schema message: creates or alters a table and updates instance messages
 - revert schema message: revert the schema to a previous version, recreating instances
 
-Instances of the schema are also described by messages. However, these instance messages are encoded in entries of users’ logs - not the schema log. Every message specifies a schema, schema version, and is one of:
+Instances of the schema are also described by messages. However, these instance messages are encoded in entries of users’ logs - not the schema log. Every instance message specifies a schema, schema version, and is one of:
 
 - create instance message: inserts a row
 - update instance message: updates a row
@@ -26,17 +26,16 @@ Migrations can also be applied to messages in order to make them compatible with
 
 A meta schema message may specify any of:
 
-- ascii-name (64 chars, non-unique)
-- display-name (optional)
-- description
-- homepage
-- bugs: for reporting issues with the schema
-- license: a comma-separated list of licenses
-- contact: a contact address in any medium preferred by the author
-- dependencies: an array of versioned schemas this schema depends on
-- spec-version: which version of this schema spec is implemented
+| field name | description | required |
+| --- | --- | --- |
+| name | Name of the schema | X |
+| spec | Which verison of this schema meta-spec is implemented | X |
+| description | Description of the schema's purpose | |
+| homepage | URL pointing at a web site for the schema | |
+| license | A comma-separated list of licenses that apply for the schema definition | |
+| contact | An email-address for contacting the schema's authors | |
 
-These values may be used to display information about the schema to the user and to guide implementations of other processes. All values are optional, a default display name is generated from the log id.
+These values may be used to display information about the schema to the user and to guide implementations of other processes. All values are encoded as unicode strings.
 
 ### Migrate schema message
 
