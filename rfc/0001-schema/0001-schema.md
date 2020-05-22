@@ -51,15 +51,38 @@ A meta schema message may specify any of:
 
 These values may be used to display information about the schema to the user and to guide implementations of other processes. All values are encoded as unicode strings.
 
+#### Examples
+
+Minimal meta schema message for a fictional messaging format *slothmail*.
+
+```
+kind: meta-schema
+name: slothmail
+spec: 1
+```
+
+Example using all fields
+
+```
+kind: meta-schema
+name: slothmail
+spec: 1
+description: Send sloth mail to your friends!
+homepage: https://liebechaos.org/activity/slothmail
+license: CC-BY-SA 2.0 <https://creativecommons.org/licenses/by-sa/2.0/>
+contact: info@liebechaos.org
+```
+
 ### Migrate schema message
 
-A migrate schema message creates or alters the schema’s table and updates its rows. A migration describes changes to one or more fields. If no database table exists for the schema, a new database table is created when applying this message. The table name may not be equal to any of the meta message’s fields such as ascii-name because that might lead to conflicts when more than one author creates a schema with the same name.
+A migrate schema message creates or alters the schema’s table and updates its rows. A migration describes changes to one or more fields. If no database table exists for the schema, a new database table is created when applying this message. The table name may not be taken from any of the field properties such as `name` because that might lead to conflicts when more than one author creates a schema with the same name.
 
 Fields may be created, updated or removed. For each created or updated field, a new data type is specified. For updated fields, a default value must be specified that is stored if conversion to the new data type fails. Each field is described by its
 
-- name
-- type
-- validation
+- action (`create`, `update`, or `remove`)
+- name (unicode string)
+- type (see below)
+- validation (optional regex pattern)
 
 Type must be one of:
 
@@ -84,13 +107,66 @@ Validation may be a regular expression used to validate messages of this schema.
 
 If an update schema message removes the last of a schema’s fields, the schema’s database table is dropped.
 
+#### Examples
+
+Example to create the slothmail schema
+
+```
+kind: migrate-schema
+fields:
+  - subject:
+    action: create
+    type: text
+  - body:
+    action: create
+    type: text
+  - author:
+    action: create
+    type: relation
+    schema: d4a1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb-12
+  - created:
+    action: create
+    type: timestamp
+```
+
+Example to add an attachments field to the slothmail schema:
+
+```
+kind: migrate-schema
+fields:
+  - attachments:
+    action: create
+    type: relation[]
+    schema: ac1b08420ceaac230839b755845a9ffbd4a1cb88a66f02f8db635ce26441cc5d-78434
+```
+
+Example to remove the attachments field and change the subject to not contain line breaks
+
+```
+kind: migrate-schema
+fields:
+  - attachments
+    action: remove
+  - subject
+    action: update
+    validation: ^[^#\r\n].*$
+    default: <Subject>
+```
+
 ### Revert schema message
 
 A revert schema message reverts previous migrations and resets the database to a previous state. This is desirable instead of updating fields in order to restore data deleted by previous migrations.
 
-A revert message specifies a target version, which is to be restored. No message in the schema’s log between the revert schema message and the target version’s migrate schema message may be another revert schema messages that targets an earlier version than the original target. If this is the case the revert schema message is ignored.
-
 The database is recreated by dropping the database and reapplying all known instance messages and all migrations up to the target migration for the schema. Create and update instance messages that specify a schema version later than the migration’s target version are ignored. Delete instance messages are applied regardless of the version mismatch in order to prevent schema authors from restoring user data against their will.
+
+#### Examples
+
+An example to revert the slothmail schema to version 2:
+
+```
+kind: revert-schema
+version: 2
+```
 
 ## Instance messages
 
@@ -107,14 +183,57 @@ The hash of the entry that encodes a create instance message becomes the primary
 
 Applying a migration to a create instance message transforms the contents to conform to the new schema version.
 
+#### Examples
+
+Example to create a slothmail message.
+
+```
+kind: create
+schema: 
+  - 88e1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb-12
+  - 1
+fields:
+  - subject: >
+    Hello!
+    ...friend
+  - body: 
+  - author: afe1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9fac
+  - created: 2020-05-22T11:58:50+0000
+```
+
+Note that the subject field contains a multi-line string. A server that already applied the migration that changed the subject field to only allow single-line content may migrate this message in order to be compatible. As the subject line would fail the validation check, it would be replaced with the default value `<Subject>`.
+
 ### Update instance message
 
 An update instance message updates the row specified by the instance id. For one or more of the fields of the schema, the row is updated with new contents.
 
 Applying a migration to an update instance message transforms the content that is written when applying the message.
 
+#### Examples
+
+Example to update the previous slothmail message, fixing the subject line to be one line only.
+
+```
+kind: update
+schema:
+  - 88e1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb-12
+  - 3
+instance: 98e1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb
+fields:
+  - subject: Hello! ...friend
+```
+
 ### Delete instance message
 
 A delete instance message drops a table row referred to by an instance id.
 
 Applying a migration to a delete instance message may make it obsolete if the affected row is deleted by a migration.
+
+#### Examples
+
+Example to delete the slothmail message.
+
+```
+kind: delete
+instance: 98e1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb
+```
