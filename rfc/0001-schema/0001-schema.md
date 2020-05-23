@@ -1,42 +1,34 @@
-# RFC 0001: Schema
+---
+working group: Panda Working Group
+status: draft
+created: 2020-05-21
+rfc: 0001-schema
+version: 1
+authors:
+  -
+    name: Vincent Ahrend
+    email: mail@vincentahrend.com
+---
 
-A schema describes data that is stored and indexed on a server. It defines  message types that can be created by clients in the network. From another perspective one could understand a schema as a specification of materialized views over all bamboo logs (inspired by Kappa Database Architecture). Having the possibility to define custom schemas for the server allows for a flexible and fast introduction of new message types, use-cases and clients in the network.
+# Schema
 
-Each schema can be installed, changed or removed on a server by running schema migrations. A schema migration is a message type by itself and is stored as an entry on a bamboo log. Each schema migration message consists of a simple description of message fields including their names and types.
+## Summary
 
-## Terminology
+p2panda is a protocol for publishing structured data in a semi-federated network of peers. Messages are published by p2panda *clients* using the [bamboo protocol](https://github.com/AljoschaMeyer/bamboo) and relayed to other peers either through *servers* or via direct connections. While messages are encoded by clients as *entries* on *bamboo logs*, the payload of these entries is encoded using the p2panda message schemas described in this document.
 
-- **entry**: An entry in a [bamboo log](https://github.com/AljoschaMeyer/bamboo)
-- **message**: A p2panda message contained in an entry, can be either a *schema message* or an *instance message*
-- **schema message**: Contains instructions used to define a database schema and a specification for *instance messages*.
-- **instance message**: Contains instructions that can be applied to a database schema in order to instantiate *instances*.
-- **instance**: A row in a database that represents an object within a p2panda-based application
+This schema specification describes a meta-schema, that is used to publish specifications for application data schemas. Each schema definition describes both the format of messages used for data exchange as well as the database schema used to retain the message content. The latter aspect can also be seen as creating materialized view from bamboo logs (inspired by the Kappa Database Architecture). 
 
-## Overview
+Server administrators explicitly decide which schemas to materialize on their infrastructure based on the needs of their users. Application developers can effortlessly update and extend their schemata by publishing *migrations*, which are then applied on servers that materialize these schematas.
 
-A schema describes a database schema and a message specification through a series of schema migrations. A schema is represented by a bamboo log. Every message on the log is a schema migration. Thereby, the version number of a schema is defined by the *sequence number* of the migration's log entry.
+Being able to publish custom data schemas in a p2p network allows application developers to quickly create and distribute clients in a distributed architecture. Building on the bamboo protocol allows for high-performance synchronisation and data validation. By leveraging materialized views, clients can run on ressource-restricted hardware such as mobile devices and still benefit from the advantages of a distributed networking architecture.
 
-Each schema migration is one of:
+# Usage
 
-- `schema-meta`: sets schema metadata
-- `schema-migration`: Used by server to create or alter database tables and to migrate *instance messages*.
-- `schema-revert`: Used by server to revert to an earlier version, recreating instance data, which may have been deleted or corrupted by intermittent migrations.
-
-Just like the schema itself, instances of the schema are described by messages. However, these instance messages are encoded in bamboo entries of users’ logs - not the schema log. Every instance message specifies a *versioned schema*.
-
-Possible instance message kinds are:
-
-- `create`: creates a database row
-- `update`: updates a row
-- `delete`: drops a row
-
-## Usage
-
-Implementations of the p2panda schema should allow for easy and fun usage. This section outlines a couple of essential user flows using a (non-existent) command line interface `panda`.
+Implementations of the p2panda schema should allow for easy and fun usage. This section outlines a couple of essential user flows using a (fictional) command line interface `panda`.
 
 All of the examples presume an already existing bamboo keypair on the local computer.
 
-### Creating a new schema
+## Creating a new schema
 
 The `panda` command line application is used to register a new schema for the fictional *slothmail* application.
 
@@ -45,7 +37,7 @@ $ panda schema slothmail init --description "Send slothmail to your friends!"
 🐼 Registered slothmail schema at log 12
 ```
 
-The *slothmail* schema's log was initialized in the local users log number 12.
+The *slothmail* schema's bamboo log was initialized in the local users log number 12.
 
 A couple of fields are added to the schema by reading from a migration definition:
 
@@ -62,7 +54,7 @@ Created fields
 
 The *slothmail* application can now start publishing slothmail messages.
 
-### Inspecting a schema
+## Inspecting a schema
 
 The panda cli can also be used to inspect a schema.
 
@@ -89,7 +81,7 @@ fields:
     type: timestamp
 ```
 
-### Materializing a new schema with a server
+## Materializing a new schema on a server
 
 All p2panda servers make available their user's log entries to each other. In addition to that, they can offer materialized views of some of the data contained in those logs. For this, server administrators instruct the server to index messages of a certain schema.
 
@@ -100,17 +92,29 @@ $ beep-beep-server index 88e1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b75
 🎍 Now indexing slothmail messages
 ```
 
-## Messages
+# Message Specification
 
-Messages are encoded using YAML 1.2.
+This section describes the data format for *schema messages* and *instance messages*. Schema messages contain instructions for forming both a database schema and message format. Instance messages are the instantiations of this message format. Instance messages are used to create materialized views of their contents. An entity of a materialized view is called an *intance*. 
+
+As an example, the *slothmail* schema is described in a sequence of *schema messages*, which are published by the slothmail authors on the slothmail log. A slothmail client is then implementing this schema and allows end users to create *instance messages*, which contain the slothmail *instances* they send each other. A server reads users' slothmail *instance messages* and creates a materialized view of slothmail *instances*.
 
 ## Initial Schema instantiation
 
-When instantiating a schema, a server executes all migrations in the schema’s log. This creates a database table capable of holding instances of the schema at its latest known version. All known *instance messages* are also applied, which results in the database contents representing all known instances at their latest versions.
+When indexing a schema, a server executes all migrations in the schema’s log in order to create a database table capable of holding instances of the schema at its latest known version. Now, all known *instance messages* can be inserted into the database, which results in the database contents representing a view of all known instances at their latest versions.
 
 Migrations can also be applied to messages in order to make them compatible with the current schema version. When an incoming message specifies a schema version older than the latest known schema version, all intermittent migrations are applied to this message so that it can be applied to the database. When a message specifies a schema version that is not known, the server tries to request that schema version’s entry using bamboo.
 
 ## Schema migration messages
+
+A schema describes a database schema and a message specification through a series of schema migrations. A schema is represented by a bamboo log. Every message on the log is a schema migration. Thereby, the version number of a schema migration is the *sequence number* of the migration's log entry.
+
+Each schema migration is one of:
+
+- `schema-meta`: sets schema metadata
+- `schema-migration`: Used by server to create or alter database tables and to migrate *instance messages*.
+- `schema-revert`: Used by server to revert to an earlier version, recreating instance data, which may have been deleted or corrupted by intermittent migrations.
+
+Schema migrations are encoded using a subset of [CDDL](https://tools.ietf.org/html/rfc8610#page-5). Examples in this draft are encoded in YAML.
 
 ### Meta schema message
 
@@ -246,11 +250,21 @@ target: 2
 
 ## Instance messages
 
+Just like the schema itself, instances of the schema are described by messages. However, these instance messages are encoded in bamboo entries of users’ logs - not the schema log. Every instance message specifies a *versioned schema*.
+
+Possible instance message kinds are:
+
+- `create`: creates a database row
+- `update`: updates a row
+- `delete`: drops a row
+
 Every *instance message* affects exactly one row of the schema’s table. 
 
 Every instance has an author and can only be altered by *instance messages* from this author.
 
-All *instance messages* for one author and schema are contained in the same log. This log may also contain messages for other schemas.
+All *instance messages* for one author and schema are contained in the same log.
+
+Instance messages are encoded using [CBOR](https://cbor.io/). 
 
 ### Create instance message
 
@@ -320,3 +334,10 @@ Example to delete the slothmail message.
 kind: delete
 instance: 98e1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb
 ```
+
+
+## Copyright
+
+This document is published under the [CC-BY-SA 2.0 license](https://creativecommons.org/licenses/by-sa/2.0/).
+
+Copyright 2020 Vincent Ahrend
