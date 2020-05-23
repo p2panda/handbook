@@ -37,7 +37,7 @@ $ panda schema slothmail init --description "Send slothmail to your friends!"
 🐼 Registered slothmail schema at log 12
 ```
 
-The *slothmail* schema's bamboo log was initialized in the local users log number 12.
+The *slothmail* schema's bamboo log was initialized in the local user's log number 12.
 
 A couple of fields are added to the schema by reading from a migration definition:
 
@@ -237,7 +237,7 @@ fields:
 
 A revert schema message reverts previous migrations and resets the database to a previous schema version (`target`). This is desirable instead of reverting by altering fields in order to restore data deleted by previous migrations.
 
-The database is recreated by dropping the database and reapplying all known instance messages and all migrations up to the target migration. Create and update instance messages, which specify a schema version later than the target version are ignored. `delete` instance messages are applied regardless of the version mismatch in order to prevent schema authors from restoring user data against their will.
+The database is recreated by dropping the database and reapplying all known instance messages and all migrations up to the target migration. `create` and `update` instance messages, which specify a schema version later than the target version are ignored. `delete` instance messages are applied regardless of the version mismatch in order to prevent schema authors from restoring user data against their will.
 
 #### Examples
 
@@ -297,7 +297,7 @@ fields:
   - created: 2020-05-22T11:58:50+0000
 ```
 
-Note that the subject field contains a multi-line string. A server that already applied the migration that changed the subject field to only allow single-line content may migrate this message in order to be compatible. As the subject line would fail the validation check, it would be replaced with the default value `<Subject>`.
+Note that the subject field contains a multi-line string and is specified using schema version `1`. A server that already applied the last example migration from the *schema-migrate* section, which changed the subject field to only allow single-line content, may migrate this message in order to be compatible. As the subject line would fail the validation check, it would be replaced with the default value `<Subject>`.
 
 ### Update instance message
 
