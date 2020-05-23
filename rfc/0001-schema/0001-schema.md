@@ -30,6 +30,73 @@ Possible instance message kinds are:
 - `update`: updates a row
 - `delete`: drops a row
 
+## Usage
+
+Implementations of the p2panda schema should allow for easy and fun usage. This section outlines a couple of essential user flows using a (non-existent) command line interface `panda`.
+
+All of the examples presume an already existing bamboo keypair on the local computer.
+
+### Creating a new schema
+
+The `panda` command line application is used to register a new schema for the fictional *slothmail* application.
+
+```bash
+$ panda schema slothmail init --description "Send slothmail to your friends!"
+🐼 Registered slothmail schema at log 12
+```
+
+The *slothmail* schema's log was initialized in the local users log number 12.
+
+A couple of fields are added to the schema by reading from a migration definition:
+
+```bash
+$ panda schema slothmail migrate slothmail-001.yaml
+Created fields 
+- subject<text>
+- body<text>
+- created<datetime>
+- recipient<panda-profile>
+
+🐼 Published slothmail version 2
+```
+
+The *slothmail* application can now start publishing slothmail messages.
+
+### Inspecting a schema
+
+The panda cli can also be used to inspect a schema.
+
+```bash
+$ panda schema slothmail
+name: slothmail
+spec: 1
+description: Send slothmail to your friends!
+author: cafca <88e1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb>
+fields:
+  - subject:
+    type: text
+  - body:
+    type: text
+  - recipient:
+    type: relation
+    schema: 
+      - d4a1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb
+      - 12
+  - created:
+    type: timestamp
+```
+
+### Indexing a new schema with a server
+
+All p2panda servers make available their user's log entries to each other. In addition to that, they can offer materialized views of some of the data contained in those logs. For this, server administrators instruct the server to index messages of a certain schema.
+
+Here, the *slothmail* schema is indexed. It is referred to by the public key of the schema's author and the log id in which that author published the schema. 
+
+```bash
+$ beep-beep-server index 88e1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb 12
+🎍 Now indexing slothmail messages
+```
+
 ## Messages
 
 Messages are encoded using YAML 1.2.
@@ -71,7 +138,7 @@ Example using all available fields
 kind: schema-meta
 name: slothmail
 spec: 1
-description: Send sloth mail to your friends!
+description: Send slothmail to your friends!
 homepage: https://liebechaos.org/activity/slothmail
 license: CC-BY-SA 2.0 <https://creativecommons.org/licenses/by-sa/2.0/>
 contact: info@liebechaos.org
@@ -127,7 +194,7 @@ fields:
       - d4a1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb
       # schema's log id
       - 12
-      # no schema version number!
+      # relation is schema-version agnostic
   - created:
     action: create
     type: timestamp
@@ -167,7 +234,7 @@ The database is recreated by dropping the database and reapplying all known inst
 
 #### Examples
 
-An example to revert the slothmail schema to version 2:
+The previous example removed the `attachments` field. During migration all slothmail attachments were deleted from slothmail instances. Simply adding the field back would not recover the deleted attachments. Here, the schema is reverted to a previous version that still had the `attachments` field, which recreates all the attachments by re-indexing all slothmail instances.
 
 ```yaml
 kind: schema-revert
@@ -195,7 +262,7 @@ Applying a migration to a create instance message transforms the contents to con
 
 #### Examples
 
-Example to create a slothmail message.
+Example to create a slothmail message. Here, the message is created using an older version of the schema than that of the last example.
 
 ```yaml
 kind: create
@@ -230,7 +297,7 @@ kind: update
 schema:
   - 88e1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb
   - 12
-  - 3
+  - 4
 instance: 98e1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb
 fields:
   - subject: Hello! ...friend
