@@ -71,7 +71,10 @@ $ panda schema slothmail
 name: slothmail
 spec: 1
 description: Send slothmail to your friends!
-author: cafca <88e1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb>
+source: 
+  - 88e1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb
+  - 12
+  - 4
 fields:
   - subject:
     type: text
@@ -86,7 +89,7 @@ fields:
     type: timestamp
 ```
 
-### Indexing a new schema with a server
+### Materializing a new schema with a server
 
 All p2panda servers make available their user's log entries to each other. In addition to that, they can offer materialized views of some of the data contained in those logs. For this, server administrators instruct the server to index messages of a certain schema.
 
