@@ -84,7 +84,7 @@ fields:
     type: relation
     schema: 
       - d4a1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb
-      - 12
+      - 10
   - created:
     type: timestamp
 ```
@@ -196,7 +196,7 @@ fields:
       # author for the schema of the recipient field
       - d4a1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb
       # schema's log id
-      - 12
+      - 10
       # relation is schema-version agnostic
   - created:
     action: create
