@@ -1,3 +1,3 @@
 # General Architecture
 
-*What is the role of servers, clients, pandas?*
+- What is the role of servers, clients, pandas?

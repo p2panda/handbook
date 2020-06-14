@@ -1,5 +1,5 @@
+# Nomenclature of p2panda
 
-
-Because wtf
+- What are we talking about?
 
 ᶘᵒ㉨ᵒᶅ

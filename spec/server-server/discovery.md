@@ -1,3 +1,3 @@
+# Discovery
 
-
-How can servers find out about other servers?
+- How can servers find out about other servers?
