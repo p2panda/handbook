@@ -195,4 +195,25 @@ kind: schema-revert
 target: 2
 ```
 
+### Some thoughts on migrations (from Andreas)
 
+Even though I like the idea of introducing migrations inside of bamboo entries I'm still not 100% convinced this is the right way. I'll try to list up some pro/cons to understand better where my thoughts are:
+
+* Pro: Nice way to get schemas from the "network". A little bit like a built-in "app store" on beep-beep where you can fetch your schemas from other users.
+* Pro: Gives a nice opportunity to build a schema explorer client
+* Con: The usability from an administrator / server-owner perspective feels complicated and this might lead to errors / mistakes. The question is: How would the flow look like in an everyday-beep-beep-use?
+    1. I install beep-beep on my linux server
+    2. I whitelist my public address in an command line interface on the server to make it accept incoming migrations from this address
+    3. I install another tool which sends migration messages to my server
+    4. I read up somewhere what migration messages are interesting for me / write my own
+    5. I put them into the command line tool and hope that I executed everything in the right order and did not do any mistakes as a beginner
+
+    ... another scenario would be to find someones public address of which I know of who posted the migrations I'm interested in but then I ..
+    1. have to find that address, put it into the whitelist via command line interface
+    2. make sure its still somewhere on the network and I got the data before I can start at all to use my server ..
+
+I think there is ways to improve that UX a lot but still I wonder if it isn't easier to have a file in the folder which describes the [schema once](https://en.wikipedia.org/wiki/Schema_migration). With every change of that file the database gets wiped and rebuilt. When something went wrong I track down the problem in my file and start again. As a server admin I see directly what my server is capable of by just reading the file. Another scenario could be to have multiple schema files just in case you want to organize them that way or install "plugins" (eg. copy just another schema file in that folder and restart the server). Aaaaanother cool thing: Schema folders can be organized as git repositories.
+
+A thing between these two solutions could be to not have single atomic migrations described by every message but actually the "final" schema per message. Thats maybe not as flexible but at least easier to grasp and somehow I can imagine "default schemas" and combinations of them will establish much more likely?
+
+Many thoughts!
