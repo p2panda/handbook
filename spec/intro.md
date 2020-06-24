@@ -25,7 +25,17 @@ Being able to publish custom data schemas in a p2p network allows application de
 # Chapters
 
 ## Overview
+1. General Architecture
+2. Bamboo Explained Shortly
+3. Nomenclature
 
 ## Server-Client
+1. Data Exchange Format
+2. Meta Schema Definitions & Migrations
+3. Bamboo Publish API
+4. Message Schema Specification
+5. Security & Encryption
 
 ## Server-Server
+1. Discovery
+2. Replication
