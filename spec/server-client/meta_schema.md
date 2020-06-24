@@ -36,6 +36,7 @@ Created fields
 The *slothmail* application can now start publishing slothmail messages.
 
 #### More possibilities
+(comments from adz)
 
 Every user can use the `panda` command line too to create new schema messages. For example the user with the public address `d4a1cb88...` creates a new schema of type `comment`:
 
@@ -279,7 +280,8 @@ kind: schema-revert
 target: 2
 ```
 
-### Some thoughts on migrations (from Andreas)
+### Some thoughts on migrations
+(comments from adz)
 
 Even though I like the idea of introducing migrations inside of bamboo entries I'm still not 100% convinced this is the right way. I'll try to list up some pro/cons to understand better where my thoughts are:
 

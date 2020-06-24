@@ -4,6 +4,7 @@
 - How do we deal with log ids?
 
 ### Multiple logs per user
+(comments from adz)
 
 #### Introduction
 

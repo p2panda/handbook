@@ -1,4 +1,5 @@
 # Replication
+(comments from adz)
 
 - Which protocol is used for replication?
 
