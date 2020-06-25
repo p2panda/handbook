@@ -26,7 +26,9 @@ p2panda can be interesting for:
 
 :eight_spoked_asterisk: [Code of Conduct](https://github.com/p2panda/design-document/blob/master/CODE_OF_CONDUCT.md)
 
-:eight_spoked_asterisk: [Technical design](https://github.com/p2panda/design-document/blob/master/DESIGN.md) and implementation specifications
+:eight_spoked_asterisk: [Technical design](https://github.com/p2panda/design-document/blob/master/DESIGN.md) and implementation ideas
+
+:eight_spoked_asterisk: [Specification](https://github.com/p2panda/design-document/blob/master/spec) of the protocol (sloth draft)
 
 :eight_spoked_asterisk: [Philosophy](https://github.com/p2panda/design-document/blob/master/PHILOSOPHY.md) of p2panda
 
@@ -43,6 +45,8 @@ p2panda can be interesting for:
 :sparkling_heart: Liebe Chaos Verein e. V.: https://liebechaos.org/
 
 ## References
+
+:diamond_shape_with_a_dot_inside: [C36C3](https://media.ccc.de/v/36c3-10756-p2panda) - Presentation at Chaos Communication Congress 2019
 
 :diamond_shape_with_a_dot_inside: [HOFFNUNG 3000](https://github.com/adzialocha/hoffnung3000) - Platform for self-curated festivals
 
