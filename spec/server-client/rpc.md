@@ -41,19 +41,9 @@ JSON-RPC via WebSocket or HTTP.
 
 * Array of the requested instance data (`@TODO`)
 
-## Status & Fork Proofs
+## Server schemas
 
-### panda_about
-
-**Parameters:**
-
-* %
-
-**Returns:**
-
-`@TODO`. Basic data like server version etc.
-
-##### panda_schemas
+### panda_getSchemas
 
 **Parameters:**
 
@@ -71,14 +61,4 @@ JSON-RPC via WebSocket or HTTP.
 
 **Returns:**
 
-`@TODO: Write more about fork proofs`. Array of fork proofs (identified forked logs), the regarding positions in the logs where the forks occured and the current vote status which fork to follow.
-
-### panda_voteFork
-
-**Parameters:**
-
-* `@TODO`
-
-**Returns:**
-
-* %
+* `@TODO: Write more about fork proofs`. Array of fork proofs (identified forked logs), the regarding positions in the logs where the forks occured and the current vote status which fork to follow. Users can vote on forks by publishing special system messages.
