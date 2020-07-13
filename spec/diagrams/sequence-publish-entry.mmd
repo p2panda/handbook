@@ -1,0 +1,14 @@
+sequenceDiagram
+  participant C as Client
+  participant S as Server
+  participant D as Database
+  C -->> C : Generate keypair
+  C -->> C : CREATE <message_type>
+  C  ->> S : RPC: panda_getNextEntryArguments
+  S  ->> D : Get latest arguments of author w. logId
+  D -->> C : entrySkiplink & entryBacklink & seqNum
+  C -->> C : Encode new entry
+  C  ->> S : RPC: panda_publishEntry
+  S -->> S : Verify entry
+  S  ->> D : INSERT entry
+  S  ->> D : INSERT <message_type>
