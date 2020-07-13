@@ -53,6 +53,8 @@ JSON-RPC via WebSocket or HTTP.
 
 `@TODO`. Array of registered data schemas on this server.
 
+## Fork proofs (idea)
+
 ### panda_getForkProofs
 
 **Parameters:**
