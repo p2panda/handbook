@@ -4,7 +4,7 @@ JSON-RPC via WebSocket or HTTP.
 
 ## Publishing
 
-##### panda_getNextEntryArguments
+### panda_getNextEntryArguments
 
 **Parameters:**
 
@@ -17,7 +17,7 @@ JSON-RPC via WebSocket or HTTP.
 * `encodedEntrySkiplink`
 * `lastSeqNum`
 
-##### panda_publishEntry
+### panda_publishEntry
 
 **Parameters:**
 
@@ -30,7 +30,7 @@ JSON-RPC via WebSocket or HTTP.
 
 ## Reading
 
-##### panda_getInstances
+### panda_getInstances
 
 **Parameters:**
 
@@ -43,7 +43,7 @@ JSON-RPC via WebSocket or HTTP.
 
 ## Status & Fork Proofs
 
-##### panda_about
+### panda_about
 
 **Parameters:**
 
@@ -63,7 +63,7 @@ JSON-RPC via WebSocket or HTTP.
 
 `@TODO`. Array of registered data schemas on this server.
 
-##### panda_getForkProofs
+### panda_getForkProofs
 
 **Parameters:**
 
@@ -73,7 +73,7 @@ JSON-RPC via WebSocket or HTTP.
 
 `@TODO: Write more about fork proofs`. Array of fork proofs (identified forked logs), the regarding positions in the logs where the forks occured and the current vote status which fork to follow.
 
-##### panda_voteFork
+### panda_voteFork
 
 **Parameters:**
 
