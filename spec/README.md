@@ -16,7 +16,7 @@
 
 1. [Data Exchange Format](https://github.com/p2panda/design-document/blob/master/spec/server-client/data_exchange_format.md)
 2. [Meta Schema Definitions & Migrations](https://github.com/p2panda/design-document/blob/master/spec/server-client/meta_schema.md)
-3. [Bamboo Publish API](https://github.com/p2panda/design-document/blob/master/spec/server-client/bamboo_publish_api.md)
+3. [RPC API](https://github.com/p2panda/design-document/blob/master/spec/server-client/rpc.md)
 4. [Message Schema Specification](https://github.com/p2panda/design-document/blob/master/spec/server-client/msg_schema.md)
 5. [Security & Encryption](https://github.com/p2panda/design-document/blob/master/spec/server-client/encryption.md)
 
