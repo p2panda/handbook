@@ -49,6 +49,10 @@ p2panda is a protocol for publishing and reading structured data in a network of
 1. [Fork proofs](https://github.com/p2panda/design-document/blob/master/spec/ideas/fork-proofs.md)
 2. [Migrations](https://github.com/p2panda/design-document/blob/master/spec/ideas/migrations.md)
 
+# TODO
+
+* Be consistent with `skiplinks` (instead of lipmaa links) and `logs` (instead of feeds)
+
 ### License
 
 `Creative Commons Attribution Share Alike 4.0 International`
