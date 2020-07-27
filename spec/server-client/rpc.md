@@ -1,6 +1,6 @@
 # RPC API
 
-JSON-RPC via WebSocket or HTTP to send and receive data between clients and servers.
+[JSON-RPC](https://www.jsonrpc.org/specification) via WebSocket or HTTP to send and receive data between clients and servers.
 
 ## Messages
 
