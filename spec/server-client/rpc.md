@@ -16,6 +16,7 @@
 * `encodedEntryBacklink` Bytes of the last entry in this log encoded as hex `String`
 * `encodedEntrySkiplink` Bytes of the last skip entry in this log encoded as hex `String`
 * `lastSeqNum` Sequence number of the last entry in this log `Number`
+* `logId` Id of the log `Number`
 
 #### Example
 
@@ -42,7 +43,8 @@
   "result": {
     "encodedEntryBacklink": "...",
     "encodedEntrySkiplink": "...",
-    "lastSeqNum": 12
+    "lastSeqNum": 12,
+    "logId": 1
   }
 }
 ```
