@@ -30,8 +30,7 @@ To read all instances of the post collection by the author `d4a1cb88a66f02f8db63
     "title": "Holidays in the rainforest",
     "body": "Recommendable trees to hang, good food",
     "publishedAt": "2020-05-31T22:51:04+0000"
-  },
-  ...
+  }
 ]
 ```
 
