@@ -25,7 +25,10 @@
 {
   "jsonrpc": "2.0",
   "method": "panda_nextEntryArguments",
-  "params": ["5e3b0c90a02115c840b31d81489e507db68dd7d33d3e453b02985d25f3b76772", "comment"],
+  "params": {
+    "author": "5e3b0c90a02115c840b31d81489e507db68dd7d33d3e453b02985d25f3b76772",
+    "schema": "comment"
+  },
   "id": 1
 }
 ```
@@ -37,8 +40,8 @@
   "jsonrpc": "2.0",
   "id": 1,
   "result": {
-    "encodedEntryBacklink": "",
-    "encodedEntrySkiplink": "",
+    "encodedEntryBacklink": "...",
+    "encodedEntrySkiplink": "...",
     "lastSeqNum": 12
   }
 }
@@ -48,8 +51,8 @@
 
 #### Parameters
 
-1. `encodedEntry` Encoded bamboo entry (hex encoded bytes) `String`
-2. `encodedPayload` Encoded CBOR payload (hex encoded bytes) `String`
+1. `encodedEntry` New bamboo entry bytes encoded as hex `String`
+2. `encodedPayload` CBOR payload bytes encoded as hex `String`
 
 #### Response
 
@@ -62,8 +65,11 @@
 ```json
 {
   "jsonrpc": "2.0",
-  "method": "",
-  "params": [],
+  "method": "panda_publishEntry",
+  "params": {
+    "encodedEntry": "...",
+    "encodedPayload": "..."
+  },
   "id": 1
 }
 ```
@@ -98,7 +104,7 @@
 {
   "jsonrpc": "2.0",
   "method": "",
-  "params": [],
+  "params": {},
   "id": 1
 }
 ```
@@ -109,8 +115,7 @@
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-  }
+  "result": {}
 }
 ```
 
@@ -134,7 +139,7 @@
 {
   "jsonrpc": "2.0",
   "method": "",
-  "params": [],
+  "params": {},
   "id": 1
 }
 ```
@@ -145,8 +150,7 @@
 {
   "jsonrpc": "2.0",
   "id": 1,
-  "result": {
-  }
+  "result": {}
 }
 ```
 
