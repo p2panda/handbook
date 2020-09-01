@@ -4,17 +4,17 @@
 
 ## Introduction
 
-p2panda is a protocol for publishing and reading structured data in a network of peers. Messages are signed and published by clients using [Bamboo](https://github.com/AljoschaMeyer/bamboo) data structures and distributed to other peers through servers. p2panda allows for decentralized or federated network topologies or even hybrids of these and aims to run in webbrowsers for accessibility without giving up on its cryptographic features.
+p2panda is a protocol for publishing and reading structured data in a decentralized network of peers. Messages are signed and published by clients using [Bamboo](https://github.com/AljoschaMeyer/bamboo) data structures which get replicated over the network to other peers. p2panda allows for decentralized or federated network topologies or even hybrids of these and aims at running in webbrowsers without giving up on its cryptographic features.
 
 ## Features
 
 - **Browser friendly:** Since clients only sign and send new data to servers they can easily be implemented for websites.
-- **Open schemas:** Clients suggest schemas which servers can then register, to validate and store any data for the network.
-- **Encryption:** Node communication is end-to-end encrypted and on-chain messages can be encrypted for particular users or groups sharing the same key.
+- **Open schemas:** Clients suggest data schemas and schema migrations which servers can support, by validating, storing and indexing the data for the network.
+- **Encryption:** Node communication is end-to-end encrypted, on-chain messages can be encrypted for particular users (asymmetrically) or groups sharing the same key (symmetrically).
 - **Single writer:** Data can only be created or changed by the same author.
-- **Local deletion:** To not store massive amounts of outdated data it can be deleted without loosing verifiability and data integrity.
+- **Local deletion:** Data can partically be deleted without loosing verifiability and data integrity to save storage and energy.
 - **Partial replication:** Servers do not need to download everything to verify data.
-- **Flexible network topologies:** Depending on the needs of the users or communities a network can consist of server federation or independent nodes per user.
+- **Flexible network topologies:** Depending on the needs and choose trade-offs of the users or communities a network can consist of federated servers or independent, fully decentralized offline-first nodes.
 - **Fork proof:** Detection of forked logs and conflict resolution through voting.
 
 ## Design Goals

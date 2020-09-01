@@ -15,7 +15,7 @@ Every author publishes entries in their logs which then get distributed in the n
 }
 ```
 
-All messages look similar to this one, they always contain an `action`, `schema`, `version` and `fields`. This example message describes the creation of a new post by setting the `action` to `create` and mentioning via `schema` that the following data is a `post`. We also give the `version` of this message for future changes to the protocol. The actual data we find under `fields`, this is where the actual post lives, everything else are meta information for the servers to work with.
+All messages look similar to this one, they always contain an `action`, `schema`, `version` and `fields`. This example message describes the creation of a new post by setting the `action` to `create` and mentioning via `schema` that the following data is a `post`. We also mention the `version` of this message for backwards compatibility when potential future changes to the protocol occur. The actual data is contained under `fields`, this is where the actual post lives, everything else are meta informations for the servers to work with.
 
 This message will be now signed and encoded as a Bamboo entry which we post to the server via the RPC API (`panda_nextEntryArguments` and `panda_publishEntry`). It gets verified by the server and if everything went well its stored now on the server database, ready for distribution to other servers in the network.
 
@@ -138,3 +138,4 @@ Delete a single existing instance (referred to via `id`) of a collection. This w
 # TODO
 
 * Add reference to "Query" chapter
+* Open question: can bamboo entries be hashed for shorter ids?
