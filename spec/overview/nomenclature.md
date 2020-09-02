@@ -1,16 +1,16 @@
 # Nomenclature
 
-- **Author:**:
-- **Bamboo:**:
-- **Client:**:
-- **Collection:**:
-- **Entry:**:
-- **Keypair:**:
-- **Log:**:
-- **Materialized View:**:
-- **Message:**:
-- **Schema:**:
-- **Server:**:
+- **Author:**
+- **Bamboo:**
+- **Client:**
+- **Collection:**
+- **Entry:**
+- **Keypair:**
+- **Log:**
+- **Materialized View:**
+- **Message:**
+- **Schema:**
+- **Server:**
 
 # TODO
 
