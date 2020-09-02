@@ -1,6 +1,6 @@
 # p2:panda_face: Specification
 
-**Status: Almost there, just not all written down yet..**
+**Status: Almost there, just not all written down yet..** :rainbow:
 
 ## Introduction
 
@@ -12,16 +12,16 @@ p2panda is a protocol for publishing and reading structured data in a decentrali
 - **Open schemas:** Clients suggest data schemas and schema migrations which servers can support, by validating, storing and indexing the data for the network.
 - **Encryption:** Node communication is end-to-end encrypted, on-chain messages can be encrypted for particular users (asymmetrically) or groups sharing the same key (symmetrically).
 - **Single writer:** Data can only be created or changed by the same author.
-- **Local deletion:** Data can partically be deleted without loosing verifiability and data integrity to save storage and energy.
-- **Partial replication:** Servers do not need to download everything to verify data.
-- **Flexible network topologies:** Depending on the needs and choose trade-offs of the users or communities a network can consist of federated servers or independent, fully decentralized offline-first nodes.
+- **Local deletion:** Data can partically be deleted without loosing verifiability and data integrity.
+- **Partial replication:** Servers do not need to download the whole log to verify data.
+- **Flexible network topologies:** Depending on the needs and choosen trade-offs of the users or communities a network can consist of federated servers or independent, fully decentralized offline-first nodes.
 - **Fork proof:** Detection of forked logs and conflict resolution through voting.
 
 ## Design Goals
 
 - **Fun:** p2p protocols can be intimidating as they bring some special problems with themselves. We believe this does not need to be reflected in the codebase neither in the APIs and documentation around this technology. We want p2panda to be fun to write code with and for.
 - **Minimal:** Make use of already existing solutions and open source libraries as much as possible to keep the actual p2panda codebase small.
-- **Extensible:** Still we want everyone to give many options to extend p2panda as much as they need.
+- **Extensible:** Keep the protocol simple, modular and open.
 
 ## Chapters
 
