@@ -4,7 +4,7 @@
 
 ## Introduction
 
-p2panda is a protocol for publishing and reading structured data in a decentralized network of peers. Messages are signed and published by clients using [Bamboo](https://github.com/AljoschaMeyer/bamboo) data structures which get replicated over the network to other peers. p2panda allows for decentralized or federated network topologies or even hybrids of these and aims at running in webbrowsers without giving up on its cryptographic features.
+p2panda is a protocol for publishing and reading structured data in a decentralised network of peers. Messages are signed and published by clients using [Bamboo](https://github.com/AljoschaMeyer/bamboo) data structures which get replicated over the network to other peers. p2panda allows for decentralised or federated network topologies or even hybrids of these and aims at running in web browsers without giving up on its cryptographic features.
 
 ## Features
 
@@ -12,9 +12,9 @@ p2panda is a protocol for publishing and reading structured data in a decentrali
 - **Open schemas:** Clients suggest data schemas and schema migrations which servers can support, by validating, storing and indexing the data for the network.
 - **Encryption:** Node communication is end-to-end encrypted, on-chain messages can be encrypted for particular users (asymmetrically) or groups sharing the same key (symmetrically).
 - **Single writer:** Published data can only be changed by its original author.
-- **Local deletion:** Data can partically be deleted without loosing verifiability and data integrity.
+- **Local deletion:** Data can partially be deleted without loosing verifiability and data integrity.
 - **Partial replication:** Servers do not need to download the whole log to verify data.
-- **Flexible network topologies:** Depending on the needs and choosen trade-offs of the users or communities a network can consist of federated servers or independent, fully decentralized offline-first nodes.
+- **Flexible network topologies:** Depending on the needs and chosen trade-offs of the users or communities a network can consist of federated servers or independent, fully decentralised offline-first nodes.
 - **Fork proof:** Detection of forked logs and conflict resolution through voting.
 
 ## Design Goals
