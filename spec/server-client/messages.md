@@ -61,7 +61,7 @@ Finally, the author is not happy with their post and wants to delete it by sendi
 
 ## Encoding
 
-Even though all RPC API requests and responses are encoded as JSON, the actual `create`, `update` and `delete` messages are encoded in [CBOR](https://en.wikipedia.org/wiki/CBOR) format to optimize processing and transfer speed between servers. Messages are strictly speaking Bamboo entry payloads and more interesting for the server than for the clients. Clients only consume already "cleaned" and structured data from the servers. Since the entry gets signed by the keypair managed inside the client, we have to do the CBOR encoding here as well.
+Even though all RPC API requests and responses are encoded as JSON, the actual `create`, `update` and `delete` messages are encoded in [CBOR](https://en.wikipedia.org/wiki/CBOR) format to optimise processing and transfer speed between servers. Messages are strictly speaking Bamboo entry payloads and more interesting for the server than for the clients. Clients only consume already "cleaned" and structured data from the servers. Since the entry gets signed by the key pair managed inside the client, we have to do the CBOR encoding here as well.
 
 ## Specification
 
@@ -129,11 +129,11 @@ Delete a single existing instance (referred to via `id`) of a collection. This w
 
 ### Fields
 
-- `action (<string>)`: Defines if a new instance of a collection is created or an existing instance is updated or deleted. Possible values are: `create`, `update` or `delete`.
-- `schema (<string>)`: Name of the specification of the message. Every schema (for example "posts" or "comments") defines a collection on a server. A schema definition can be installed on a server which makes it validate and store wellformed messages of that schema. Unknown schemas are stored as Bamboo entries for further replication but ignored as queryable data for this server.
-- `version (<number>)`: Version number of the message format. This value will be `1` until new message formats get introduced in future protocol updates.
-- `id <string>`: Reference to a particular instance when updating its fields or deleting it.
-- `fields <object>`: Actual data for the instance following the schema specification. Every field has a name (string) and a value which type is defined by the regarding collection schema. Messages not following the schema (with invalid types or names and missing fields) get rejected by the server.
+- `action` *string*: Defines if a new instance of a collection is created or an existing instance is updated or deleted. Possible values are: `create`, `update` or `delete`.
+- `schema` *string*: Name of the specification of the message. Every schema (for example "posts" or "comments") defines a collection on a server. A schema definition can be installed on a server which makes it validate and store wellformed messages of that schema. Unknown schemas are stored as Bamboo entries for further replication but ignored as queryable data for this server.
+- `version` *number*: Version number of the message format. This value will be `1` until new message formats get introduced in future protocol updates.
+- `id` *string*: Reference to a particular instance when updating its fields or deleting it.
+- `fields` *object*: Actual data for the instance following the schema specification. Every field has a name (*string*) and a value which type is defined by the regarding collection schema. Messages not following the schema (with invalid types or names and missing fields) get rejected by the server.
 
 # TODO
 
