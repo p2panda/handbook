@@ -28,11 +28,11 @@ Since clients and servers are separatable it is possible to build different sort
 
 | Feature | Federated | Decentralised |
 | --- | --- | --- |
-| Works offline | No | Yes |
-| Trust own node | No | Yes |
-| Browser friendly | Yes | No |
-| Static IP | Yes | No |
-| Can be used by many | Yes | No |
+| Works offline | :interrobang: | :white_check_mark: |
+| Trust own node | :interrobang: | :white_check_mark: |
+| Browser friendly | :white_check_mark: | :interrobang: |
+| Static IP | :white_check_mark: | :interrobang: |
+| Can be used by many | :white_check_mark: | :interrobang: |
 
 With these two components a few setup configurations for p2panda are imaginable:
 
