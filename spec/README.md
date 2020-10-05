@@ -11,7 +11,7 @@ p2panda is a protocol for publishing and reading structured data in a decentrali
 - **Browser friendly:** Since clients only sign and send new data to servers they can easily be implemented for websites.
 - **Open schemas:** Clients suggest data schemas and schema migrations which servers can support, by validating, storing and indexing the data for the network.
 - **Encryption:** Node communication is end-to-end encrypted, on-chain messages can be encrypted for particular users (asymmetrically) or groups sharing the same key (symmetrically).
-- **Single writer:** Data can only be created or changed by the same author.
+- **Single writer:** Published data can only be changed by its original author.
 - **Local deletion:** Data can partically be deleted without loosing verifiability and data integrity.
 - **Partial replication:** Servers do not need to download the whole log to verify data.
 - **Flexible network topologies:** Depending on the needs and choosen trade-offs of the users or communities a network can consist of federated servers or independent, fully decentralized offline-first nodes.
@@ -19,9 +19,9 @@ p2panda is a protocol for publishing and reading structured data in a decentrali
 
 ## Design Goals
 
-- **Fun:** p2p protocols can be intimidating as they bring some special problems with themselves. We believe this does not need to be reflected in the codebase neither in the APIs and documentation around this technology. We want p2panda to be fun to write code with and for.
+- **Fun:** p2p protocols can be intimidating as they bring some special problems with themselves. We believe this does neither need to be reflected in the codebase and APIs nor in the documentation. We want p2panda to be fun to write code with and for.
 - **Minimal:** Make use of already existing solutions and open source libraries as much as possible to keep the actual p2panda codebase small.
-- **Extensible:** Keep the protocol simple, modular and open.
+- **Extensible:** Keep the protocol modular and open.
 
 ## Chapters
 
