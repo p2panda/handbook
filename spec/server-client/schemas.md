@@ -96,11 +96,11 @@ No user log exists yet on the server when a client generates a new key pair. In 
 
 1. Client asks server via RPC API (`panda_nextEntryArguments`) about the next `backlink` and `skiplink` for the next message of type `comment`. This is a required step to sign new bamboo entries on the clients side. The server looks into the database and checks if already any user log for `comment` exists. Since this is the very first message of this user, it can't find anything.
 
-  :bulb: *The server would reject this request if messages of type `comment` are not accepted. For this example we assume they are accepted.*
+    :bulb: *The server would reject this request if messages of type `comment` are not accepted. For this example we assume they are accepted.*
 
 2. The server picks the next unused user log id, which in this case is `1` (it is the first possible user log id) and sends it back to the client including `null` for the `backlink` and `skiplink` field as no entries exist yet.
 
-    ```json
+    ```
     {
       "log_id": 1024,
       "backlink_hash": null,
@@ -110,7 +110,7 @@ No user log exists yet on the server when a client generates a new key pair. In 
 
 3. With this data, the client can encode the new bamboo entry now and send it finally to the server (via `panda_publishEntry`).
 
-    ```json
+    ```
     {
       "entryBytes": [...],
       "payloadBytes": [...]
