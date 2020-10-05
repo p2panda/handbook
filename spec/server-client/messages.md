@@ -1,6 +1,6 @@
 # Messages
 
-Every author publishes entries in their logs which then get distributed in the network. Lets start with the following examples of an author `d4a1cb...` creating a new `post` entry which contains the following:
+Every author publishes entries in their logs which then get distributed in the network. The following examples assume an author with the address `d4a1cb...` creating a new `post` entry which contains the following:
 
 ```json
 {
@@ -15,13 +15,13 @@ Every author publishes entries in their logs which then get distributed in the n
 }
 ```
 
-All messages look similar to this one, they always contain an `action`, `schema`, `version` and `fields`. This example message describes the creation of a new post by setting the `action` to `create` and mentioning via `schema` that the following data is a `post`. We also mention the `version` of this message for backwards compatibility when potential future changes to the protocol occur. The actual data is contained under `fields`, this is where the actual post lives, everything else are meta informations for the servers to work with.
+All messages look similar to this one: They always contain the fields `action`, `schema`, `version` and `fields`. This example message describes the creation of a new post by setting the `action` field to `create` and mentioning via `schema` that the following data is a `post`. We also store the `version` of this message for backwards compatibility when potential future changes to the protocol occur. The actual data is contained under `fields`, this is where the actual post lives, everything else are meta informations for the servers to work with.
 
-This message will be now signed and encoded as a Bamboo entry which we post to the server via the RPC API (`panda_nextEntryArguments` and `panda_publishEntry`). It gets verified by the server and if everything went well its stored now on the server database, ready for distribution to other servers in the network.
+This message will now be signed and encoded as a Bamboo entry which we post to the server via the RPC API (`panda_nextEntryArguments` and `panda_publishEntry`). It gets verified by the server, and if everything went fine, stored on the server database, ready for distribution to other nodes in the network.
 
-By creating a new post we create a new *instance* of the *collection* `post`. Collections are categories of data which is structured in the same way. Instances are singular data entries inside of a collection.
+By creating a new post, we create a new *instance* of the *collection* `post`. Collections are categories of data which are structured in the same way, following the same *schema*. Instances are singular data entries inside of a collection.
 
-To read all instances of the post collection by the author `d4a1cb88a66f02f8db635ce26441cc5dac1b08420ceaac230839b755845a9ffb` we can request a list of them via the RPC API (`panda_query`) with the following result:
+To read all instances of the post collection by the author `d4a1cb...` we request a list of them via the RPC API (`panda_query`) with the following result:
 
 ```json
 [
@@ -48,7 +48,7 @@ The same author can change the post by sending an `update` message, referencing 
 }
 ```
 
-Finally the author is not happy with their post and wants to delete it by sending the following `delete` message:
+Finally, the author is not happy with their post and wants to delete it by sending the following `delete` message:
 
 ```json
 {
@@ -61,7 +61,7 @@ Finally the author is not happy with their post and wants to delete it by sendin
 
 ## Encoding
 
-Even though all API requests and responses are encoded as JSON, the `create`, `update` and `delete` messages are encoded in [CBOR](https://en.wikipedia.org/wiki/CBOR) format to optimize processing and transfer speed between servers. Messages are strictly speaking Bamboo entry payloads and more interesting for the server than for the clients as they only consume already cleaned-up and structured data from the servers. Since the keypair signing the entry lives inside the client we have to do the CBOR encoding here.
+Even though all RPC API requests and responses are encoded as JSON, the actual `create`, `update` and `delete` messages are encoded in [CBOR](https://en.wikipedia.org/wiki/CBOR) format to optimize processing and transfer speed between servers. Messages are strictly speaking Bamboo entry payloads and more interesting for the server than for the clients. Clients only consume already "cleaned" and structured data from the servers. Since the entry gets signed by the keypair managed inside the client, we have to do the CBOR encoding here as well.
 
 ## Specification
 
