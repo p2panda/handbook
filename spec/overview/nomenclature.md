@@ -1,5 +1,19 @@
-# Nomenclature of p2panda
+# Nomenclature
 
-- What are we talking about?
+- **Author:**
+- **Bamboo:**
+- **Client:**
+- **Collection:**
+- **Entry:**
+- **Keypair:**
+- **Log:**
+- **Materialized View:**
+- **Message:**
+- **Node:**
+- **Schema:**
+- **Server:**
 
-ᶘᵒ㉨ᵒᶅ
+# TODO
+
+* Explain all terms
+* Maybe rename all `Servers` to `Nodes`?

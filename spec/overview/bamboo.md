@@ -1,5 +1,7 @@
 # Bamboo Explained Shortly
 
-- How are the structures of bamboo used? Key pairs, logs, entries.
-- How do we deal with log ids?
+See: https://github.com/AljoschaMeyer/bamboo
 
+# TODO
+
+* How are the structures of bamboo used? Key pairs, logs, entries.
