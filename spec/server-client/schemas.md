@@ -102,7 +102,7 @@ No user log exists yet on the server when a client generates a new key pair. In 
 
     ```
     {
-      "log_id": 1024,
+      "log_id": 1,
       "backlink_hash": null,
       "skiplink_hash": null
     }
