@@ -8,6 +8,10 @@ Newly created data by clients is sent directly to a server via a RPC API which i
 
 Servers also *materialise* the data they store, which means they make it faster and easier to query it. Clients can not only create data but also request the server via the RPC API to send them what it knows about a certain topic, author or kind, like *"Send me all the posts from this user?"* or *"What are the pictures attached to this event?"* to finally display the responses to the user in an interface.
 
+## Overview
+
+![Overview of Server and Client architecture](../assets/server-client.jpg)
+
 **Server**
 
 * Holds all known data (append-only logs). Awaits signed messages from clients via an API which then are added to the logs and internally stored in the database.
@@ -26,22 +30,20 @@ Servers also *materialise* the data they store, which means they make it faster 
 
 Depending on your preferences and chosen trade-offs, a client and server can run on different computers or on the same one, sometimes even within the same application if necessary.
 
+![Alternative setups of Server and Client](../assets/server-client-setups.jpg)
+
 This following table roughly compares the advantages of the different network topologies:
 
 | Feature | Federated | Decentralised |
 | --- | --- | --- |
-| Works offline | :interrobang: | :white_check_mark: |
-| Trust own node | :interrobang: | :white_check_mark: |
-| Browser friendly | :white_check_mark: | :interrobang: |
-| Static IP | :white_check_mark: | :interrobang: |
-| Can be used by many | :white_check_mark: | :interrobang: |
+| Works offline | :interrobang: | :heavy_check_mark: |
+| Trust own node | :interrobang: | :heavy_check_mark: |
+| Browser friendly | :heavy_check_mark: | :interrobang: |
+| Static IP | :heavy_check_mark: | :interrobang: |
+| Can be used by many | :heavy_check_mark: | :interrobang: |
 
 With these two components a few setup configurations for p2panda are imaginable:
 
 * Website (hosted via HTTP server) communicating with external node (hosted on dedicated p2panda hardware or any other machine).
 * Electron / Tauri (or similar) Desktop application which contains both server and client.
 * Website which contains both server and client (not possible right now due to browser limitations / performance bottlenecks).
-
-# TODO
-
-* Add diagrams of different network setups
