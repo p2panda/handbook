@@ -1,6 +1,6 @@
 # Architecture
 
-The p2panda network consists of **clients**, which create new data, and **servers** which receive it. Servers check first if all incoming data is valid before they store it. After storing the data, servers discover other peers to sync the latest data with them. Depending on your preferences and chosen trade-offs, a client and server can run on different computers or on the same one, sometimes even within the same application if necessary!
+The p2panda network consists of **clients**, which create new data, and **servers** which receive it. Servers check first if all incoming data is valid before they store it. After storing the data, servers discover other peers to sync the latest data with them.
 
 One can roughly describe clients as **data creators** and servers as **data distributors**. Clients generate a key pair when you start them for the first time. Key pairs are the most sensitive bit of information and only known to the client, usually stored locally for one user. It is used to sign newly created data, similar to a signature under a letter making sure your identity is proven when sending it somewhere else.
 
@@ -24,7 +24,9 @@ Servers also *materialise* the data they store, which means they make it faster 
 
 ## Federated vs. decentralised setups
 
-Since clients and servers are separatable it is possible to build different sorts of applications depending on the needs of the users. This following table roughly compares the advantages of the different network topologies:
+Depending on your preferences and chosen trade-offs, a client and server can run on different computers or on the same one, sometimes even within the same application if necessary.
+
+This following table roughly compares the advantages of the different network topologies:
 
 | Feature | Federated | Decentralised |
 | --- | --- | --- |
