@@ -53,8 +53,8 @@
 
 #### Parameters
 
-1. `encodedEntry` New bamboo entry bytes encoded as hex `String`
-2. `encodedPayload` CBOR payload bytes encoded as hex `String`
+1. `entryEncoded` Bamboo entry bytes encoded as hex `String`
+2. `messageEncoded` CBOR payload message bytes encoded as hex `String`
 
 #### Response
 
@@ -69,8 +69,8 @@
   "jsonrpc": "2.0",
   "method": "panda_publishEntry",
   "params": {
-    "encodedEntry": "00ba6d9fa129db04a3edfe5d8734561ec99aff1f5abb079b9ef2ad0f7f1a31858600010d004069db5208a271c53de8a1b6220e6a4d7fcccd89e6c0c7e75c833e34dc68d932624f2ccf27513f42fb7d0e4390a99b225bad41ba14a6297537246dbe4e6ce150e8a55b4c5cd6726a5d21f8ef5f4a426855c5b7f415afbe6d47a2fdf613c46e272fb44719c7761c7294ba4b4a639f8dbfe82d73726925eda909a9546ed79de27e02",
-    "encodedPayload": "68656c6c6f2062616d626f6f21"
+    "entryEncoded": "00ba6d9fa129db04a3edfe5d8734561ec99aff1f5abb079b9ef2ad0f7f1a31858600010d004069db5208a271c53de8a1b6220e6a4d7fcccd89e6c0c7e75c833e34dc68d932624f2ccf27513f42fb7d0e4390a99b225bad41ba14a6297537246dbe4e6ce150e8a55b4c5cd6726a5d21f8ef5f4a426855c5b7f415afbe6d47a2fdf613c46e272fb44719c7761c7294ba4b4a639f8dbfe82d73726925eda909a9546ed79de27e02",
+    "messageEncoded": "68656c6c6f2062616d626f6f21"
   },
   "id": 1
 }
@@ -83,7 +83,7 @@
   "jsonrpc": "2.0",
   "id": 1,
   "result": {
-    "entryHashSkiplink": "0040d52a461247c7014fa3cd9fedc0ae381f84b7158befe96fa250641b4a1b74501169ed046ad53389a8e7309a035bf2f68ea19e6ffaaf0ee5822c00e81e16fa4424"
+    "entryHash": "0040d52a461247c7014fa3cd9fedc0ae381f84b7158befe96fa250641b4a1b74501169ed046ad53389a8e7309a035bf2f68ea19e6ffaaf0ee5822c00e81e16fa4424"
   }
 }
 ```
