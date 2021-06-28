@@ -1,5 +1,7 @@
 # p2:panda_face:
 
+**Note June 2021: This document reflects where we started off, it shows our motivations and dreams. Since then, p2panda has grown to be more than a software for festivals. An update to this design document is coming, keep this in mind until then.**
+
 p2panda is a :panda_face: way to get together in self-organized festivals. 
 
 A festival can be anything you want to plan with your friends, your circle, your collective, your commune – or people you have never met before: Give p2panda to your devices and create workshops, gatherings, initiatives, concerts or conferences using the computers and phones you already have – independent of any commercial infrastructure.
