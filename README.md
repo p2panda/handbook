@@ -31,8 +31,6 @@ While exploring building a p2p festival platform we met many people from the com
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/p2panda/design-document/restructure/pandas.jpg" width="500" />
-  <br />
-  <br />
 </div>
 
 This led to a group of people interested in realising a protocol for p2p communication, which ultimately should serve as a tool to build applications, like a festival tool and more.
