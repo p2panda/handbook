@@ -29,6 +29,12 @@ p2panda emerged out of activities around the self-curated zine [BLATT 3000](http
 
 While exploring building a p2p festival platform we met many people from the communities around Secure Scuttlebutt, DAT / Hypercore, Cabal, Chaos Computer Club, Fediverse, Antiuniversity Now, Pixelache trying to understand how this technology affects the way we organise ourselves.
 
+<div align="center">
+  <img src="https://raw.githubusercontent.com/p2panda/design-document/restructure/pandas.jpg" width="500" />
+  <br />
+  <br />
+</div>
+
 This led to a group of people interested in realising a protocol for p2p communication, which ultimately should serve as a tool to build applications, like a festival tool and more.
 
 In recent times activities have gathered around [Liebe Chaos Verein](https://liebechaos.org/), organizing a [p2p gathering](https://p2p-berlin.org/) and reading group in Berlin. We've been meeting almost every Monday since 2019 to hack on p2panda. Obviously we're still gunna organise another festival sometime :panda_face:
