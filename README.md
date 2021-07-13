@@ -92,17 +92,16 @@ In recent times activities have gathered around [Liebe Chaos Verein](https://lie
 
 ## How to contribute
 
-* Chatroom *#p2panda*: https://wald.liebechaos.org/channel/p2panda
-* Meeting notes: https://wolke.liebechaos.org/s/oEErg5TMqZM9HB6
-* GitHub: https://github.com/p2panda
+* Come to our weekly meetings, every Monday at 19:00 CET: https://wolke.liebechaos.org/call/tq6j9tuz
+* Join our chat channel *#p2panda*: https://wald.liebechaos.org/channel/p2panda
+* Here you can find our meeting notes: https://wolke.liebechaos.org/s/oEErg5TMqZM9HB6
+* Check out our issues, PRs and source code on GitHub: https://github.com/p2panda
 
 ## Futher links
 
-* Presentation at Chaos Communication Congress 2019
-* Shirokuma Cafe - panda_face
-* Mio Ebisu
-* Laura Weber - Cute panda illustrations
-* Liebe Chaos Verein e. V.: https://liebechaos.org/
+* [C36C3](https://media.ccc.de/v/36c3-10756-p2panda) Presentation at Chaos Communication Congress 2019
+* [Shirokuma Cafe](https://en.wikipedia.org/wiki/Shirokuma_Cafe)
+* [Laura Weber](http://www.lauraweber.net/) - Cute panda illustrations
 
 ## License
 
