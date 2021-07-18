@@ -11,16 +11,16 @@ Messages in p2panda are signed, encrypted and published by clients using the [Ba
 * **Browser friendliness**: Lightweight clients that can easily be implemented for websites.
 * **Schemas**: Users suggest data schemas which can be installed on nodes, validating, storing and indexing the data for the network.
 * **Encryption**: Transport communication is end-to-end encrypted via SSB's Secret Handshake, data is encrypted for groups via the Messaging Layer Security (MLS) protocol.
-* **Verification**: Published data is stored in append-only logs and can only be updated by its original author.
+* **Integrity**: Data is signed and can only be created and updated by its original author.
 * **Deletion**: Data can be deleted without loosing verifiability and log integrity.
 * **Decentralization**: Networks consist of both federated or decentralised nodes.
 * **Partial replication**: Nodes do not need to download the whole log to verify them.
-* **Devices**: A bunch of laptops or single board computers need less electricity than a server farm.
+* **Low-power electronics**: A bunch of laptops or single board computers need less electricity than a server farm.
 * **Identities**: People manage one or many identities across devices.
 * **Moderation**: Support hiding or removing content for users and groups.
 * **Local- & offline first**: Communicate without the global internet.
 * **Fork proof**: Automatic detection of accidentially or maliciously forked append-only logs.
-* **Energy**: Data- and energy-efficient storage and replication.
+* **Energy efficiency**: Data- and energy-efficient storage and replication.
 * **Warmth**: Computers make it easy to get carried away by their rigidly structured ways. However, every computer also contains an undeniable spark of pure chaos. We want to capture that spark to ignite a campfire for you to gather around and get cosy.
 
 ## Background
