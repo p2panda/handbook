@@ -30,7 +30,7 @@ p2panda emerged out of activities around the self-curated zine [BLATT 3000](http
 While exploring building a p2p festival platform we met many people from the communities around Secure Scuttlebutt, DAT / Hypercore, Cabal, Chaos Computer Club, Fediverse, Antiuniversity Now, Pixelache trying to understand how this technology affects the way we organise ourselves.
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/p2panda/design-document/restructure/pandas.jpg" width="500" alt="p2panda - サービス！サービス！" />
+  <img src="https://raw.githubusercontent.com/p2panda/design-document/restructure/assets/pandas.jpg" width="500" alt="p2panda - サービス！サービス！" />
   <p>サービス！サービス！</p>
 </div>
 
