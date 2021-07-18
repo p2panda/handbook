@@ -96,7 +96,7 @@ In recent times activities have gathered around [Liebe Chaos Verein](https://lie
 * Here you can find our meeting notes: https://wolke.liebechaos.org/s/oEErg5TMqZM9HB6
 * Check out our issues, PRs and source code on GitHub: https://github.com/p2panda
 
-## Futher links
+## Further links
 
 * [C36C3](https://media.ccc.de/v/36c3-10756-p2panda) Presentation at Chaos Communication Congress 2019
 * [Shirokuma Cafe](https://en.wikipedia.org/wiki/Shirokuma_Cafe)
