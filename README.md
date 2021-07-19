@@ -34,9 +34,7 @@ While exploring building a p2p festival platform we met many people from the com
   <p>サービス！サービス！</p>
 </div>
 
-This led to a group of people interested in realising a protocol for p2p communication, which ultimately should serve as a tool to build applications, like a festival tool and more.
-
-In recent times activities have gathered around [Liebe Chaos Verein](https://liebechaos.org/), organizing a [p2p gathering](https://p2p-berlin.org/) and reading group in Berlin. We've been meeting almost every Monday since 2019 to hack on p2panda. Obviously we're still gunna organise another festival sometime :panda_face:
+This led to a group of people interested in realising a protocol for p2p communication, which ultimately should serve as a tool to build applications, like a festival tool and more. We've been meeting regularly on Mondays since 2019 to hack on p2panda and have recently reached the point where we have a publicly running [demo project](https://p2panda.org/demo). We have also been active in some other projects including the [Liebe Chaos Verein](https://liebechaos.org/), organizing a [p2p gathering](https://p2p-berlin.org/) and a reading group in Berlin. Obviously we're still going to organise another festival sometime :panda_face:.
 
 ## Overview
 
