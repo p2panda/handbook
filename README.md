@@ -9,20 +9,19 @@ Messages in p2panda are signed, encrypted and published by clients using the [Ba
 ## Topics we're interested in
 
 * **Browser friendliness**: Lightweight clients that can easily be implemented as websites.
-* **Schemas**: User data is stored in published, versioned data schemas so data can be reliably accessed across services.
-* **Encryption**: Transport communication is end-to-end encrypted via SSB's Secret Handshake, data is encrypted for groups via the Messaging Layer Security (MLS) protocol.
-* **Integrity**: Authorship of all published data can be verified through signatures.
-* **Deletion**: Data can be deleted without loosing verifiability and log integrity.
 * **Decentralization**: Networks consist of both federated or decentralised nodes.
-* **Partial replication**: Nodes do not need to download the whole log to verify them.
-* **Low-power electronics**: Useable on low power devices.
-* **Identities**: A user account model that gives people options for managing one or multiple online identities across devices.
-* **Moderation**: Decentralised content moderation for users and groups.
-* **Local- & offline first**: Access to online services without reliable and performant internet infrastructure. Independence from the corporate cloud.
-* **Fork proof**: Automatic detection of accidentially or maliciously forked append-only logs.
+* **Deletion**: Data can be deleted without loosing verifiability and log integrity.
+* **Encryption**: Transport communication is end-to-end encrypted via SSB's Secret Handshake, data is encrypted for groups via the Messaging Layer Security (MLS) protocol.
 * **Energy efficiency**: Data- and energy-efficient storage and replication.
+* **Fork proof**: Automatic detection of accidentially or maliciously forked append-only logs.
+* **Identities**: A user account model that gives people options for managing one or multiple online identities across devices.
+* **Integrity**: Authorship of all published data can be verified through signatures.
+* **Local- & offline first**: Access to online services without reliable and performant internet infrastructure. Independence from the corporate cloud.
+* **Low-power electronics**: Useable on low power devices.
+* **Moderation**: Decentralised content moderation for users and groups.
+* **Partial replication**: Nodes do not need to download the whole log to verify them.
+* **Schemas**: User data is stored in published, versioned data schemas so data can be reliably accessed across services.
 * **Warmth**: Computers make it easy to get carried away by their rigidly structured ways. However, every computer also contains an undeniable spark of pure chaos. We want to capture that spark to ignite a campfire for you to gather around and get cosy.
-
 ## Background
 
 p2panda emerged out of activities around the self-curated zine [BLATT 3000](https://blatt3000.de) (2014) and subsequent festivals [VERANTWORTUNG 3000](https://blatt3000.de/verantwortung3000/) (2016) and [HOFFNUNG 3000](https://blatt3000.de/hoffnung3000/) (2017), the latter of these being the catalyst for building a custom platform designed to help communities organise in a decentralised manner, also called [HOFFNUNG 3000](https://hoffnung3000.de/).
