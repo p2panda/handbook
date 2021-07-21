@@ -88,7 +88,7 @@ This led to a group of people interested in realising a protocol for p2p communi
 
 ## How to contribute
 
-* Come to our weekly meetings, every Monday at 19:00 CET: https://wolke.liebechaos.org/call/tq6j9tuz
+* We meet every Monday at 19:00 CET, for coding and planning, drop us a message if you would like to join.
 * Join our chat channel *#p2panda*: https://wald.liebechaos.org/channel/p2panda
 * Here you can find our meeting notes: https://wolke.liebechaos.org/s/oEErg5TMqZM9HB6
 * Check out our issues, PRs and source code on GitHub: https://github.com/p2panda
