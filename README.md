@@ -1,57 +1,104 @@
 # p2:panda_face:
 
-**Note June 2021: This document reflects where we started off, it shows our motivations and dreams. Since then, p2panda has grown to be more than a software for festivals. An update to this design document is coming, keep this in mind until then.**
+p2panda is a user-friendly peer-to-peer communications protocol for secure, energy-efficient, offline- and local-first web applications. We want this protocol to be a playful tool for people to hack, build, play, and experiment with.
 
-p2panda is a :panda_face: way to get together in self-organized festivals. 
+Messages in p2panda are signed, encrypted and published by clients using the [Bamboo](https://github.com/AljoschaMeyer/bamboo) append-only log data type which gets distributed over the network to other peers. p2panda allows for decentralised and federated network topologies or even hybrids of these and aims at running in web browsers without loosing its cryptographic features.
 
-A festival can be anything you want to plan with your friends, your circle, your collective, your commune – or people you have never met before: Give p2panda to your devices and create workshops, gatherings, initiatives, concerts or conferences using the computers and phones you already have – independent of any commercial infrastructure.
+> **p2panda is currently very much in prototyping and specification phase, our milestones and progress can be seen below. If you're interested in any of these topics please get in touch!**
 
-What is in it?
+## Topics we're interested in
 
-- **Decentralised Infrastructure for Self-Organized Events:** Let the festival unfold on its own. Every connected device can register venues, materials and resources that can then be put together by everybody to plan and document a series of events.
-- **Radical Authorization:** Install a p2panda client to get started, no need to make an account, set a password, etc. Connect with other devices to start making plans together. Everybody starts out equally: Whether you are an organizer, performer or visitor is just decided by your actions and not determined by the type of account you have.
-- **Offline first:** Every device has its own copy of all information, which lets p2panda work independent of an Internet connection, obliterates a cloud infrastructure and creates an ephemeral archive for every participant. p2panda clients create a peer-to-peer network to exchange and sync information.
-- **Open Protocol:** p2panda is an easy-to-extend protocol that records the connection of users, resources and events. You can create a serendipity bot that occasionally creates random meeting events for your festival goers, or a hardware display with a live update of the festival schedule, or an archive bot that makes available a permanent copy of the festival on the world wide web.
-- **Warmth:** Computers make it easy to get carried away by their rigidly structured ways. However, every computer also contains an undeniable spark of pure chaos. We want to capture that spark to ignite a campfire for you to gather around and get cosy.
+* **Browser friendliness**: Lightweight clients that can easily be implemented as websites.
+* **Decentralization**: Networks consist of both federated or decentralised nodes.
+* **Deletion**: Data can be deleted without loosing verifiability and log integrity.
+* **Encryption**: Transport communication is end-to-end encrypted via SSB's Secret Handshake, data is encrypted for groups via the Messaging Layer Security (MLS) protocol.
+* **Energy efficiency**: Data- and energy-efficient storage and replication.
+* **Fork proof**: Automatic detection of accidentially or maliciously forked append-only logs.
+* **Identities**: A user account model that gives people options for managing one or multiple online identities across devices.
+* **Integrity**: Authorship of all published data can be verified through signatures.
+* **Local- & offline first**: Access to online services without reliable and performant internet infrastructure. Independence from the corporate cloud.
+* **Low-power electronics**: Useable on low power devices.
+* **Moderation**: Decentralised content moderation for users and groups.
+* **Partial replication**: Nodes do not need to download the whole log to verify them.
+* **Schemas**: User data is stored in published, versioned data schemas so data can be reliably accessed across services.
+* **Warmth**: Computers make it easy to get carried away by their rigidly structured ways. However, every computer also contains an undeniable spark of pure chaos. We want to capture that spark to ignite a campfire for you to gather around and get cosy.
+## Background
 
-p2panda can be interesting for:
+p2panda emerged out of activities around the self-curated zine [BLATT 3000](https://blatt3000.de) (2014) and subsequent festivals [VERANTWORTUNG 3000](https://blatt3000.de/verantwortung3000/) (2016) and [HOFFNUNG 3000](https://blatt3000.de/hoffnung3000/) (2017), the latter of these being the catalyst for building a custom platform designed to help communities organise in a decentralised manner, also called [HOFFNUNG 3000](https://hoffnung3000.de/).
 
-- **House projects, hackerspaces and other shared spaces** that want to make available tools and rooms to a group of people.
-- **Organisations, initiatives or (art) projects** that are active throughout whole cities, regions or the world.
-- **Conferences, museums, galleries, festivals** that want to experiment with alternative ways of curation.
-- **Metacollectives**, which offer spaces and resources across cities to be used by varying collectives and initiatives over time.
-- **Fun or esoteric things** like a festival in only virtual spaces or even no places.
+While exploring building a p2p festival platform we met many people from the communities around Secure Scuttlebutt, DAT / Hypercore, Cabal, Chaos Computer Club, Fediverse, Antiuniversity Now, Pixelache trying to understand how this technology affects the way we organise ourselves.
 
-![p2panda](https://raw.githubusercontent.com/p2panda/design-document/master/images/pandas.jpg)
+<div align="center">
+  <img src="https://raw.githubusercontent.com/p2panda/design-document/restructure/assets/pandas.jpg" width="500" alt="p2panda - サービス！サービス！" />
+  <p>サービス！サービス！</p>
+</div>
 
-## Learn more
+This led to a group of people interested in realising a protocol for p2p communication, which ultimately should serve as a tool to build applications, like a festival tool and more. We've been meeting regularly on Mondays since 2019 to hack p2panda and have recently reached the point where we have a publicly running [demo project](https://p2panda.org/demo). We have also been active in some other projects including the [Liebe Chaos Verein](https://liebechaos.org/), organising a [p2p gathering](https://p2p-berlin.org/) and a reading group in Berlin. Obviously we're still going to organise another festival sometime :panda_face:.
 
-:eight_spoked_asterisk: [Code of Conduct](https://github.com/p2panda/design-document/blob/master/CODE_OF_CONDUCT.md)
+## Overview
 
-:eight_spoked_asterisk: [Technical design](https://github.com/p2panda/design-document/blob/master/DESIGN.md) and implementation ideas
+> **These libraries and applications are current work-in-progress reference implementations. See the Milestones below for current progress status.**
 
-:eight_spoked_asterisk: [Specification](https://github.com/p2panda/design-document/blob/master/spec) of the protocol (sloth draft)
+**Libraries**
 
-:eight_spoked_asterisk: [Philosophy](https://github.com/p2panda/design-document/blob/master/PHILOSOPHY.md) of p2panda
+* [`p2panda`](https://github.com/p2panda/p2panda): Provides tools to write a client for the p2panda network. It is shipped both as a Rust crate `p2panda-rs` with WebAssembly bindings and a NPM package `p2panda-js` with TypeScript definitions running in NodeJS or any modern web browser.
 
-:eight_spoked_asterisk: [Many ideas](https://github.com/p2panda/design-document/blob/master/IDEAS.md) on how to use p2:panda_face:
+**Nodes**
 
-## Get involved
+* [`aquadoggo`](https://github.com/p2panda/aquadoggo): RPC node server for the p2panda network running as a standalone application or Rust `aquadoggo` crate.
+* [`fishyfish`](https://github.com/p2panda/fishyfish): Command line interface to manage p2panda nodes.
 
-:tv: Chatroom *#p2panda*: https://wald.liebechaos.org/channel/p2panda
+**Clients**
 
-:lollipop: Meeting notes: https://wolke.liebechaos.org/s/oEErg5TMqZM9HB6
+* [`beep-boop`](https://github.com/p2panda/beep-boop): Chat client based on p2panda to experiment with. See it live under: https://p2panda.org/demo
 
-:octocat: GitHub: https://github.com/p2panda
+## Milestones
 
-:sparkling_heart: Liebe Chaos Verein e. V.: https://liebechaos.org/
+* [x] Ed25519 key pair generation and handling
+* [x] Bamboo `Entry` creation
+* [x] `Entry` signing and validation
+* [x] SQLite / PostgreSQL / MySQL support for data storage
+* [x] WebAssembly support in the browser
+* [x] `aquadoggo` HTTP and WebSocket RPC API
+* [x] Publish first v0.1.0 `p2panda-rs` crate and `p2panda-js` npm package
+* [x] Message specification, creation and validation
+* [x] CBOR encoding and basic CDDL validation of messages
+* [x] Experimental chat demo application
+* [x] Embed `aquadoggo` library in Tauri container
+* [ ] Stabilize `p2panda-js` API, release 0.2.0 (**in progress**)
+* [ ] Naive materialization of data from logs (**in progress**)
+* [ ] Schemas and data validation (**in progress**)
+* [ ] Publish `aquadoggo` crate 0.1.0
+* [ ] Simple query interface to read data
+* [ ] Manually follow other nodes
+* [ ] Automatic local discovery via mDNS
+* [ ] Schema migrations
+* [ ] *Persona* schema to manage identities and key pairs
+* [ ] Efficient materialization of data from logs
+* [ ] Naive replication protocol
+* [ ] Transport encryption between nodes via SSB Secret Handshake
+* [ ] Message encryption for groups via OpenMLS
+* [ ] Automatic discovery via gossip protocol
+* [ ] Efficient point2point replication protocol
+* [ ] Schema backwards compatibility via lenses
+* [ ] p2panda specification 1.0 release :panda_face:
+* [ ] Automatic deletion of unused data
+* [ ] Automatic detection of forked logs
+* [ ] Filter and content moderation curated by users and groups
 
-## References
+## How to contribute
 
-:diamond_shape_with_a_dot_inside: [C36C3](https://media.ccc.de/v/36c3-10756-p2panda) - Presentation at Chaos Communication Congress 2019
+* We meet every Monday at 19:00 CET, for coding and planning, drop us a message if you would like to join.
+* Join our chat channel *#p2panda*: https://wald.liebechaos.org/channel/p2panda
+* Here you can find our meeting notes: https://wolke.liebechaos.org/s/oEErg5TMqZM9HB6
+* Check out our issues, PRs and source code on GitHub: https://github.com/p2panda
 
-:diamond_shape_with_a_dot_inside: [HOFFNUNG 3000](https://github.com/adzialocha/hoffnung3000) - Platform for self-curated festivals
+## Further links
 
-:diamond_shape_with_a_dot_inside: [Shirokuma Cafe](https://en.wikipedia.org/wiki/Shirokuma_Cafe) - :panda_face:
+* [C36C3](https://media.ccc.de/v/36c3-10756-p2panda) Presentation at Chaos Communication Congress 2019
+* [Shirokuma Cafe](https://en.wikipedia.org/wiki/Shirokuma_Cafe)
+* [Laura Weber](http://www.lauraweber.net/) - Cute panda illustrations
 
-:diamond_shape_with_a_dot_inside: [Laura Weber](http://www.lauraweber.net) - Cute panda illustrations
+## License
+
+[`CC-BY-SA-4.0 License`](/LICENSE)
