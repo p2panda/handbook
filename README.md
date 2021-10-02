@@ -102,3 +102,10 @@ This led to a group of people interested in realising a protocol for p2p communi
 ## License
 
 [`CC-BY-SA-4.0 License`](/LICENSE)
+
+## Supported by
+
+<img src="https://p2panda.org/images/ngi-logo.png" width="auto" height="80px">
+<img src="https://p2panda.org/images/eu-flag-logo.png" width="auto" height="80px">
+
+*This project has received funding from the European Union’s Horizon 2020 research and innovation programme within the framework of the NGI-POINTER Project funded under grant agreement No 871528*
