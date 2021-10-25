@@ -65,17 +65,17 @@ This led to a group of people interested in realising a protocol for p2p communi
 * [x] CBOR encoding and basic CDDL validation of messages
 * [x] Experimental chat demo application
 * [x] Embed `aquadoggo` library in Tauri container
-* [ ] Stabilize `p2panda-js` API, release 0.2.0 (**in progress**)
+* [x] Stabilize `p2panda-js` API, release 0.2.0
+* [x] Publish `aquadoggo` crate 0.1.0
 * [ ] Naive materialization of data from logs (**in progress**)
 * [ ] Schemas and data validation (**in progress**)
-* [ ] Publish `aquadoggo` crate 0.1.0
+* [ ] Naive replication protocol (**in progress**)
 * [ ] Simple query interface to read data
 * [ ] Manually follow other nodes
 * [ ] Automatic local discovery via mDNS
 * [ ] Schema migrations
 * [ ] *Persona* schema to manage identities and key pairs
 * [ ] Efficient materialization of data from logs
-* [ ] Naive replication protocol
 * [ ] Transport encryption between nodes via SSB Secret Handshake
 * [ ] Message encryption for groups via OpenMLS
 * [ ] Automatic discovery via gossip protocol
