@@ -1,16 +1,12 @@
 # Your proposal's title
 
-* Github PR: *add HTTPS link here after PR is opened*
-* Authors: *add list of GitHub username[s] here*
-* Date: YYYY-MM-DD
-
 ## Summary
 
 > Insert 1-2 paragraphs of explanation of what this is about here.
 
-## Motivation
+## User stories
 
-> Why are we doing this? What use cases does it support? What is the expected outcome?
+> Try to formulate the following questions as user stories: Why are we doing this? What use cases does it support? What is the expected outcome?
 
 ## Documentation
 
