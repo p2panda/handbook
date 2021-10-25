@@ -1,5 +1,7 @@
 # Your proposal's title
 
+> Give this file a short name like `your-proposals-title.md`.
+
 ## Summary
 
 > Insert 1-2 paragraphs of explanation of what this is about here.
