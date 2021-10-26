@@ -22,5 +22,4 @@ The p2panda [Handbook](https://github.com/p2panda/handbook) has a [`/specificati
 **3. Review and Merge Phase**
   * After all changes have been reflected and the p2panda [core team](/CODEOWNERS) approved the PR gets merged and the specification is official!
 
-**4. Happy Phase!**
- 🎆
+**4. Happy Phase!** 🎆
