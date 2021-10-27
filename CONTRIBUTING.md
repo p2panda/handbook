@@ -28,4 +28,4 @@ The p2panda [Handbook](https://github.com/p2panda/handbook) has a [`/specificati
 
 **4. Happy Phase!** 🎆
 
-- The newly released specification is announced by the facilitator in the #p2panda channel in rocket.chat".
+- The newly released specification is announced by the facilitator in the [#p2panda](https://wald.liebechaos.org/channel/p2panda) channel in rocket.chat.
