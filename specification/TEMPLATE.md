@@ -4,11 +4,11 @@
 
 ## Summary
 
-> Insert 1-2 paragraphs of explanation of what this is about here.
+> Summarise this specification in 1-2 paragraphs here.
 
 ## User stories
 
-> Try to formulate the following questions as user stories: Why are we doing this? What use cases does it support? What is the expected outcome?
+Describe who is affected by your proposal and what changes they can expect by writing user stories about it. It can help to think about the questions: Why are we doing this? What use cases does it support? What is the expected outcome?
 
 ## Documentation
 
@@ -16,4 +16,4 @@
 
 ## Rationale, alternatives and drawbacks
 
-> Why is this design the best in the space of possible designs? What other designs have been considered and what is the rationale for not choosing them? What is the impact of not doing this? Why should we *not* do this?
+> Why is this design the best in the space of possible designs? What other designs have been considered and what is the rationale for not choosing them? What is the impact of not doing this? Why should we _not_ do this?
