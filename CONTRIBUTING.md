@@ -23,9 +23,9 @@ The p2panda [Handbook](https://github.com/p2panda/handbook) has a [`/specificati
 **3. Review and Merge Phase**
 
 - The PR can be reviewed by anyone.
-- The p2panda [project maintainers](/CODEOWNERS) approve the PR and merge it
+- The p2panda [project maintainers](/CODEOWNERS) approve the PR and merge it.
 - The specification is now part of the handbook!
 
 **4. Happy Phase!** 🎆
 
-- the newly released specification is announced by the facilitator in the #p2panda channel in rocket.chat"
+- The newly released specification is announced by the facilitator in the #p2panda channel in rocket.chat".
