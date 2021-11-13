@@ -8,10 +8,9 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const config = {
   title: "p2panda",
   tagline: "It really whips the bamboo's ass",
-  // @TODO: Change this to `https://p2panda.org` before merging into `main`
-  url: "https://p2panda.org/handbook",
+  url: "https://p2panda.org",
   // @TODO: Change this to `/` before merging into `main`
-  baseUrl: "/handbook",
+  baseUrl: "/handbook/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   // favicon: "img/favicon.ico",
