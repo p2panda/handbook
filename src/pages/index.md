@@ -3,7 +3,7 @@ title: p2🐼
 ---
 
 <div className="img-landing">
-    <img src="/img/panda2by2.png" role="decoration" />
+    <img src="/handbook/img/panda2by2.png" role="decoration" />
     <h1>p2panda</h1>
 </div>
 
