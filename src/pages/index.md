@@ -107,10 +107,6 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [Shirokuma Cafe](https://en.wikipedia.org/wiki/Shirokuma_Cafe)
 - [Laura Weber](http://www.lauraweber.net/) - Cute panda illustrations
 
-## License
-
-[`CC-BY-SA-4.0 License`](/LICENSE)
-
 ## Supported by
 
 <img src="https://p2panda.org/images/ngi-logo.png" width="auto" height="80px" />
