@@ -55,7 +55,6 @@ const config = {
             position: "left",
             label: "Handbook",
           },
-          { to: "/demo", label: "Demo", position: "left" },
           { to: "/blog", label: "News", position: "left" },
           {
             href: "https://github.com/p2panda",
