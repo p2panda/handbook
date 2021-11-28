@@ -2,34 +2,18 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Overview
 
-Let's discover **Docusaurus in less than 5 minutes**.
+- what is p2panda?
+- what can you do with p2panda?
+- what can p2panda not do?
 
-## Getting Started
+## Handbook
 
-Get started by **creating a new site**.
+- what is the handbook?
+- what is the structure of the handbook?
+- what other ressources should the reader know about?
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Reading notes
 
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**:
-
-```shell
-npm init docusaurus@latest my-website classic
-```
-
-## Start your site
-
-Run the development server:
-
-```shell
-cd my-website
-
-npx docusaurus start
-```
-
-Your site starts at `http://localhost:3000`.
-
-Open `docs/intro.md` and edit some lines: the site **reloads automatically** and displays your changes.
+- `p2panda` refers to [the p2panda library](https://github.com/p2panda/p2panda)
