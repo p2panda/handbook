@@ -2,7 +2,7 @@
 
 This document describes how decisions for the p2panda project are made. In particular this includes decisions on strategic objectives and community participation. This governance structure assumes good-will: it does not try to handle all possible cases of what could go wrong but attempts to provide some grounding clarity.
 
-This document is not supposed to last forever, it may be changed to adopt to the changing nature of the project (see  [_Evolution_](#Evolution).
+This document is not supposed to last forever, it may be changed to adopt to the changing nature of the project (see  [_Evolution_](#Evolution)).
 
 ## Basics
 
