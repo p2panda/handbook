@@ -12,7 +12,7 @@ sidebar_position: 3
 ## Instance Serialisation
 
 - for storing instances in a database, a table is created for every schema that should be persisted
-  - the table name may be constructed from the instance's schema name and a unique identifier for the schema's version (e.g. the _instance id_ of the corresponding [_metaschema_](/docs/writing-data/schemas) instance)
+  - the table name may be constructed from the instance's schema name and a unique identifier for the schema's version (e.g. the _instance id_ of the corresponding [_metaschema_](/docs/sending-data/schemas) instance)
   - the table should have a column for every field in the schema's definition
   - the table should have a column to record the _document id_ and _instance id_ of every row
 - for every instance to persist
