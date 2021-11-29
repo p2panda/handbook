@@ -10,11 +10,13 @@ The p2panda project creates the p2panda protocol, builds software libraries and 
 
 _The maintainers_ hold decision-making power while seeking to represent a balance of the views and the best interests of the community as a whole. See [_Current Maintainers_](#Current-Maintainers) for a listing.
 
+Our core values for making decisions are: mutual respect, open-mindedness, human-centric approaches, inclusion. These are vague words but we include them here to provide new community members with a vibe check.
+
 This document refers to the whole of maintainers with the words "the maintainers" and single members of the maintainers as "any maintainer".
 
 Decisions by the maintainers are made in unanimity.
 
-Our core values for making decisions are: mutual respect, open-mindedness, human-centric approaches, inclusion. These are vague words but we include them here to provide new community members with a vibe check.
+In the event that any maintainer is unable or unwilling to continue maintenance, they may propose a replacement. The remaining maintainers have to unanimously agree to the replacement.
 
 ## Participants
 
@@ -23,8 +25,6 @@ Participation is open to anyone who wants to join as long as they are not a Nazi
 Participants involved in the development of open source resources are _contributors_, participants involved in strategy and fundraising are _advisors_, participants involved in drinking beers and discussing everything are _philosophers_, together these are the project's _community_.
 
 The maintainers can remove misbehaving participants at will for the sake of the common good. In addition, our [code of conduct][1] describes our expections for _all_ community members, as well as the consequences for unacceptable behavior.
-
-In the event that any maintainer is unable or unwilling to continue maintenance, they may propose a replacement. The remaining maintainers have to unanimously agree to the replacement.
 
 ## Forking
 
