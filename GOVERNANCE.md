@@ -63,7 +63,7 @@ In alphabetical order:
 - [adz](mailto:x34@adz.garden)
 - [cafca](mailto:p2panda@vincentahrend.com)
 - [sam](mailto:contact@samandreae.com)
-- [sophistiiika](mailto:sophie.kuna@mailbox.org)
+- [sophiiistika](mailto:sophie.kuna@mailbox.org)
 
 [1]: https://github.com/p2panda/handbook/blob/main/CODE_OF_CONDUCT.md
 [2]: https://wald.liebechaos.org/channel/p2panda
