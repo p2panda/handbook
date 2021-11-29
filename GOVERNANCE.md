@@ -56,11 +56,11 @@ The maintainers can change the governance structure at will.
 
 Changes and the history of this document are made available [publicly][5].
 
-# Current Maintainers
+## Current Maintainers
 
 In alphabetical order:
 
-- [adz](mailto:msg@adz.garden)
+- [adz](mailto:x34@adz.garden)
 - [cafca](mailto:p2panda@vincentahrend.com)
 - [sam](mailto:contact@samandreae.com)
 - [sophistiiika](mailto:sophie.kuna@mailbox.org)
