@@ -24,7 +24,7 @@ Participants involved in the development of open source resources are _contribut
 
 The maintainers can remove misbehaving participants at will for the sake of the common good. In addition, our [code of conduct][1] describes our expections for _all_ community members, as well as the consequences for unacceptable behavior.
 
-In the event that any maintainer is unable or unwilling to continue maintenance, they may propose a replacement, which the remaining maintainers must agree to.
+In the event that any maintainer is unable or unwilling to continue maintenance, they may propose a replacement. The remaining maintainers have to unanimously agree to the replacement.
 
 ## Forking
 
