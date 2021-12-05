@@ -4,6 +4,7 @@ sidebar_position: 1
 
 # Encoding
 
+- in order to write data in p2panda it needs to be encoded
 - p2panda uses bamboo to encode data
 
 ## Bamboo 🎍
