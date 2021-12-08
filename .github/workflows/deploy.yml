@@ -6,10 +6,15 @@ on:
       # @TODO: Change this to `main` when ready
       - docuasaurus2
 
+defaults:
+  run:
+    working-directory: website
+
 jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
