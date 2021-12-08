@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>p2panda Blog</title>
+        <link>https://p2panda.org/handbook/releases</link>
+        <description>p2panda Blog</description>
+        <lastBuildDate>Tue, 26 Oct 2021 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[p2panda 0.2.1]]></title>
+            <link>https://p2panda.org/handbook/releases/p2panda-021</link>
+            <guid>p2panda-021</guid>
+            <pubDate>Tue, 26 Oct 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Fixed]]></description>
+            <content:encoded><![CDATA[<h2>Fixed</h2><ul><li>Use deprecated linter name for now as it breaks some building pipelines <a href="https://github.com/p2panda/p2panda/pull/121">#121</a> <code>rs</code></li><li>Fix access to optional parameter in <code>Session.query</code> logging call <a href="https://github.com/p2panda/p2panda/issues/119">#119</a> <code>js</code></li></ul><h2>Campfires and boiling pots to sit around</h2><ul><li>Add pull request template to not forget updating this changelog <a href="https://github.com/p2panda/p2panda/pull/122">#122</a></li></ul>]]></content:encoded>
+        </item>
+    </channel>
+</rss>
