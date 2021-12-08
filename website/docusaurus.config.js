@@ -7,7 +7,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "p2panda",
-  tagline: "It really whips the bamboo's ass",
+  tagline: "Official p2panda website",
   url: "https://p2panda.org",
   // @TODO: Change this to `/` before merging into `main`
   baseUrl: "/handbook/",
@@ -24,14 +24,14 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          editUrl: "https://github.com/facebook/docusaurus/edit/main/website/",
+          editUrl: "https://github.com/p2panda/handbook/edit/main/website/",
         },
         blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            "https://github.com/facebook/docusaurus/edit/main/website/blog/",
+          showReadingTime: false,
+          blogTitle: 'Releases',
+          routeBasePath: 'releases',
+          path: './releases',
+          blogSidebarTitle: 'Releases',
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -56,7 +56,7 @@ const config = {
             position: "left",
             label: "Handbook",
           },
-          { to: "/blog", label: "News", position: "left" },
+          { to: "/releases", label: "Releases", position: "left" },
           {
             href: "https://github.com/p2panda",
             label: "GitHub",
@@ -68,11 +68,15 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "Docs",
+            title: "Documentation",
             items: [
               {
-                label: "Tutorial",
-                to: "/docs/intro",
+                label: "Handbook",
+                to: "/docs",
+              },
+              {
+                label: "Releases",
+                to: "/releases",
               },
             ],
           },
@@ -80,34 +84,30 @@ const config = {
             title: "Community",
             items: [
               {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/docusaurus",
+                label: "Chat",
+                href: "https://wald.liebechaos.org/channel/p2panda",
               },
               {
-                label: "Discord",
-                href: "https://discordapp.com/invite/docusaurus",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/docusaurus",
+                label: "Code of Conduct",
+                href: "https://github.com/p2panda/handbook/blob/main/CODE_OF_CONDUCT.md",
               },
             ],
           },
           {
-            title: "More",
+            title: "Source Code",
             items: [
               {
-                label: "Blog",
-                to: "/blog",
+                label: "GitHub",
+                href: "https://github.com/p2panda",
               },
               {
-                label: "GitHub",
-                href: "https://github.com/facebook/docusaurus",
+                label: "Contribute",
+                href: "https://github.com/p2panda/handbook/blob/main/CONTRIBUTING.md",
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} p2panda Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} p2panda`,
       },
       prism: {
         theme: lightCodeTheme,
