@@ -5,7 +5,7 @@ sidebar_position: 4
 # Queries
 
 - in order to access data from instances, clients send _queries_ to nodes and receive the queried information back
-- queries are sent as [JSON RPC 2.0](json_rpc) requests
+- queries are sent as [JSON RPC 2.0][json_rpc] requests
 
 ## Use cases
 
