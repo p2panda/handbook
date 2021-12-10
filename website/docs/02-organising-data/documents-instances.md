@@ -4,7 +4,11 @@ sidebar_position: 1
 
 # Documents and Instances
 
-- documents and instances are sets of operations that operate on the same data
+- documents identify pieces of data
+  - when the data is changed it is still the same document
+  - some things that may be a document in p2panda: a blog post, a wiki page, a chat message, a user account, a configuration setting
+- instances represent the state of a document at a particular point in its history of edits
+  - every change of a document results in a new instance
 
 ## Documents
 
