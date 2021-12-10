@@ -8,6 +8,10 @@ sidebar_position: 3
 - entries may be persisted when they are published or [received](/docs/networking/replication) from the network
 - documents may be persisted by recording information alongside stored entries that allows retrieving them by the document they belong to
 - instances may be persisted by serialising the instance's fields
+- p2panda requires compatibility of all its data types with
+  - PostgreSQL
+  - SQLite
+  - todo: specific versions?
 
 ## Instance Serialisation
 
