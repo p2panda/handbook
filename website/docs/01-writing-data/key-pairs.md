@@ -4,8 +4,8 @@ sidebar_position: 2
 
 # Key Pairs
 
-- p2panda uses Ed25519 key pairs
 - clients sign all published data with a user's key pair
+- p2panda uses Ed25519 key pairs
 - refer to [collaboration](/docs/collaboration/overview) for further topics
 
 ## Usage
