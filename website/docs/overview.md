@@ -25,7 +25,8 @@ p2panda lets you build applications connected by a feature-rich decentralised da
 ## Handbook
 
 - the handbook contains detailled descriptions of all capabilities of p2panda and contains references to technical specifications, examples and additional resources 
-- you can start reading the handbook from the beginning to learn bit by bit or directly jump to sections of interest
+- the handbook is structured to begin at the very lowest level with how data is encoded and consecutively builds on that until high-level concepts can be explained
+- you can start reading the handbook from the beginning by clicking the _next_ button at the bottom of this page to learn bit by bit or directly jump to sections of interest
 - what other ressources should the reader know about?
 
 ## Reading notes
