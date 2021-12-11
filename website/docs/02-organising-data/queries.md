@@ -56,4 +56,4 @@ sidebar_position: 4
 [aquadoggo]: https://github.com/p2panda/aquadoggo
 [encoding]: /docs/writing-data/encoding
 [json_rpc]: https://en.wikipedia.org/wiki/JSON-RPC
-[p2panda_openrpc]: https://github.com/p2panda/p2panda/blob/main/p2panda-js/openrpc.json
+[p2panda_openrpc]: https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/p2panda/p2panda/main/p2panda-js/openrpc.json
