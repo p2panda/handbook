@@ -18,7 +18,6 @@ sidebar_position: 5
   - a key pair MUST NOT publish data through any client other than the one it was created with
   - a key pair MUST NOT publish data on any node other than the one it was first used with
   - disregard of this rule carries the risk of creating forks within a public key's logs. See [Key Groups][key_groups] for way to publish data from multiple devices without transmitting a private key or changing the node used.
-- 
 
 ## Nodes
 
@@ -28,6 +27,7 @@ sidebar_position: 5
   - this allows using p2panda from a browser without installing software
 - [aquadoggo][aquadoggo] is the reference node implementation
 - nodes offer a [JSON RPC API][queries] that is used by clients to connect and exchange data
+- _a node SHOULD respect configuration parameters set via a [_node configuration_][node_configuration_schema]_
 
 ## Clients
 
@@ -39,4 +39,5 @@ sidebar_position: 5
 [p2panda]: https://github.com/p2panda/p2panda
 [beep_boop]: https://github.com/p2panda/beep-boop
 [key_groups]: /docs/collaboration/key-groups
+[node_configuration_schema]: https://github.com/p2panda/handbook/issues/122
 [queries]: /docs/organising-data/queries
