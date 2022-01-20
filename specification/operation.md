@@ -45,6 +45,10 @@ Operations MUST contain a valid operation version number which can be used to va
 
 ```
 
+### Operation Fields
+
+TODO
+
 ### OperationMeta
 
 Expanded operation used when building/traversing an OperationGraph
