@@ -17,10 +17,11 @@ sidebar_position: 4
 - every operation MUST have an _operation version_
   - it describes the version of the operation specification that is followed by that operation
   - versions are encoded as integers
-- every _delete_ and _update operation_ MUST have a _previous operation_
-  - it identifies the [instance](/docs/organising-data/documents-instances#instances) that is being updated or deleted
-  - the previous operation MUST be the latest known operation of the [document](/docs/organising-data/documents-instances#documents) that is being adressed
-- a _create operation_ MUST NOT have a _previous operation_
+- every _delete_ and _update operation_ MUST have _previous operations_ with `length > 0`
+  - it contains an array of _operation_id_'s which identifies the tip operation of any un-merged branches in this document graph
+  - in the case where a graph has no un-merged branches, this array will contain only one id (the resolved graph tip)
+  - publishing an operation which identifies more than 1 graph tip, effectively merges these branches back into the main graph
+- a _create operation_ MUST not have _previous operations_
 
 ## Fields
 
