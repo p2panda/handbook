@@ -6,10 +6,12 @@ sidebar_position: 3
 
 - schemas are used to describe and validate the format in which data is published
 - schemas have a name, a description and a number of _fields_
-- the name of a schema MUST consist of alphanumeric characters and MUST be at most 64 characters long
+- the name of a schema MUST match the regular expression `([A-Za-z0-9][A-Za-z0-9\-\/\.]{0,63})`
+  - the name of a schema MUST be at most 64 characters long
+  - it begin with an alphanumeric character
+  - it uses only alphanumeric characters, digits and the characters dash (-), slash (/) and period (.)
 - the description of a schema MUST consist of unicode characters and MUST be at most 256 characters long
 - a schema MUST have at most 1024 fields
-  - @cafca: Postgres seems to have an upper limit of [1600 columns](https://nerderati.com/2017/01/03/postgresql-tables-can-have-at-most-1600-columns/) so I thought it would be nice to stay clear of that, maybe we should even make it lower but I didn't want to set arbitrary limits here unless there is a good reason.
 
 ## Encoding
 
@@ -58,7 +60,7 @@ sidebar_position: 3
 
 ### _relation_ fields
 
-- encode a _relation_ to another _instance_
+- encode a _relation_ to another _document_
 - _relation_ fields MAY be self-referential
   - self-referential relations MAY be interpreted as instance ordering in [queries](/docs/organising-data/queries)
 
