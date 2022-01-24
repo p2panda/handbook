@@ -83,13 +83,13 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [ ] KeyGroup functionality in `p2panda-rs`
 - [x] OpenMLS group encryption capabilities in `p2panda-rs`
 - [ ] Simple query interface to read data
-- [ ] Manually follow other nodes
-- [ ] Automatic local discovery via mDNS
 - [ ] Implement System Schema's in `aquadoggo`
 - [ ] Implement Applicatopn Schema storage and retrieval in `aquadoggo`
 - [ ] KeyGroups and multi-writer permissions/moderation in `aquadoggo`
 - [ ] Transport encryption between nodes via SSB Secret Handshake
 - [ ] Message encryption for groups via OpenMLS in `aquadoggo`
+- [ ] Manually follow other nodes
+- [ ] Automatic local discovery via mDNS
 - [ ] Automatic discovery via gossip protocol
 - [ ] Efficient point2point replication protocol
 - [ ] Schema migrations
