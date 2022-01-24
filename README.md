@@ -70,6 +70,8 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [x] Embed `aquadoggo` library in Tauri container
 - [x] Stabilize `p2panda-js` API, release 0.2.0
 - [x] Publish `aquadoggo` crate 0.1.0
+- [x] bamboo-rs-ed25519-yasmf published
+- [x] Use YASMF hashes in `p2panda-rs` and `p2panda-js`
 
 ### Now:
 
