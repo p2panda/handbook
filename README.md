@@ -85,12 +85,14 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [ ] Simple query interface to read data
 - [ ] Manually follow other nodes
 - [ ] Automatic local discovery via mDNS
-- [ ] Schema migrations
+- [ ] Implement System Schema's in `aquadoggo`
+- [ ] Implement Applicatopn Schema storage and retrieval in `aquadoggo`
 - [ ] KeyGroups and multi-writer permissions/moderation in `aquadoggo`
 - [ ] Transport encryption between nodes via SSB Secret Handshake
 - [ ] Message encryption for groups via OpenMLS in `aquadoggo`
 - [ ] Automatic discovery via gossip protocol
 - [ ] Efficient point2point replication protocol
+- [ ] Schema migrations
 - [ ] Schema backwards compatibility via lenses
 - [ ] p2panda specification 1.0 release :panda_face:
 
