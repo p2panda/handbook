@@ -55,7 +55,7 @@ This led to a group of people interested in realising a protocol for p2p communi
 
 ## Milestones
 
-### The past:
+### The past
 
 - [x] Ed25519 key pair generation and handling
 - [x] Bamboo `Entry` creation
@@ -70,38 +70,36 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [x] Embed `aquadoggo` library in Tauri container
 - [x] Stabilize `p2panda-js` API, release 0.2.0
 - [x] Publish `aquadoggo` crate 0.1.0
-- [x] bamboo-rs-ed25519-yasmf published
+- [x] `bamboo-rs-ed25519-yasmf` crate published
 - [x] Use YASMF hashes in `p2panda-rs` and `p2panda-js`
 
-### Now:
+### Now
 
+- [x] OpenMLS group encryption capabilities in `p2panda-rs`
+- [ ] p2panda first draft specification (**in progress**)
 - [ ] Materialisation of data from operations (**in progress**)
 - [ ] Multi-writer materialisation in `aquadoggo`(**in progress**)
 - [ ] Schemas and data validation (**in progress**)
 - [ ] Naive replication protocol (**in progress**)
-- [ ] p2panda first draft specification (**in progress**)
-- [ ] KeyGroup functionality in `p2panda-rs`
-- [x] OpenMLS group encryption capabilities in `p2panda-rs`
-- [ ] Simple query interface to read data
-- [ ] Implement System Schema's in `aquadoggo`
-- [ ] Implement Applicatopn Schema storage and retrieval in `aquadoggo`
-- [ ] KeyGroups and multi-writer permissions/moderation in `aquadoggo`
-- [ ] Transport encryption between nodes via SSB Secret Handshake
-- [ ] Message encryption for groups via OpenMLS in `aquadoggo`
+- [ ] Shared identities with `KeyGroup` in `p2panda-rs`
+- [ ] GraphQL API to query data
+- [ ] Implement System Schemas in `aquadoggo`
+- [ ] Implement Application Schemas in `aquadoggo`
+- [ ] Multi-writer permissions/moderation in `aquadoggo`
+- [ ] Transport encryption between nodes
 - [ ] Manually follow other nodes
 - [ ] Automatic local discovery via mDNS
-- [ ] Automatic discovery via gossip protocol
-- [ ] Efficient point2point replication protocol
-- [ ] Schema migrations
-- [ ] Schema backwards compatibility via lenses
 - [ ] p2panda specification 1.0 release :panda_face:
 
-### The future:
+### The future
 
-- [ ] Optimise data materialisation
+- [ ] Schema migrations
+- [ ] Schema backwards compatibility via lenses
+- [ ] Automatic discovery via gossip protocol
+- [ ] Efficient replication protocol
 - [ ] Automatic deletion of unused data
 - [ ] Automatic detection of forked logs
-- [ ] Magma + Lava
+- [ ] Improved data type: Magma + Lava
 
 ## How to contribute
 
