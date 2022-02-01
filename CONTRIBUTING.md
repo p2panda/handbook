@@ -36,9 +36,9 @@ p2panda is currently in an early development phase. We aim at releasing a stable
 
 **Requirements**
 
-* NodeJS v16 and npm v8
-* Rust 1.58 (stable)
-* wasm-pack 0.10.2
+* NodeJS v16 and npm v8 (recommended install via a Node version mananger like [`n`](https://github.com/tj/n) or [`nvm`](https://github.com/nvm-sh/nvm))
+* Rust 1.58 (stable) (install via [`rustup`](https://www.rust-lang.org/tools/install)
+* wasm-pack 0.10.2 (run `cargo install wasm-pack` or [read more](https://rustwasm.github.io/wasm-pack/installer/))
 
 **1. Build `p2panda-js`**
 
