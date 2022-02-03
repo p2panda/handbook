@@ -8,25 +8,30 @@ The `key_group` schema is a way to group a set of public keys so that they can a
 
 > Describe who is affected by your proposal and what changes they can expect by writing user stories about it. It can help to think about the questions: Why are we doing this? What use cases does it support? What is the expected outcome?
 
-- a key group can be created using a key pair
-- a key can be added to a key group
-- a key can be removed from a key group
-- a key group can be added to a key group
-- when a key is added, specific _permissions_ can be defined for that membership
-- a key's membership can be limited to publishing operations in specific schemas
-- a key's membership can be limited to a specific set of operations
-- Developers can use `group` to represent identity in the application by creating schemas of their application as _authorised schemas_.
-- Schema authors can require that documents of their schema define a key group as their author
-- Key group members can publish operations for documents that define the key group as their author
-- Key group members can not publish operations for that key group's documents when their key group membership doesn't define the required permissions
+- A key group can be created using a key pair.
+- A key can be added to a key group.
+- A key can be removed from a key group.
+- A key group can be added to a key group.
+- Specific _permissions_ can be defined for a key's membership in a key group.
+    - A key's membership can be limited to publishing operations in specific schemas.
+    - A key's membership can be limited to a specific set of that key's operations
+    - A key membership can be limited to specific operation actions
+- Developers can make key groups the owners of a schema's documents by creating an _authorised schema_.
+    - Key group members can publish operations for documents that define the key group as their author.
+    - Key group members can not publish operations for that key group's documents when their key group membership doesn't define the required permissions.
 
 ### Authorised Schemas
 
-- schemas are considered _authorised schemas_ if they contain a single field of type `author_relation` that contains either the instance id of a key group or an instance id belonging to another _authorised schema_.
-- Every instance of an _authorised schema_ has a set of _authorised public keys_. This set can be created by recursively following the field of type `author_relation` and then
-  - if a group is found: include all public keys of that group
-  - if another _authorised schema_ is found: include all of its _authorised public keys_.
-- operations of _authorised schemas_ are only materialised if they were created by a key pair included in the _authorised public keys_ of the operations's instance.
+- authorised schemas define a key group as the owner of documents created with them
+    - use a authorised schema when you want to enable all key group members with according permissions to update or delete that document
+    - documents created from authorised schemas are called _authorised documents_
+- schemas are _authorised schemas_ if they contain a single field of type `owner` that contains 
+    - either the document id of a key group 
+    - or the document id of another authorised document.
+- Every document of an _authorised schema_ has a set of _authorised public keys_. This set can be created by looking at the document pointed at by the `owner` type field:
+  - if it points at an authorised document, continue from there
+  - if a key group is found: that key group's keys are the document's authorised public keys.
+- operations of _authorised schemas_ are only materialised if they were created by a key pair included in the current _authorised public keys_ of the operations's document
 
 ## Documentation
 
@@ -34,25 +39,30 @@ The `key_group` schema is a way to group a set of public keys so that they can a
 
 ### Schema `key-group`
 
-```
-inverse: boolean
-```
+_Schema doesn't define any fields_
 
-A `key_group` instance is a set of public keys. When the instance is first created it only contains the public key that the `CREATE` message was created with.
+A `key_group` instance is a set of public keys. When a key group is created it contains the public key that published it.
+
+
+::: info Jam Queue
+By adding an `inverse: boolean` field here we could allow a) anyone to change a document (wow chaos) b) _exclude_ specific keys from editing a document.
+:::
 
 ### Schema `key-group-membership-request`
 
 ```
 key_group: relation(key-group)
-? member: author_relation(key-group)
+? member: owner(key-group)
 ```
 
-A _key group membership request_ is created in order to add a new public key (or a key group) to a key group. It says "Hey! Would you mind adding me to this key group?"
+A _key group membership request_ is created in order to add its authoring public key to a key group. It says "Hey! Would you mind adding me to this key group?"
+
+The optional `member` field allows specifying a key group that requests membership instead of the public key that published this operation. A key group membership request that defines a `member` should only be considered valid if its authoring public key is a current member of that key group and its membership has `can_authorise` set to true.
 
 ### Schema `key-group-membership`
 
 ```
-key_group: author_relation(key-group)
+key_group: owner(key-group)
 request: hash(key-group-membership-request)
 ? schema: hash(schema)
 accepted: boolean
@@ -64,14 +74,14 @@ can_delete: boolean
 
 A _key group membership_ is created to _accept_ or _reject_ a group membership request.
 
-If accepted, the key pair that created the _key group membership request_ is now included in the key group's key set.
+If accepted, the public key that created the _key group membership request_ is now included in the key group's key set. If the membership request defines a `member` key group, that key group's key set is included instead.
 
-If denied, all _key group membership requests_ by the same public key should be considered invalid and no operations published by that key should be materialised.
+If denied, all _key group membership requests_ by the same public key should be considered invalid.
 
 #### Schema `key-group-membership-limit`
 
 ```
-membership: author_relation(group-membership)
+membership: owner(group-membership)
 public_key: string
 from_hash: string
 to_hash: string
@@ -100,7 +110,7 @@ In this example we want to represent chat messages and their authors. Authors sh
 
 Instances of the `account` schema have an `author` pointing at a group that contains all public keys of a user and a `picture` that contains the profile picture as a `blob`.
 
-The `group` schema has a `name` field that we can use to represent the username but we need a way to link a profile picture to that. We create a new schema `account` that contains both an `author_relationgroup)` and a `relation(blob)`.
+The `group` schema has a `name` field that we can use to represent the username but we need a way to link a profile picture to that. We create a new schema `account` that contains both an `owner(group)` and a `relation(blob)`.
 
 **Schema `account`:**
 
