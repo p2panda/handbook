@@ -40,6 +40,7 @@ sidebar_position: 3
   - _float_
   - _str_
   - _relation_
+  - _relation\_list_
 
 ### _bool_ fields
 
@@ -61,8 +62,17 @@ sidebar_position: 3
 ### _relation_ fields
 
 - encode a _relation_ to another _document_
-- _relation_ fields MAY be self-referential
+- specify _document_ and _document view_
+  - "document" is the document that the relation is pointing at
+  - "document_view" is the exact version of the document that is being pointed at
+  - applications MAY ignore `document_view` and interpret the relation to point at the latest version if that makes sense in the application's context
+- _relation_ fields MAY be self-referential in that their target is of the same schema
   - self-referential relations MAY be interpreted as instance ordering in [queries](/docs/organising-data/queries)
+
+### _relation\_list_ fields
+
+- encode a list of _relations_ to other documents
+- a relation list field defines a schema that all its related documents must have
 
 ## System and Application Schemas
 
