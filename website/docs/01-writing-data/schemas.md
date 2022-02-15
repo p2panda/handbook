@@ -55,3 +55,12 @@ sidebar_position: 3
 - encode a _relation_ to another _document_
 - _relation_ fields MAY be self-referential
   - self-referential relations MAY be interpreted as instance ordering in [queries](/docs/organising-data/queries)
+
+## System and Application Schemas
+
+- _system schemas_ are defined as part of the p2panda specification
+  - system schemas MAY have unique procedures for [_reduction_](/docs/organising-data/reduction), [_reconciliation_](/docs/collaboration/reconciliation) and [_persistence_](/docs/organising-data/persistence) of their instances
+  - system schemas are uniquely identified by their name and an integer version number
+- _application schemas_ are published by developers
+  - they may be used to transport application-specific data or they can be published as reusable data schemas to be used in many applications
+  - application schemas are uniquely identified by the _instance id_ of their _metaschema_ instance
