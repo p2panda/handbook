@@ -4,6 +4,10 @@ sidebar_position: 1
 
 # Discovery
 
+:::info not implemented
+Discovery is in specification phase and has not been implemented yet.
+:::
+
 - Discovery is the process by which [nodes][clients_nodes] find other nodes and connect to them
 - There is no global list of all existing nodes
     - Nodes MUST NOT be required to register or sign up anywhere in order to start connecting to other nodes

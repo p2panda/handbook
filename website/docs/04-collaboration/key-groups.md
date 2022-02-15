@@ -4,6 +4,10 @@ sidebar_position: 2
 
 # Key Groups
 
+:::info not implemented
+Key groups are in specification phase and have not been implemented yet.
+:::
+
 - Key groups record the key pairs allowed to change a document
 - See the [draft key group spec][key_group_spec] for details
 
