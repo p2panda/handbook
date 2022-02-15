@@ -5,7 +5,7 @@ slug: /
 
 # Overview
 
-p2panda lets you build applications connected by a feature-rich decentralised database with built-in identity and encryption providers. p2panda is playful, local-first, ressource-efficient, interconnected and hackable.
+p2panda lets you build applications connected by a feature-rich decentralised database with built-in identity and encryption providers. p2panda is playful, local-first, resource-efficient, interconnected and hackable.
 
 ## Handbook
 
