@@ -6,10 +6,10 @@ sidebar_position: 3
 
 - schemas are used to describe and validate the format in which data is published
 - schemas have a name, a description and a number of _fields_
-- the name of a schema MUST match the regular expression `([A-Za-z0-9][A-Za-z0-9\-\/\.]{0,63})`
+- the name of a schema MUST match the regular expression `([A-Za-z][A-Za-z0-9_]{0,63})`
   - the name of a schema MUST be at most 64 characters long
-  - it begin with an alphanumeric character
-  - it uses only alphanumeric characters, digits and the characters dash (-), slash (/) and period (.)
+  - it begins with a letter
+  - it uses only alphanumeric characters, digits and the underscore character ( _ )
 - the description of a schema MUST consist of unicode characters and MUST be at most 256 characters long
 - a schema MUST have at most 1024 fields
 
@@ -19,14 +19,6 @@ sidebar_position: 3
 - a schema definition can be encoded using CDDL
 - a schema definition can be encoded using the _metaschema_
   - the _metaschema_ is a p2panda schema that allows publishing schema definitions
-
-### CDDL Encoding
-
-- todo: rules for describing schemas in CDDL
-
-### Metaschema Encoding
-
-- todo: rules for describing schemas in metaschemas
 
 ## Fields
 
@@ -63,12 +55,3 @@ sidebar_position: 3
 - encode a _relation_ to another _document_
 - _relation_ fields MAY be self-referential
   - self-referential relations MAY be interpreted as instance ordering in [queries](/docs/organising-data/queries)
-
-## System and Application Schemas
-
-- _system schemas_ are defined as part of the p2panda specification
-  - system schemas MAY have unique procedures for [_reduction_](/docs/organising-data/reduction), [_reconciliation_](/docs/collaboration/reconciliation) and [_persistence_](/docs/organising-data/persistence) of their instances
-  - system schemas are uniquely identified by their name and an integer version number
-- _application schemas_ are published by developers
-  - they may be used to transport application-specific data or they can be published as reusable data schemas to be used in many applications
-  - application schemas are uniquely identified by the _instance id_ of their _metaschema_ instance
