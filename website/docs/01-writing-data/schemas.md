@@ -6,7 +6,7 @@ sidebar_position: 3
 
 - schemas are used to describe and validate the format in which data is published
 - schemas have a name, a description and a number of _fields_
-- the name of a schema MUST match the regular expression `([A-Za-z][A-Za-z0-9_]{0,63})`
+- the name of a schema MUST match the regular expression `([A-Za-z][A-Za-z0-9_]{1,63})`
   - the name of a schema MUST be at most 64 characters long
   - it begins with a letter
   - it uses only alphanumeric characters, digits and the underscore character ( _ )
