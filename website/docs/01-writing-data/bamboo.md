@@ -2,14 +2,11 @@
 sidebar_position: 1
 ---
 
-# Encoding
+# Bamboo
 
 - in order to write data in p2panda it needs to be encoded
 - p2panda uses [bamboo][bamboo_spec] to encode data
   - this handbook doesn't repeat everything that's in the bamboo spec, so it might be helpful to have a look at that (it's not too long)
-
-## Bamboo 🎍
-
 - bamboo is an append-only data structure that allows encoding arbitrary data in order to share it among peers without trust in the data transmission
   - bamboo organises data by _author_
   - every author has many [_logs_](#logs), each of which contains many _entries_
