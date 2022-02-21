@@ -4,24 +4,15 @@ sidebar_position: 2
 
 # Key Pairs
 
-- clients sign all published data with a user's key pair
-- p2panda uses Ed25519 key pairs
-- refer to [collaboration](/docs/collaboration/overview) for further topics
+All entries published using p2panda are signed with an [Ed25519][ed25519] key pair that identifies the author of the entry. The private part of this key pair should be kept safe from being accessed by adversaries.
 
-## Usage
+## Copying private keys
 
-- p2panda clients create key pairs for their users
-  - p2panda includes functionality to create key pairs
-- data recipients can identify the author of data from the public key and the signature on a [bamboo entry](/docs/writing-data/encoding#bamboo-)
-  - the public key and signature are distributed alongside the data
-- data recipients can verify the integrity of data using the signature on bamboo entries
+Applications should not require copying a key pair to a different device or software installation when a user wishes to keep their identity in that new location. Instead, a new key pair should be generated for every new usage context and the new key pair should be linked to the old key pair using a [key group][key_group].
 
-## Key Management
+## Verifying public keys
 
-- p2panda clients SHOULD generate a new key pair for every new usage context
-  - the boundaries of a usage context are defined by
-    - device storage
-    - software distribution
-    - trust
-- p2panda clients SHOULD ensure that private keys cannot be read by adversaries
-- p2panda clients SHOULD NOT require the transmission of a private key outside a usage context (e.g. to migrate a software installation)
+As public keys are embedded in Bamboo entries, p2panda does not require a directory of public keys. However, it may be desirable to allow users to verify a peer's public key, for example by displaying it as a QR code and providing a mechanism to scan and verify these QR codes when peers meet physically.
+
+[ed25519]: https://ed25519.cr.yp.to/
+[key_group]: /docs/collaboration/key-groups
