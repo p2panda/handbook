@@ -4,16 +4,16 @@ sidebar_position: 4
 
 # Operations
 
-- operations encode data changes
+- operations represent data changes
 - operations are published as the payload of _bamboo entries_
 - operations are identified by the hash of their bamboo entry
   - this is referred to as the _operation id_
+- every operation is associated with a [bamboo author](/docs/writing-data/key-pairs), which is encoded in the operation's _entry_
 - every operation MUST have an _operation type_, which must be one of
   - `CREATE` - results in a _create operation_
   - `UPDATE` - results in a _update operation_
   - `DELETE` - results in a _delete operation_
 - every operation MUST have a [schema](/docs/writing-data/schemas)
-- every operation has an [author](/docs/writing-data/key-pairs), which is encoded in the operation's _entry_
 - every operation MUST have an _operation version_
   - it describes the version of the operation specification that is followed by that operation
   - versions are encoded as integers
