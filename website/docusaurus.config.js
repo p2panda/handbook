@@ -107,7 +107,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} p2panda`,
+        copyright: `Copyright © ${new Date().getFullYear()} p2panda contributors`,
       },
       prism: {
         theme: lightCodeTheme,
