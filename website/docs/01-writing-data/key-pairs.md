@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+id: key-pairs
 ---
 
 # Key Pairs

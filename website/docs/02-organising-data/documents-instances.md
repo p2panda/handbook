@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+id: documents
 ---
 
 # Documents and Document Views
