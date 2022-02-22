@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 # Queries
@@ -21,7 +21,7 @@ sidebar_position: 4
 
 ## Publishing Entries
 
-- clients use two RPC endpoints for publishing entries:
+- clients use two RPC methods for publishing entries:
     1. `panda_getEntryArguments` to retrieve parameters required for encoding an entry
     2. `panda_publishEntry` to publish a signed and encoded entry
 
@@ -45,15 +45,8 @@ sidebar_position: 4
 - returns entries of a given schema
     - no side effects
 
-## Privacy
-
-- _the node MAY log rpc endpoints requested as well as the parameters for all requests that don't have side effects_
-- _a node MUST NOT log the ip address requests were received from_
-
-
-
 
 [aquadoggo]: https://github.com/p2panda/aquadoggo
-[encoding]: /docs/writing-data/encoding
+[encoding]: /docs/writing-data/bamboo
 [json_rpc]: https://en.wikipedia.org/wiki/JSON-RPC
 [p2panda_openrpc]: https://playground.open-rpc.org/?schemaUrl=https://raw.githubusercontent.com/p2panda/p2panda/main/p2panda-js/openrpc.json
