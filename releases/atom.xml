@@ -12,6 +12,8 @@
         <link href="https://p2panda.org/handbook/releases/p2panda-021"/>
         <updated>2021-10-26T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Fixed]]></summary>
-        <content type="html"><![CDATA[<h2>Fixed</h2><ul><li>Use deprecated linter name for now as it breaks some building pipelines <a href="https://github.com/p2panda/p2panda/pull/121">#121</a> <code>rs</code></li><li>Fix access to optional parameter in <code>Session.query</code> logging call <a href="https://github.com/p2panda/p2panda/issues/119">#119</a> <code>js</code></li></ul><h2>Campfires and boiling pots to sit around</h2><ul><li>Add pull request template to not forget updating this changelog <a href="https://github.com/p2panda/p2panda/pull/122">#122</a></li></ul>]]></content>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_mojV" id="fixed">Fixed<a class="hash-link" href="#fixed" title="Direct link to heading">​</a></h2><ul><li>Use deprecated linter name for now as it breaks some building pipelines <a href="https://github.com/p2panda/p2panda/pull/121" target="_blank" rel="noopener noreferrer">#121</a> <code>rs</code></li><li>Fix access to optional parameter in <code>Session.query</code> logging call <a href="https://github.com/p2panda/p2panda/issues/119" target="_blank" rel="noopener noreferrer">#119</a> <code>js</code></li></ul><h2 class="anchor anchorWithStickyNavbar_mojV" id="campfires-and-boiling-pots-to-sit-around">Campfires and boiling pots to sit around<a class="hash-link" href="#campfires-and-boiling-pots-to-sit-around" title="Direct link to heading">​</a></h2><ul><li>Add pull request template to not forget updating this changelog <a href="https://github.com/p2panda/p2panda/pull/122" target="_blank" rel="noopener noreferrer">#122</a></li></ul>]]></content>
+        <category label="p2panda-rs" term="p2panda-rs"/>
+        <category label="p2panda-js" term="p2panda-js"/>
     </entry>
 </feed>
