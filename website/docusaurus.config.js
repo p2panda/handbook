@@ -9,7 +9,7 @@ const config = {
   title: "p2panda",
   tagline: "Official p2panda website",
   url: "https://p2panda.org",
-  // @TODO: Change this to `/` before merging into `main`
+  // @TODO: Change this to `/` for replacing p2panda.org with this docusaurus
   baseUrl: "/handbook/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
