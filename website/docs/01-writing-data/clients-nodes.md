@@ -1,5 +1,5 @@
 ---
-id: client-nodes
+id: clients-nodes
 ---
 
 # Clients and Nodes

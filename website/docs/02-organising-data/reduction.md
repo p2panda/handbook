@@ -4,7 +4,7 @@ id: reduction
 
 # Reduction
 
-- reduction is the process of creating an _instance_ from a _document_ (c.f. [documents and instances](/docs/organising-data/documents-instances))
+- reduction is the process of creating an _instance_ from a _document_ (c.f. [documents and views](/docs/organising-data/documents))
 
 ## Algorithm
 

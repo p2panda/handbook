@@ -14,7 +14,7 @@ const sidebars = {
         'writing-data/key-pairs',
         'writing-data/schemas',
         'writing-data/operations',
-        'writing-data/client-nodes',
+        'writing-data/clients-nodes',
       ],
     },
     {

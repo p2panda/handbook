@@ -33,7 +33,7 @@ id: operations
 
 - clients can use operations to publish data changes
 - clients must embed operations in bamboo entries to publish them
-- clients can create a [document](/docs/organising-data/documents-instances#documents) by publishing a _create operation_
+- clients can create a [document](/docs/organising-data/documents#documents) by publishing a _create operation_
 - clients can update a document by publishing an _update operation_
   - every _update operation_ leads to a new _document view_ of the document that is being updated
 - clients can delete a document by publishing a _delete operation_

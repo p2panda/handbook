@@ -37,5 +37,5 @@ id: bamboo
 
 [key_pairs]: /docs/writing-data/key-pairs
 [bamboo_spec]: https://github.com/bamboo-rs/bamboo-ed25519-yasmf
-[documents]: /docs/organising-data/documents-instances
+[documents]: /docs/organising-data/documents
 [operations]: /docs/writing-data/operations
