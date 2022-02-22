@@ -62,17 +62,18 @@ sidebar_position: 3
 ### _relation_ fields
 
 - encode a _relation_ to another _document_
-- specify _document_ and _document view_
+- specify a _document_ and an optional _document view_
   - "document" is the document that the relation is pointing at
-  - "document_view" is the exact version of the document that is being pointed at
+  - "document_view" defines the exact version of the document as a list of document graph tips
   - applications MAY ignore `document_view` and interpret the relation to point at the latest version if that makes sense in the application's context
+- a relation field prescribes a schema for the referenced document
 - _relation_ fields MAY be self-referential in that their target is of the same schema
   - self-referential relations MAY be interpreted as instance ordering in [queries](/docs/organising-data/queries)
 
 ### _relation\_list_ fields
 
 - encode a list of _relations_ to other documents
-- a relation list field defines a schema that all its related documents must have
+- a relation list field prescribes a schema that all referenced documents must follow
 
 ## System and Application Schemas
 
