@@ -1,10 +1,11 @@
 ---
 title: Overview
+hide_table_of_contents: true
 ---
 
 <div className="img-landing">
-    <img src="/handbook/img/panda2by2.png" role="decoration" />
-    <h1>p2panda</h1>
+  <img src="/handbook/img/panda2by2.png" role="decoration" />
+  <h1>p2panda</h1>
 </div>
 
 p2panda is a user-friendly peer-to-peer communications protocol for secure, energy-efficient, offline- and local-first web applications. We want this protocol to be a playful tool for people to hack, build, play, and experiment with.
