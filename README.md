@@ -2,7 +2,7 @@
 
 p2panda is a user-friendly peer-to-peer communications protocol for secure, energy-efficient, offline- and local-first web applications. We want this protocol to be a playful tool for people to hack, build, play, and experiment with.
 
-Messages in p2panda are signed, encrypted and published by clients using the [Bamboo](https://github.com/AljoschaMeyer/bamboo) append-only log data type which gets distributed over the network to other peers. p2panda allows for decentralised and federated network topologies or even hybrids of these and aims at running in web browsers without loosing its cryptographic features.
+Data changes in p2panda are signed, encrypted and published by clients using the [Bamboo](https://github.com/AljoschaMeyer/bamboo) append-only log data type which gets distributed over the network to other peers. p2panda allows for decentralised and federated network topologies or even hybrids of these and aims at running in web browsers without loosing its cryptographic features.
 
 > **p2panda is currently very much in prototyping and specification phase, our milestones and progress can be seen below. If you're interested in any of these topics please get in touch!**
 
@@ -47,11 +47,11 @@ This led to a group of people interested in realising a protocol for p2p communi
 **Nodes**
 
 - [`aquadoggo`](https://github.com/p2panda/aquadoggo): RPC node server for the p2panda network running as a standalone application or Rust `aquadoggo` crate.
-- [`fishyfish`](https://github.com/p2panda/fishyfish): Command line interface to manage p2panda nodes.
 
 **Clients**
 
 - [`beep-boop`](https://github.com/p2panda/beep-boop): Chat client based on p2panda to experiment with. See it live under: https://p2panda.org/demo
+- [`fishyfish`](https://github.com/p2panda/fishyfish): Command line interface to manage p2panda nodes.
 
 ## Milestones
 
@@ -72,27 +72,27 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [x] Publish `aquadoggo` crate 0.1.0
 - [x] `bamboo-rs-ed25519-yasmf` crate published
 - [x] Use YASMF hashes in `p2panda-rs` and `p2panda-js`
+- [x] Materialisation of data from operations
+- [x] OpenMLS group encryption capabilities in `p2panda-rs`
 
 ### Now
 
-- [x] OpenMLS group encryption capabilities in `p2panda-rs`
-- [ ] p2panda first draft specification (**in progress**)
-- [ ] Materialisation of data from operations (**in progress**)
-- [ ] Multi-writer materialisation in `aquadoggo`(**in progress**)
-- [ ] Schemas and data validation (**in progress**)
-- [ ] Naive replication protocol (**in progress**)
-- [ ] Shared identities with `KeyGroup` in `p2panda-rs`
+- [ ] p2panda first draft specification
+- [ ] Multi-writer materialisation in `aquadoggo`
+- [ ] Schemas and data validation
+- [ ] Naive replication protocol
 - [ ] GraphQL API to query data
 - [ ] Implement System Schemas in `aquadoggo`
 - [ ] Implement Application Schemas in `aquadoggo`
+
+### The future
+
+- [ ] Shared identities with `KeyGroup` in `p2panda-rs`
 - [ ] Multi-writer permissions/moderation in `aquadoggo`
 - [ ] Transport encryption between nodes
 - [ ] Manually follow other nodes
 - [ ] Automatic local discovery via mDNS
 - [ ] p2panda specification 1.0 release :panda_face:
-
-### The future
-
 - [ ] Schema migrations
 - [ ] Schema backwards compatibility via lenses
 - [ ] Automatic discovery via gossip protocol
