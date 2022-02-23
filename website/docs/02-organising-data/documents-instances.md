@@ -24,7 +24,7 @@ id: documents
 - a _document view_ is the result of applying a series of operations from a _document_
   - the series of operations must start with the document's _create operation_
   - see [reduction](/docs/organising-data/reduction) and [reconciliation](/docs/collaboration/reconciliation) for further details
-- a document view is identified by it's documents current graph tips
+- a document view is identified by its document's current graph tips
   - the graph tips themselves are expressed as a list of operation ids
 - a document view has a value for all fields that are defined by its document's schema
 - a document view is _deleted_ if its document contains a _delete operation_
