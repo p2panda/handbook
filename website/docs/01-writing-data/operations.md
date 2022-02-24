@@ -29,6 +29,11 @@ id: operations
 - an _update operation_ MAY contain any combination of fields from the operation's schema
 - a _delete operation_ MUST NOT contain any fields
 
+## Serialisation
+
+- operations are serialised using [CBOR][cbor]
+- all fields are serialised using [snake case][snake_case]
+
 ## Usage
 
 - clients can use operations to publish data changes
@@ -40,3 +45,6 @@ id: operations
 - nodes can [reduce](/docs/organising-data/reduction) operations to produce a specific _document view_ of their document
 - clients can delete a document by publishing a _delete operation_ 
   - nodes MUST delete all operations of a document once it has been deleted
+
+[cbor]: https://cbor.io/
+[snake_case]: https://en.wikipedia.org/wiki/Snake_case
