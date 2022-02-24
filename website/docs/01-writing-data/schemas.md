@@ -59,8 +59,7 @@ sidebar_position: 3
 ## System and Application Schemas
 
 - _system schemas_ are defined as part of the p2panda specification
-  - system schemas MAY have unique procedures for [_reduction_](/docs/organising-data/reduction), [_reconciliation_](/docs/collaboration/reconciliation) and [_persistence_](/docs/organising-data/persistence) of their instances
-  - system schemas are uniquely identified by their name and an integer version number
+  - system schemas MAY have unique procedures for [_reduction_](/docs/organising-data/reduction), [_reconciliation_](/docs/collaboration/reconciliation) and [_persistence_](/docs/organising-data/persistence) of their documents
 - _application schemas_ are published by developers
   - they may be used to transport application-specific data or they can be published as reusable data schemas to be used in many applications
-  - application schemas are uniquely identified by the _instance id_ of their _metaschema_ instance
+  - application schemas are uniquely identified by the _document view id_ of their _metaschema_ instance
