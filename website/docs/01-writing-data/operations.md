@@ -46,5 +46,5 @@ id: operations
 - clients can delete a document by publishing a _delete operation_ 
   - nodes MUST delete all operations of a document once it has been deleted
 
-[cbor]: https://cbor.io/\
+[cbor]: https://cbor.io/
 [snake_case]: https://en.wikipedia.org/wiki/Snake_case
