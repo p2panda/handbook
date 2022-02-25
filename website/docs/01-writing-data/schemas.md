@@ -63,7 +63,7 @@ sidebar_position: 3
   - system schemas are uniquely identified by their name and an integer version number, written in snake case
     - example: `application_schema_v1`
   - system schema fields are identified by the name of the schema they belong to and an appendix for the field name
-    - example `application_schema_v1_description`
+    - example `application_schema_description_v1`
 - _application schemas_ are published by developers
   - they may be used to transport application-specific data or they can be published as reusable data schemas to be used in many applications
   - application schemas are uniquely identified by the _document view id_ of their _metaschema_ instance
