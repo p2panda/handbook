@@ -61,9 +61,7 @@ sidebar_position: 3
 - _system schemas_ are defined as part of the p2panda specification
   - system schemas MAY have unique procedures for [_reduction_](/docs/organising-data/reduction), [_reconciliation_](/docs/collaboration/reconciliation) and [_persistence_](/docs/organising-data/persistence) of their documents
   - system schemas are uniquely identified by their name and an integer version number, written in snake case
-    - example: `application_schema_v1`
-  - system schema fields are identified by the name of the schema they belong to and an appendix for the field name
-    - example `application_schema_description_v1`
+    - example: `key_group_v1`
 - _application schemas_ are published by developers
   - they may be used to transport application-specific data or they can be published as reusable data schemas to be used in many applications
   - application schemas are uniquely identified by the _document view id_ of their _metaschema_ instance
