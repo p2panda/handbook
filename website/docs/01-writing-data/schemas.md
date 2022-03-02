@@ -55,8 +55,8 @@ id: schemas
 
 - encode a _relation_ to another _document_ or _document view_
 - specify a _document_ (unpinned) or _document view_ (pinned)
-  - pinned relations represent a whole document that the relation is pointing at by using the document id
-  - unpinned relations define the exact version of the document as a list of document graph tips
+  - unpinned relations represent a whole document that the relation is pointing at by using the document id
+  - pinned relations define the exact version of the document as a list of document graph tips
 - a relation field prescribes a schema for the referenced document
 - a relation field prescribes if the relation is pinned or unpinned
 - _relation_ fields MAY be self-referential in that their target is of the same schema
