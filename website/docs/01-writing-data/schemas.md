@@ -53,16 +53,17 @@ id: schemas
 
 ### _relation_ fields
 
-- encode a _relation_ to another _document_
-- specify a _document_ and an optional _document view_
-  - "document" is the document that the relation is pointing at
-  - "document_view" defines the exact version of the document as a list of document graph tips
-  - applications MAY ignore `document_view` and interpret the relation to point at the latest version if that makes sense in the application's context
+- encode a _relation_ to another _document_ or _document view_
+- specify a _document_ (unpinned) or _document view_ (pinned)
+  - unpinned relations represent a whole document that the relation is pointing at by using the document id
+  - pinned relations define the exact version of the document as a list of document graph tips
 - a relation field prescribes a schema for the referenced document
+- a relation field prescribes if the relation is pinned or unpinned
 - _relation_ fields MAY be self-referential in that their target is of the same schema
   - self-referential relations MAY be interpreted as instance ordering in [queries](/docs/organising-data/queries)
 
 ### _relation\_list_ fields
 
-- encode a list of _relations_ to other documents
+- encode a list of _relations_ to other documents or document views
 - a relation list field prescribes a schema that all referenced documents must follow
+- a relation list field prescribes if all references are pinned or unpinned
