@@ -9,7 +9,7 @@ id: schemas
 - the name of a schema MUST match the regular expression `([A-Za-z][A-Za-z0-9_]{1,63})`
   - the name of a schema MUST be at most 64 characters long
   - it begins with a letter
-  - it uses only alphanumeric characters, digits and the underscore character ( \_ )
+  - it uses only alphanumeric characters, digits and the underscore character ( _ )
 - the description of a schema MUST consist of unicode characters and MUST be at most 256 characters long
 - a schema MUST have at most 1024 fields
 
@@ -32,9 +32,10 @@ id: schemas
   - _float_
   - _str_
   - _relation_
-  - _relation_list_
-  - _pinned_relation_
-  - _pinned_relation_list_
+  - _relation\_list_
+  - _pinned\_relation_
+  - _pinned\_relation\_list_
+
 
 ### _bool_ fields
 
@@ -61,20 +62,20 @@ id: schemas
 - _relation_ fields MAY be self-referential in that their target is of the same schema
   - self-referential relations MAY be interpreted as instance ordering in [queries](/docs/organising-data/queries)
 
-### _pinned_relation_ fields
+### _pinned\_relation_ fields
 
-- encode a*pinned_relation* to a _document view_
+- encode a_pinned\_relation_ to a _document view_
 - specify a _document view_ by it's document view id
   - this relation can be descirbed as _pinned_ as it defines an exact version of a document
   - this is achieved by listing the document graph tips at the point of reference by their operation id
-- a _pinned_relation_ field prescribes a schema for the referenced document
+- a _pinned\_relation_ field prescribes a schema for the referenced document
 
-### _relation_list_ fields
+### _relation\_list_ fields
 
 - encode a list of _relations_ to other documents
 - a relation list field prescribes a schema that all referenced documents must follow
 
-### _pinned_relation_list_ fields
+### _pinned\_relation\_list_ fields
 
 - encode a list of _pinned relations_ to document views
-- a _pinned_relation_list_ field prescribes a schema that all referenced document views must follow
+- a _pinned\_relation\_list_ field prescribes a schema that all referenced document views must follow
