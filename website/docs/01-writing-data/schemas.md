@@ -59,7 +59,7 @@ id: schemas
   - relations represent the whole referenced document through their _document id_
     - _relation_: reference to a single document
     - _relation list_: a list of references to documents
-  - relations point at immutable versions of documents through their _document view ids_
+  - pinned relations point at immutable versions of documents through their _document view ids_
     - _pinned relation_: reference to a single document view. 
     - _pinned relation list_: a list of references to document views
 
