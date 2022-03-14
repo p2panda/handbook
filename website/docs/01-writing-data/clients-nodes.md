@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+id: clients-nodes
 ---
 
 # Clients and Nodes

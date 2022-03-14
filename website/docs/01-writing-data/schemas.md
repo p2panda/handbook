@@ -1,12 +1,12 @@
 ---
-sidebar_position: 3
+id: schemas
 ---
 
 # Schemas
 
 - schemas are used to describe and validate the format in which data is published
 - schemas have a name, a description and a number of _fields_
-- the name of a schema MUST match the regular expression `([A-Za-z][A-Za-z0-9_]{0,63})`
+- the name of a schema MUST match the regular expression `([A-Za-z][A-Za-z0-9_]{1,63})`
   - the name of a schema MUST be at most 64 characters long
   - it begins with a letter
   - it uses only alphanumeric characters, digits and the underscore character ( _ )
@@ -53,13 +53,13 @@ sidebar_position: 3
 
 - encode a _relation_ to one or many other _documents_
 - all relation fields MUST define a schema that all referenced documents must conform to
-- _relation_ fields of a schema may point at the same schema (_self-referential relation_)
+- _relation_ fields MAY be self-referential in that their target is of the same schema
   - self-referential relations MAY be interpreted as instance ordering in [queries](/docs/organising-data/queries)
 - there are four kinds of relation fields
-  - relations tracking changes to the referenced document(s):
+  - relations represent the whole referenced document through their _document id_
     - _relation_: reference to a single document
     - _relation list_: a list of references to documents
-  - relations pointing at immutable versions of documents (document view):
+  - relations point at immutable versions of documents through their _document view ids_
     - _pinned relation_: reference to a single document view. 
     - _pinned relation list_: a list of references to document views
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+id: key-pairs
 ---
 
 # Key Pairs
@@ -11,8 +11,8 @@ sidebar_position: 2
 ## Usage
 
 - p2panda clients create key pairs for their users
-  - p2panda includes functionality to create key pairs
-- data recipients can identify the author of data from the public key and the signature on a [bamboo entry](/docs/writing-data/encoding#bamboo-)
+  - the p2panda library includes functionality to create key pairs
+- data recipients can identify the author of data from the public key and the signature on a [bamboo entry](/docs/writing-data/bamboo#entries)
   - the public key and signature are distributed alongside the data
 - data recipients can verify the integrity of data using the signature on bamboo entries
 

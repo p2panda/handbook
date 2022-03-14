@@ -29,3 +29,30 @@ The p2panda [Handbook](https://github.com/p2panda/handbook) has a [`/specificati
 **4. Happy Phase!** 🎆
 
 - The newly released specification is announced by the facilitator in the [#p2panda](https://wald.liebechaos.org/channel/p2panda) channel in rocket.chat.
+
+## How to setup my development environment?
+
+p2panda is currently in an early development phase. We aim at releasing a stable API and backwards compatibility for future updates as soon as we reach our first major version (`1.0.0`). Until then you might need to set up a local development environment to test your p2panda experiments.
+
+**Requirements**
+
+* NodeJS v16 and npm v8 (recommended install via a Node version mananger like [`n`](https://github.com/tj/n) or [`nvm`](https://github.com/nvm-sh/nvm))
+* Rust 1.58 (stable) (install via [`rustup`](https://www.rust-lang.org/tools/install)
+* wasm-pack 0.10.2 (run `cargo install wasm-pack` or [read more](https://rustwasm.github.io/wasm-pack/installer/))
+
+**1. Build `p2panda-js`**
+
+- Clone the `p2panda` repository via `git clone https://github.com/p2panda/p2panda.git` and move into the `p2panda-js` folder inside of it
+- Run `npm install` to install all dependencies
+- Run `npm run build` to compile WebAssembly and bundle the JavaScript package
+- Run `npm link` to locally link to the `p2panda-js` package. Now you can use it somewhere else!
+
+**2. Run `aquadoggo` node**
+
+- Clone the `aquadoggo` repository via `git clone https://github.com/p2panda/aquadoggo`
+- Run `cargo run` inside of it. This will start a locally running node on your machine under http://localhost:2020
+
+**3. Build your p2panda project**
+
+- You can clone our example application *beep-boop* to test your p2panda setup. Download it via `git clone https://github.com/p2panda/beep-boop` and run `npm install` and `npm start` to open it in your browser under http://localhost:4000
+- You can refer to the latest `p2panda-js` version by linking to the package you've compiled in the steps above. Run `npm link p2panda-js` to use it inside of the project you're working on

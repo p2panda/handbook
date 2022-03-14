@@ -3,8 +3,7 @@ name: Deploy website via GitHub Pages
 on:
   push:
     branches:
-      # @TODO: Change this to `main` when ready
-      - docuasaurus2
+      - main
 
 defaults:
   run:
