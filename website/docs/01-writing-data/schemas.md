@@ -96,7 +96,7 @@ id: schemas
 - fields:
   - name: string
   - type: string
-    - may be one of 
+    - MUST be one of 
       - `bool`: boolean
       - `int`: integer number
       - `float`: floating point number
