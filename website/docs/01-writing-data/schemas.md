@@ -13,25 +13,24 @@ sidebar_position: 3
 - the description of a schema MUST consist of unicode characters and MUST be at most 256 characters long
 - a schema MUST have at most 1024 fields
 
-## Encoding
-
-- a schema definition is an encoding of its name, description and fields
-- a schema definition can be encoded using CDDL
-- a schema definition can be encoded using the _metaschema_
-  - the _metaschema_ is a p2panda schema that allows publishing schema definitions
-
 ## Fields
 
 - a field is defined by
   - _field name_
   - _field type_
-- the field name MUST have only alphanumeric characters and MUST be at most 64 characters long
+- the field name MUST match the regular expression `([A-Za-z][A-Za-z0-9_]{0,63})`
+  - the field name MUST be at most 64 characters long
+  - it begins with a letter
+  - it uses only alphanumeric characters, digits and the underscore character ( _ )
 - the field type MUST be one of
   - _bool_
   - _int_
   - _float_
   - _str_
   - _relation_
+  - _relation list_
+  - _pinned relation_
+  - _pinned relation list_
 
 ### _bool_ fields
 
@@ -52,9 +51,17 @@ sidebar_position: 3
 
 ### _relation_ fields
 
-- encode a _relation_ to another _document_
-- _relation_ fields MAY be self-referential
+- encode a _relation_ to one or many other _documents_
+- all relation fields MUST define a schema that all referenced documents must conform to
+- _relation_ fields of a schema may point at the same schema (_self-referential relation_)
   - self-referential relations MAY be interpreted as instance ordering in [queries](/docs/organising-data/queries)
+- there are four kinds of relation fields
+  - relations tracking changes to the referenced document(s):
+    - _relation_: reference to a single document
+    - _relation list_: a list of references to documents
+  - relations pointing at immutable versions of documents (document view):
+    - _pinned relation_: reference to a single document view. 
+    - _pinned relation list_: a list of references to document views
 
 ## System and Application Schemas
 
@@ -63,5 +70,39 @@ sidebar_position: 3
   - system schemas are uniquely identified by their name and an integer version number, written in snake case
     - example: `key_group_v1`
 - _application schemas_ are published by developers
-  - they may be used to transport application-specific data or they can be published as reusable data schemas to be used in many applications
-  - application schemas are uniquely identified by the _document view id_ of their _metaschema_ instance
+  - they are used to validate the format of application specific data
+  - all developers can create new application schemas by publishing documents of the `SchemaDefinition` and `SchemaFieldDefinition` system schemas
+  - they are published as reusable data schemas and can be used in many applications
+  - application schemas are uniquely identified by their document view id
+
+
+## System Schemas
+
+### Schema Definition
+
+- string identifier: `schema_definition_v1`
+- used to publish [application schemas](#system-and-application-schemas)
+- in order to be a valid description of an application schema, a schema definition's fields MUST conform with the restrictions for schema name, description and fields [described at the top](#)
+- fields:
+  - name: string
+  - description: string
+  - fields: a pinned relation list referencing `SchemaFieldDefinition` documents
+
+### Schema Field Definition
+
+- string identifier: `schema_field_definition_v1`
+- defines individual fields for [schema definitions](#schema-definition)
+- fields:
+  - name: string
+  - type: string
+    - may be one of 
+      - `bool`: boolean
+      - `int`: integer number
+      - `float`: floating point number
+      - `str`: string
+      - `relation(<schema>)`: reference to a document
+      - `relation_list(<schema>)`: a list of references to documents
+      - `pinned_relation(<schema>)`: reference to a document view
+      - `pinned_relation_list(<schema>)`: a list of references to document views
+    - all _relation_ field types need to specify a schema in the portion of the field name marked by `<schema>` above
+    - _TODO: define format of reference to a schema_
