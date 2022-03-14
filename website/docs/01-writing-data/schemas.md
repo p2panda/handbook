@@ -69,6 +69,7 @@ sidebar_position: 3
   - system schemas MAY have unique procedures for [_reduction_](/docs/organising-data/reduction), [_reconciliation_](/docs/collaboration/reconciliation) and [_persistence_](/docs/organising-data/persistence) of their documents
   - system schemas are uniquely identified by their name and an integer version number, written in snake case
     - example: `key_group_v1`
+  - the format of system schema operations can be validated by their CDDL definitions
 - _application schemas_ are published by developers
   - they are used to validate the format of application specific data
   - all developers can create new application schemas by publishing documents of the `SchemaDefinition` and `SchemaFieldDefinition` system schemas
