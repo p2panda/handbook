@@ -66,7 +66,7 @@ id: schemas
 ## System and Application Schemas
 
 - _system schemas_ are defined as part of the p2panda specification
-  - system schemas MAY have unique procedures for [_reduction_](/docs/organising-data/reduction), [_reconciliation_](/docs/collaboration/reconciliation) and [_persistence_](/docs/organising-data/persistence) of their documents
+  - system schemas MAY have unique procedures for [_reduction_](/docs/organising-data/reduction), [_reconciliation_](/docs/collaboration/reconciliation) and _persistence_ of their documents
   - system schemas are uniquely identified by their name and an integer version number, written in snake case
     - example: `key_group_v1`
   - the format of system schema operations can be validated by their CDDL definitions
