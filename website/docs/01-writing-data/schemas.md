@@ -13,26 +13,24 @@ id: schemas
 - the description of a schema MUST consist of unicode characters and MUST be at most 256 characters long
 - a schema MUST have at most 1024 fields
 
-## Encoding
-
-- a schema definition is an encoding of its name, description and fields
-- a schema definition can be encoded using CDDL
-- a schema definition can be encoded using the _metaschema_
-  - the _metaschema_ is a p2panda schema that allows publishing schema definitions
-
 ## Fields
 
 - a field is defined by
   - _field name_
   - _field type_
-- the field name MUST have only alphanumeric characters and MUST be at most 64 characters long
+- the field name MUST match the regular expression `([A-Za-z][A-Za-z0-9_]{0,63})`
+  - the field name MUST be at most 64 characters long
+  - it begins with a letter
+  - it uses only alphanumeric characters, digits and the underscore character ( _ )
 - the field type MUST be one of
   - _bool_
   - _int_
   - _float_
   - _str_
   - _relation_
-  - _relation\_list_
+  - _relation list_
+  - _pinned relation_
+  - _pinned relation list_
 
 ### _bool_ fields
 
@@ -53,17 +51,59 @@ id: schemas
 
 ### _relation_ fields
 
-- encode a _relation_ to another _document_ or _document view_
-- specify a _document_ (unpinned) or _document view_ (pinned)
-  - unpinned relations represent a whole document that the relation is pointing at by using the document id
-  - pinned relations define the exact version of the document as a list of document graph tips
-- a relation field prescribes a schema for the referenced document
-- a relation field prescribes if the relation is pinned or unpinned
+- encode a _relation_ to one or many other _documents_
+- all relation fields MUST define a schema that all referenced documents must conform to
 - _relation_ fields MAY be self-referential in that their target is of the same schema
   - self-referential relations MAY be interpreted as instance ordering in [queries](/docs/organising-data/queries)
+- there are four kinds of relation fields
+  - relations represent the whole referenced document through their _document id_
+    - _relation_: reference to a single document
+    - _relation list_: a list of references to documents
+  - pinned relations point at immutable versions of documents through their _document view ids_
+    - _pinned relation_: reference to a single document view. 
+    - _pinned relation list_: a list of references to document views
 
-### _relation\_list_ fields
+## System and Application Schemas
 
-- encode a list of _relations_ to other documents or document views
-- a relation list field prescribes a schema that all referenced documents must follow
-- a relation list field prescribes if all references are pinned or unpinned
+- _system schemas_ are defined as part of the p2panda specification
+  - system schemas MAY have unique procedures for [_reduction_](/docs/organising-data/reduction), [_reconciliation_](/docs/collaboration/reconciliation) and [_persistence_](/docs/organising-data/persistence) of their documents
+  - system schemas are uniquely identified by their name and an integer version number, written in snake case
+    - example: `key_group_v1`
+  - the format of system schema operations can be validated by their CDDL definitions
+- _application schemas_ are published by developers
+  - they are used to validate the format of application specific data
+  - all developers can create new application schemas by publishing documents of the `SchemaDefinition` and `SchemaFieldDefinition` system schemas
+  - they are published as reusable data schemas and can be used in many applications
+  - application schemas are uniquely identified by their document view id
+
+
+## System Schemas
+
+### Schema Definition
+
+- string identifier: `schema_definition_v1`
+- used to publish [application schemas](#system-and-application-schemas)
+- in order to be a valid description of an application schema, a schema definition's fields MUST conform with the restrictions for schema name, description and fields [described at the top](#)
+- fields:
+  - name: string
+  - description: string
+  - fields: a pinned relation list referencing `SchemaFieldDefinition` documents
+
+### Schema Field Definition
+
+- string identifier: `schema_field_definition_v1`
+- defines individual fields for [schema definitions](#schema-definition)
+- fields:
+  - name: string
+  - type: string
+    - MUST be one of 
+      - `bool`: boolean
+      - `int`: integer number
+      - `float`: floating point number
+      - `str`: string
+      - `relation`: reference to a document
+      - `relation_list`: a list of references to documents
+      - `pinned_relation`: reference to a document view
+      - `pinned_relation_list`: a list of references to document views
+    - all _relation_ field types need to specify a schema
+    - _TODO: define format of reference to a schema_
