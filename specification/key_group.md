@@ -9,21 +9,22 @@ The `key_group` schema is a way to group a set of public keys so that they can a
 > Describe who is affected by your proposal and what changes they can expect by writing user stories about it. It can help to think about the questions: Why are we doing this? What use cases does it support? What is the expected outcome?
 
 - A key group can be created using a key pair.
-- A key can be added to a key group.
+- A key can be added to a key group, making it a _member_.
 - A key can be removed from a key group.
-- A key group can be added to a key group.
-- Specific _permissions_ can be defined for a key's membership in a key group.
-    - A key's membership can be limited to publishing operations in specific schemas.
-    - A key's membership can be limited to a specific set of that key's operations
-    - A key membership can be limited to specific operation actions
+- A key group can be added to a key group, making it a _member_.
+- Specific _permissions_ can be defined for members of a key group.
+    - A membership can be limited to publishing operations in specific schemas.
+    - A membership can be limited to specific operation actions (e.g. excluding `DELETE` actions).
+- Specific _permissions_ can be defined for individual keys of a key group.
+    - A member's key can be limited to a specific set of that key's operations.
 - Developers can make key groups the owners of a schema's documents by creating an _authorised schema_.
-    - Key group members can publish operations for documents that define the key group as their author.
+    - Key group members can publish operations for documents that define the key group as their owner.
     - Key group members can not publish operations for that key group's documents when their key group membership doesn't define the required permissions.
 
 ### Authorised Schemas
 
 - authorised schemas define a key group as the owner of documents created with them
-    - use a authorised schema when you want to enable all key group members with according permissions to update or delete that document
+    - use an authorised schema when you want to enable all key group members with according permissions to update or delete that document
     - documents created from authorised schemas are called _authorised documents_
 - schemas are _authorised schemas_ if they contain a single field of type `owner` that contains 
     - either the document id of a key group 
@@ -31,44 +32,66 @@ The `key_group` schema is a way to group a set of public keys so that they can a
 - Every document of an _authorised schema_ has a set of _authorised public keys_. This set can be created by looking at the document pointed at by the `owner` type field:
   - if it points at an authorised document, continue from there
   - if a key group is found: that key group's keys are the document's authorised public keys.
-- operations of _authorised schemas_ are only materialised if they were created by a key pair included in the current _authorised public keys_ of the operations's document
+- operations of _authorised schemas_ are only materialised if they were created by a key pair included in the _authorised public keys_ of the operations's document and if that key pair membership has the required permissions for the operation.
 
 ## Documentation
 
 > This section is a more formal description of the proposal, written as if it was a sub-section of the standard (for technical proposals) or a formal process or "fine print" for process proposals. It should be unambiguous and cover all known corner-cases. Formal language (such as protobuf schemas or binary header diagrams) are appropriate here.
 
-### Schema `key-group`
+### Schema `key_group_v1`
 
-_Schema doesn't define any fields_
+```
+name: string
+members: relation_list(key_group_membership_v1)
+```
 
-A `key_group` instance is a set of public keys. When a key group is created it contains the public key that published it.
+- the name of a key group should be chosen so that its purpose can be understood
 
 
 ::: info Jam Queue
 By adding an `inverse: boolean` field here we could allow a) anyone to change a document (wow chaos) b) _exclude_ specific keys from editing a document.
 :::
 
-### Schema `key-group-membership-request`
+### Schema `key_group_membership_request_v1`
 
 ```
-key_group: relation(key-group)
-? member: owner(key-group)
+key_group: relation(key_group_v1)
+? member: owner(key_group_v1)
 ```
 
 A _key group membership request_ is created in order to add its authoring public key to a key group. It says "Hey! Would you mind adding me to this key group?"
 
-The optional `member` field allows specifying a key group that requests membership instead of the public key that published this operation. A key group membership request that defines a `member` should only be considered valid if its authoring public key is a current member of that key group and its membership has `can_authorise` set to true.
+The optional `member` field allows specifying a key group that requests membership instead of the public key that published this operation. A key group membership request that defines a `member` should only be considered valid if its authoring public key has a membership in that key group with `can_authorise` set to `true`.
 
-### Schema `key-group-membership`
+::: info Jam Queue
+If a `member` is defined and the membership has `can_authorise` set to false, the member key group can still change the key set of the parent key group by changing its own members. This could be prevented by making member a pinned relation.
+:::
+
+### Schema `key_group_membership_v1`
 
 ```
-key_group: owner(key-group)
-request: hash(key-group-membership-request)
-? schema: hash(schema)
+# defines the owner of this membership
+key_group: owner(key_group_v1)
+
+# points at the original membership request
+request: pinned_relation(key_group_membership_request_v1)
+
+# if set, limit this membership to the schema id specified
+? schema: string
+
+# set true to accept the request, can be set to `false` with a later update
 accepted: boolean
+
+# if true, this membership can authorise membership requests for the key group,  add the key group to other key groups and edit membership limits.
 can_authorise: boolean
+
+# if true, this membership can create documents owned by the key group
 can_create: boolean
+
+# if true, this membership can update documents owned by the key group
 can_update: boolean
+
+# if true, this membership can delete documents owned by the key group
 can_delete: boolean
 ```
 
@@ -76,31 +99,31 @@ A _key group membership_ is created to _accept_ or _reject_ a group membership r
 
 If accepted, the public key that created the _key group membership request_ is now included in the key group's key set. If the membership request defines a `member` key group, that key group's key set is included instead.
 
-If denied, all _key group membership requests_ by the same public key should be considered invalid.
+If rejected, all _key group membership requests_ by the same public key and the same `member` value should be considered invalid.
 
-#### Schema `key-group-membership-limit`
+#### Schema `key_group_membership_limit_v1`
 
 ```
-membership: owner(group-membership)
+membership: owner(key_group_membership_v1)
 public_key: string
-from_hash: string
-to_hash: string
+? from_operation_id: string
+to_operation_id: string
 ```
 
-Imagine someone has been a member of a key group for 2 years but now you want to kick them out: You can now limit their membership to a specific set of operations within that group by adding a key group membership limit. Once a limit has been created for a `key-group-membership` only operations signed by `public_key` contained in [`from_hash`:`to_hash`] will be valid. You can create any number of these limits for a group membership.
+Imagine someone has been a member of a key group for 2 years but now you want to kick them out: You can now limit their membership to a specific set of operations within that group by adding a key group membership limit. Once a limit has been created for a membership, only operations that are preceeding `to_operation_id` and following `from_operation_id` (if set) are valid. You can create any number of these limits for a group membership.
 
-### Message Field Type `author-relation`
+### Schema Field Definition: Field Type `owner`
 
 - The field definition looks similar to `relation`
-- The hash in the `references` field must be an _authorised schema_. Any message for which this does not hold is invalid.
+- The schema id in the `references` field must reference an _authorised schema_. Any schema field definition for which this does not hold is invalid.
 
 #### Extension to the _schema schema_ CDDL:
 
 ```
 field-definition /= {
-    type: "author-relation",
+    type: "owner",
     name: field-name,
-    references: hash
+    references: schema_id
 }
 ```
 
