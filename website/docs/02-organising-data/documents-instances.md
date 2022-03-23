@@ -25,10 +25,10 @@ id: documents
   - the series of operations must start with the document's _create operation_
   - see [reduction](/docs/organising-data/reduction) and [reconciliation](/docs/collaboration/reconciliation) for further details
 - a document view is identified by its set of graph tips: the _document view id_
-  - the graph tips themselves are expressed as a list of operation ids
+  - each graph tip is represented as an _operation id_
   - it's possible to replicate the exact state of a document from the document view id
   - the document view id grows unbounded with the number of unmerged graph tips
   - if a limited size identifier is required, the document view's _hash id_ can be used
-    - to construct the hash id sort the graph tips of a document view id alphabetically, concatenate them and hash the result using YASMF.
+    - to construct the hash id sort the graph tips of a document view id, concatenate them and hash the result using YASMF.
 - a document view has a value for all fields that are defined by its document's schema
 - a document view is _deleted_ if its document contains a _delete operation_
