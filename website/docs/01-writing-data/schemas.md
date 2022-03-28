@@ -85,7 +85,7 @@ id: schemas
 - application schema ids are constructed from the schema's name and document view id
   - they consist of sections separated by an underscore
   - the first section is the name, which must have 1-64 characters, must start with a letter and must contain only alphanumeric characters and underscores
-  - the remaining sections are the document view id of the schema's `schema_v1` document, represented as alphabetically sorted hex-encoded operation ids, separated by underscores.
+  - the remaining sections are the document view id of the schema's `schema_definition_v1` document, represented as alphabetically sorted hex-encoded operation ids, separated by underscores.
   - example `profile_picture_0020c65567ae37efea293e34a9c7d13f8f2bf23dbdc3b5c7b9ab46293111c48fc78b`
 
 ## System Schemas
