@@ -87,6 +87,14 @@ id: schemas
   - the first section is the name, which must have 1-64 characters, must start with a letter and must contain only alphanumeric characters and underscores
   - the remaining sections are the document view id of the schema's `schema_definition_v1` document, represented as alphabetically sorted hex-encoded operation ids, separated by underscores.
   - example `profile_picture_0020c65567ae37efea293e34a9c7d13f8f2bf23dbdc3b5c7b9ab46293111c48fc78b`
+- as application schema ids can potentially grow very large the _schema hash id_ is an alterantive identifier with limited size
+  - it's possible for an adversary to generate schemas with a very large schema id, although this is not expected in regular use
+  - applications should choose to identify schemas by their _schema hash id_ when this fact can be exploited or a short identifier results in better usability
+  - in all other scenarios the regular _schema id_ should be preferred as it's not possible to reconstruct the schema document from the _schema hash id_
+  - the schema hash id is constructed by concatenating
+    - the schema's _name_
+    - an underscore character (`_`)
+    - the schema's _document view hash id_
 
 ## System Schemas
 
