@@ -5,11 +5,12 @@ id: schemas
 # Schemas
 
 - schemas are used to describe and validate the format in which data is published
+- schemas are identified by their [schema id](#schema-id)
 - schemas have a name, a description and a number of _fields_
-- the name of a schema MUST match the regular expression `([A-Za-z][A-Za-z0-9_]{1,63})`
+- the name of a schema MUST match the regular expression `([A-Za-z]{1}[A-Za-z0-9_]{0,63})`
   - the name of a schema MUST be at most 64 characters long
   - it begins with a letter
-  - it uses only alphanumeric characters, digits and the underscore character ( _ )
+  - it uses only alphanumeric characters, digits and the underscore character ( `_` )
 - the description of a schema MUST consist of unicode characters and MUST be at most 256 characters long
 - a schema MUST have at most 1024 fields
 
@@ -18,10 +19,10 @@ id: schemas
 - a field is defined by
   - _field name_
   - _field type_
-- the field name MUST match the regular expression `([A-Za-z][A-Za-z0-9_]{0,63})`
+- the field name MUST match the regular expression `([A-Za-z]{1}[A-Za-z0-9_]{0,63})`
   - the field name MUST be at most 64 characters long
   - it begins with a letter
-  - it uses only alphanumeric characters, digits and the underscore character ( _ )
+  - it uses only alphanumeric characters, digits and the underscore character ( `_` )
 - the field type MUST be one of
   - _bool_
   - _int_
@@ -60,28 +61,38 @@ id: schemas
     - _relation_: reference to a single document
     - _relation list_: a list of references to documents
   - pinned relations point at immutable versions of documents through their _document view ids_
-    - _pinned relation_: reference to a single document view. 
+    - _pinned relation_: reference to a single document view.
     - _pinned relation list_: a list of references to document views
 
 ## System and Application Schemas
 
 - _system schemas_ are defined as part of the p2panda specification
   - system schemas MAY have unique procedures for [_reduction_](/docs/organising-data/reduction), [_reconciliation_](/docs/collaboration/reconciliation) and _persistence_ of their documents
-  - system schemas are uniquely identified by their name and an integer version number, written in snake case
-    - example: `key_group_v1`
   - the format of system schema operations can be validated by their CDDL definitions
 - _application schemas_ are published by developers
   - they are used to validate the format of application specific data
   - all developers can create new application schemas by publishing documents of the `SchemaDefinition` and `SchemaFieldDefinition` system schemas
   - they are published as reusable data schemas and can be used in many applications
-  - application schemas are uniquely identified by their document view id
 
+### Schema ID
+
+- schema ids are strings that uniquely identify a schema
+- every system schema's schema id is given in that schema's section below
+  - they always start with the schema's name in snake case
+  - then an underscore separator
+  - then the letter v, followed by the schema's version number as an integer
+  - example: `key_group_v1`
+- application schema ids are constructed from the schema's name and document view id
+  - they consist of sections separated by an underscore
+  - the first section is the name, which must have 1-64 characters, must start with a letter and must contain only alphanumeric characters and underscores
+  - the remaining sections are the document view id of the schema's `schema_definition_v1` document, represented as alphabetically sorted hex-encoded operation ids, separated by underscores.
+  - example `profile_picture_0020c65567ae37efea293e34a9c7d13f8f2bf23dbdc3b5c7b9ab46293111c48fc78b`
 
 ## System Schemas
 
 ### Schema Definition
 
-- string identifier: `schema_definition_v1`
+- schema id: `schema_definition_v1`
 - used to publish [application schemas](#system-and-application-schemas)
 - in order to be a valid description of an application schema, a schema definition's fields MUST conform with the restrictions for schema name, description and fields [described at the top](#)
 - fields:
@@ -91,12 +102,12 @@ id: schemas
 
 ### Schema Field Definition
 
-- string identifier: `schema_field_definition_v1`
+- schema id: `schema_field_definition_v1`
 - defines individual fields for [schema definitions](#schema-definition)
 - fields:
   - name: string
   - type: string
-    - MUST be one of 
+    - MUST be one of
       - `bool`: boolean
       - `int`: integer number
       - `float`: floating point number

@@ -33,6 +33,8 @@ id: operations
 
 - operations are serialised using [CBOR][cbor]
 - all fields are serialised using [snake case][snake_case]
+- all array values and map keys must be serialised in sorted order unless their order is semantic
+  - all operations that have values or map keys which are not sorted even though their order has no semantic meaning are invalid
 
 ## Usage
 
