@@ -29,6 +29,6 @@ id: documents
   - it's possible to replicate the exact state of a document from the document view id
   - the document view id grows unbounded with the number of unmerged graph tips
   - if a limited size identifier is required, the document view's _hash id_ can be used
-    - to construct the hash id sort the graph tips of a document view id, concatenate them and hash the result using YASMF.
+    - to construct the hash id sort the graph tips of a document view id, concatenate their byte values and hash the result using YASMF.
 - a document view has a value for all fields that are defined by its document's schema
 - a document view is _deleted_ if its document contains a _delete operation_
