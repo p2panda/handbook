@@ -91,8 +91,9 @@ id: schemas
   - unless a limited-size identifier is required, the regular _schema id_ should be preferred as it's not possible to reconstruct the schema document from the _schema hash id_
   - the schema hash id is constructed by concatenating
     - the schema's _name_
-    - an underscore character (`_`)
+    - **two** underscore characters (`__`)
     - the schema's _document view hash id_
+    - example `profile_picture__0020c65567ae37efea293e34a9c7d13f8f2bf23dbdc3b5c7b9ab46293111c48fc78b`
 
 ## System Schemas
 
