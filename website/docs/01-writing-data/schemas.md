@@ -112,9 +112,13 @@ id: schemas
       - `int`: integer number
       - `float`: floating point number
       - `str`: string
-      - `relation`: reference to a document
-      - `relation_list`: a list of references to documents
-      - `pinned_relation`: reference to a document view
-      - `pinned_relation_list`: a list of references to document views
+      - `relation(<schema_id>)`: reference to a document
+      - `relation_list(<schema_id>)`: a list of references to documents
+      - `pinned_relation(<schema_id>)`: reference to a document view
+      - `pinned_relation_list(<schema_id>)`: a list of references to document views
     - all _relation_ field types need to specify a schema
-    - _TODO: define format of reference to a schema_
+      - `<schema_id>` in the above listing needs to be a valid schema id
+      - documents referenced by any relation field, to which this schema field definition applies, need to be of this schema
+      - e.g. if you are publishing an operation to update a field with the type `relation(key_group_v1)`, the field value
+      needs to be the document id of a `key_group_v1` document
+
