@@ -7,10 +7,11 @@ id: schemas
 - schemas are used to describe and validate the format in which data is published
 - schemas are identified by their [schema id](#schema-id)
 - schemas have a name, a description and a number of _fields_
-- the name of a schema MUST match the regular expression `([A-Za-z]{1}[A-Za-z0-9_]{0,63})`
+- the name of a schema MUST match the regular expression `^[A-Za-z]{1}[A-Za-z0-9_]{0,62}[A-Za-z0-9]{1}$`
   - the name of a schema MUST be at most 64 characters long
   - it begins with a letter
   - it uses only alphanumeric characters, digits and the underscore character ( `_` )
+  - it doesn't end with an underscore
 - the description of a schema MUST consist of unicode characters and MUST be at most 256 characters long
 - a schema MUST have at most 1024 fields
 
@@ -19,7 +20,7 @@ id: schemas
 - a field is defined by
   - _field name_
   - _field type_
-- the field name MUST match the regular expression `([A-Za-z]{1}[A-Za-z0-9_]{0,63})`
+- the field name MUST match the regular expression `^[A-Za-z]{1}[A-Za-z0-9_]{0,63}$`
   - the field name MUST be at most 64 characters long
   - it begins with a letter
   - it uses only alphanumeric characters, digits and the underscore character ( `_` )
