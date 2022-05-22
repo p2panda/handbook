@@ -31,4 +31,6 @@ id: documents
   - if a limited size identifier is required, the document view's _hash id_ can be used
     - to construct the hash id sort the graph tips of a document view id, concatenate their byte values and hash the result using YASMF.
 - a document view has a value for all fields that are defined by its document's schema
+- a document view has the _operation id_ for the _operation_ which transported each fields value 
 - a document view is _deleted_ if its document contains a _delete operation_
+- a document view is _edited_ if it's document contained one or more _update operations_
