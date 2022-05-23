@@ -7,10 +7,11 @@ id: schemas
 - schemas are used to describe and validate the format in which data is published
 - schemas are identified by their [schema id](#schema-id)
 - schemas have a name, a description and a number of _fields_
-- the name of a schema MUST match the regular expression `([A-Za-z]{1}[A-Za-z0-9_]{0,63})`
+- the name of a schema MUST match the regular expression `^[A-Za-z]{1}[A-Za-z0-9_]{0,62}[A-Za-z0-9]{1}$`
   - the name of a schema MUST be at most 64 characters long
   - it begins with a letter
   - it uses only alphanumeric characters, digits and the underscore character ( `_` )
+  - it doesn't end with an underscore
 - the description of a schema MUST consist of unicode characters and MUST be at most 256 characters long
 - a schema MUST have at most 1024 fields
 
@@ -19,7 +20,7 @@ id: schemas
 - a field is defined by
   - _field name_
   - _field type_
-- the field name MUST match the regular expression `([A-Za-z]{1}[A-Za-z0-9_]{0,63})`
+- the field name MUST match the regular expression `^[A-Za-z]{1}[A-Za-z0-9_]{0,63}$`
   - the field name MUST be at most 64 characters long
   - it begins with a letter
   - it uses only alphanumeric characters, digits and the underscore character ( `_` )
@@ -87,6 +88,13 @@ id: schemas
   - the first section is the name, which must have 1-64 characters, must start with a letter and must contain only alphanumeric characters and underscores
   - the remaining sections are the document view id of the schema's `schema_definition_v1` document, represented as alphabetically sorted hex-encoded operation ids, separated by underscores.
   - example `profile_picture_0020c65567ae37efea293e34a9c7d13f8f2bf23dbdc3b5c7b9ab46293111c48fc78b`
+- as application schema ids can potentially grow very large the _schema hash id_ is an alterantive identifier with limited size
+  - unless a limited-size identifier is required, the regular _schema id_ should be preferred as it's not possible to reconstruct the schema document from the _schema hash id_
+  - the schema hash id is constructed by concatenating
+    - the schema's _name_
+    - **two** underscore characters (`__`)
+    - the schema's _document view hash id_
+    - example `profile_picture__0020c65567ae37efea293e34a9c7d13f8f2bf23dbdc3b5c7b9ab46293111c48fc78b`
 
 ## System Schemas
 
