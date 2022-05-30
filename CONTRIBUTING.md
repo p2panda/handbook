@@ -56,3 +56,92 @@ p2panda is currently in an early development phase. We aim at releasing a stable
 
 - You can clone our example application *beep-boop* to test your p2panda setup. Download it via `git clone https://github.com/p2panda/beep-boop` and run `npm install` and `npm start` to open it in your browser under http://localhost:4000
 - You can refer to the latest `p2panda-js` version by linking to the package you've compiled in the steps above. Run `npm link p2panda-js` to use it inside of the project you're working on
+
+## Style Guide
+
+### Rust
+
+- Imports are grouped by: 1. `std`, 2. external crates, 3. `crate` 4. `super`.
+
+  ```rust
+    use std::collections::BTreeMap;
+    
+    use rstest::rstest;
+
+    use crate::hash::Hash;
+    use crate::operation::OperationId;
+    use crate::test_utils::fixtures::random_hash;
+
+    use super::DocumentId;
+  ```
+  
+- Prefer using `crate` imports over `super`, except in `tests` modules where you import something from the same file.
+
+  ```rust
+  use crate::hash::Hash;
+  use crate::document::DocumentViewId;
+  
+  struct TheThingImTesting;
+  
+  #[cfg(test)]
+  mod tests {
+    use super::TheThingImTesting;
+  }
+  ```
+  
+- Newlines are appreciated to structure your code into logical blocks and make it easier to follow it.
+
+  ```rust
+  let some_thing = im_initialising_it();
+  let some_other_thing = more_initialization();
+  
+  let result = make_request(&some_thing, &some_other_thing).await?;
+  
+  assert_eq!(result, 42);
+  ```
+
+- Code often does not explain itself, give it a comment!
+
+  ```rust
+  // The queue is empty, but this node has dependencies missing then there
+  // is either a cycle or missing nodes.
+  return Err(GraphError::BadlyFormedGraph);
+  ```
+  
+- Whenever you `unwrap`, explain why in a comment.
+
+  ```rust
+  // We unwrap here because this can never go wrong
+  trojan_horse.unwrap();
+  ```
+  
+- We write documentation for _everything_, struct members, methods, modules, etc.
+
+- Doc-Strings appear before [attributes](https://doc.rust-lang.org/reference/attributes.html).
+
+  ```rust
+  /// Valid field types for publishing an application schema.
+  #[derive(Clone, Debug, PartialEq)]
+  pub enum FieldType {
+    // ...
+  }
+  ```
+
+- We try to write in British English.
+
+- Module-level docstrings are not followed by a newline
+
+  ```rust
+  //! Create, sign, encode and decode [`Bamboo`] entries.
+  //!
+  //! Bamboo entries are the main data type of p2panda. Entries are organised in a distributed,
+  //! single-writer append-only log structure, created and signed by holders of private keys and
+  //! stored inside the node database.
+  //!
+  //! [`Bamboo`]: https://github.com/AljoschaMeyer/bamboo
+  mod decode;
+  ```
+  
+- Every file needs a license header: `// SPDX-License-Identifier: AGPL-3.0-or-later`
+
+- Make `cargo clippy` and `cargo fmt` happy.
