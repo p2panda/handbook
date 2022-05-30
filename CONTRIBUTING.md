@@ -93,9 +93,9 @@ p2panda is currently in an early development phase. We aim at releasing a stable
 
   ```rust
   let some_thing = im_initialising_it();
-  let some_other_thing = more_initialization();
+  let some_other_thing = more_initialisation();
   
-  let result = make_request(&some_thing, &some_other_thing).await?;
+  let result = do_request(&some_thing, &some_other_thing).await?;
   
   assert_eq!(result, 42);
   ```
@@ -129,7 +129,7 @@ p2panda is currently in an early development phase. We aim at releasing a stable
 
 - We try to write in British English.
 
-- Module-level docstrings are not followed by a newline
+- Module-level docstrings are not followed by a newline.
 
   ```rust
   //! Create, sign, encode and decode [`Bamboo`] entries.
@@ -142,6 +142,6 @@ p2panda is currently in an early development phase. We aim at releasing a stable
   mod decode;
   ```
   
-- Every file needs a license header: `// SPDX-License-Identifier: AGPL-3.0-or-later`
+- Every file needs a license header: `// SPDX-License-Identifier: AGPL-3.0-or-later`.
 
 - Make `cargo clippy` and `cargo fmt` happy.
