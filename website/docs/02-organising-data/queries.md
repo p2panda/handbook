@@ -26,7 +26,7 @@ id: queries
     1. `nextEntryArgs` to retrieve parameters required for encoding an entry
     2. `publishEntry` to publish a signed and encoded entry together with its payload
 
-### `nextEntryArgs`
+#### `nextEntryArgs`
 
 - returns parameters required for encoding new entries
     - no side effects
@@ -72,7 +72,7 @@ type EntryArgsResponse {
 }
 ```
 
-### `publishEntry`
+#### `publishEntry`
 
 - publishes the entry supplied with the request
   - the entry is validated by the receiving node and persisted in a database
@@ -120,8 +120,93 @@ type PublishEntryResponse {
 
 ### Querying documents and document views
 
-- returns entries of a given schema
+- not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
+- since schemas can be created by clients in the p2panda network the regarding GraphQL schemas are dynamically created as the network changes. p2panda uses _schema ids_ to refer to documents of certain type, in this specification we use `<schema_id>` as a placeholder
+
+#### `<schema_id>`
+
+- returns one document view of a given schema
     - no side effects
+- either a `id` or `view_id` needs to be specified
+
+```graphql
+query <schema_id>(
+  """
+  id of the document to be queried
+  """
+  id: String
+
+  """
+  specific view id of the document to be queried, this returns the document
+  state at a certain point in time
+  """
+  view_id: String
+): <schema_id>Response!
+```
+
+```graphql
+type <schema_id>Response {
+  """
+  meta information about the queried document view
+  """
+  meta: <schema_id>ResponseMeta,
+
+  """
+  actual data contained in this document view
+  """
+  fields: <schema_id>ResponseFields,
+}
+
+type <schema_id>ResponseMeta {
+  """
+  list of public keys which edited this document view
+  """
+  publicKeys: [String!]!
+
+  """
+  identifier of the whole document
+  """
+  id: String!
+
+  """
+  identifier of the document at this point in time
+  """
+  view_id: String!
+
+  """
+  flag indicating if this document has been deleted
+  """
+  deleted: Boolean!
+
+  """
+  flag indicating if this document view has been updated at least once
+  """
+  edited: Boolean!
+}
+
+type <schema_id>ResponseFields {
+  """
+  named fields containing the actual, materialised values of this document
+  view. the form is defined by the regarding p2panda schema
+  """
+  <field_name>: <field_type>
+
+  """
+  ... potentially more fields
+  """
+}
+```
+
+#### `all_<schema_id>`
+
+- returns many document views of a given schema
+    - no side effects
+- response is paginated and can be sorted and filtered
+
+```graphql
+query all_<schema_id>(
+): [<schema_id>Response!]!
+```
 
 [aquadoggo]: https://github.com/p2panda/aquadoggo
 [encoding]: /docs/writing-data/bamboo
