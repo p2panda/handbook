@@ -201,11 +201,132 @@ type <schema_id>ResponseFields {
 
 - returns many document views of a given schema
     - no side effects
-- response is paginated and can be sorted and filtered
+- response is paginated, can be sorted and filtered
+- if no filter is selected all document views following that given schema will be selected
+- if no ordering is selected the document views will be ordered by document id, ascending
 
 ```graphql
 query all_<schema_id>(
-): [<schema_id>Response!]!
+  """
+  filter collection of document views
+  """
+  where: <schema_id>Filter
+
+  """
+  order results by field values
+  """
+  orderBy: <field_name>
+
+  """
+  order results in specified direction ("asc" or "desc")
+  """
+  orderDirection: String
+
+  """
+  max number of items to be returned per page
+  """
+  first: Int
+
+  """
+  cursor identifier for pagination
+  """
+  after: String
+): <schema_id>PageResponse!
+```
+
+```graphql
+type <schema_id>Filter {
+  """
+  filter by public key
+  """
+  publicKey: String
+
+  """
+  filter by deletion status
+  """
+  deleted: Boolean
+
+  """
+  filter by editing status
+  """
+  edited: Boolean
+
+  """
+  filter by fields containing that exact value
+  """
+  <field_name>: <value>
+
+  """
+  filter by fields not containing that exact value
+  """
+  <field_name>_ne: <value>
+
+  """
+  filter by fields containing larger values
+  """
+  <field_name>_gt: <value>
+
+  """
+  filter by fields containing larger or equal values
+  """
+  <field_name>_gte: <value>
+
+  """
+  filter by fields containing lower values
+  """
+  <field_name>_lt: <value>
+
+  """
+  filter by fields containing lower or equal values
+  """
+  <field_name>_lte: <value>
+}
+
+type <schema_id>PageResponse {
+  """
+  information to aid in pagination
+  """
+  pageInfo: <schema_id>PageInfo!
+
+  """
+  list of returned items with pagination data
+  """
+  edges: [<schema_id>PageEdge]
+}
+
+type <schema_id>PageInfo {
+  """
+  when paginating backwards, are there more items?
+  """
+  hasPreviousPage: Boolean!
+
+  """
+  when paginating forwards, are there more items?
+  """
+  hasNextPage: Boolean!
+
+  """
+  when paginating backwards, the cursor to continue.
+  """
+  startCursor: String
+
+  """
+  when paginating forwards, the cursor to continue.
+  """
+  endCursor: String
+}
+
+type <schema_id>PageEdge {
+  """
+  item at the end of the pagination edge
+  """
+  node: <schema_id>Response!
+
+  """
+  cursor to use in pagination
+  """
+  cursor: String!
+}
 ```
 
 [aquadoggo]: https://github.com/p2panda/aquadoggo
