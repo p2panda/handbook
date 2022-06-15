@@ -4,11 +4,12 @@ id: replication
 
 # Replication
 
-:::info not implemented
-Replication is in specification phase and has not been implemented yet.
-:::
-
-- Replication is the process by which nodes exchange data
-    - p2panda uses _gossip replication_: nodes autonomously share data with each other without central coordination
+- replication is the process by which nodes exchange data to eventually converge all to the same state
+    - nodes autonomously share data with each other without central coordination
     - this makes p2panda an _eventually consistent_ database
-- Nodes may not be interested in all available data and can choose to receive only some data
+- nodes may not be interested in all available data and can choose to receive only some data, for example by only requesting documents following a certain schema
+- clients use the same GraphQL API to talk to nodes, you can read more about it under [queries][queries]
+
+## Node API
+
+[queries]: /docs/organising-data/queries

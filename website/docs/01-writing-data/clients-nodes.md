@@ -34,7 +34,7 @@ id: clients-nodes
   - as a daemon on a user's computer
     - multiple p2panda clients could talk to one node on the same computer
 - [aquadoggo][aquadoggo] is the reference node implementation
-- nodes offer a [GraphQL][queries] that is used by clients and other nodes to connect and exchange data
+- nodes offer a GraphQL API that is used by [clients][queries] and other [nodes][replication] to connect and exchange data
 
 ## Clients
 
@@ -51,4 +51,5 @@ id: clients-nodes
 [key_groups]: /docs/collaboration/key-groups
 [p2panda]: https://github.com/p2panda/p2panda
 [queries]: /docs/organising-data/queries
+[replication]: /docs/networking/replication
 [tauri]: https://tauri.studio/
