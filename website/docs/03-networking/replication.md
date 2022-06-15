@@ -192,7 +192,4 @@ type SingleEntryAndPayload {
 }
 ```
 
-```
-
-
 [queries]: /docs/organising-data/queries
