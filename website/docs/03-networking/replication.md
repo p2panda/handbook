@@ -12,75 +12,93 @@ id: replication
 
 ## Node API
 
-- graphql queries allowing other nodes ask about the bamboo logs, entries and payloads they know about. These methods are enough to build a replication protocol on top of which is specified further below
+- GraphQL queries allowing other nodes ask about the bamboo logs, entries and payloads they know about. these methods are enough to build a replication protocol on top.
 
 ```graphql
 """
-Get an entry by its hash
+get an entry by its hash
 """
 entryByHash(hash: EntryHash!): SingleEntryAndPayload
 
 """
-Get any entries that are newer than the provided sequence_number for a given
+get any entries that are newer than the provided sequence_number for a given
 author and log_id
 """
 getEntriesNewerThanSeq(
+  """
+  id of the log
+  """
   logId: LogId!
+
+  """
+  author of the log
+  """
   author: Author!
+
+  """
+  latest known sequence number. we want the entries which are newer than this.
+  """
   sequenceNumber: SequenceNumber!
+
+  """
+  max number of items to be returned per page
+  """
   first: Int
+
+  """
+  cursor identifier for pagination
+  """
   after: String
 ): EntryAndPayloadConnection!
 
 """
-Get a single entry by its log_id, sequence_number and author
+get a single entry by its log_id, sequence_number and author
 """
 entryByLogIdAndSequence(
+  """
+  id of the log
+  """
   logId: LogId!
-  sequenceNumber: SequenceNumber!
+
+  """
+  author of the log
+  """
   author: Author!
+
+  """
+  sequence number of the entry in the log
+  """
+  sequenceNumber: SequenceNumber!
 ): SingleEntryAndPayload
 
 """
-Get aliases of the provided `public_keys` that you can use in future requests
-to save bandwidth.
+get aliases of the provided `public_keys` that you can use in future requests
+to save bandwidth
 """
 authorAliases(publicKeys: [PublicKey!]!): [AliasedAuthor!]!
 ```
 
 ```graphql
-scalar Entry
-
-scalar EntryHash
-
-scalar LogId
-
-scalar Payload
-
-scalar PublicKey
-
-scalar SequenceNumber
-
 """
 AliasedAuthor is one of either the public_key or an alias
 
-The intention of this is to reduce bandwidth when making requests by using a
+the intention of this is to reduce bandwidth when making requests by using a
 short "alias" rather than the full author public_key
 
-To get an alias of an author, use the `author_aliases` method which will return
+to get an alias of an author, use the `author_aliases` method which will return
 this type.
 
-When using as an input to a query, exactly one of public_key or alias must be
+when using as an input to a query, exactly one of public_key or alias must be
 set otherwise it is an error.
 """
 type AliasedAuthor {
   """
-  The author's public key
+  the author's public key
   """
   publicKey: PublicKey!
 
   """
-  The author alias
+  the author alias
   """
   alias: ID!
 }
@@ -90,12 +108,12 @@ Either the `public_key` or the `alias` of that author.
 """
 input Author {
   """
-  The author's public key
+  the author's public key
   """
   publicKey: PublicKey
 
   """
-  The author alias
+  the author alias
   """
   alias: ID
 }
@@ -105,71 +123,64 @@ An entry with an optional payload
 """
 type EntryAndPayload {
   """
-  Get the entry
+  get the entry
   """
   entry: Entry!
 
   """
-  Get the payload
+  get the payload
   """
   payload: Payload
 }
 
 type EntryAndPayloadConnection {
   """
-  Information to aid in pagination.
+  information to aid in pagination
   """
   pageInfo: PageInfo!
 
   """
-  A list of edges.
+  a list of edges.
   """
   edges: [EntryAndPayloadEdge]
 }
 
 """
-An edge in a connection.
+An edge in a connection
 """
 type EntryAndPayloadEdge {
   """
-  The item at the end of the edge
+  the item at the end of the edge
   """
   node: EntryAndPayload!
 
   """
-  A cursor for use in pagination
+  a cursor for use in pagination
   """
   cursor: String!
 }
 
-type EntryArgsResponse {
-  logId: String!
-  seqNum: String!
-  backlink: String
-  skiplink: String
-}
-
 """
-Information about pagination in a connection
+information about pagination in a connection
 """
 type PageInfo {
   """
-  When paginating backwards, are there more items?
+  when paginating backwards, are there more items?
   """
   hasPreviousPage: Boolean!
 
   """
-  When paginating forwards, are there more items?
+  when paginating forwards, are there more items?
   """
   hasNextPage: Boolean!
 
   """
-  When paginating backwards, the cursor to continue.
+  when paginating backwards, the cursor to continue
   """
   startCursor: String
 
   """
-  When paginating forwards, the cursor to continue.
+  when paginating forwards, the cursor to continue
   """
   endCursor: String
 }
@@ -181,7 +192,7 @@ type SingleEntryAndPayload {
   entry: Entry!
 
   """
-  The payload
+  The payload, bytes encoded as hexadecimal string
   """
   payload: Payload
 
@@ -191,8 +202,18 @@ type SingleEntryAndPayload {
   """
   certificatePool: [Entry!]!
 }
-```
 
-## Naive replication protocol
+scalar Entry
+
+scalar EntryHash
+
+scalar LogId
+
+scalar Payload
+
+scalar PublicKey
+
+scalar SequenceNumber
+```
 
 [queries]: /docs/organising-data/queries
