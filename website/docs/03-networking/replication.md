@@ -8,9 +8,11 @@ id: replication
     - nodes autonomously share data with each other without central coordination
     - this makes p2panda an _eventually consistent_ database
 - nodes may not be interested in all available data and can choose to receive only some data, for example by only requesting documents following a certain schema
-- nodes need to implement the API specifications to make sure they are compatible with all other node and client implementations. The Node API is specified here, the Client API is further specified under [queries][queries], both reside inside of nodes
+- nodes need to implement the API specifications to make sure they are compatible with all other node and client implementations. The Node API is specified here, the Client API is further specified under [queries][queries], both APIs reside inside nodes
 
 ## Node API
+
+- graphql queries allowing other nodes ask about the bamboo logs, entries and payloads they know about. These methods are enough to build a replication protocol on top of which is specified further below
 
 ```graphql
 """
@@ -44,7 +46,6 @@ Get aliases of the provided `public_keys` that you can use in future requests
 to save bandwidth.
 """
 authorAliases(publicKeys: [PublicKey!]!): [AliasedAuthor!]!
-}
 ```
 
 ```graphql
@@ -191,5 +192,7 @@ type SingleEntryAndPayload {
   certificatePool: [Entry!]!
 }
 ```
+
+## Naive replication protocol
 
 [queries]: /docs/organising-data/queries
