@@ -73,6 +73,7 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [x] `bamboo-rs-ed25519-yasmf` crate published
 - [x] Use YASMF hashes in `p2panda-rs` and `p2panda-js`
 - [x] Materialisation of data from operations
+- [x] Schemas describing the format of operations 
 - [x] OpenMLS group encryption capabilities in `p2panda-rs`
 - [x] Schema migrations
 - [x] Multi-writer materialisation in `aquadoggo`
