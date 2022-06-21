@@ -31,7 +31,7 @@ id: queries
 
 - returns parameters required for encoding new entries
     - no side effects
-- clients can't encode new entries without information from this endpoint because every entry needs to place itself in the first unused sequence number of a specific [_bamboo log_][encoding] and also it needs to include the hashes of specific previous entries in its encoding
+- clients can't encode new entries without information from this endpoint because every entry needs to place itself in the first unused sequence number of a specific [_bamboo log_][bamboo] and also it needs to include the hashes of specific previous entries in its encoding
     - this information is held by the node
 - clients may cache the arguments required for the next entry (they are also returned by `publishEntry`)
 - clients may also persist their entry logs locally to avoid any dependency for retrieving entry arguments of nodes at all
@@ -76,7 +76,10 @@ type EntryArgsResponse {
 #### `publishEntry`
 
 - publishes the entry supplied with the request
-  - the entry is validated by the receiving node and persisted in a database
+  - the entry is validated by the receiving node and persisted in a database. the data gets validated by checking if:
+    - the entry adheres to the [bamboo specification][bamboo] and has a valid signature and log integrity
+    - the operation adheres to the [operation specification][operations]
+    - the operation is linked to the entry with a correct payload hash and size
   - the operation may be materialised on the node resulting in a new document view
 - returns entry arguments required for publishing the next entry for the same document, similar to `nextEntryArgs`
 - returns an error when the bamboo log, signature or document integrity could not be verified, the operation was malformed or schema not fullfilled
@@ -215,14 +218,14 @@ type <schema_id>ResponseFields {
 
 **Pagination**
 
-- our pagination adheres to the [connection-specification][connection specification] of graphql
+- our pagination adheres to the [connection specification][connection-specification] of graphql
   - a `cursor` is an opaque and unique identifier of every connection edge and can be implemented differently as long as it aids pagination
     - we recommend a base64 encoded document view id as a cursor
-    - as stated by the [pagination-specification][pagination specification] of graphql the encoding should aid reminding developers that this data is opaque should not be relied upon
+    - as stated by the [pagination specification][pagination-specification] of graphql the encoding should aid reminding developers that this data is opaque should not be relied upon
 
 **Self-referential fields**
 
-- if the selected `orderBy` field is a [self-referential-relation][self-referential relation] the node will return an topologically ordered list of that reference graph in the same manner as the [reduction][reduction] algorithm works
+- if the selected `orderBy` field is a [self-referential relation][self-referential-relation] the node will return an topologically ordered list of that reference graph in the same manner as the [reduction][reduction] algorithm works
 - if the selected filter field is a self-referential relation the topologically ordered list will be filtered
 
 ```graphql
@@ -350,12 +353,13 @@ type <schema_id>PageEdge {
 ```
 
 [aquadoggo]: https://github.com/p2panda/aquadoggo
+[bamboo]: /docs/writing-data/bamboo
+[connection-specification]: https://relay.dev/graphql/connections.htm
 [documents]: /docs/organising-data/documents
-[encoding]: /docs/writing-data/bamboo
 [graphql]: https://graphql.org/
 [nodes]: /docs/writing-data/clients-nodes
+[operations]: /docs/writing-data/operations
+[pagination-specification]: https://graphql.org/learn/pagination/#pagination-and-edges
 [reduction]: /docs/organising-data/reduction
 [replication]: /docs/networking/replication
 [self-referential-relation]: /docs/writing-data/schemas#relation-fields
-[connection-specification]: https://relay.dev/graphql/connections.htm
-[pagination-specification]: https://graphql.org/learn/pagination/#pagination-and-edges
