@@ -203,9 +203,27 @@ type <schema_id>ResponseFields {
 - returns zero to many documents (the "latest" document views) of a given schema
     - no side effects
 - response is paginated, can be sorted and filtered
+
+**Filters**
+
+- filters can be applied on any operation field of type `relation`, `pinned_relation`, `float`, `string` and `integer`
 - if no filter is selected all document views following that given schema will be selected
+
+**Ordering**
+
 - if no ordering is selected the document views will be ordered by document id, ascending
+
+**Pagination**
+
+- our pagination adheres to the [connection-specification][connection specification] of graphql
+  - a `cursor` is an opaque and unique identifier of every connection edge and can be implemented differently as long as it aids pagination
+    - we recommend a base64 encoded document view id as a cursor
+    - as stated by the [pagination-specification][pagination specification] of graphql the encoding should aid reminding developers that this data is opaque should not be relied upon
+
+**Self-referential fields**
+
 - if the selected `orderBy` field is a [self-referential-relation][self-referential relation] the node will return an topologically ordered list of that reference graph in the same manner as the [reduction][reduction] algorithm works
+- if the selected filter field is a self-referential relation the topologically ordered list will be filtered
 
 ```graphql
 query all_<schema_id>(
@@ -339,3 +357,5 @@ type <schema_id>PageEdge {
 [reduction]: /docs/organising-data/reduction
 [replication]: /docs/networking/replication
 [self-referential-relation]: /docs/writing-data/schemas#relation-fields
+[connection-specification]: https://relay.dev/graphql/connections.htm
+[pagination-specification]: https://graphql.org/learn/pagination/#pagination-and-edges
