@@ -209,7 +209,8 @@ type <schema_id>ResponseFields {
 
 **Filters**
 
-- filters can be applied on any operation field of type `relation`, `pinned_relation`, `float`, `string` and `integer`
+- filters can be applied on any operation field of type `float`, `string` and `integer`
+  - in special cases also 'relation' and 'pinned-relation' can be filtered, see self-referential relations section below
 - if no filter is selected all document views following that given schema will be selected
 
 **Ordering**
