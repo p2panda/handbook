@@ -144,7 +144,7 @@ query <schema_id>(
   specific view id of the document to be queried, this returns the document
   state at a certain point in time
   """
-  view_id: String
+  viewId: String
 ): <schema_id>Response!
 ```
 
@@ -175,7 +175,7 @@ type <schema_id>ResponseMeta {
   """
   identifier of the document at this point in time
   """
-  view_id: String!
+  viewId: String!
 
   """
   flag indicating if this document has been deleted
