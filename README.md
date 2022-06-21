@@ -74,14 +74,15 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [x] Use YASMF hashes in `p2panda-rs` and `p2panda-js`
 - [x] Materialisation of data from operations
 - [x] OpenMLS group encryption capabilities in `p2panda-rs`
+- [x] Schema migrations
+- [x] Multi-writer materialisation in `aquadoggo`
 
 ### Now
 
 - [ ] p2panda first draft specification
-- [ ] Multi-writer materialisation in `aquadoggo`
-- [ ] Schemas and data validation
+- [ ] Schemas- and data validation
 - [ ] Naive replication protocol
-- [ ] GraphQL API to query data
+- [ ] Dynamic GraphQL API to query data
 - [ ] Implement System Schemas in `aquadoggo`
 - [ ] Implement Application Schemas in `aquadoggo`
 
@@ -93,7 +94,6 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [ ] Manually follow other nodes
 - [ ] Automatic local discovery via mDNS
 - [ ] p2panda specification 1.0 release :panda_face:
-- [ ] Schema migrations
 - [ ] Schema backwards compatibility via lenses
 - [ ] Automatic discovery via gossip protocol
 - [ ] Efficient replication protocol
