@@ -14,11 +14,12 @@ id: queries
 
 - clients can publish entries
     - before that, clients can retrieve parameters required for encoding entries if they can't compute them independently
-- clients can retrieve materialised documents and document views of a given schema
-    - _documents can be filtered by individual fields_
-    - _linked documents can be retrieved_
-    - _documents can be sorted by arbitrary fields_
-    - _documents can be sorted by self-referential orderings_
+- clients can retrieve materialised [documents][documents] of a given schema
+    - documents can be filtered by individual fields
+    - linked documents can be retrieved
+    - documents can be sorted by arbitrary fields
+    - documents can be sorted by self-referential orderings
+    - documents can be queried by `document_view_id` in order to receive a [documents][view] onto it's data at a specific materialised state
 
 ### Publishing Entries
 
@@ -76,7 +77,7 @@ type EntryArgsResponse {
 
 - publishes the entry supplied with the request
   - the entry is validated by the receiving node and persisted in a database
-  - the operation is materialised on the node resulting in a new document view
+  - the operation may be materialised on the node resulting in a new document view
 - returns entry arguments required for publishing the next entry for the same document, similar to `nextEntryArgs`
 - returns an error when the bamboo log, signature or document integrity could not be verified, the operation was malformed or schema not fullfilled
 
@@ -118,7 +119,7 @@ type PublishEntryResponse {
 }
 ```
 
-### Querying documents and document views
+### Querying documents
 
 - not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
 - since schemas can be created by clients in the p2panda network the regarding GraphQL schemas are dynamically created as the network changes. p2panda uses _schema ids_ to refer to documents of certain type, in this specification we use `<schema_id>` as a placeholder
@@ -199,7 +200,7 @@ type <schema_id>ResponseFields {
 
 #### `all_<schema_id>`
 
-- returns many document views of a given schema
+- returns zero to many documents (the "latest" document views) of a given schema
     - no side effects
 - response is paginated, can be sorted and filtered
 - if no filter is selected all document views following that given schema will be selected
@@ -208,7 +209,7 @@ type <schema_id>ResponseFields {
 ```graphql
 query all_<schema_id>(
   """
-  filter collection of document views
+  filter collection of documents
   """
   where: <schema_id>Filter
 
@@ -330,6 +331,7 @@ type <schema_id>PageEdge {
 ```
 
 [aquadoggo]: https://github.com/p2panda/aquadoggo
+[documents]: /docs/organising-data/documents
 [encoding]: /docs/writing-data/bamboo
 [graphql]: https://graphql.org/
 [nodes]: /docs/writing-data/clients-nodes
