@@ -205,6 +205,7 @@ type <schema_id>ResponseFields {
 - response is paginated, can be sorted and filtered
 - if no filter is selected all document views following that given schema will be selected
 - if no ordering is selected the document views will be ordered by document id, ascending
+- if the selected `orderBy` field is a [self-referential-relation][self-referential relation] the node will return an topologically ordered list of that reference graph in the same manner as the [reduction][reduction] algorithm works
 
 ```graphql
 query all_<schema_id>(
@@ -335,4 +336,6 @@ type <schema_id>PageEdge {
 [encoding]: /docs/writing-data/bamboo
 [graphql]: https://graphql.org/
 [nodes]: /docs/writing-data/clients-nodes
+[reduction]: /docs/organising-data/reduction
 [replication]: /docs/networking/replication
+[self-referential-relation]: /docs/writing-data/schemas#relation-fields
