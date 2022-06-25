@@ -60,7 +60,7 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [x] Ed25519 key pair generation and handling
 - [x] Bamboo `Entry` creation
 - [x] `Entry` signing and validation
-- [x] SQLite / PostgreSQL / MySQL support for data storage
+- [x] SQLite / PostgreSQL support for data storage
 - [x] WebAssembly support in the browser
 - [x] `aquadoggo` HTTP and WebSocket RPC API
 - [x] Publish first v0.1.0 `p2panda-rs` crate and `p2panda-js` npm package
