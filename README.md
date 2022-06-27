@@ -77,15 +77,15 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [x] OpenMLS group encryption capabilities in `p2panda-rs`
 - [x] Schema migrations
 - [x] Multi-writer materialisation in `aquadoggo`
+- [x] Implement System Schemas in `aquadoggo`
+- [x] Implement Application Schemas in `aquadoggo`
 
 ### Now
 
 - [ ] p2panda first draft specification
 - [ ] Schemas- and data validation
-- [ ] Naive replication protocol
+- [ ] Basic replication protocol
 - [ ] Dynamic GraphQL API to query data
-- [ ] Implement System Schemas in `aquadoggo`
-- [ ] Implement Application Schemas in `aquadoggo`
 
 ### The future
 
