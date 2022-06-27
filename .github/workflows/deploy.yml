@@ -61,18 +61,19 @@ jobs:
 
       - name: Install wasm-pack
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+        working-directory: p2panda-js
 
       - name: Install dependencies
         run: npm ci
-        working-directory: ${{ env.working_directory }}
+        working-directory: p2panda-js
 
       - name: Build documentation page
         run: npm run docs
-        working-directory: ${{ env.working_directory }}
+        working-directory: p2panda-js
 
       - name: Deploy website
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{ env.working_directory }}/docs
+          publish_dir: p2panda-js/docs
           destination_dir: lib/p2panda-js
