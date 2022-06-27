@@ -2,8 +2,9 @@ name: Deploy website via GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    # TODO: Comment this out for now
+    # branches:
+    #   - main
 
 defaults:
   run:
