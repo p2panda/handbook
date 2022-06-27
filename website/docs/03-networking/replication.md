@@ -15,7 +15,7 @@ Replication is in specification phase and has not been implemented yet.
 
 ## Transport protocol
 
-- p2panda replication is based on the GraphQL query language
+- p2panda replication protocol is based on the GraphQL query language
   - this allows developers to easily build their p2panda replication implementations in any programming language
   - this allows "leecher" node implementations in the browser which collect and persist entries but do not communicate and replicate further with other nodes
 
@@ -31,13 +31,22 @@ Replication is in specification phase and has not been implemented yet.
   - is based on the QUIC streaming protocol supporting both unidirectional and bidirectional streams
   - has a fault-tolerancy mechanism
   - makes use of connection pooling, for reusing already opened connections
-  - encrypts connections via TLS 1.3 with self-signed certificates
-    - this allows transport encryption without a centralised certificate authority (CA)
-    - this doesn't give authentication but since p2panda data is already authenticated this doesn't need to be reflected on this level
 
-## Basic Replication
+### Encryption
 
-- through the graphql api nodes can ask each other about the logs and entries they have stored and query entries which are not known to them yet
+- data over qp2p and regular HTTP transport connection is secured via TLS 1.3
+- TLS certificates are self-signed certificates by default
+  - this allows transport encryption without a centralised certificate authority (CA)
+  - this doesn't give authentication but since p2panda data is already authenticated this doesn't need to be reflected on this level
+  - optionally a p2panda node can be moved behind a reverse-proxy providing its own certificates
+
+## Replication protocol
+
+- the replication protocol defines the process of exchanging entries and p2panda operations on top of the GraphQL Node API
+
+### Basic Replication
+
+- retreives new entries from another node
 - more sophisticated replication protocols can be built on top
   - the "basic replication" protocol serves as a base
 
@@ -45,9 +54,9 @@ Replication is in specification phase and has not been implemented yet.
 
 1. 
 
-## Schema Replication
+### Schema Replication
 
-- queries a node about new entries holding operations of a certain schema
+- retreives new entries from another node holding operations of a certain schema
 
 **Process**
 
