@@ -203,7 +203,7 @@ type <schema_id>ResponseFields {
 
 #### `all_<schema_id>`
 
-- returns zero to many documents (the "latest" document views) of a given schema
+- returns the current view for many documents of a given schema
     - no side effects
 - response is paginated, can be sorted and filtered
 
