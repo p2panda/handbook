@@ -27,7 +27,7 @@ Replication is in specification phase and has not been implemented yet.
 
 - nodes can offer a [qp2p][qp2p] endpoint on port `2022` for replication via the qp2p (QUIC, TLS 1.3) protocol
 - qp2p is a p2p messaging protocol sending discrete GraphQL queries over QUIC streams, it ..
-  - has build-in support for the Internet Gateway Device Protocol (IGD) for automatic port forwarding for peers behind NAT-enabled routers
+  - has built-in support for the Internet Gateway Device Protocol (IGD) for automatic port forwarding for peers behind NAT-enabled routers
   - is based on the QUIC streaming protocol supporting both unidirectional and bidirectional streams
   - has a fault-tolerancy mechanism
   - makes use of connection pooling, for reusing already opened connections
@@ -37,7 +37,7 @@ Replication is in specification phase and has not been implemented yet.
 - data over qp2p and regular HTTP transport connection is secured via TLS 1.3
 - TLS certificates are self-signed certificates by default
   - this allows transport encryption without a centralised certificate authority (CA)
-  - this doesn't give authentication but since p2panda data is already authenticated this doesn't need to be reflected on this level
+  - this doesn't give authentication but since p2panda data is already authenticated and designed to function in a trustless network setting, this doesn't need to be reflected on this layer
   - optionally a p2panda node can be moved behind a reverse-proxy providing its own certificates
 
 ## Replication protocol
