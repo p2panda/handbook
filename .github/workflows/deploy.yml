@@ -12,7 +12,7 @@ defaults:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy p2panda website
 
     runs-on: ubuntu-latest
 
@@ -43,7 +43,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
 
-  js-docs:
+  deploy-js-docs:
     name: Deploy p2panda-js API documentation
 
     runs-on: ubuntu-latest
@@ -65,6 +65,10 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: p2panda-js
+
+      - name: Compile wasm and build p2panda-js
+        run: npm run build
         working-directory: p2panda-js
 
       - name: Build documentation page
