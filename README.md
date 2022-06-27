@@ -86,21 +86,20 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [ ] Schemas- and data validation
 - [ ] Basic replication protocol
 - [ ] Dynamic GraphQL API to query data
+- [ ] Manually follow other nodes
 
 ### The future
 
 - [ ] Shared identities with `KeyGroup` in `p2panda-rs`
-- [ ] Multi-writer permissions/moderation in `aquadoggo`
-- [ ] Transport encryption between nodes
-- [ ] Manually follow other nodes
+- [ ] Multi-writer permissions in `aquadoggo`
+- [ ] Transport encryption between nodes via TLS 1.3
 - [ ] Automatic local discovery via mDNS
 - [ ] p2panda specification 1.0 release :panda_face:
 - [ ] Schema backwards compatibility via lenses
-- [ ] Automatic discovery via gossip protocol
+- [ ] Automatic internet discovery via signalling servers
 - [ ] Efficient replication protocol
-- [ ] Automatic deletion of unused data
+- [ ] Automatic deletion of unused data ("Garbage Collection")
 - [ ] Automatic detection of forked logs
-- [ ] Improved data type: Magma + Lava
 
 ## How to contribute
 
