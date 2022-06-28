@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 defaults:
   run:
@@ -12,12 +11,13 @@ defaults:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy p2panda website
+
     runs-on: ubuntu-latest
 
     steps:
       - name: Git checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node
         uses: actions/setup-node@v2
@@ -41,3 +41,42 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
+
+  deploy-js-docs:
+    name: Deploy p2panda-js API documentation
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout p2panda-js repository
+        uses: actions/checkout@v3
+        with:
+          repository: 'p2panda/p2panda'
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+        working-directory: p2panda-js
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: p2panda-js
+
+      - name: Compile wasm and build p2panda-js
+        run: npm run build
+        working-directory: p2panda-js
+
+      - name: Build documentation page
+        run: npm run docs
+        working-directory: p2panda-js
+
+      - name: Deploy website
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: p2panda-js/docs
+          destination_dir: lib/p2panda-js
