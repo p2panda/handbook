@@ -12,6 +12,7 @@ id: queries
 
 ## Client API
 
+- the client api is the interface for communication between [node and client][nodes]
 - clients can publish entries
     - before that, clients can retrieve parameters required for encoding entries if they can't compute them independently
 - clients can retrieve materialised [documents][documents] of a given schema
@@ -23,18 +24,20 @@ id: queries
 
 ### Publishing Entries
 
-- clients use two GraphQL queries for publishing entries:
-    1. `nextEntryArgs` to retrieve parameters required for encoding an entry
-    2. `publishEntry` to publish a signed and encoded entry together with its payload
+- clients use two GraphQL operations for publishing entries:
+    1. [`nextEntryArgs`](#nextentryargs) query to retrieve parameters required for encoding an entry
+    2. [`publishEntry`](#publishentry) mutation to publish a signed and encoded entry together with its payload
 
 #### `nextEntryArgs`
 
 - returns parameters required for encoding new entries
-    - no side effects
+    - implementations must not have side effects
 - clients can't encode new entries without information from this endpoint because every entry needs to place itself in the first unused sequence number of a specific [_bamboo log_][bamboo] and also it needs to include the hashes of specific previous entries in its encoding
     - this information is held by the node
 - clients may cache the arguments required for the next entry (they are also returned by `publishEntry`)
 - clients may also persist their entry logs locally to avoid any dependency for retrieving entry arguments of nodes at all
+- clients must set the `documentId` input variable to receive arguments for encoding an `UPDATE` or `DELETE` operation.
+  - clients must not set this when they want to encode a `CREATE` operation
 
 ```graphql
 query nextEntryArgs(
@@ -44,8 +47,7 @@ query nextEntryArgs(
   publicKey: String!
 
   """
-  document id the operation wants to mutate. leave empty when document was not
-  created yet
+  id of the document that will be updated or deleted with the next entry. leave empty to receive arguments for creating a new document.
   """
   documentId: String
 ): EntryArgsResponse!
@@ -75,14 +77,17 @@ type EntryArgsResponse {
 
 #### `publishEntry`
 
-- publishes the entry supplied with the request
-  - the entry is validated by the receiving node and persisted in a database. the data gets validated by checking if:
+- if a `publishEntry` request is accepted by a node it must publish the entry supplied with the request by taking the following steps:
+  - the node must validate the received entry and operation by checking if:
     - the entry adheres to the [bamboo specification][bamboo] and has a valid signature and log integrity
     - the operation adheres to the [operation specification][operations]
     - the operation is linked to the entry with a correct payload hash and size
-  - the operation may be materialised on the node resulting in a new document view
+  - the node should persist the entry and operation and make it available to other nodes via [replication][replication]
+  - the node may [materialise][reduction] the document this new operation belongs to, resulting in a new document view
 - returns entry arguments required for publishing the next entry for the same document, similar to `nextEntryArgs`
-- returns an error when the bamboo log, signature or document integrity could not be verified, the operation was malformed or schema not fullfilled
+- returns an error 
+  - when the bamboo log, signature or document integrity could not be verified, the operation was malformed or schema not fullfilled
+  - when the node is unable to persist the entry and operation at the moment
 
 
 ```graphql
@@ -124,14 +129,20 @@ type PublishEntryResponse {
 
 ### Querying documents
 
-- not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
-- since schemas can be created by clients in the p2panda network the regarding GraphQL schemas are dynamically created as the network changes. p2panda uses _schema ids_ to refer to documents of certain type, in this specification we use `<schema_id>` as a placeholder
+- these queries allow clients to request the field contents of materialised document views and metadata for their associated documents
+- some GraphQL operations and types are dynamic in that they depend on the schemas known to the node
+  - this spec only gives a generic form for these operations and types
+  - in this specification we use `<schema_id>` as a placeholder for the string-encoded schema id of actual schemas
 
 #### `<schema_id>`
 
-- returns one document view of a given schema
-    - no side effects
-- either a `id` or `view_id` needs to be specified
+- returns a single document that uses this schema id with a specific document view
+    - implementations must have no side effects
+- either the `id` or `view_id` input variable must to be set
+  - if `id` contains a document id the response must contain the [_latest document view_](latestDocumentView) for that document
+  - if `view_id` contains a document view id, the query must contain this document view
+  - if both input variables are given the query must return an error
+- not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
 
 ```graphql
 query <schema_id>(
@@ -141,8 +152,7 @@ query <schema_id>(
   id: String
 
   """
-  specific view id of the document to be queried, this returns the document
-  state at a certain point in time
+  specific document view id to be queried
   """
   viewId: String
 ): <schema_id>Response!
@@ -151,12 +161,12 @@ query <schema_id>(
 ```graphql
 type <schema_id>Response {
   """
-  meta information about the queried document view
+  meta information about the returned document and document view
   """
   meta: <schema_id>ResponseMeta,
 
   """
-  actual data contained in this document view
+  actual data contained in the document view
   """
   fields: <schema_id>ResponseFields,
 }
@@ -168,22 +178,22 @@ type <schema_id>ResponseMeta {
   publicKeys: [String!]!
 
   """
-  identifier of the whole document
+  identifier of the returned document
   """
   id: String!
 
   """
-  identifier of the document at this point in time
+  document view id contained in this response
   """
   viewId: String!
 
   """
-  flag indicating if this document has been deleted
+  this field is `true` if this document has been deleted
   """
   deleted: Boolean!
 
   """
-  flag indicating if this document view has been updated at least once
+  this field is `true` if this document view has been updated at least once
   """
   edited: Boolean!
 }
@@ -203,19 +213,20 @@ type <schema_id>ResponseFields {
 
 #### `all_<schema_id>`
 
-- returns the current view for many documents of a given schema
-    - no side effects
+- returns the [latest document view][latestDocumentView] for many documents of a given schema
+    - implementations must have no side effects
+- deleted documents must not be included in the response unless they are explicitly included using a filter
 - response is paginated, can be sorted and filtered
 
 **Filters**
 
-- filters can be applied on any operation field of type `float`, `string` and `integer`
-  - in special cases also 'relation' and 'pinned-relation' can be filtered, see self-referential relations section below
+- filters can be applied on any operation field of type `float`, `str` and `integer`
+  - in special cases also `relation` and `pinned_relation` can be filtered, see self-referential relations section below
 - if no filter is selected all document views following that given schema will be selected
 
 **Ordering**
 
-- if no ordering is selected the document views will be ordered by document id, ascending
+- if no ordering is selected the documents will be ordered by document id, ascending
 
 **Pagination**
 
@@ -226,7 +237,7 @@ type <schema_id>ResponseFields {
 
 **Self-referential fields**
 
-- if the selected `orderBy` field is a [self-referential relation][self-referential-relation] the node will return an topologically ordered list of that reference graph in the same manner as the [reduction][reduction] algorithm works
+- if the selected `orderBy` field is a [self-referential relation][self-referential-relation] the node will return a topologically ordered list of that reference graph in the same manner as the [reduction][reduction] algorithm works
 - if the selected filter field is a self-referential relation the topologically ordered list will be filtered
 
 ```graphql
@@ -364,3 +375,4 @@ type <schema_id>PageEdge {
 [reduction]: /docs/organising-data/reduction
 [replication]: /docs/networking/replication
 [self-referential-relation]: /docs/writing-data/schemas#relation-fields
+[latestDocumentView]: /docs/organising-data/documents#the-latest-document-view

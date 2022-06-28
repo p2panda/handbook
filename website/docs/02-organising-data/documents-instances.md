@@ -34,3 +34,8 @@ id: documents
 - a document view is _deleted_ if its document contains a _delete operation_
   - a deleted document's view has no values for its fields
 - a document view is _edited_ if it's document contained one or more _update operations_
+
+### The Latest Document View
+
+- it is defined as that document view which incorporates all valid operations that are known to the node and part of the document
+- as two nodes in the p2panda network may not share knowledge of the same operations, the latest document view may differ from node to node
