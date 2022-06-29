@@ -44,34 +44,34 @@ query nextEntryArgs(
   """
   public key of the author forging the next entry
   """
-  publicKey: String!
+  publicKey: PublicKey!
 
   """
   id of the document that will be updated or deleted with the next entry. leave empty to receive arguments for creating a new document.
   """
-  documentId: String
+  documentId: DocumentId
 ): EntryArgsResponse!
 
 type EntryArgsResponse {
   """
   log id to be used to forge the next entry
   """
-  logId: String!
+  logId: LogId!
 
   """
   sequence number to be used to forge the next entry
   """
-  seqNum: String!
+  seqNum: SequenceNumber!
 
   """
   optional backlink hash to be used to forge the next entry
   """
-  backlink: String
+  backlink: EntryHash
 
   """
   optional skiplink hash to be used to forge the next entry
   """
-  skiplink: String
+  skiplink: EntryHash
 }
 ```
 
@@ -89,41 +89,40 @@ type EntryArgsResponse {
   - when the bamboo log, signature or document integrity could not be verified, the operation was malformed or schema not fullfilled
   - when the node is unable to persist the entry and operation at the moment
 
-
 ```graphql
 mutation publishEntry(
   """
   CBOR representation of a signed Bamboo entry, encoded as a hexadecimal string
   """
-  entryEncoded: String!
+  entry: SignedEntry!
 
   """
   CBOR representation of an p2panda operation, the payload of the Bamboo entry,
   encoded as a hexadecimal string
   """
-  operationEncoded: String!
+  operation: EncodedOperation!
 ): PublishEntryResponse!
 
 type PublishEntryResponse {
   """
   log id to be used to forge the next entry
   """
-  logId: String!
+  logId: LogId!
 
   """
   sequence number to be used to forge the next entry
   """
-  seqNum: String!
+  seqNum: SequenceNumber!
 
   """
   optional backlink hash to be used to forge the next entry
   """
-  backlink: String
+  backlink: EntryHash
 
   """
   optional skiplink hash to be used to forge the next entry
   """
-  skiplink: String
+  skiplink: EntryHash
 }
 ```
 
@@ -149,12 +148,12 @@ query <schema_id>(
   """
   id of the document to be queried
   """
-  id: String
+  id: DocumentId
 
   """
   specific document view id to be queried
   """
-  viewId: String
+  viewId: DocumentViewId
 ): <schema_id>Response!
 ```
 
@@ -173,19 +172,14 @@ type <schema_id>Response {
 
 type <schema_id>ResponseMeta {
   """
-  list of public keys which edited this document view
-  """
-  publicKeys: [String!]!
-
-  """
   identifier of the returned document
   """
-  id: String!
+  id: DocumentId!
 
   """
   document view id contained in this response
   """
-  viewId: String!
+  viewId: DocumentViewId!
 
   """
   this field is `true` if this document has been deleted
@@ -274,7 +268,7 @@ type <schema_id>Filter {
   """
   filter by public key
   """
-  publicKey: String
+  publicKey: PublicKey
 
   """
   filter by deletion status
