@@ -5,19 +5,21 @@ id: replication
 # Replication
 
 - replication is the process by which nodes exchange entries and operations to eventually converge all to the same state
-    - nodes autonomously share data with each other without central coordination
-    - this makes p2panda an _eventually consistent_ database
-- Nodes may not be interested in all available data and can choose to receive only some data
+  - this makes p2panda an _eventually consistent_ database
+  - nodes autonomously share data with each other without central coordination
+- nodes may not be interested in all available data and can choose to receive only some data
+  - for example from a set of authors or schemas
 
 ## Node API
 
-- GraphQL queries allowing other nodes ask about the bamboo logs, entries and payloads they know about. these methods are enough to build a replication protocol on top.
+- this api consists of GraphQL queries for other nodes to ask about the state of bamboo logs, entries and payloads
+  - these queries are enough to build a flexible replication protocol on top
 
 ```graphql
 """
 get an entry by its hash
 """
-entryByHash(hash: EntryHash!): SingleEntryAndPayload
+entryByHash(hash: EntryHash!): EntryAndOperationWithPool
 
 """
 get any entries that are newer than the provided sequence_number for a given
@@ -48,7 +50,7 @@ getEntriesNewerThanSeq(
   cursor identifier for pagination
   """
   after: String
-): EntryAndPayloadConnection!
+): EntryAndOperationConnection!
 
 """
 get a single entry by its log_id, sequence_number and author
@@ -68,57 +70,12 @@ entryByLogIdAndSequence(
   sequence number of the entry in the log
   """
   seqNum: SeqNum!
-): SingleEntryAndPayload
-
-"""
-get aliases of the provided `public_keys` that you can use in future requests
-to save bandwidth
-"""
-authorAliases(publicKeys: [PublicKey!]!): [AliasedAuthor!]!
+): EntryAndOperationWithPool
 ```
 
 ```graphql
 """
-AliasedAuthor is one of either the public_key or an alias
-
-the intention of this is to reduce bandwidth when making requests by using a
-short "alias" rather than the full author public_key
-
-to get an alias of an author, use the `author_aliases` method which will return
-this type.
-
-when using as an input to a query, exactly one of public_key or alias must be
-set otherwise it is an error.
-"""
-type AliasedAuthor {
-  """
-  the author's public key
-  """
-  publicKey: PublicKey!
-
-  """
-  the author alias
-  """
-  alias: ID!
-}
-
-"""
-Either the `public_key` or the `alias` of that author.
-"""
-input Author {
-  """
-  the author's public key
-  """
-  publicKey: PublicKey
-
-  """
-  the author alias
-  """
-  alias: ID
-}
-
-"""
-An entry with an optional operation payload
+an entry with an optional operation payload
 """
 type EntryAndOperation {
   """
@@ -132,7 +89,7 @@ type EntryAndOperation {
   operation: EncodedOperation
 }
 
-type EntryAndPayloadConnection {
+type EntryAndOperationConnection {
   """
   information to aid in pagination
   """
@@ -141,13 +98,13 @@ type EntryAndPayloadConnection {
   """
   a list of edges.
   """
-  edges: [EntryAndPayloadEdge]
+  edges: [EntryAndOperationEdge]
 }
 
 """
 An edge in a connection
 """
-type EntryAndPayloadEdge {
+type EntryAndOperationEdge {
   """
   the item at the end of the edge
   """
@@ -184,7 +141,7 @@ type PageInfo {
   endCursor: String
 }
 
-type SingleEntryAndPayload {
+type EntryAndOperationWithPool {
   """
   entry bytes encoded as hexadecimal string
   """
@@ -197,7 +154,7 @@ type SingleEntryAndPayload {
 
   """
   get the certificate pool for this entry that can be used to verify the entry
-  is valid.
+  is valid
   """
   certificatePool: [EncodedEntry!]!
 }
