@@ -133,12 +133,12 @@ type PublishEntryResponse {
   - this spec only gives a generic form for these operations and types
   - in this specification we use `<schema_id>` as a placeholder for the string-encoded schema id of actual schemas
 
-#### `<schema_id>`
+### `<schema_id>`
 
 - returns a single document that uses this schema id with a specific document view
     - implementations must have no side effects
 - either the `id` or `view_id` input variable must to be set
-  - if `id` contains a document id the response must contain the [_latest document view_](latestDocumentView) for that document
+  - if `id` contains a document id the response must contain the [_latest document view_][latest-document-view] for that document
   - if `view_id` contains a document view id, the query must contain this document view
   - if both input variables are given the query must return an error
 - not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
@@ -207,7 +207,7 @@ type <schema_id>ResponseFields {
 
 ### `all_<schema_id>`
 
-- returns the [latest document view][latestDocumentView] for many documents of a given schema
+- returns the [latest document view][latest-document-view] for many documents of a given schema
     - implementations must have no side effects
 - deleted documents must not be included in the response unless they are explicitly included using a filter
 - response is paginated, can be sorted and filtered
@@ -363,10 +363,10 @@ type <schema_id>PageEdge {
 [connection-specification]: https://relay.dev/graphql/connections.htm
 [documents]: /docs/organising-data/documents
 [graphql]: https://graphql.org/
+[latest-document-view]: /docs/organising-data/documents#the-latest-document-view
 [nodes]: /docs/writing-data/clients-nodes
 [operations]: /docs/writing-data/operations
 [pagination-specification]: https://graphql.org/learn/pagination/#pagination-and-edges
 [reduction]: /docs/organising-data/reduction
 [replication]: /docs/networking/replication
 [self-referential-relation]: /docs/writing-data/schemas#relation-fields
-[latestDocumentView]: /docs/organising-data/documents#the-latest-document-view
