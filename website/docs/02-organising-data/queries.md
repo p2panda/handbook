@@ -22,13 +22,13 @@ id: queries
     - documents can be sorted by self-referential orderings
     - documents can be queried by `document_view_id` in order to receive a [documents][view] onto it's data at a specific materialised state
 
-### Publishing Entries
+## Publishing Entries
 
 - clients use two GraphQL operations for publishing entries:
     1. [`nextEntryArgs`](#nextentryargs) query to retrieve parameters required for encoding an entry
     2. [`publishEntry`](#publishentry) mutation to publish a signed and encoded entry together with its payload
 
-#### `nextEntryArgs`
+### `nextEntryArgs`
 
 - returns parameters required for encoding new entries
     - implementations must not have side effects
@@ -42,7 +42,7 @@ id: queries
 ```graphql
 query nextEntryArgs(
   """
-  public key of the author forging the next entry
+  public key of the author signing and encoding the next entry
   """
   publicKey: PublicKey!
 
@@ -75,7 +75,7 @@ type EntryArgsResponse {
 }
 ```
 
-#### `publishEntry`
+### `publishEntry`
 
 - if a `publishEntry` request is accepted by a node it must publish the entry supplied with the request by taking the following steps:
   - the node must validate the received entry and operation by checking if:
@@ -126,7 +126,7 @@ type PublishEntryResponse {
 }
 ```
 
-### Querying documents
+## Querying documents
 
 - these queries allow clients to request the field contents of materialised document views and metadata for their associated documents
 - some GraphQL operations and types are dynamic in that they depend on the schemas known to the node
@@ -205,7 +205,7 @@ type <schema_id>ResponseFields {
 }
 ```
 
-#### `all_<schema_id>`
+### `all_<schema_id>`
 
 - returns the [latest document view][latestDocumentView] for many documents of a given schema
     - implementations must have no side effects
