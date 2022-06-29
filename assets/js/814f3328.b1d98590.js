@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkp2panda_website=self.webpackChunkp2panda_website||[]).push([[535],{5641:function(e){e.exports=JSON.parse('{"title":"Releases","items":[{"title":"p2panda 0.2.1","permalink":"/handbook/releases/p2panda-021"}]}')}}]);

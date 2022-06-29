@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkp2panda_website=self.webpackChunkp2panda_website||[]).push([[3106],{5730:function(e){e.exports=JSON.parse('{"permalink":"/handbook/releases/tags/p-2-panda-rs","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Releases"}')}}]);
