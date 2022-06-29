@@ -7,7 +7,7 @@ id: clients-nodes
 - p2panda has a clear separation of clients and nodes to allow flexible setups and make client development easier
   - nodes do the heavy lifting, they exist to allow clients to be lightweight, easier to implement and potentially running in a browser
 - client and node can be integrated in a single software package or run separate from each other - even on different machines
-  - one way to integrate node and client is as a [Tauri](tauri) application, something that is supported by [aquadoggo][aquadoggo]
+  - one way to integrate node and client is as a [Tauri][tauri] application, something that is supported by [aquadoggo][aquadoggo]
 - both nodes and clients are built on the same [p2panda][p2panda] library that defines shared data structures
 - every key pair is bound to exactly one client and exactly one node
   - a key pair MUST NOT publish data through any client other than the one it was created with
