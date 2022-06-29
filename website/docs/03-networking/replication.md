@@ -38,7 +38,7 @@ getEntriesNewerThanSeq(
   """
   latest known sequence number. we want the entries which are newer than this.
   """
-  sequenceNumber: SequenceNumber!
+  seqNum: SeqNum!
 
   """
   max number of items to be returned per page
@@ -68,7 +68,7 @@ entryByLogIdAndSequence(
   """
   sequence number of the entry in the log
   """
-  sequenceNumber: SequenceNumber!
+  seqNum: SeqNum!
 ): SingleEntryAndPayload
 
 """
@@ -119,18 +119,18 @@ input Author {
 }
 
 """
-An entry with an optional payload
+An entry with an optional operation payload
 """
-type EntryAndPayload {
+type EntryAndOperation {
   """
   get the entry
   """
-  entry: Entry!
+  entry: EncodedEntry!
 
   """
-  get the payload
+  get the operation (entry payload)
   """
-  payload: Payload
+  operation: EncodedOperation
 }
 
 type EntryAndPayloadConnection {
@@ -152,7 +152,7 @@ type EntryAndPayloadEdge {
   """
   the item at the end of the edge
   """
-  node: EntryAndPayload!
+  node: EntryAndOperation!
 
   """
   a cursor for use in pagination
@@ -187,33 +187,21 @@ type PageInfo {
 
 type SingleEntryAndPayload {
   """
-  The entry
+  entry bytes encoded as hexadecimal string
   """
-  entry: Entry!
+  entry: EncodedEntry!
 
   """
-  The payload, bytes encoded as hexadecimal string
+  operation (payload of the entry) bytes encoded as hexadecimal string
   """
-  payload: Payload
+  operation: EncodedOperation
 
   """
-  Get the certificate pool for this entry that can be used to verify the entry
+  get the certificate pool for this entry that can be used to verify the entry
   is valid.
   """
-  certificatePool: [Entry!]!
+  certificatePool: [EncodedEntry!]!
 }
-
-scalar Entry
-
-scalar EntryHash
-
-scalar LogId
-
-scalar Payload
-
-scalar PublicKey
-
-scalar SequenceNumber
 ```
 
 [queries]: /docs/organising-data/queries

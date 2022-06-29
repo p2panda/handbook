@@ -61,7 +61,7 @@ type EntryArgsResponse {
   """
   sequence number to be used to forge the next entry
   """
-  seqNum: SequenceNumber!
+  seqNum: SeqNum!
 
   """
   optional backlink hash to be used to forge the next entry
@@ -112,7 +112,7 @@ type PublishEntryResponse {
   """
   sequence number to be used to forge the next entry
   """
-  seqNum: SequenceNumber!
+  seqNum: SeqNum!
 
   """
   optional backlink hash to be used to forge the next entry
