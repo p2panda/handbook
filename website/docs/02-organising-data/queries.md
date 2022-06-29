@@ -133,7 +133,7 @@ type PublishEntryResponse {
   - this spec only gives a generic form for these operations and types
   - in this specification we use `<schema_id>` as a placeholder for the string-encoded schema id of actual schemas
 
-#### `<schema_id>`
+### `<schema_id>`
 
 - returns a single document that uses this schema id with a specific document view
     - implementations must have no side effects
