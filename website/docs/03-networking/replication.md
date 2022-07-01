@@ -14,6 +14,7 @@ id: replication
 
 - this api consists of GraphQL queries for other nodes to ask about the state of bamboo logs, entries and payloads
   - these queries are enough to build a flexible replication protocol on top
+- nodes need to implement the API specifications to make sure they are compatible with all other node and client implementations. The Node API is specified here, the Client API is further specified under [queries][queries], both APIs reside inside nodes
 
 ### `entryByHash`
 
@@ -49,6 +50,8 @@ entryByLogIdAndSeqNum(
 ```
 
 ### `entriesNewerThanSeqNum`
+
+- used as the main query for replication, see process defined further below
 
 ```graphql
 """
@@ -198,19 +201,14 @@ type PageInfo {
 - retreives new entries from another node
 - more sophisticated replication protocols can be built on top
   - the "basic replication" protocol serves as a base
+  - nodes may not be interested in all available data and can choose to receive only some data, for example by only requesting operations following a certain schema
 
 **Process**
 
-1. 
-
-### Schema Replication
-
-- retreives new entries from another node holding operations of a certain schema
-
-**Process**
-
-- nodes may not be interested in all available data and can choose to receive only some data, for example by only requesting documents following a certain schema
-- nodes need to implement the API specifications to make sure they are compatible with all other node and client implementations. The Node API is specified here, the Client API is further specified under [queries][queries], both APIs reside inside nodes
+1. Node `A` gets latest known sequence number `s` for log `k` of author `p` from own database
+2. Node `A` makes a GraphQL request `entriesNewerThanSeqNum` and asks Node `B` if it has newer entries of log `k` and author `p` starting from sequence number `s`
+3. Node `B` replies with a paginated list of encoded entries and operations. If it doesn't have that log or if there are no newer entries, it replies with an empty result
+4. Node `A` paginates through the response until it downloaded all new entries, it validates them locally and stores them in its database. Node `A` can make use of the `certificatePool` field of `EncodedEntryAndOperation` if it doesn't have the full log locally to verify it
 
 [qp2p]: https://github.com/maidsafe/qp2p
 [queries]: /docs/organising-data/queries
