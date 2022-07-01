@@ -15,34 +15,65 @@ id: replication
 - this api consists of GraphQL queries for other nodes to ask about the state of bamboo logs, entries and payloads
   - these queries are enough to build a flexible replication protocol on top
 
+### `entryByHash`
+
 ```graphql
 """
 get an entry by its hash
 """
-entryByHash(hash: EntryHash!): EntryAndOperationWithPool
+entryByHash(hash: EntryHash!): EncodedEntryAndOperation
+```
 
+### `entryByLogIdAndSeqNum`
+
+```graphql
 """
-get any entries that are newer than the provided sequence_number for a given
-author and log_id
+get a single entry by its log id, sequence number and public key
 """
-getEntriesNewerThanSeq(
+entryByLogIdAndSeqNum(
   """
   id of the log
   """
   logId: LogId!
 
   """
-  author of the log
+  public key of author of the log
   """
-  author: Author!
+  public_key: PublicKey!
 
   """
-  latest known sequence number. we want the entries which are newer than this.
+  sequence number of the entry in the log
   """
   seqNum: SeqNum!
+): EncodedEntryAndOperation
+```
+
+### `entriesNewerThanSeqNum`
+
+```graphql
+"""
+get any entries that are newer than the provided sequence_number for a given
+public key and log_id
+"""
+entriesNewerThanSeqNum(
+  """
+  id of the log
+  """
+  logId: LogId!
 
   """
-  max number of items to be returned per page
+  public key of author of the log
+  """
+  public_key: PublicKey!
+
+  """
+  latest known sequence number. we want the entries which are newer than this,
+  defaults to 0
+  """
+  seqNum: SeqNum
+
+  """
+  max number of items to be returned per page, defaults to 10
   """
   first: Int
 
@@ -50,46 +81,35 @@ getEntriesNewerThanSeq(
   cursor identifier for pagination
   """
   after: String
-): EntryAndOperationConnection!
-
-"""
-get a single entry by its log_id, sequence_number and author
-"""
-entryByLogIdAndSequence(
-  """
-  id of the log
-  """
-  logId: LogId!
-
-  """
-  author of the log
-  """
-  author: Author!
-
-  """
-  sequence number of the entry in the log
-  """
-  seqNum: SeqNum!
-): EntryAndOperationWithPool
+): EncodedEntryAndOperationConnection!
 ```
 
+### Encoded entries with operation
+
 ```graphql
-"""
-an entry with an optional operation payload
-"""
-type EntryAndOperation {
+type EncodedEntryAndOperation {
   """
-  get the entry
+  entry bytes encoded as hexadecimal string
   """
   entry: EncodedEntry!
 
   """
-  get the operation (entry payload)
+  operation (payload of the entry) bytes encoded as hexadecimal string
   """
   operation: EncodedOperation
-}
 
-type EntryAndOperationConnection {
+  """
+  get the certificate pool for this entry that can be used to verify the entry
+  is valid
+  """
+  certificatePool: [EncodedEntry!]!
+}
+```
+
+### Pagination
+
+```graphql
+type EncodedEntryAndOperationConnection {
   """
   information to aid in pagination
   """
@@ -98,17 +118,17 @@ type EntryAndOperationConnection {
   """
   a list of edges.
   """
-  edges: [EntryAndOperationEdge]
+  edges: [EncodedEntryAndOperationEdge]
 }
 
 """
-An edge in a connection
+an edge in a connection
 """
-type EntryAndOperationEdge {
+type EncodedEntryAndOperationEdge {
   """
   the item at the end of the edge
   """
-  node: EntryAndOperation!
+  node: EncodedEntryAndOperation!
 
   """
   a cursor for use in pagination
@@ -139,24 +159,6 @@ type PageInfo {
   when paginating forwards, the cursor to continue
   """
   endCursor: String
-}
-
-type EntryAndOperationWithPool {
-  """
-  entry bytes encoded as hexadecimal string
-  """
-  entry: EncodedEntry!
-
-  """
-  operation (payload of the entry) bytes encoded as hexadecimal string
-  """
-  operation: EncodedOperation
-
-  """
-  get the certificate pool for this entry that can be used to verify the entry
-  is valid
-  """
-  certificatePool: [EncodedEntry!]!
 }
 ```
 
