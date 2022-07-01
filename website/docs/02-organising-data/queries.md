@@ -50,29 +50,7 @@ query nextEntryArgs(
   id of the document that will be updated or deleted with the next entry. leave empty to receive arguments for creating a new document.
   """
   documentId: DocumentId
-): EntryArgsResponse!
-
-type EntryArgsResponse {
-  """
-  log id to be used to forge the next entry
-  """
-  logId: LogId!
-
-  """
-  sequence number to be used to forge the next entry
-  """
-  seqNum: SeqNum!
-
-  """
-  optional backlink hash to be used to forge the next entry
-  """
-  backlink: EntryHash
-
-  """
-  optional skiplink hash to be used to forge the next entry
-  """
-  skiplink: EntryHash
-}
+): NextEntryArguments!
 ```
 
 ### `publishEntry`
@@ -94,16 +72,22 @@ mutation publishEntry(
   """
   CBOR representation of a signed Bamboo entry, encoded as a hexadecimal string
   """
-  entry: SignedEntry!
+  entry: EncodedEntry!
 
   """
   CBOR representation of an p2panda operation, the payload of the Bamboo entry,
   encoded as a hexadecimal string
   """
   operation: EncodedOperation!
-): PublishEntryResponse!
+): NextEntryArguments!
+```
 
-type PublishEntryResponse {
+### Response
+
+- both `publishEntry` and `nextEntryArgs` return the arguments for encoding and signing the next entry as a response
+
+```graphql
+type NextEntryArguments {
   """
   log id to be used to forge the next entry
   """
