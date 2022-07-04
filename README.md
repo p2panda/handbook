@@ -11,7 +11,7 @@ Data changes in p2panda are signed, encrypted and published by clients using the
 - **Browser friendliness**: Lightweight clients that can easily be implemented as websites.
 - **Decentralization**: Networks consist of both federated or decentralised nodes.
 - **Deletion**: Data can be deleted without loosing verifiability and log integrity.
-- **Encryption**: Transport communication is end-to-end encrypted via SSB's Secret Handshake, data is encrypted for groups via the Messaging Layer Security (MLS) protocol.
+- **Encryption**: Transport communication is end-to-end encrypted via TLS 1.3, data is encrypted for groups via the Messaging Layer Security (MLS) protocol.
 - **Energy efficiency**: Data- and energy-efficient storage and replication.
 - **Fork proof**: Automatic detection of accidentially or maliciously forked append-only logs.
 - **Identities**: A user account model that gives people options for managing one or multiple online identities across devices.
