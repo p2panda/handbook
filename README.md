@@ -46,7 +46,7 @@ This led to a group of people interested in realising a protocol for p2p communi
 
 **Nodes**
 
-- [`aquadoggo`](https://github.com/p2panda/aquadoggo): RPC node server for the p2panda network running as a standalone application or Rust `aquadoggo` crate.
+- [`aquadoggo`](https://github.com/p2panda/aquadoggo): GraphQL node server for the p2panda network running as a standalone application or Rust `aquadoggo` crate.
 
 **Clients**
 
@@ -62,7 +62,7 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [x] `Entry` signing and validation
 - [x] SQLite / PostgreSQL support for data storage
 - [x] WebAssembly support in the browser
-- [x] `aquadoggo` HTTP and WebSocket RPC API
+- [x] `aquadoggo` HTTP and WebSocket API
 - [x] Publish first v0.1.0 `p2panda-rs` crate and `p2panda-js` npm package
 - [x] Operation specification, creation and validation
 - [x] CBOR encoding and basic CDDL validation of messages
@@ -79,14 +79,14 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [x] Multi-writer materialisation in `aquadoggo`
 - [x] Implement System Schemas in `aquadoggo`
 - [x] Implement Application Schemas in `aquadoggo`
+- [x] Basic replication protocol
+- [x] Manually follow other nodes
 
 ### Now
 
 - [ ] p2panda first draft specification
 - [ ] Schemas- and data validation
-- [ ] Basic replication protocol
 - [ ] Dynamic GraphQL API to query data
-- [ ] Manually follow other nodes
 
 ### The future
 
