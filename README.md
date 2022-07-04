@@ -81,10 +81,10 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [x] Implement Application Schemas in `aquadoggo`
 - [x] Basic replication protocol
 - [x] Manually follow other nodes
+- [x] p2panda first draft specification
 
 ### Now
 
-- [ ] p2panda first draft specification
 - [ ] Schemas- and data validation
 - [ ] Dynamic GraphQL API to query data
 
