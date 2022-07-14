@@ -146,7 +146,7 @@ type <schema_id>Response {
   """
   meta information about the returned document and document view
   """
-  meta: <schema_id>ResponseMeta,
+  meta: DocumentMetadata,
 
   """
   actual data contained in the document view
@@ -154,7 +154,7 @@ type <schema_id>Response {
   fields: <schema_id>ResponseFields,
 }
 
-type <schema_id>ResponseMeta {
+type DocumentMetadata {
   """
   identifier of the returned document
   """
