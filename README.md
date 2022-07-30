@@ -9,6 +9,7 @@ Data changes in p2panda are signed, encrypted and published by clients using the
 ## Topics we're interested in
 
 - **Browser friendliness**: Lightweight clients that can easily be implemented as websites.
+- **Collaboration**: Data can be changed by multiple users at the same time with built-in CRDTs.
 - **Decentralization**: Networks consist of both federated or decentralised nodes.
 - **Deletion**: Data can be deleted without loosing verifiability and log integrity.
 - **Encryption**: Transport communication is end-to-end encrypted via TLS 1.3, data is encrypted for groups via the Messaging Layer Security (MLS) protocol.
