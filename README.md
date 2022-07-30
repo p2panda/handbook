@@ -1,6 +1,6 @@
 # p2:panda_face:
 
-p2panda is a user-friendly peer-to-peer communications protocol for secure, energy-efficient, offline- and local-first web applications. We want this protocol to be a playful tool for people to hack, build, play, and experiment with.
+p2panda is a user-friendly peer-to-peer communications protocol for secure, energy-efficient, offline- and local-first web, mobile and desktop applications. We want this protocol to be a playful tool for people to hack, build, play, and experiment with.
 
 Data changes in p2panda are signed, encrypted and published by clients using the [Bamboo](https://github.com/AljoschaMeyer/bamboo) append-only log data type which gets distributed over the network to other peers. p2panda allows for decentralised and federated network topologies or even hybrids of these and aims at running in web browsers without loosing its cryptographic features.
 
