@@ -1,4 +1,5 @@
 ---
+id: bamboo
 ---
 
 # Bamboo
