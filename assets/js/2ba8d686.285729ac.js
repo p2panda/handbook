@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkp2panda_website=self.webpackChunkp2panda_website||[]).push([[3240],{6144:function(a){a.exports=JSON.parse('{"label":"p2panda-js","permalink":"/handbook/releases/tags/p-2-panda-js","allTagsPath":"/handbook/releases/tags","count":1}')}}]);

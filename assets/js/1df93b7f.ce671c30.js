@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkhandbook=self.webpackChunkhandbook||[]).push([[237],{9754:(e,t,n)=>{n.r(t),n.d(t,{default:()=>o});var a=n(7294),i=n(2164);function o(){return a.createElement(i.Z,{title:"Home",description:"Description will go into a meta tag in <head />"})}}}]);
