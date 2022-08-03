@@ -6,11 +6,11 @@ The [p2panda website](https://p2panda.org) is built using [Docusaurus 2](https:/
 
 ```bash
 # Install dependencies
-yarn
+npm install
 
 # Starts a local development server and opens up a browser window
-yarn start
+npm run start
 
 # Generates static content into the `build` directory
-yarn build
+npm run build
 ```

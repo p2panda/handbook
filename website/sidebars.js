@@ -1,68 +1,47 @@
 // @ts-check
+
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  docs: [
-    'overview',
+  introduction: [
+    'introduction/index',
+    'introduction/things-were-interested-in',
+    'introduction/implementations',
+    'introduction/specification',
+    'introduction/background',
+  ],
+  learn: [
+    'learn/index',
+  ],
+  specification: [
+    'specification/index',
     {
       type: 'category',
-      label: 'Writing Data',
-      link: {
-        type: 'generated-index',
-      },
+      label: 'Data types',
       items: [
-        'writing-data/bamboo',
-        'writing-data/key-pairs',
-        'writing-data/schemas',
-        'writing-data/operations',
-        'writing-data/clients-nodes',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Organising Data',
-      link: {
-        type: 'generated-index',
-      },
-      items: [
-        'organising-data/documents',
-        'organising-data/reduction',
-        'organising-data/queries',
+        'specification/data-types/bamboo',
+        'specification/data-types/key-pairs',
+        'specification/data-types/operations',
+        'specification/data-types/schemas',
+        'specification/data-types/documents',
+        'specification/data-types/materialization',
       ],
     },
     {
       type: 'category',
       label: 'Networking',
-      link: {
-        type: 'generated-index',
-      },
       items: [
-        'networking/discovery',
-        'networking/replication',
+        'specification/networking/clients-nodes',
+        'specification/networking/queries',
+        'specification/networking/discovery',
+        'specification/networking/replication',
       ],
     },
     {
       type: 'category',
       label: 'Collaboration',
-      link: {
-        type: 'generated-index',
-      },
       items: [
-        'collaboration/overview',
-        'collaboration/key-groups',
-        'collaboration/reconciliation',
-        'collaboration/encryption',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Extensions',
-      link: {
-        type: 'generated-index',
-      },
-      items: [
-        'extensions/overview',
-        'extensions/migration',
-        'extensions/blobs',
+        'specification/collaboration/key-groups',
+        'specification/collaboration/secret-groups',
       ],
     },
   ],

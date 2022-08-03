@@ -1,8 +1,7 @@
 ---
 id: bamboo
+title: Bamboo
 ---
-
-# Bamboo
 
 - in order to write data in p2panda it needs to be encoded
 - p2panda uses [bamboo][bamboo_spec] to encode data
@@ -35,7 +34,7 @@ id: bamboo
   - we call these changes _operations_
 - have a look at the [operations][operations] section of this handbook for more detailled information on this topic
 
-[key_pairs]: /docs/writing-data/key-pairs
+[key_pairs]: /specification/data-types/key-pairs
 [bamboo_spec]: https://github.com/bamboo-rs/bamboo-ed25519-yasmf
-[documents]: /docs/organising-data/documents
-[operations]: /docs/writing-data/operations
+[documents]: /specification/data-types/documents
+[operations]: /specification/data-types/operations

@@ -1,19 +1,18 @@
 ---
 id: operations
+title: Operations
 ---
-
-# Operations
 
 - operations represent data changes
 - operations are published as the payload of _bamboo entries_
 - operations are identified by the hash of their bamboo entry
   - this is referred to as the _operation id_
-- every operation is associated with a [bamboo author](/docs/writing-data/key-pairs), which is encoded in the operation's _entry_
+- every operation is associated with a [bamboo author](/specification/data-types/key-pairs), which is encoded in the operation's _entry_
 - every operation MUST have an _operation type_, which must be one of
   - `CREATE` - results in a _create operation_
   - `UPDATE` - results in a _update operation_
   - `DELETE` - results in a _delete operation_
-- every operation MUST have a [schema](/docs/writing-data/schemas)
+- every operation MUST have a [schema](/specification/data-types/schemas)
 - every operation MUST have an _operation version_
   - it describes the version of the operation specification that is followed by that operation
   - versions are encoded as integers
@@ -40,11 +39,11 @@ id: operations
 
 - clients can use operations to publish data changes
 - clients must embed operations in bamboo entries to publish them
-- clients can create a [document](/docs/organising-data/documents#documents) by publishing a _create operation_
+- clients can create a [document](/specification/data-types/documents#documents) by publishing a _create operation_
 - clients can update a document by publishing an _update operation_
   - every _update operation_ leads to a new _document view_ of the document that is being updated
 - clients can delete a document by publishing a _delete operation_
-- nodes can [reduce](/docs/organising-data/reduction) operations to produce a specific _document view_ of their document
+- nodes can [reduce](/specification/data-types/materialization#reduction) operations to produce a specific _document view_ of their document
 - clients can delete a document by publishing a _delete operation_ 
   - nodes MUST delete all operations of a document once it has been deleted
 

@@ -1,5 +1,3 @@
-*.code-workspace
-
 # Dependencies
 node_modules
 
