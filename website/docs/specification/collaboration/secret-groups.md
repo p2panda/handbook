@@ -1,8 +1,7 @@
 ---
 id: secret-groups
+title: Secret Groups
 ---
-
-# Secret Groups
 
 - p2panda uses [MLS][mls] for encryption, which allows efficient group encryption with forward-secrecy and post-compromise security
 
