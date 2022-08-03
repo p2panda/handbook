@@ -1,8 +1,7 @@
 ---
 id: clients-nodes
+title: Clients and nodes
 ---
-
-# Clients and Nodes
 
 - p2panda has a clear separation of clients and nodes to allow flexible setups and make client development easier
   - nodes do the heavy lifting, they exist to allow clients to be lightweight, easier to implement and potentially running in a browser
@@ -48,8 +47,8 @@ id: clients-nodes
 
 [aquadoggo]: https://github.com/p2panda/aquadoggo
 [beep_boop]: https://github.com/p2panda/beep-boop
-[key_groups]: /docs/collaboration/key-groups
+[key_groups]: /specification/collaboration/key-groups
 [p2panda]: https://github.com/p2panda/p2panda
-[queries]: /docs/organising-data/queries
-[replication]: /docs/networking/replication
+[queries]: /specification/networking/queries
+[replication]: /specification/networking/replication
 [tauri]: https://tauri.studio/

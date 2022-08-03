@@ -1,8 +1,7 @@
 ---
 id: documents
+title: Documents and document views
 ---
-
-# Documents and Document Views
 
 - _documents_ identify mutable pieces of data
   - some things that may be a document in p2panda: a blog post, a wiki page, a chat message, a user account, a configuration setting
@@ -11,7 +10,7 @@ id: documents
 
 ## Documents
 
-- a document is the graph of [operations](/docs/writing-data/operations) that is constructed by starting with a _create operation_ as its root and exhaustively connecting all known _update_ and _delete operations_ that point at leafs of this graph
+- a document is the graph of [operations](/specification/data-types/operations) that is constructed by starting with a _create operation_ as its root and exhaustively connecting all known _update_ and _delete operations_ that point at leafs of this graph
 - a document is identified by the operation id of its create operation
   - this is also called the _document id_
 - a document assumes the schema of its _create operation_
@@ -23,7 +22,7 @@ id: documents
 
 - a _document view_ is the result of applying a series of operations from a _document_
   - the series of operations must start with the document's _create operation_
-  - see [reduction](/docs/organising-data/reduction) and [reconciliation](/docs/collaboration/reconciliation) for further details
+  - see [reduction](/specification/data-types/materialization#reduction) and [reconciliation](/specification/data-types/materialization#reconciliation) for further details
 - a document view is identified by its set of graph tips: the _document view id_
   - each graph tip is represented as an _operation id_
   - it's possible to replicate the exact state of a document from the document view id

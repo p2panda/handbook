@@ -1,8 +1,7 @@
 ---
 id: replication
+title: Replication
 ---
-
-# Replication
 
 - replication is the process by which nodes exchange entries and operations to eventually converge all to the same state
   - this makes p2panda an _eventually consistent_ database
@@ -211,4 +210,4 @@ type PageInfo {
 4. Node `A` paginates through the response until it downloaded all new entries, it validates them locally and stores them in its database. Node `A` can make use of the `certificatePool` field of `EncodedEntryAndOperation` if it doesn't have the full log locally to verify it
 
 [qp2p]: https://github.com/maidsafe/qp2p
-[queries]: /docs/organising-data/queries
+[queries]: /specification/networking/queries
