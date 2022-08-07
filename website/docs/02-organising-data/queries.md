@@ -14,26 +14,26 @@ id: queries
 
 - the client api is the interface for communication between [node and client][nodes]
 - clients can publish entries
-    - before that, clients can retrieve parameters required for encoding entries if they can't compute them independently
+  - before that, clients can retrieve parameters required for encoding entries if they can't compute them independently
 - clients can retrieve materialised [documents][documents] of a given schema
-    - documents can be filtered by individual fields
-    - linked documents can be retrieved
-    - documents can be sorted by arbitrary fields
-    - documents can be sorted by self-referential orderings
-    - documents can be queried by `document_view_id` in order to receive a [documents][view] onto it's data at a specific materialised state
+  - documents can be filtered by individual fields
+  - linked documents can be retrieved
+  - documents can be sorted by arbitrary fields
+  - documents can be sorted by self-referential orderings
+  - documents can be queried by `document_view_id` in order to receive a [documents][view] onto it's data at a specific materialised state
 
 ## Publishing Entries
 
 - clients use two GraphQL operations for publishing entries:
-    1. [`nextEntryArgs`](#nextentryargs) query to retrieve parameters required for encoding an entry
-    2. [`publishEntry`](#publishentry) mutation to publish a signed and encoded entry together with its payload
+  1. [`nextEntryArgs`](#nextentryargs) query to retrieve parameters required for encoding an entry
+  2. [`publishEntry`](#publishentry) mutation to publish a signed and encoded entry together with its payload
 
 ### `nextEntryArgs`
 
 - returns parameters required for encoding new entries
-    - implementations must not have side effects
+  - implementations must not have side effects
 - clients can't encode new entries without information from this endpoint because every entry needs to place itself in the first unused sequence number of a specific [_bamboo log_][bamboo] and also it needs to include the hashes of specific previous entries in its encoding
-    - this information is held by the node
+  - this information is held by the node
 - clients may cache the arguments required for the next entry (they are also returned by `publishEntry`)
 - clients may also persist their entry logs locally to avoid any dependency for retrieving entry arguments of nodes at all
 - clients must set the `documentId` input variable to receive arguments for encoding an `UPDATE` or `DELETE` operation.
@@ -63,7 +63,7 @@ query nextEntryArgs(
   - the node should persist the entry and operation and make it available to other nodes via [replication][replication]
   - the node may [materialise][reduction] the document this new operation belongs to, resulting in a new document view
 - returns entry arguments required for publishing the next entry for the same document, similar to `nextEntryArgs`
-- returns an error 
+- returns an error
   - when the bamboo log, signature or document integrity could not be verified, the operation was malformed or schema not fullfilled
   - when the node is unable to persist the entry and operation at the moment
 
@@ -119,8 +119,8 @@ type NextEntryArguments {
 
 ### `<schema_id>`
 
-- returns a single document that uses this schema id with a specific document view
-    - implementations must have no side effects
+- returns a single document that uses this schema id
+  - implementations must have no side effects
 - either the `id` or `view_id` input variable must to be set
   - if `id` contains a document id the response must contain the [_latest document view_][latest-document-view] for that document
   - if `view_id` contains a document view id, the query must contain this document view
@@ -192,7 +192,7 @@ type <schema_id>ResponseFields {
 ### `all_<schema_id>`
 
 - returns the [latest document view][latest-document-view] for many documents of a given schema
-    - implementations must have no side effects
+  - implementations must have no side effects
 - deleted documents must not be included in the response unless they are explicitly included using a filter
 - response is paginated, can be sorted and filtered
 
