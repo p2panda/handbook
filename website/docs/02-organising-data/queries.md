@@ -20,7 +20,7 @@ id: queries
   - linked documents can be retrieved
   - documents can be sorted by arbitrary fields
   - documents can be sorted by self-referential orderings
-  - documents can be queried by `document_view_id` in order to receive a [documents][view] onto it's data at a specific materialised state
+  - documents can be queried by document view id in order to receive a [documents][view] onto it's data at a specific materialised state
 
 ## Publishing Entries
 
@@ -113,7 +113,7 @@ type NextEntryArguments {
 ## Querying documents
 
 - these queries allow clients to request the field contents of materialised document views and metadata for their associated documents
-- some GraphQL operations and types are dynamic in that they depend on the schemas known to the node
+- some GraphQL fields and types are dynamic in that they depend on the schemas known to the node
   - this spec only gives a generic form for these operations and types
   - in this specification we use `<schema_id>` as a placeholder for the string-encoded schema id of actual schemas
 
@@ -121,9 +121,9 @@ type NextEntryArguments {
 
 - returns a single document that uses this schema id
   - implementations must have no side effects
-- either the `id` or `view_id` input variable must to be set
+- either the `id` or `viewId` input variable must be set
   - if `id` contains a document id the response must contain the [_latest document view_][latest-document-view] for that document
-  - if `view_id` contains a document view id, the query must contain this document view
+  - if `viewId` contains a document view id, the query must contain this document view
   - if both input variables are given the query must return an error
 - not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
 
