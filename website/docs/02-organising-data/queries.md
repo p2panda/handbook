@@ -36,7 +36,7 @@ id: queries
   - this information is held by the node
 - clients may cache the arguments required for the next entry (they are also returned by `publishEntry`)
 - clients may also persist their entry logs locally to avoid any dependency for retrieving entry arguments of nodes at all
-- clients must set the `documentId` input variable to receive arguments for encoding an `UPDATE` or `DELETE` operation.
+- clients must set the field's `documentId` argument to receive arguments for encoding an `UPDATE` or `DELETE` operation.
   - clients must not set this when they want to encode a `CREATE` operation
 
 ```graphql
@@ -112,53 +112,50 @@ type NextEntryArguments {
 
 ## Querying documents
 
-- these queries allow clients to request the field contents of materialised document views and metadata for their associated documents
-- some GraphQL fields and types are dynamic in that they depend on the schemas known to the node
-  - this spec only gives a generic form for these operations and types
-  - in this specification we use `<schema_id>` as a placeholder for the string-encoded schema id of actual schemas
+- For every schema that can be queried, nodes generate fields, which are made available on the _root query type_, as well as types to represent the schema's documents.
+  - Together, these allow clients to request documents including their materialised views and metadata.
+- As fields and types that contain schema-specific data are dynamically generated, every node may contain a different set of these, depending on which schemas are available.
+- This specification defines a generic form for these dynamic fields and types.
+  - The string `<schema_id>` is used as a generic placeholder to be replaced by a concrete _schema id_.
 
-### `<schema_id>`
+### GraphQL type
 
-- returns a single document that uses this schema id
-  - implementations must have no side effects
-- either the `id` or `viewId` input variable must be set
-  - if `id` contains a document id the response must contain the [_latest document view_][latest-document-view] for that document
-  - if `viewId` contains a document view id, the query must contain this document view
-  - if both input variables are given the query must return an error
-- not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
-
-```graphql
-query <schema_id>(
-  """
-  id of the document to be queried
-  """
-  id: DocumentId
-
-  """
-  specific document view id to be queried
-  """
-  viewId: DocumentViewId
-): <schema_id>Response!
-```
+- Nodes generate two GraphQL types for every schema that can be queried:
+  1. a type `<schema_id>` that contains fields for document metadata and the associated document view
+  2. a type `<schema_id>Fields` to represent the document view's fields with the actual data contained in the document
+- Document fields with the types `Boolean`, `Integer`, `Float` and `Text` are represented with the corresponding GraphQL scalar types.
+- Document fields with the relation types `Relation` / `RelationList` and `PinnedRelation` / `PinnedRelationList` use the type generated for that field's schema.
 
 ```graphql
-type <schema_id>Response {
+type <schema_id> {
   """
   meta information about the returned document and document view
   """
-  meta: DocumentMetadata,
+  meta: DocumentMeta,
 
   """
   actual data contained in the document view
   """
-  fields: <schema_id>ResponseFields,
+  fields: <schema_id>Fields,
 }
 
-type DocumentMetadata {
+type <schema_id>Fields {
+  """
+  named fields containing the actual, materialised values of this document
+  view. the form is defined by the regarding p2panda schema
+  """
+  <field_name>: <field_type>
+
+  """
+  ... potentially more fields
+  """
+}
+
+type DocumentMeta {
   """
   identifier of the returned document
   """
-  id: DocumentId!
+  documentId: DocumentId!
 
   """
   document view id contained in this response
@@ -175,17 +172,34 @@ type DocumentMetadata {
   """
   edited: Boolean!
 }
+```
 
-type <schema_id>ResponseFields {
-  """
-  named fields containing the actual, materialised values of this document
-  view. the form is defined by the regarding p2panda schema
-  """
-  <field_name>: <field_type>
+### `<schema_id>`
 
-  """
-  ... potentially more fields
-  """
+- returns a single document that uses this schema
+  - implementations must have no side effects
+- the name of this field is equal to the _schema id_ of the schema it represents
+- either the `id` or `viewId` field argument must be set
+  - if `id` contains a document id, the response must contain the [_latest document view_][latest-document-view] for that document
+  - if `viewId` contains a document view id, the response must contain this document view
+  - if both field arguments are given the query must return an error
+- not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
+
+```graphql
+type QueryRoot {
+  # ... other query root fields here ...
+
+  <schema_id>(
+    """
+    id of the document to be queried
+    """
+    id: DocumentId
+
+    """
+    specific document view id to be queried
+    """
+    viewId: DocumentViewId
+  ): <schema_id>
 }
 ```
 
@@ -219,32 +233,36 @@ type <schema_id>ResponseFields {
 - if the selected filter field is a self-referential relation the topologically ordered list will be filtered
 
 ```graphql
-query all_<schema_id>(
-  """
-  filter collection of documents
-  """
-  where: <schema_id>Filter
+type QueryRoot {
+  # ... other query root fields here ...
 
-  """
-  order results by field values
-  """
-  orderBy: <field_name>
+  all_<schema_id>(
+    """
+    filter collection of documents
+    """
+    where: <schema_id>Filter
 
-  """
-  order results in specified direction ("asc" or "desc")
-  """
-  orderDirection: String
+    """
+    order results by field values
+    """
+    orderBy: <field_name>
 
-  """
-  max number of items to be returned per page
-  """
-  first: Int
+    """
+    order results in specified direction ("asc" or "desc")
+    """
+    orderDirection: String
 
-  """
-  cursor identifier for pagination
-  """
-  after: String
-): <schema_id>PageResponse!
+    """
+    max number of items to be returned per page
+    """
+    first: Int
+
+    """
+    cursor identifier for pagination
+    """
+    after: String
+  ): <schema_id>Page!
+}
 ```
 
 ```graphql
@@ -295,7 +313,7 @@ type <schema_id>Filter {
   <field_name>_lte: <value>
 }
 
-type <schema_id>PageResponse {
+type <schema_id>Page {
   """
   information to aid in pagination
   """
@@ -333,7 +351,7 @@ type <schema_id>PageEdge {
   """
   item at the end of the pagination edge
   """
-  node: <schema_id>Response!
+  node: <schema_id>!
 
   """
   cursor to use in pagination
