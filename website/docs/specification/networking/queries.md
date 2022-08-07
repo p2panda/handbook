@@ -1,8 +1,7 @@
 ---
 id: queries
+title: Queries
 ---
-
-# Queries
 
 - clients send _queries_ to nodes in order to publish new entries and query materialised documents
 - queries are sent via HTTP using the [GraphQL][graphql] language
@@ -361,14 +360,14 @@ type <schema_id>PageEdge {
 ```
 
 [aquadoggo]: https://github.com/p2panda/aquadoggo
-[bamboo]: /docs/writing-data/bamboo
+[bamboo]: /specification/data-types/bamboo
 [connection-specification]: https://relay.dev/graphql/connections.htm
-[documents]: /docs/organising-data/documents
+[documents]: /specification/data-types/documents
 [graphql]: https://graphql.org/
-[latest-document-view]: /docs/organising-data/documents#the-latest-document-view
-[nodes]: /docs/writing-data/clients-nodes
-[operations]: /docs/writing-data/operations
+[latest-document-view]: /specification/data-types/documents#the-latest-document-view
+[nodes]: /specification/networking/clients-nodes
+[operations]: /specification/data-types/operations
 [pagination-specification]: https://graphql.org/learn/pagination/#pagination-and-edges
-[reduction]: /docs/organising-data/reduction
-[replication]: /docs/networking/replication
-[self-referential-relation]: /docs/writing-data/schemas#relation-fields
+[reduction]: /specification/data-types/materialization#reduction
+[replication]: /specification/data-types/materialization#replication
+[self-referential-relation]: /specification/data-types/schemas#relation-fields

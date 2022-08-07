@@ -1,8 +1,7 @@
 ---
 id: discovery
+title: Discovery
 ---
-
-# Discovery
 
 :::info not implemented
 Discovery is in specification phase and has not been implemented yet.
@@ -29,4 +28,4 @@ Discovery is in specification phase and has not been implemented yet.
 - _Nodes broadcast via mDNS that they are ready to replicate_
 - _enabled by default_
 
-[clients_nodes]: /docs/writing-data/clients-nodes
+[clients_nodes]: /specification/networking/clients-nodes
