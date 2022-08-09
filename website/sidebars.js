@@ -2,12 +2,14 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  introduction: [
-    'introduction/index',
-    'introduction/things-were-interested-in',
-    'introduction/implementations',
-    'introduction/specification',
-    'introduction/background',
+  about: [
+    'about/index',
+    'about/things-were-interested-in',
+    'about/implementations',
+    'about/specification',
+    'about/roadmap',
+    'about/contribute',
+    'about/history',
   ],
   learn: [
     'learn/index',
