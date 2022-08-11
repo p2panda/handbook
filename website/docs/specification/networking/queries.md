@@ -24,10 +24,10 @@ title: Queries
 ## Publishing Entries
 
 - clients use two GraphQL operations for publishing entries:
-    1. [`nextEntryArgs`](#nextentryargs) query to retrieve parameters required for encoding an entry
+    1. [`nextArgs`](#nextargs) query to retrieve parameters required for encoding an entry
     2. [`publishEntry`](#publishentry) mutation to publish a signed and encoded entry together with its payload
 
-### `nextEntryArgs`
+### `nextArgs`
 
 - returns parameters required for encoding new entries
     - implementations must not have side effects
@@ -39,7 +39,7 @@ title: Queries
   - clients must not set this when they want to encode a `CREATE` operation
 
 ```graphql
-query nextEntryArgs(
+query nextArgs(
   """
   public key of the author signing and encoding the next entry
   """
@@ -61,7 +61,7 @@ query nextEntryArgs(
     - the operation is linked to the entry with a correct payload hash and size
   - the node should persist the entry and operation and make it available to other nodes via [replication][replication]
   - the node may [materialise][reduction] the document this new operation belongs to, resulting in a new document view
-- returns entry arguments required for publishing the next entry for the same document, similar to `nextEntryArgs`
+- returns entry arguments required for publishing the next entry for the same document, similar to `nextArgs`
 - returns an error 
   - when the bamboo log, signature or document integrity could not be verified, the operation was malformed or schema not fullfilled
   - when the node is unable to persist the entry and operation at the moment
@@ -83,7 +83,7 @@ mutation publishEntry(
 
 ### Response
 
-- both `publishEntry` and `nextEntryArgs` return the arguments for encoding and signing the next entry as a response
+- both `publishEntry` and `nextArgs` return the arguments for encoding and signing the next entry as a response
 
 ```graphql
 type NextEntryArguments {
