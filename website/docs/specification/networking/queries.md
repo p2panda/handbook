@@ -25,7 +25,7 @@ title: Queries
 
 - clients use two GraphQL operations for publishing entries:
     1. [`nextArgs`](#nextargs) query to retrieve parameters required for encoding an entry
-    2. [`publishEntry`](#publishentry) mutation to publish a signed and encoded entry together with its payload
+    2. [`publish`](#publish) mutation to publish a signed and encoded entry together with its payload
 
 ### `nextArgs`
 
@@ -33,7 +33,7 @@ title: Queries
     - implementations must not have side effects
 - clients can't encode new entries without information from this endpoint because every entry needs to place itself in the first unused sequence number of a specific [_bamboo log_][bamboo] and also it needs to include the hashes of specific previous entries in its encoding
     - this information is held by the node
-- clients may cache the arguments required for the next entry (they are also returned by `publishEntry`)
+- clients may cache the arguments required for the next entry (they are also returned by `publish`)
 - clients may also persist their entry logs locally to avoid any dependency for retrieving entry arguments of nodes at all
 - clients must set the `documentId` input variable to receive arguments for encoding an `UPDATE` or `DELETE` operation.
   - clients must not set this when they want to encode a `CREATE` operation
@@ -52,9 +52,9 @@ query nextArgs(
 ): NextEntryArguments!
 ```
 
-### `publishEntry`
+### `publish`
 
-- if a `publishEntry` request is accepted by a node it must publish the entry supplied with the request by taking the following steps:
+- if a `publish` request is accepted by a node it must publish the entry supplied with the request by taking the following steps:
   - the node must validate the received entry and operation by checking if:
     - the entry adheres to the [bamboo specification][bamboo] and has a valid signature and log integrity
     - the operation adheres to the [operation specification][operations]
@@ -67,7 +67,7 @@ query nextArgs(
   - when the node is unable to persist the entry and operation at the moment
 
 ```graphql
-mutation publishEntry(
+mutation publish(
   """
   CBOR representation of a signed Bamboo entry, encoded as a hexadecimal string
   """
@@ -83,7 +83,7 @@ mutation publishEntry(
 
 ### Response
 
-- both `publishEntry` and `nextArgs` return the arguments for encoding and signing the next entry as a response
+- both `publish` and `nextArgs` return the arguments for encoding and signing the next entry as a response
 
 ```graphql
 type NextEntryArguments {
