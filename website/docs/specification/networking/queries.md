@@ -111,10 +111,13 @@ type NextEntryArguments {
 
 ## Querying documents
 
-- For every schema that can be queried, nodes generate fields, which are made available on the _root query type_, as well as types to represent the schema's documents.
+- The GraphQL schema of a node changes depending on the schemas that are available on the node.
+- A node inserts additional queryable fields into the root query type for every schema that can be queried.
+  - In addition, types for the responses of these fields are generated according to the schemas' definitions.
   - Together, these allow clients to request documents including their materialised views and metadata.
-- As fields and types that contain schema-specific data are dynamically generated, every node may contain a different set of these, depending on which schemas are available.
-- This specification defines a generic form for these dynamic fields and types.
+  - Detailed descriptions of both of these follow below.
+- Therefore, client implementations SHOULD gracefully handle being connected to a node that doesn't process a schema they would like to interact with.
+- This specification defines a generic form for these dynamic GraphQL fields and types.
   - The string `<schema_id>` is used as a generic placeholder to be replaced by a concrete _schema id_.
 
 ### GraphQL type
