@@ -9,8 +9,9 @@ title: Materialization
 
 ## 1. Reconciliation
 
-- a document is made up of operations published by one or many authors, they may have been issued concurrently which would cause a document to take the form of a graph
-- every operation has a `previous` field containing a `document_view_id` which refers to the document state _at the moment it was published_
+- a document is made up of operations published by one or many authors
+  - a fork in the graph occurs if two authors publish operations concurrently
+- every operation has a `previous` field containing a `document_view_id` which refers to document state _at the moment it was published_
   - these `previous` references make up the edges in a graph, the operations being the nodes
   - this graph can be said to trace the causal relation between all operations in a document
 - the first step we take in materializing a document is to sort and linearise it's graph of operations deterministically
