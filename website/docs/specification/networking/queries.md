@@ -125,7 +125,7 @@ type NextArguments {
 - Nodes generate two GraphQL types for every schema that can be queried:
   1. a type `<schema_id>` that contains fields for document metadata and the associated document view
   2. a type `<schema_id>Fields` to represent the document view's fields with the actual data contained in the document
-- Document fields with the types `Boolean`, `Integer`, `Float` and `Text` are represented with the corresponding GraphQL scalar types.
+- Document fields with the types `Boolean`, `Integer`, `Float` and `String` are represented with the corresponding GraphQL scalar types.
 - Document fields with the relation types `Relation` / `RelationList` and `PinnedRelation` / `PinnedRelationList` use the type generated for that field's schema.
 
 ```graphql
