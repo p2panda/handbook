@@ -184,7 +184,7 @@ type DocumentMeta {
 - either the `id` or `viewId` field argument must be set
   - if `id` contains a document id, the response must contain the [_latest document view_][latest-document-view] for that document
   - if `viewId` contains a document view id, the response must contain this document view
-  - if both field arguments are given the query must return an error
+  - if both field arguments are given the view id is used
 - not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
 
 ```graphql
