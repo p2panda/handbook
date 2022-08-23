@@ -16,8 +16,9 @@ title: Operations
   - `1` - results in an UPDATE operation
   - `2` - results in a DELETE operation
 - every operation MUST have a [schema id](/specification/data-types/schemas)
-- every DELETE and UPDATE operation_ MUST have _previous operations_ with `length > 0`
+- every DELETE and UPDATE operation MUST have _previous operations_ with `length > 0`
   - it contains an array of _operation_id_'s which identify the tip operation of any un-merged branches in this document graph
+    - this is also known as a _document_view_id_
   - in the case where a graph has no un-merged branches, this array will contain only one id (the resolved graph tip)
   - publishing an operation which identifies more than 1 graph tip, effectively merges these branches into one
 - a CREATE operation MUST NOT have _previous operations_
