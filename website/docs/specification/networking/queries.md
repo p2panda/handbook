@@ -35,7 +35,7 @@ title: Queries
   - this information is held by the node
 - clients may cache the arguments required for the next entry (they are also returned by `publish`)
 - clients may also persist their entry logs locally to avoid any dependency for retrieving entry arguments of nodes at all
-- clients must set the `documentId` input variable to receive arguments for encoding an `UPDATE` or `DELETE` operation.
+- clients must set the `viewId` input variable to receive arguments for encoding an `UPDATE` or `DELETE` operation.
   - clients must not set this when they want to encode a `CREATE` operation
 
 ```graphql
@@ -46,9 +46,9 @@ query nextArgs(
   publicKey: PublicKey!
 
   """
-  id of the document that will be updated or deleted with the next entry. leave empty to receive arguments for creating a new document.
+  any view id from the document that will be updated or deleted with the next entry. leave empty to receive arguments for creating a new document.
   """
-  documentId: DocumentId
+  viewId: ViewId
 ): NextArguments!
 ```
 
@@ -87,25 +87,25 @@ mutation publish(
 
 ```graphql
 type NextArguments {
-  """
-  log id to be used to forge the next entry
-  """
-  logId: LogId!
+	"""
+	log id to be used to forge the next entry
+	"""
+	logId: LogId!
 
-  """
-  sequence number to be used to forge the next entry
-  """
-  seqNum: SeqNum!
+	"""
+	sequence number to be used to forge the next entry
+	"""
+	seqNum: SeqNum!
 
-  """
-  optional backlink hash to be used to forge the next entry
-  """
-  backlink: EntryHash
+	"""
+	optional backlink hash to be used to forge the next entry
+	"""
+	backlink: EntryHash
 
-  """
-  optional skiplink hash to be used to forge the next entry
-  """
-  skiplink: EntryHash
+	"""
+	optional skiplink hash to be used to forge the next entry
+	"""
+	skiplink: EntryHash
 }
 ```
 
