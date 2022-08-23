@@ -10,12 +10,16 @@ title: Materialization
 ## 1. Reconciliation
 
 - a document is made up of operations published by one or many authors, they may have been issued concurrently which would cause a document to take the form of a graph
+- every operation has a `previous` field containing a `document_view_id` which refers to the document state _at the moment it was published_
+  - these `previous` references make up the edges in a graph, the operations being the nodes
+  - this graph can be said to trace the causal relation between all operations in a document
 - the first step we take in materializing a document is to sort and linearise it's graph of operations deterministically
 - we do this by applying a topological depth-first sorting algorithm:
   - sorting MUST start from the documents CREATE operation
   - an operation which refers to the current operation in it's `previous` field MUST be visited next
   - if multiple operations refer to the current, the one with a `<` `document_id` MUST be visited next
   - when visiting a branch, all operations it contains must be visited and sorted before continuing to the rest of the graph
+  - ANY operation which references a `document_view_id` not present in this graph MUST not be visited
 
 ## 2. Reduction
 
