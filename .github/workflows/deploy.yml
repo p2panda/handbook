@@ -58,9 +58,25 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install wasm-pack
-        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-        working-directory: p2panda-js
+      - name: Setup Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          target: wasm32-unknown-unknown
+          override: true
+
+      - name: Install wasm-bindgen
+        uses: jetli/wasm-bindgen-action@v0.1.0
+
+      - name: Install wasm-opt
+        uses: giantswarm/install-binary-action@v1
+        with:
+          binary: "wasm-opt"
+          version: "109"
+          download_url: "https://github.com/WebAssembly/binaryen/releases/download/version_${version}/binaryen-version_${version}-x86_64-linux.tar.gz"
+          tarball_binary_path: "*/bin/${binary}"
+          smoke_test: "${binary} --version"
 
       - name: Install dependencies
         run: npm ci
