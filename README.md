@@ -83,11 +83,12 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [x] Basic replication protocol
 - [x] Manually follow other nodes
 - [x] p2panda first draft specification
+- [x] Dynamic GraphQL API to query data
 
 ### Now
 
 - [ ] Schemas- and data validation
-- [ ] Dynamic GraphQL API to query data
+- [ ] p2panda specification 1.0 release :panda_face:
 
 ### The future
 
@@ -95,7 +96,6 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [ ] Multi-writer permissions in `aquadoggo`
 - [ ] Transport encryption between nodes via TLS 1.3
 - [ ] Automatic local discovery via mDNS
-- [ ] p2panda specification 1.0 release :panda_face:
 - [ ] Schema backwards compatibility via lenses
 - [ ] Automatic internet discovery via signalling servers
 - [ ] Efficient replication protocol
