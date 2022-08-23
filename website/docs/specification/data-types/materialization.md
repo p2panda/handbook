@@ -31,6 +31,7 @@ title: Materialization
        - overwrite this field's contents on the view with the contents from the operation
   3. If the next operation in the document is a _delete operation_
      - remove the content on all fields of the view
-     - mark the view deleted
+     - mark the view delete
+     - stop reduction here
   4. Stop reduction if there is no next known operation in the document
   5. Continue with step 2. otherwise
