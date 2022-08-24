@@ -55,6 +55,7 @@
 
 :root {
   --ifm-font-family-base: 'Covik Sans Mono';
+  --ifm-font-family-monospace: 'Covik Sans Mono';
   --ifm-font-weight-normal: 700;
   --ifm-color-primary: #3465a4;
   --ifm-color-primary-dark: #2f5b94;
