@@ -47,6 +47,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
+        hideOnScroll: true,
         logo: {
           alt: 'p2panda Handbook',
           src: 'images/handbook.png',
