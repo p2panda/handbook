@@ -47,12 +47,10 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "p2🐼",
-        // @TODO: Check if we still need this here
-        /* logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
-        }, */
+        logo: {
+          alt: 'p2panda Handbook',
+          src: 'images/handbook.png',
+        },
         items: [
           {
             type: 'doc',
