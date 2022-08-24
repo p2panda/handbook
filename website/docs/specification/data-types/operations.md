@@ -3,71 +3,144 @@ id: operations
 title: Operations
 ---
 
-- operations represent data changes
-- operations are published as the payload of _bamboo entries_
-- operations are identified by the hash of their bamboo entry
-  - this is referred to as the _operation id_
-- every operation is associated with a [bamboo author](/specification/data-types/key-pairs), which is encoded in the operation's _entry_
-- every operation MUST have an _operation version_
-  - it describes the version of the operation specification that is followed by that operation
-  - this write-up represents the operation specification version 1
-- every operation MUST have an _operation action_, which MUST be one of
-  - `0` - results in a CREATE operation
-  - `1` - results in an UPDATE operation
-  - `2` - results in a DELETE operation
-- every operation MUST have a [schema id](/specification/data-types/schemas)
-- every DELETE and UPDATE operation MUST have _previous_ with `length > 0`
-  - it contains an array of _operation_id_'s which identify the tip operation of any un-merged branches in this document graph
-    - this is also known as a _document_view_id_
-  - in the case where a graph has no un-merged branches, this array will contain only one id (the resolved graph tip)
-  - publishing an operation which identifies more than 1 graph tip, effectively merges these branches into one
-- a CREATE operation MUST NOT have _previous_
+- Operations represent atomic data changes.
+- Operations are published as the payload of _bamboo entries_.
+- Operations are identified by the hash of their bamboo entry.
+- Every operation is associated with a [bamboo author](/specification/data-types/key-pairs), which is encoded in the operation's _entry_
 
-## Fields
+:::info Definition: Operation ID
 
-- a CREATE operation MUST contain all fields of the operation's schema
-- an UPDATE operation MAY contain any combination of fields from the operation's schema
-- a DELETE operation MUST NOT contain any fields
-- fields map field names to field values
+The _operation id_ uniquely identifies an operation. It is equal to the hash of the Bamboo entry that has the operation as its payload.
+
+:::
+
+## Encoding Format
+
+- CBOR is a binary encoding that is used to encode the contents of an operation and produce bytes that can be associated with a Bamboo entry, stored, and sent over a network connection.
+- Operations are encoded as arrays of items, described in more detai below.
+
+:::note Requirement OP1
+
+An operation MUST be encoded using hexadecimal encoded [CBOR][cbor] with the following format:
+
+`[version, action, schema_id, [previous]?, { [field_key]: <field_value> }?]`
+
+Operations MUST NOT contain any additional items.
+
+:::
+
+## Items
+
+### Version
+
+- The operation version is the version of the p2panda specification that is followed by that operation.
+
+:::note Requirement OP2
+
+Every operation MUST have an _operation version_. An operation version MUST be a positive integer number. An operation version MUST NOT be larger than 256.
+
+:::
+
+### Action
+
+- The operation action defines the kind of data change that is described by the operation.
+
+:::info Definition: Operation Actions
+
+There are 3 types of operation:
+
+1. _create operations_ initialise new documents and set all of their field values.
+2. _update operations_ mutate any number of fields on an existing document.
+3. _delete operations_ delete an existing document.
+
+:::
+
+:::note Requirement OP3
+
+Every operation MUST have an _operation action_, which MUST be one of
+
+- `0` - denotes a CREATE action and results in a _create operation_
+- `1` - denotes an UPDATE action and results in a _update operation_
+- `2` - denotes a DELETE action and results in a _delete operation_
+
+:::
+
+### Schema Id
+
+- The schema of an operation may define additional requirements for the operation's action, previous and fields items.
+  - See the [schema](/specification/data-types/schemas) section for more details.
+
+:::note Requirement OP4
+
+Every operation MUST have a [schema id](/specification/data-types/schemas).
+
+:::
+
+### Previous
+
+- _previous_ specifies where an operation should be placed when constructing the graph of operations required to materialise a document.
+  - It contains an array of _operation_id_'s which identify the tip operation of any un-merged branches in this document at the time of
+    publishing this operation.
+  - In the case where a graph has no un-merged branches, this array will contain only one id (the resolved graph tip).
+  - Publishing an operation which identifies more than one graph tip effectively merges these branches into one.
+
+:::note Requirement OP5
+
+DELETE and UPDATE operations MUST have _previous_ with `length > 0`. CREATE operations MUST NOT have _previous_.
+
+:::
+
+### Fields
+
+- _Operation fields_ contain the actual data carried by an operation.
+- Depending on the operation's action and schema, different requirements exist for which data must be contained in the operation.
+- Fields map field names to field values
   - field names are strings
   - field values can be of type: `u64`, `f64`, `boolean`, `string`, `relation`, `relation_list`, `pinned_relation`, `pinned_relation_list`
-  - see [schema][/specification/data-types/schemas] for further specification of field names and -values
-- to identify the actual type of an operation value an external schema is required
+  - see [schema][/specification/data-types/schemas] for further specification of field names and values
+- The schema defined by the schema id item of the operation specifies the name and type of each field which can be included in an operation.
+- In order to deserialise typed field values, a copy of the schema is required.
 
-## Encoding
+:::note Requirement OP6
 
-- operations are encoded using [CBOR][cbor] with the following format: `[version, action, "schema id", [previous]?, { [field key]: <field value> }?]`
-  - version is encoded as a u64 integer and MUST be given
-    - the latest operation specification version is `1`
-    - unknown or unsupported operation versions MUST be rejected
-  - action is encoded as a u64 integer and MUST be given, the regarding actions are represented as follows:
-    - CREATE: `0`
-    - UPDATE: `1`
-    - DELETE: `2`
-  - schema id is encoded as a string and MUST be given
-  - previous is encoded as an array of operation ids, it MUST be omitted in a CREATE operation
-  - fields are encoded as a map where the map keys are encoded as strings, it MUST be omitted in a DELETE operation
-    - the map values can be encoded as one of the following types: `u64`, `f64`, `boolean`, `string`, `string[]` or `string[][]`
-    - map names and values MUST match the given schema
-    - the encoding reflects the core data types of CBOR while they MUST be interpreted as p2panda operation values when decoding with the help of a schema:
-      - `string` can be interpreted as any string or a document id for a relation depending on the schema
-      - `string[]` can be interpreted as a pinned relation (document view id) or a relation list (list of document ids) depending on the schema
-      - `string[][]` is a pinned relation list
-  - operations MUST never contain any more array fields than the specified ones, if they do they need to be rejected
-- all array values and map keys must be serialised in sorted order and de-duplicated unless their order and occurrence is semantic
-  - this is currently only required for document view ids, which are given inside of application schema ids and previous fields as well as pinned relation lists or pinned relations
-  - all operations that have values or map keys which are not sorted or duplicate even though their order has no semantic meaning are invalid
+A CREATE operation MUST contain all fields defined by the operation's _operation schema_.
+An UPDATE operation MAY contain any combination of fields from the operation's _operation schema_.
+A DELETE operation MUST NOT contain any fields.
+
+:::
+
+:::note Requirement OP7
+
+The encoding reflects the core data types of CBOR while they MUST be interpreted as p2panda operation values when decoding with the help of a schema:
+
+- `string` can be interpreted as any string or a document id for a relation depending on the schema
+- `string[]` can be interpreted as a pinned relation (document view id) or a relation list (list of document ids) depending on the schema
+- `string[][]` is a pinned relation list
+
+:::
+
+:::note Requirement OP8
+
+The type of all operation field values MUST match the corresponding field in the operation's schema.
+
+:::
 
 ## Usage
 
-- clients can use operations to publish data changes
-- clients must embed operations in bamboo entries to publish them
-- clients can create a [document](/specification/data-types/documents#documents) by publishing a CREATE operation
-- clients can update a document by publishing an UPDATE operation
-  - every UPDATE operation leads to a new _document view_ of the document that is being updated
-- nodes can [reduce](/specification/data-types/materialization#reduction) operations to produce a specific _document view_ of their document
-- clients can delete a document by publishing a DELETE operation
-  - nodes MUST delete all operations of a document once it has been deleted
+- Clients can use operations to publish data changes.
+- Clients must embed operations in bamboo entries to publish them.
+- Clients can create a [document](/specification/data-types/documents#documents) by publishing a CREATE operation.
+- Clients can update a document by publishing an _update operation_.
+  - Every _update operation_ leads to a new _document view_ of the document that is being updated.
+- Clients can delete a document by publishing a _delete operation_.
+- Nodes can [reduce](/specification/data-types/materialization#reduction) operations to produce a specific _document view_ of their document.
+- Clients can delete a document by publishing a _delete operation_.
+
+:::note Requirement OP9
+
+Nodes MUST delete all operations of a document once it has been deleted. (_note: this should probably go into the documents section_).
+
+:::
 
 [cbor]: https://cbor.io/
 [snake_case]: https://en.wikipedia.org/wiki/Snake_case
