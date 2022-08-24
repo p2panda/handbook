@@ -6,7 +6,7 @@ title: Operations
 - Operations represent atomic data changes.
 - Operations are published as the payload of _bamboo entries_.
 - Operations are identified by the hash of their bamboo entry.
-- every operation is associated with a [bamboo author](/specification/data-types/key-pairs), which is encoded in the operation's _entry_
+- Every operation is associated with a [bamboo author](/specification/data-types/key-pairs), which is encoded in the operation's _entry_
 
 :::info Definition: Operation ID
 
@@ -16,105 +16,92 @@ The _operation id_ uniquely identifies an operation. It is equal to the hash of 
 
 ## Encoding Format
 
+- CBOR is a binary encoding that is used to encode the contents of an operation and produce bytes that can be associated with a Bamboo entry, stored, and sent over a network connection.
+- Operations are encoded as arrays of items, described in more detai below.
+
 :::note Requirement OP1
 
-Operations MUST be encoded using hexadecimal encoded CBOR.
+An operation MUST be encoded using hexadecimal encoded [CBOR][cbor] with the following format:
+
+`[version, action, schema_id, [previous]?, { [field_key]: <field_value> }?]`
+
+Operations MUST NOT contain any additional items.
 
 :::
 
-- CBOR is a binary encoding that is used to encode the contents of an operation and produce bytes that can be associated with a Bamboo entry, stored, and sent over a network connection.
+## Items
+
+### Version
+
+- The operation version is the version of the p2panda specification that is followed by that operation.
 
 :::note Requirement OP2
-
-An operation MUST be encoded using [CBOR][cbor] with the following format:
-
-`[version, action, "schema id", [previous]?, { [field key]: <field value> }?]`
-
-:::
-
-:::note Requirement OP2
-
-- all array values and map keys must be serialised in sorted order and de-duplicated unless their order and occurrence is semantic
-  - this is currently only required for document view ids, which are given inside of application schema ids and previous fields as well as pinned relation lists or pinned relations
-  - all operations that have values or map keys which are not sorted or duplicate even though their order has no semantic meaning are invalid
-
-:::
-
-## Operation Version
-
-- The operation version describes the specification that is followed by that operation
-  - this write-up represents the operation specification version 1
-
-:::note Requirement OP6
 
 Every operation MUST have an _operation version_. An operation version MUST be a positive integer number. An operation version MUST NOT be larger than 256.
 
 :::
 
-:::note Requirement OP6
-
-Unknown or unsupported operation versions MUST be rejected.
-
-:::
-
-- The operation version is set according to the version of the p2panda specification that is followed by that operation.
-
-## Operation Action
+### Action
 
 - The operation action defines the kind of data change that is described by the operation.
 
-:::note Requirement OP2
+:::info Definition: Operation Actions
 
-Every operation MUST have an _operation action_, which MUST be one of
+There are 3 types of operation:
 
-- `0` - results in a CREATE operation
-- `1` - results in an UPDATE operation
-- `2` - results in a DELETE operation
+1. _create operations_ initialise new documents and set all of their field values.
+2. _update operations_ mutate any number of fields on an existing document.
+3. _delete operations_ delete an existing document.
 
 :::
 
-## Operation Schema Id
-
 :::note Requirement OP3
+
+Every operation MUST have an _operation action_, which MUST be one of
+
+- `0` - denotes a CREATE action and results in a _create operation_
+- `1` - denotes an UPDATE action and results in a _update operation_
+- `2` - denotes a DELETE action and results in a _delete operation_
+
+:::
+
+### Schema Id
+
+- The schema of an operation may define additional requirements for the operation's action, previous and fields items.
+  - See the [schema](/specification/data-types/schemas) section for more details.
+
+:::note Requirement OP4
 
 Every operation MUST have a [schema id](/specification/data-types/schemas).
 
 :::
 
-- The schema of an operation may define additional requirements for the operation.
-  - See the [schema](/specification/data-types/schemas) section for more details.
+### Previous
 
-## Previous Operations
-
-:::note Requirement OP7
-
-Every DELETE and UPDATE operation MUST have _previous_ with `length > 0`. Every CREATE operation MUST NOT have _previous_.
-
-:::
-
-- _Previous operations_ specify where an operation should be placed when constructing the graph of operations required to materialise a document.
-  - It contains an array of _operation_id_'s which identify the tip operation of any un-merged branches in this document graph.
-    - This is also known as a _document_view_id_.
+- _previous_ specifies where an operation should be placed when constructing the graph of operations required to materialise a document.
+  - It contains an array of _operation_id_'s which identify the tip operation of any un-merged branches in this document at the time of
+    publishing this operation.
   - In the case where a graph has no un-merged branches, this array will contain only one id (the resolved graph tip).
   - Publishing an operation which identifies more than one graph tip effectively merges these branches into one.
 
-:::note Requirement OP8
+:::note Requirement OP5
 
-A create operation MUST NOT have _previous operations_.
+DELETE and UPDATE operations MUST have _previous_ with `length > 0`. CREATE operations MUST NOT have _previous_.
 
 :::
 
-## Fields
+### Fields
 
 - _Operation fields_ contain the actual data carried by an operation.
-- Depending on the operation's type and schema, different requirements exist for which data must be contained in the operation.
+- Depending on the operation's action and schema, different requirements exist for which data must be contained in the operation.
 - Fields map field names to field values
   - field names are strings
   - field values can be of type: `u64`, `f64`, `boolean`, `string`, `relation`, `relation_list`, `pinned_relation`, `pinned_relation_list`
-  - see [schema][/specification/data-types/schemas] for further specification of field names and -values
-- To identify the actual type of an operation value an external schema is required.
+  - see [schema][/specification/data-types/schemas] for further specification of field names and values
+- The schema defined by the schema id item of the operation specifies the name and type of each field which can be included in an operation.
+- In order to deserialise typed field values, a copy of the schema is required.
 
-:::note Requirement OP9
+:::note Requirement OP6
 
 A CREATE operation MUST contain all fields defined by the operation's _operation schema_.
 An UPDATE operation MAY contain any combination of fields from the operation's _operation schema_.
@@ -122,24 +109,19 @@ A DELETE operation MUST NOT contain any fields.
 
 :::
 
-:::note Requirement OP10
+:::note Requirement OP7
 
-    - the encoding reflects the core data types of CBOR while they MUST be interpreted as p2panda operation values when decoding with the help of a schema:
-      - `string` can be interpreted as any string or a document id for a relation depending on the schema
-      - `string[]` can be interpreted as a pinned relation (document view id) or a relation list (list of document ids) depending on the schema
-      - `string[][]` is a pinned relation list
+The encoding reflects the core data types of CBOR while they MUST be interpreted as p2panda operation values when decoding with the help of a schema:
 
-:::
-
-:::note Requirement OP10
-
-    - map names and values MUST be validated against their given schema
+- `string` can be interpreted as any string or a document id for a relation depending on the schema
+- `string[]` can be interpreted as a pinned relation (document view id) or a relation list (list of document ids) depending on the schema
+- `string[][]` is a pinned relation list
 
 :::
 
-:::note Requirement OP10
+:::note Requirement OP8
 
-- operations MUST never contain any more array fields than the specified ones, if they do they need to be rejected
+The type of all operation field values MUST match the corresponding field in the operation's schema.
 
 :::
 
@@ -154,7 +136,7 @@ A DELETE operation MUST NOT contain any fields.
 - Nodes can [reduce](/specification/data-types/materialization#reduction) operations to produce a specific _document view_ of their document.
 - Clients can delete a document by publishing a _delete operation_.
 
-:::note Requirement OP12
+:::note Requirement OP9
 
 Nodes MUST delete all operations of a document once it has been deleted. (_note: this should probably go into the documents section_).
 
