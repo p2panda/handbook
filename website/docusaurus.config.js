@@ -98,8 +98,7 @@ const config = {
       },
       footer: {
         style: 'light',
-        // @TODO: Some much more fun license here
-        copyright: `Copyright © ${new Date().getFullYear()} p2panda contributors`,
+        copyright: 'CC BY-SA 4.0',
       },
       colorMode: {
         disableSwitch: true, // Do not show light/dark mode switch
