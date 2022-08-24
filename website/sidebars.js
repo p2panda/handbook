@@ -20,6 +20,7 @@ const sidebars = {
       type: 'category',
       label: 'Data types',
       items: [
+        'specification/data-types/encoding-data',
         'specification/data-types/bamboo',
         'specification/data-types/key-pairs',
         'specification/data-types/operations',
