@@ -19,6 +19,12 @@ Unless otherwise specified hexadecimal encoding MUST use lowercase charachters. 
 
 All CBOR array values and map keys whose order is not semantic MUST be encoded in lexicographically sorted order.
 
+Arrays without semantic meaning, which therefore need sorting, are:
+
+- any _document view id_
+  - incluing those in a _schema id_ or _pinned_relation_
+- _previous_ operation array in an operation
+
 :::
 
 :::note Requirement EN3
@@ -26,17 +32,3 @@ All CBOR array values and map keys whose order is not semantic MUST be encoded i
 All CBOR map keys MUST be unique.
 
 :::
-
-## WIP SECTIONS
-
-### Conventions
-
-- p2panda prefers [snake case][snake_case] for field names.
-
-### Prelude
-
-- this p2panda specification represents the operation specification version 1
-
-### Publishing / recieving data
-
-- unknown or unsupported operation versions MUST be rejected.
