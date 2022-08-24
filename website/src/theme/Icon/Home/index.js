@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function IconHome() {
-  return '⛲';
+  return <span className="panda-icon">⛲</span>;
 }

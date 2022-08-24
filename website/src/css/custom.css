@@ -68,6 +68,8 @@
   --ifm-toc-border-color: transparent;
   --ifm-footer-background-color: transparent;
   --ifm-footer-color: #666;
+  --ifm-alert-shadow: 0;
+  --ifm-alert-border-radius: 0;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
@@ -137,4 +139,8 @@
   margin-top: 2em;
   font-size: 0.8rem;
   line-height: 1.5;
+}
+
+.panda-icon {
+  font-size: 1.1rem;
 }
