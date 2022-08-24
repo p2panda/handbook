@@ -13,61 +13,61 @@ title: Queries
 
 - the client api is the interface for communication between [node and client][nodes]
 - clients can publish entries
-    - before that, clients can retrieve parameters required for encoding entries if they can't compute them independently
+  - before that, clients can retrieve parameters required for encoding entries if they can't compute them independently
 - clients can retrieve materialised [documents][documents] of a given schema
-    - documents can be filtered by individual fields
-    - linked documents can be retrieved
-    - documents can be sorted by arbitrary fields
-    - documents can be sorted by self-referential orderings
-    - documents can be queried by `document_view_id` in order to receive a [documents][view] onto it's data at a specific materialised state
+  - documents can be filtered by individual fields
+  - linked documents can be retrieved
+  - documents can be sorted by arbitrary fields
+  - documents can be sorted by self-referential orderings
+  - documents can be queried by `document_view_id` in order to receive a [documents][view] onto it's data at a specific materialised state
 
 ## Publishing Entries
 
 - clients use two GraphQL operations for publishing entries:
-    1. [`nextEntryArgs`](#nextentryargs) query to retrieve parameters required for encoding an entry
-    2. [`publishEntry`](#publishentry) mutation to publish a signed and encoded entry together with its payload
+  1. [`nextArgs`](#nextargs) query to retrieve parameters required for encoding an entry
+  2. [`publish`](#publish) mutation to publish a signed and encoded entry together with its payload
 
-### `nextEntryArgs`
+### `nextArgs`
 
 - returns parameters required for encoding new entries
-    - implementations must not have side effects
+  - implementations must not have side effects
 - clients can't encode new entries without information from this endpoint because every entry needs to place itself in the first unused sequence number of a specific [_bamboo log_][bamboo] and also it needs to include the hashes of specific previous entries in its encoding
-    - this information is held by the node
-- clients may cache the arguments required for the next entry (they are also returned by `publishEntry`)
+  - this information is held by the node
+- clients may cache the arguments required for the next entry (they are also returned by `publish`)
 - clients may also persist their entry logs locally to avoid any dependency for retrieving entry arguments of nodes at all
-- clients must set the `documentId` input variable to receive arguments for encoding an `UPDATE` or `DELETE` operation.
+- clients must set the `viewId` input variable to receive arguments for encoding an `UPDATE` or `DELETE` operation.
   - clients must not set this when they want to encode a `CREATE` operation
 
 ```graphql
-query nextEntryArgs(
+query nextArgs(
   """
   public key of the author signing and encoding the next entry
   """
   publicKey: PublicKey!
 
   """
-  id of the document that will be updated or deleted with the next entry. leave empty to receive arguments for creating a new document.
+  any view id from the document that will be updated or deleted with the next entry. leave empty to receive arguments for creating a new document.
   """
-  documentId: DocumentId
-): NextEntryArguments!
+  viewId: ViewId
+): NextArguments!
 ```
 
-### `publishEntry`
+### `publish`
 
-- if a `publishEntry` request is accepted by a node it must publish the entry supplied with the request by taking the following steps:
+- if a `publish` request is accepted by a node it must publish the entry supplied with the request by taking the following steps:
   - the node must validate the received entry and operation by checking if:
     - the entry adheres to the [bamboo specification][bamboo] and has a valid signature and log integrity
     - the operation adheres to the [operation specification][operations]
     - the operation is linked to the entry with a correct payload hash and size
   - the node should persist the entry and operation and make it available to other nodes via [replication][replication]
   - the node may [materialise][reduction] the document this new operation belongs to, resulting in a new document view
-- returns entry arguments required for publishing the next entry for the same document, similar to `nextEntryArgs`
-- returns an error 
+- returns entry arguments required for publishing the next entry for the same document, similar to `nextArgs`
+- returns an error
   - when the bamboo log, signature or document integrity could not be verified, the operation was malformed or schema not fullfilled
   - when the node is unable to persist the entry and operation at the moment
 
 ```graphql
-mutation publishEntry(
+mutation publish(
   """
   CBOR representation of a signed Bamboo entry, encoded as a hexadecimal string
   """
@@ -78,86 +78,86 @@ mutation publishEntry(
   encoded as a hexadecimal string
   """
   operation: EncodedOperation!
-): NextEntryArguments!
+): NextArguments!
 ```
 
 ### Response
 
-- both `publishEntry` and `nextEntryArgs` return the arguments for encoding and signing the next entry as a response
+- both `publish` and `nextArgs` return the arguments for encoding and signing the next entry as a response
 
 ```graphql
-type NextEntryArguments {
-  """
-  log id to be used to forge the next entry
-  """
-  logId: LogId!
+type NextArguments {
+	"""
+	log id to be used to forge the next entry
+	"""
+	logId: LogId!
 
-  """
-  sequence number to be used to forge the next entry
-  """
-  seqNum: SeqNum!
+	"""
+	sequence number to be used to forge the next entry
+	"""
+	seqNum: SeqNum!
 
-  """
-  optional backlink hash to be used to forge the next entry
-  """
-  backlink: EntryHash
+	"""
+	optional backlink hash to be used to forge the next entry
+	"""
+	backlink: EntryHash
 
-  """
-  optional skiplink hash to be used to forge the next entry
-  """
-  skiplink: EntryHash
+	"""
+	optional skiplink hash to be used to forge the next entry
+	"""
+	skiplink: EntryHash
 }
 ```
 
 ## Querying documents
 
-- these queries allow clients to request the field contents of materialised document views and metadata for their associated documents
-- some GraphQL operations and types are dynamic in that they depend on the schemas known to the node
-  - this spec only gives a generic form for these operations and types
-  - in this specification we use `<schema_id>` as a placeholder for the string-encoded schema id of actual schemas
+- The GraphQL schema of a node changes depending on the schemas that are available on the node.
+- A node inserts additional queryable fields into the root query type for every schema that can be queried.
+  - In addition, types for the responses of these fields are generated according to the schemas' definitions.
+  - Together, these allow clients to request documents including their materialised views and metadata.
+  - Detailed descriptions of both of these follow below.
+- Therefore, client implementations SHOULD gracefully handle being connected to a node that doesn't process a schema they would like to interact with.
+- This specification defines a generic form for these dynamic GraphQL fields and types.
+  - The string `<schema_id>` is used as a generic placeholder to be replaced by a concrete _schema id_.
 
-### `<schema_id>`
+### GraphQL type
 
-- returns a single document that uses this schema id with a specific document view
-    - implementations must have no side effects
-- either the `id` or `view_id` input variable must to be set
-  - if `id` contains a document id the response must contain the [_latest document view_][latest-document-view] for that document
-  - if `view_id` contains a document view id, the query must contain this document view
-  - if both input variables are given the query must return an error
-- not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
-
-```graphql
-query <schema_id>(
-  """
-  id of the document to be queried
-  """
-  id: DocumentId
-
-  """
-  specific document view id to be queried
-  """
-  viewId: DocumentViewId
-): <schema_id>Response!
-```
+- Nodes generate two GraphQL types for every schema that can be queried:
+  1. a type `<schema_id>` that contains fields for document metadata and the associated document view
+  2. a type `<schema_id>Fields` to represent the document view's fields with the actual data contained in the document
+- Document fields with the types `Boolean`, `Integer`, `Float` and `String` are represented with the corresponding GraphQL scalar types.
+- Document fields with the relation types `Relation` / `RelationList` and `PinnedRelation` / `PinnedRelationList` use the type generated for that field's schema.
 
 ```graphql
-type <schema_id>Response {
+type <schema_id> {
   """
   meta information about the returned document and document view
   """
-  meta: <schema_id>ResponseMeta,
+  meta: DocumentMeta,
 
   """
   actual data contained in the document view
   """
-  fields: <schema_id>ResponseFields,
+  fields: <schema_id>Fields,
 }
 
-type <schema_id>ResponseMeta {
+type <schema_id>Fields {
+  """
+  named fields containing the actual, materialised values of this document
+  view. the form is defined by the regarding p2panda schema
+  """
+  <field_name>: <field_type>
+
+  """
+  ... potentially more fields
+  """
+}
+
+type DocumentMeta {
   """
   identifier of the returned document
   """
-  id: DocumentId!
+  documentId: DocumentId!
 
   """
   document view id contained in this response
@@ -174,24 +174,41 @@ type <schema_id>ResponseMeta {
   """
   edited: Boolean!
 }
+```
 
-type <schema_id>ResponseFields {
-  """
-  named fields containing the actual, materialised values of this document
-  view. the form is defined by the regarding p2panda schema
-  """
-  <field_name>: <field_type>
+### `<schema_id>`
 
-  """
-  ... potentially more fields
-  """
+- returns a single document that uses this schema
+  - implementations must have no side effects
+- the name of this field is equal to the _schema id_ of the schema it represents
+- either the `id` or `viewId` field argument must be set
+  - if `id` contains a document id, the response must contain the [_latest document view_][latest-document-view] for that document
+  - if `viewId` contains a document view id, the response must contain this document view
+  - if both field arguments are given the view id is used
+- not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
+
+```graphql
+type QueryRoot {
+  # ... other query root fields here ...
+
+  <schema_id>(
+    """
+    id of the document to be queried
+    """
+    id: DocumentId
+
+    """
+    specific document view id to be queried
+    """
+    viewId: DocumentViewId
+  ): <schema_id>
 }
 ```
 
 ### `all_<schema_id>`
 
 - returns the [latest document view][latest-document-view] for many documents of a given schema
-    - implementations must have no side effects
+  - implementations must have no side effects
 - deleted documents must not be included in the response unless they are explicitly included using a filter
 - response is paginated, can be sorted and filtered
 
@@ -218,32 +235,36 @@ type <schema_id>ResponseFields {
 - if the selected filter field is a self-referential relation the topologically ordered list will be filtered
 
 ```graphql
-query all_<schema_id>(
-  """
-  filter collection of documents
-  """
-  where: <schema_id>Filter
+type QueryRoot {
+  # ... other query root fields here ...
 
-  """
-  order results by field values
-  """
-  orderBy: <field_name>
+  all_<schema_id>(
+    """
+    filter collection of documents
+    """
+    where: <schema_id>Filter
 
-  """
-  order results in specified direction ("asc" or "desc")
-  """
-  orderDirection: String
+    """
+    order results by field values
+    """
+    orderBy: <field_name>
 
-  """
-  max number of items to be returned per page
-  """
-  first: Int
+    """
+    order results in specified direction ("asc" or "desc")
+    """
+    orderDirection: String
 
-  """
-  cursor identifier for pagination
-  """
-  after: String
-): <schema_id>PageResponse!
+    """
+    max number of items to be returned per page
+    """
+    first: Int
+
+    """
+    cursor identifier for pagination
+    """
+    after: String
+  ): <schema_id>Page!
+}
 ```
 
 ```graphql
@@ -294,7 +315,7 @@ type <schema_id>Filter {
   <field_name>_lte: <value>
 }
 
-type <schema_id>PageResponse {
+type <schema_id>Page {
   """
   information to aid in pagination
   """
@@ -332,7 +353,7 @@ type <schema_id>PageEdge {
   """
   item at the end of the pagination edge
   """
-  node: <schema_id>Response!
+  node: <schema_id>!
 
   """
   cursor to use in pagination

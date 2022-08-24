@@ -51,7 +51,7 @@ This led to a group of people interested in realising a protocol for p2p communi
 
 **Clients**
 
-- [`beep-boop`](https://github.com/p2panda/beep-boop): Chat client based on p2panda to experiment with. See it live under: https://p2panda.org/demo
+- [`zoo-adventures`](https://github.com/p2panda/zoo-adventures): "Connect Four" Game. See it live under: https://p2panda.org
 - [`fishyfish`](https://github.com/p2panda/fishyfish): Command line interface to manage p2panda nodes.
 
 ## Milestones
@@ -84,10 +84,10 @@ This led to a group of people interested in realising a protocol for p2p communi
 - [x] Manually follow other nodes
 - [x] p2panda first draft specification
 - [x] Dynamic GraphQL API to query data
+- [x] Schemas- and data validation
 
 ### Now
 
-- [ ] Schemas- and data validation
 - [ ] p2panda specification 1.0 release :panda_face:
 
 ### The future
