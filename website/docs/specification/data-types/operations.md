@@ -17,43 +17,42 @@ The _operation id_ uniquely identifies an operation. It is equal to the hash of 
 
 :::note Requirement OP1
 
-Operations MUST be encoded using CBOR.
+Operations MUST be encoded using hexadecimal encoded CBOR.
 
 :::
 
 - CBOR is a binary encoding that is used to encode the contents of an operation and produce bytes that can be associated with a Bamboo entry, stored, and sent over a network connection.
-- p2panda prefers [snake case][snake_case] for field names.
 
 :::note Requirement OP2
 
-All array values and map keys whose order is not semantic MUST be encoded in lexicographically sorted order.
+An operation must be encoded as a CBOR array containing the following items in this exact order:
+
+1. Version
+2. Action
+3. Schema
+4. Previous (optional)
+5. Fields (optional)
 
 :::
 
-:::note Requirement OP3
+## Operation Action
 
-Map keys MUST be unique.
+- The operation action defines the kind of data change that is described by the operation.
 
-:::
+:::note Requirement OP2
 
-## Operation Type
-
-- The operation type defines the kind of data change that is described by the operation.
-
-:::note Requirement OP4
-
-An operation MUST have an operation type. An operation type MUST be one of `CREATE`, `UPDATE`, `DELETE`.
+An operation MUST have an operation action. An operation action MUST be one of `CREATE`, `UPDATE`, `DELETE`.
 
 :::
 
-- Every operation type results in a different kind of operation:
+- Every operation action results in a different kind of operation:
   - `CREATE` - results in a _create operation_
   - `UPDATE` - results in a _update operation_
   - `DELETE` - results in a _delete operation_
 
 ## Operation Schema
 
-:::note Requirement OP5
+:::note Requirement OP3
 
 Every operation MUST have a schema.
 

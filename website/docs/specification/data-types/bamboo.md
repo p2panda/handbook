@@ -3,6 +3,8 @@ id: bamboo
 title: Bamboo
 ---
 
+- requirements in this section refer only to how p2panda specifies use of bamboo
+
 :::note Requirement BA1
 
 p2panda uses [Bamboo Ed25519 Yasmf][bamboo_spec] to encode data.
@@ -35,7 +37,7 @@ p2panda uses [Bamboo Ed25519 Yasmf][bamboo_spec] to encode data.
 
 :::note Requirement BA3
 
-Bamboo entries MUST be encoded using hexadecimal encoding with lowercase characters. Each byte of the Bamboo entry MUST be encoded using two hexadecimal digits.
+Bamboo entries MUST be encoded using hexadecimal encoding.
 
 :::
 
@@ -68,6 +70,10 @@ A p2panda author is a human or bot who publishes data using p2panda. Authors may
   - Every atomic change is recorded inside an entry.
   - We call these changes _operations_.
 - Have a look at the [operations][operations] section of this handbook for more detailled information on this topic.
+
+### End of log flag
+
+- Currently p2panda doesn't reserve a special use for the end of log flag. This may change in future versions.
 
 [key_pairs]: /specification/data-types/key-pairs
 [bamboo_spec]: https://github.com/bamboo-rs/bamboo-ed25519-yasmf

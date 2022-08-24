@@ -5,9 +5,13 @@ title: Key Pairs
 
 :::note Requirement KY1
 
-Key pairs must use ED25519 keys.
+Key pairs MUST use ED25519 keys.
 
 :::
+
+
+
+Correct hexadecimal encoding (when using human-readable encoding format) (#OP1)
 
 - A key pair is used to sign Bamboo entries and their payloads.
 - The public key of a key pair is embedded in Bamboo entries and therefore always available when verifying an entry and its payload.
