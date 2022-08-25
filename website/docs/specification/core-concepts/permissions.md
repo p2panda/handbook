@@ -1,7 +1,9 @@
 ---
-id: key-groups
-title: Key Groups
+id: permissions
+title: Permissions
 ---
+
+## Key Groups
 
 :::info not implemented
 Key groups are in specification phase and have not been implemented yet.
