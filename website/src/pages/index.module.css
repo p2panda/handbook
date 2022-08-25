@@ -13,6 +13,7 @@
 
 @media (max-width: 996px) {
   .title {
+    margin-top: 0;
     font-size: 2.5rem;
   }
 }
@@ -34,6 +35,21 @@
 .subtitle a {
   color: var(--ifm-color-gray-700);
   text-decoration: var(--ifm-link-hover-decoration);
+}
+
+.logo {
+  position: absolute;
+  right: 22%;
+  top: 250px;
+  width: 350px;
+}
+
+@media (max-width: 996px) {
+  .logo {
+    position: static;
+    margin: 0 auto;
+    width: 300px;
+  }
 }
 
 .pentagon-container {

@@ -2,6 +2,7 @@ import Layout from '@theme/Layout';
 import React from 'react';
 import clsx from 'clsx';
 import { ZooAdventures } from 'zoo-adventures';
+import LogoSVG from '@site/static/images/p2panda.svg';
 
 import styles from './index.module.css';
 
@@ -45,6 +46,10 @@ function Pentagon(props: {
   );
 }
 
+function Logo(): JSX.Element {
+  return <LogoSVG />;
+}
+
 function Zoo(): JSX.Element {
   return (
     <div className="panda-zoo">
@@ -84,6 +89,9 @@ export default function Home(): JSX.Element {
           hideOnSmallDevices
         />
         <Title />
+        <div className={styles['logo']}>
+          <Logo />
+        </div>
       </div>
     </Layout>
   );
