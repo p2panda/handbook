@@ -31,6 +31,16 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Core concepts',
+      items: [
+        'specification/core-concepts/concepts-documents',
+        'specification/core-concepts/concepts-schemas',
+        'specification/core-concepts/encryption',
+        'specification/core-concepts/permissions',
+      ],
+    },
+    {
+      type: 'category',
       label: 'APIs',
       items: [
         'specification/APIs/apis-overview',
@@ -46,14 +56,6 @@ const sidebars = {
         'specification/networking/clients-nodes',
         'specification/networking/discovery',
         'specification/networking/replication-protocol',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Collaboration',
-      items: [
-        'specification/collaboration/key-groups',
-        'specification/collaboration/secret-groups',
       ],
     },
   ],

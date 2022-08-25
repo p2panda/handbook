@@ -14,7 +14,7 @@ title: Documents
   - These `previous` references make up the edges in a graph, the operations being the nodes.
   - The graph describes the causal relationship between all operations in a document.
 
-:::info Fun fact
+:::tip Fun fact
 Some things that may be a document in p2panda: a blog post, a wiki page, a chat message, a user account, a configuration setting, a game board.
 :::
 
