@@ -16,11 +16,11 @@ const sidebars = {
   ],
   specification: [
     'specification/index',
+    'specification/encoding-data',
     {
       type: 'category',
       label: 'Data types',
       items: [
-        'specification/data-types/encoding-data',
         'specification/data-types/bamboo',
         'specification/data-types/key-pairs',
         'specification/data-types/operations',
@@ -31,20 +31,31 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Networking',
+      label: 'Core concepts',
       items: [
-        'specification/networking/clients-nodes',
-        'specification/networking/queries',
-        'specification/networking/discovery',
-        'specification/networking/replication',
+        'specification/core-concepts/concepts-documents',
+        'specification/core-concepts/concepts-schemas',
+        'specification/core-concepts/encryption',
+        'specification/core-concepts/permissions',
       ],
     },
     {
       type: 'category',
-      label: 'Collaboration',
+      label: 'APIs',
       items: [
-        'specification/collaboration/key-groups',
-        'specification/collaboration/secret-groups',
+        'specification/APIs/apis-overview',
+        'specification/APIs/publishing',
+        'specification/APIs/queries',
+        'specification/APIs/replication',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Networking',
+      items: [
+        'specification/networking/clients-nodes',
+        'specification/networking/discovery',
+        'specification/networking/replication-protocol',
       ],
     },
   ],
