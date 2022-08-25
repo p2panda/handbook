@@ -1,16 +1,16 @@
 import Layout from '@theme/Layout';
 import React from 'react';
 import clsx from 'clsx';
-import { ZooAdventures } from 'zoo-adventures';
-import LogoSVG from '@site/static/images/p2panda.svg';
-
-import styles from './index.module.css';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import { ZooAdventures } from 'zoo-adventures';
 
-const CYAN = '#81e0ff';
-const PINK = '#ff7dbf';
+import LogoSVG from '@site/static/images/p2panda.svg';
+import styles from './index.module.css';
+
 const BLUE = '#7e8eff';
+const CYAN = '#81e0ff';
 const GREEN = '#8dffe3';
+const PINK = '#ff7dbf';
 
 function Pentagon(props: {
   size: number;
@@ -75,8 +75,21 @@ function Logo(): JSX.Element {
 function Zoo(): JSX.Element {
   return (
     <div className={styles['zoo']}>
-      <div className={styles['zoo-inner']}>
-        <ZooAdventures />
+      <div className={styles['zoo-gameboy']}>
+        <p className={styles['zoo-title']}>Zoo Adventures</p>
+        <div className={styles['zoo-inner']}>
+          <ZooAdventures />
+        </div>
+        <p className={styles['zoo-about']}>
+          Play with the other animals in the zoo. Put 3x in a row to win.{' '}
+          <a
+            target="_blank"
+            href="https://github.com/p2panda/zoo-adventures"
+            rel="noreferrer"
+          >
+            What is this?
+          </a>
+        </p>
       </div>
     </div>
   );
@@ -120,7 +133,7 @@ export default function Home(): JSX.Element {
     >
       <Section className={styles['welcome-section']}>
         <Pentagon size={1000} color={CYAN} right margin={4} />
-        <Pentagon size={500} color={CYAN} margin={6} hideOnSmallDevices />
+        <Pentagon size={600} color={CYAN} margin={6} hideOnSmallDevices />
         <Title center text="p2panda is a protocol for local-first applications">
           Read more about it in the <a href="about">introduction</a>
         </Title>
@@ -160,7 +173,8 @@ export default function Home(): JSX.Element {
         <Pentagon size={750} color={GREEN} margin={4} right />
         <img src={useBaseUrl('/images/panda-pixel-1.png')} width="200" />
         <Title center text="Play with p2panda in Rust or TypeScript">
-          Explore the <a href="tutorials">Tutorials</a> and <a href="libraries">Libraries</a>
+          Explore the <a href="tutorials">Tutorials</a> and{' '}
+          <a href="libraries">Libraries</a>
         </Title>
         <Pentagon size={500} color={GREEN} margin={2} hideOnSmallDevices />
       </Section>
