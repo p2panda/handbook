@@ -3,7 +3,7 @@ id: permissions
 title: Permissions
 ---
 
-## Key Group
+# Key Group
 
 The `key_group` schema is a way to group a set of public keys so that they can act as a single identity. Every member key can have different permissions limiting the extent to which they can publish operations as this single identity. Keys can only be added to a key group with a confirmation from both the key itself and an existing member key with the according permissions. Key groups can also be extended with other key groups, which extends the set of keys in the former with those from the latter. Key groups can serve as a building block for many other concepts in p2panda including identity (handles/usernames), multi-device usage, permissions and moderation.
 lish operations for that key group's documents when their key group membership doesn't define the required permissions.
@@ -34,3 +34,112 @@ lish operations for that key group's documents when their key group membership d
   - if it points at an authorised document, continue from there
   - if a key group is found: that key group's keys are the document's authorised public keys.
 - operations of _authorised schemas_ are only materialised if they were created by a key pair included in the _authorised public keys_ of the operations's document and if that key pair membership has the required permissions for the operation.
+
+### Schema `key_group_v1`
+
+```
+name: string
+members: relation_list(key_group_membership_v1)
+```
+
+- the name of a key group should be chosen so that its purpose can be understood
+
+::: info Jam Queue
+By adding an `inverse: boolean` field here we could allow a) anyone to change a document (wow chaos) b) _exclude_ specific keys from editing a document.
+:::
+
+### Schema `key_group_membership_request_v1`
+
+```
+key_group: relation(key_group_v1)
+? member: owner(key_group_v1)
+```
+
+A _key group membership request_ is created in order to add its authoring public key to a key group. It says "Hey! Would you mind adding me to this key group?"
+
+The optional `member` field allows specifying a key group that requests membership instead of the public key that published this operation. A key group membership request that defines a `member` should only be considered valid if its authoring public key has a membership in that key group with `can_authorise` set to `true`.
+
+::: info Jam Queue
+If a `member` is defined and the membership has `can_authorise` set to false, the member key group can still change the key set of the parent key group by changing its own members. This could be prevented by making member a pinned relation.
+:::
+
+### Schema `key_group_membership_v1`
+
+```
+# defines the owner of this membership
+key_group: owner(key_group_v1)
+
+# points at the original membership request
+request: pinned_relation(key_group_membership_request_v1)
+
+# if set, limit this membership to the schema id specified
+? schema: string
+
+# set true to accept the request, can be set to `false` with a later update
+accepted: boolean
+
+# if true, this membership can authorise membership requests for the key group,  add the key group to other key groups and edit membership limits.
+can_authorise: boolean
+
+# if true, this membership can create documents owned by the key group
+can_create: boolean
+
+# if true, this membership can update documents owned by the key group
+can_update: boolean
+
+# if true, this membership can delete documents owned by the key group
+can_delete: boolean
+```
+
+A _key group membership_ is created to _accept_ or _reject_ a group membership request.
+
+If accepted, the public key that created the _key group membership request_ is now included in the key group's key set. If the membership request defines a `member` key group, that key group's key set is included instead.
+
+If rejected, all _key group membership requests_ by the same public key and the same `member` value should be considered invalid.
+
+### Schema Field Definition: Field Type `owner`
+
+- The field definition looks similar to `relation`
+- The schema id in the `references` field must reference an _authorised schema_. Any schema field definition for which this does not hold is invalid.
+
+## Example: chat schemas
+
+In this example we want to represent chat messages and their authors. Authors should have a name and a profile picture. We also want to make sure that only key pairs controlled by the author can publish chat messages that are linked to the author's name and picture.
+
+Instances of the `account` schema have an `author` pointing at a group that contains all public keys of a user and a `picture` that contains the profile picture as a `blob`.
+
+The `group` schema has a `name` field that we can use to represent the username but we need a way to link a profile picture to that. We create a new schema `account` that contains both an `owner(group)` and a `relation(blob)`.
+
+**Schema `account`:**
+
+```
+group: author_relation(group)
+picture: relation(blob)
+```
+
+Because it has an `author_relation`, operations for this `account` schema are only valid if they are signed by one of the keys contained in the key set referred to in the `author_relation`.
+
+Now we can create the schema for chat messages. It combines the chat message's content with a link to an instance of the `account` schema.
+
+**Schema `chat-message`:**
+
+```
+content: string
+author: author_relation(account)
+```
+
+Again, because this uses `author_relation`, operations for this schema are only valid when signed by one of the keys referred to by the `author_relation`.
+
+How could a query for this schema look like? This is a GraphQL schema for a query that retrieves `chat-message` instances, as well as the name and picture of their authors.
+
+```
+chat-message {
+    content,
+    author {
+        persona {
+            name
+        }
+        picture
+    }
+}
+```
