@@ -4,7 +4,9 @@
 
 .section {
   margin: 0 auto;
-  padding: 2em;
+  padding: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .pentagon-container {
@@ -204,6 +206,13 @@
   line-height: 1;
 }
 
+@media (max-width: 996px) {
+  .zoo-title {
+    font-size: 20px;
+    letter-spacing: 10px;
+  }
+}
+
 .zoo-about {
   margin-top: 1em;
   margin-bottom: 0;
@@ -219,16 +228,19 @@
   text-decoration: underline;
 }
 
-.sc-ftvSup {
-  display: none;
-}
-
 .zoo-gameboy {
   padding: 2em;
   width: 511px;
   background-color: #c8ffaf;
   border-radius: 10px;
   box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 996px) {
+  .zoo-gameboy {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
 }
 
 .zoo-inner {
@@ -239,6 +251,18 @@
   border-radius: 10px;
   height: 336px;
   overflow: hidden;
+}
+
+@media (max-width: 996px) {
+  .zoo-inner {
+    background-size: 110%;
+  }
+}
+
+@media (max-width: 503px) {
+  .zoo-inner {
+    background-size: 135%;
+  }
 }
 
 /*
