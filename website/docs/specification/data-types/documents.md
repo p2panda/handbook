@@ -22,7 +22,7 @@ Some things that may be a document in p2panda: a blog post, a wiki page, a chat 
 
 A document MUST contain exactly one _create_operation_.  
 A document's operation graph MUST NOT contain any cycles.  
-A document MUST NOT contain an operation who's `previous` refers to an operation not present in the documet's graph.
+A document MUST NOT contain an operation who's `previous` refers to an operation not present in the document's graph.
 
 :::
 
