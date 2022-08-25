@@ -26,7 +26,7 @@ const sidebars = {
         'specification/data-types/operations',
         'specification/data-types/schemas',
         'specification/data-types/documents',
-        'specification/data-types/materialization',
+        'specification/data-types/document-views',
       ],
     },
     {
