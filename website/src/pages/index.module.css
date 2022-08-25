@@ -1,0 +1,71 @@
+.wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2em;
+}
+
+.title {
+  margin-top: 1em;
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+@media (max-width: 996px) {
+  .title {
+    font-size: 2.5rem;
+  }
+}
+
+.subtitle {
+  max-width: 12em;
+  margin-top: 2em;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: var(--ifm-color-gray-700);
+}
+
+@media (max-width: 996px) {
+  .subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+.subtitle a {
+  color: var(--ifm-color-gray-700);
+  text-decoration: var(--ifm-link-hover-decoration);
+}
+
+.pentagon-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  overflow-y: hidden;
+  z-index: -1;
+  padding: 100px;
+}
+
+@media (max-width: 996px) {
+  .pentagon-container-small-hide {
+    display: none;
+  }
+}
+
+.pentagon-position {
+  position: absolute;
+  transform: translate3d(0, -20%, 0);
+}
+
+.panda-zoo {
+  width: 447px;
+  height: 336px;
+  margin: 0 auto;
+}
+
+.panda-zoo-inner {
+  width: 447px;
+  height: 336px;
+  background-image: url('/images/game-background.jpg');
+  background-size: contain;
+  box-shadow: inset 0 0 20px 0 rgba(0,0,0,0.6);
+}
