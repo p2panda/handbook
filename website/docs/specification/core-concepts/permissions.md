@@ -24,31 +24,35 @@ lish operations for that key group's documents when their key group membership d
 
 ## Authorised Schemas
 
-- authorised schemas define a key group as the owner of documents created with them
-  - use an authorised schema when you want to enable all key group members with according permissions to update or delete that document
-  - documents created from authorised schemas are called _authorised documents_
-- schemas are _authorised schemas_ if they contain a single field of type `owner` that contains
-  - either the document view id of a key group
+- Authorised schemas define a key group as the owner of documents created with them.
+  - Use an authorised schema when you want to enable all key group members with according permissions to update or delete that document.
+  - Documents created from authorised schemas are called _authorised documents_.
+- Schemas are _authorised schemas_ if they contain a single field of type `owner` that contains:
+  - either the document view id of a key group,
   - or the document view id of another authorised document.
 - Every document of an _authorised schema_ has a set of _authorised public keys_. This set can be created by looking at the document pointed at by the `owner` type field:
   - if it points at an authorised document, continue from there
   - if a key group is found: that key group's keys are the document's authorised public keys.
-- operations of _authorised schemas_ are only materialised if they were created by a key pair included in the _authorised public keys_ of the operations's document and if that key pair membership has the required permissions for the operation.
+- Operations of _authorised schemas_ are only materialised if they were created by a key pair included in the _authorised public keys_ of the operations's document and if that key pair membership has the required permissions for the operation.
 
-### Schema `key_group_v1`
+### Key groups
+
+#### Schema `key_group_v1`
 
 ```
 name: string
 members: relation_list(key_group_membership_v1)
 ```
 
-- the name of a key group should be chosen so that its purpose can be understood
+- The name of a key group should be chosen so that its purpose can be understood.
 
-::: info Jam Queue
+:::tip Jam Queue
 By adding an `inverse: boolean` field here we could allow a) anyone to change a document (wow chaos) b) _exclude_ specific keys from editing a document.
 :::
 
-### Schema `key_group_membership_request_v1`
+### Memberships
+
+#### Schema `key_group_membership_request_v1`
 
 ```
 key_group: relation(key_group_v1)
@@ -59,11 +63,11 @@ A _key group membership request_ is created in order to add its authoring public
 
 The optional `member` field allows specifying a key group that requests membership instead of the public key that published this operation. A key group membership request that defines a `member` should only be considered valid if its authoring public key has a membership in that key group with `can_authorise` set to `true`.
 
-::: info Jam Queue
+:::info Jam Queue
 If a `member` is defined and the membership has `can_authorise` set to false, the member key group can still change the key set of the parent key group by changing its own members. This could be prevented by making member a pinned relation.
 :::
 
-### Schema `key_group_membership_v1`
+#### Schema `key_group_membership_v1`
 
 ```
 # defines the owner of this membership
@@ -97,12 +101,12 @@ If accepted, the public key that created the _key group membership request_ is n
 
 If rejected, all _key group membership requests_ by the same public key and the same `member` value should be considered invalid.
 
-### Schema Field Definition: Field Type `owner`
+## Schema Field Definition: Field Type `owner`
 
 - The field definition looks similar to `relation`
 - The schema id in the `references` field must reference an _authorised schema_. Any schema field definition for which this does not hold is invalid.
 
-## Example: chat schemas
+## Example: Chat Schema
 
 In this example we want to represent chat messages and their authors. Authors should have a name and a profile picture. We also want to make sure that only key pairs controlled by the author can publish chat messages that are linked to the author's name and picture.
 
