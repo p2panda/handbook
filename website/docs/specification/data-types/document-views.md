@@ -6,7 +6,7 @@ title: Document views
 - _document views_ represent the immutable state of a document at a particular point in its history of edits
   - every change of a document results in a new document view
 - a _document view_ is the result of applying a series of operations from a _document_
-  - see [reduction](/specification/data-types/materialization#reduction) and [reconciliation](/specification/data-types/materialization#reconciliation) for further details
+  - see [reduction](/specification/data-types/documents#reduction) and [reconciliation](/specification/data-types/documents#reconciliation) for further details
 - a document view has a value for all fields that are defined by its document's schema unless the document has been deleted
 
 :::info Factoid: Latest document view

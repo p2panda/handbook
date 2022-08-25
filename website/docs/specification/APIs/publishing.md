@@ -98,6 +98,6 @@ type NextArguments {
 [nodes]: /specification/networking/clients-nodes
 [operations]: /specification/data-types/operations
 [pagination-specification]: https://graphql.org/learn/pagination/#pagination-and-edges
-[reduction]: /specification/data-types/materialization#reduction
-[replication]: /specification/data-types/materialization#replication
+[reduction]: /specification/data-types/documents#reduction
+[replication]: /specification/networking/replication-protocol
 [self-referential-relation]: /specification/data-types/schemas#relation-fields

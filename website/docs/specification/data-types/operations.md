@@ -129,11 +129,11 @@ The type of all operation field values MUST match the corresponding field in the
 
 - Clients can use operations to publish data changes.
 - Clients must embed operations in bamboo entries to publish them.
-- Clients can create a [document](/specification/data-types/documents#documents) by publishing a CREATE operation.
+- Clients can create a [document](/specification/data-types/documents) by publishing a CREATE operation.
 - Clients can update a document by publishing an _update operation_.
   - Every _update operation_ leads to a new _document view_ of the document that is being updated.
 - Clients can delete a document by publishing a _delete operation_.
-- Nodes can [reduce](/specification/data-types/materialization#reduction) operations to produce a specific _document view_ of their document.
+- Nodes can [reduce](/specification/data-types/documents#reduction) operations to produce a specific _document view_ of their document.
 - Clients can delete a document by publishing a _delete operation_.
 
 :::note Requirement OP9
