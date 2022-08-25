@@ -164,6 +164,7 @@
   right: 20%;
   top: 270px;
   width: 350px;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, .2));
 }
 
 @media (max-width: 996px) {

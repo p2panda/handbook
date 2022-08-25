@@ -122,7 +122,7 @@ export default function Home(): JSX.Element {
         <Pentagon size={1000} color={CYAN} right margin={4} />
         <Pentagon size={500} color={CYAN} margin={6} hideOnSmallDevices />
         <Title center text="p2panda is a protocol for local-first applications">
-          Read more about it in the <a href="">introduction</a>
+          Read more about it in the <a href="about">introduction</a>
         </Title>
         <Logo />
       </Section>
@@ -133,7 +133,7 @@ export default function Home(): JSX.Element {
         <Pentagon size={1500} color={PINK} margin={2} shift />
         <Drawing url="/images/panda-artwork-2.png" />
         <Title text="Collaborative peer-to-peer networks" right>
-          <a href="">Learn</a> more about the concepts of p2panda
+          <a href="learn">Learn</a> more about the concepts of p2panda
         </Title>
         <Pentagon
           size={700}
@@ -151,7 +151,7 @@ export default function Home(): JSX.Element {
       <Section>
         <Pentagon size={1000} color={BLUE} margin={4} right />
         <Title text="Open protocol specification and research">
-          <a href="">Read</a> the specification
+          <a href="specification">Read</a> the specification
         </Title>
         <Drawing url="/images/panda-artwork-1.png" />
       </Section>
@@ -160,7 +160,7 @@ export default function Home(): JSX.Element {
         <Pentagon size={750} color={GREEN} margin={4} right />
         <img src={useBaseUrl('/images/panda-pixel-1.png')} width="200" />
         <Title center text="Play with p2panda in Rust or TypeScript">
-          Explore the <a href="">Tutorials</a> and <a href="">Libraries</a>
+          Explore the <a href="tutorials">Tutorials</a> and <a href="libraries">Libraries</a>
         </Title>
         <Pentagon size={500} color={GREEN} margin={2} hideOnSmallDevices />
       </Section>
