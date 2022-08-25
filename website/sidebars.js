@@ -16,6 +16,7 @@ const sidebars = {
   ],
   specification: [
     'specification/index',
+    'specification/encoding-data',
     {
       type: 'category',
       label: 'Data types',
@@ -25,7 +26,27 @@ const sidebars = {
         'specification/data-types/operations',
         'specification/data-types/schemas',
         'specification/data-types/documents',
-        'specification/data-types/materialization',
+        'specification/data-types/document-views',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Core concepts',
+      items: [
+        'specification/core-concepts/concepts-documents',
+        'specification/core-concepts/concepts-schemas',
+        'specification/core-concepts/encryption',
+        'specification/core-concepts/permissions',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'APIs',
+      items: [
+        'specification/APIs/apis-overview',
+        'specification/APIs/publishing',
+        'specification/APIs/queries',
+        'specification/APIs/replication',
       ],
     },
     {
@@ -33,17 +54,8 @@ const sidebars = {
       label: 'Networking',
       items: [
         'specification/networking/clients-nodes',
-        'specification/networking/queries',
         'specification/networking/discovery',
-        'specification/networking/replication',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Collaboration',
-      items: [
-        'specification/collaboration/key-groups',
-        'specification/collaboration/secret-groups',
+        'specification/networking/replication-protocol',
       ],
     },
   ],
