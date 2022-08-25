@@ -18,7 +18,7 @@ title: Documents
 Some things that may be a document in p2panda: a blog post, a wiki page, a chat message, a user account, a configuration setting, a game board.
 :::
 
-:::note Requirement DO1
+:::caution Requirement DO1
 
 A document MUST contain exactly one _create_operation_.  
 A document's operation graph MUST NOT contain any cycles.  
@@ -39,7 +39,7 @@ Although here we describe the resolving an operation graph as a property of the 
 - The first step we take is to sort and linearise the document's graph of operations deterministically.
 - We do this by applying a topological depth-first sorting algorithm which meets the following requirements:
 
-:::note Requirement DO2
+:::caution Requirement DO2
 
 Sorting MUST start from the documents CREATE operation.  
 An operation which refers to the current operation in it's `previous` field MUST be sorted next.  

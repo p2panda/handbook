@@ -22,7 +22,7 @@ The most common document view you will encounter is the current state of a docum
   - if a limited size identifier is required, the document view's _hash id_ can be used
     - to construct the hash id sort the graph tips of a document view id, concatenate their byte values and hash the result using YASMF.
 
-:::note Requirement DV1
+:::caution Requirement DV1
 Following Requirement EN2, operations in a document view id MUST be lexicographically sorted before encoding and when generating a _hash id_.
 :::
 
