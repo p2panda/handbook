@@ -31,12 +31,21 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'APIs',
+      items: [
+        'specification/APIs/apis-overview',
+        'specification/APIs/publishing',
+        'specification/APIs/queries',
+        'specification/APIs/replication',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Networking',
       items: [
         'specification/networking/clients-nodes',
-        'specification/networking/queries',
         'specification/networking/discovery',
-        'specification/networking/replication',
+        'specification/networking/replication-protocol',
       ],
     },
     {
