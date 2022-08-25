@@ -3,7 +3,6 @@ import Layout from '@theme/Layout';
 import React from 'react';
 import clsx from 'clsx';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import { ZooAdventures } from 'zoo-adventures';
 
 import LogoSVG from '@site/static/images/p2panda.svg';
 import styles from './index.module.css';
@@ -81,6 +80,8 @@ function Zoo(): JSX.Element {
         <div className={styles['zoo-inner']}>
           <BrowserOnly>
             {() => {
+              // eslint-disable-next-line @typescript-eslint/no-var-requires
+              const { ZooAdventures } = require('zoo-adventures');
               return <ZooAdventures />;
             }}
           </BrowserOnly>
