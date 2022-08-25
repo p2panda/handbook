@@ -47,12 +47,11 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "p2🐼",
-        // @TODO: Check if we still need this here
-        /* logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
-        }, */
+        hideOnScroll: true,
+        logo: {
+          alt: 'p2panda Handbook',
+          src: 'images/handbook.png',
+        },
         items: [
           {
             type: 'doc',
@@ -100,8 +99,7 @@ const config = {
       },
       footer: {
         style: 'light',
-        // @TODO: Some much more fun license here
-        copyright: `Copyright © ${new Date().getFullYear()} p2panda contributors`,
+        copyright: 'CC BY-SA 4.0',
       },
       colorMode: {
         disableSwitch: true, // Do not show light/dark mode switch

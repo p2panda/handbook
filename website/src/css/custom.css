@@ -1,12 +1,75 @@
+@font-face {
+  font-family: "Covik Sans Mono";
+  src: url('/fonts/Covik_Sans_Mono-Regular.woff2') format('woff2'),
+       url('/fonts/Covik_Sans_Mono-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Covik Sans Mono";
+  src: url('/fonts/Covik_Sans_Mono-Italic.woff2') format('woff2'),
+       url('/fonts/Covik_Sans_Mono-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Covik Sans Mono";
+  src: url('/fonts/Covik_Sans_Mono-Medium.woff2') format('woff2'),
+       url('/fonts/Covik_Sans_Mono-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Covik Sans Mono";
+  src: url('/fonts/Covik_Sans_Mono-Semibold.woff2') format('woff2'),
+       url('/fonts/Covik_Sans_Mono-Semibold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Covik Sans Mono";
+  src: url('/fonts/Covik_Sans_Mono-Bold.woff2') format('woff2'),
+       url('/fonts/Covik_Sans_Mono-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Covik Sans Mono";
+  src: url('/fonts/Covik_Sans_Mono-Black.woff2') format('woff2'),
+       url('/fonts/Covik_Sans_Mono-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Metamor Bit";
+  src: url('/fonts/MetamorBit.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-font-family-base: 'Covik Sans Mono';
+  --ifm-font-family-monospace: 'Covik Sans Mono';
+  --ifm-font-weight-normal: 700;
+  --ifm-color-primary: #3465a4;
+  --ifm-color-primary-dark: #2f5b94;
+  --ifm-color-primary-darker: #2c568b;
+  --ifm-color-primary-darkest: #244773;
+  --ifm-color-primary-light: #396fb4;
+  --ifm-color-primary-lighter: #3c74bd;
+  --ifm-color-primary-lightest: #5185c8;
   --ifm-code-font-size: 95%;
+  --ifm-toc-border-color: transparent;
+  --ifm-footer-background-color: transparent;
+  --ifm-footer-color: #666;
+  --ifm-alert-shadow: 0;
+  --ifm-alert-border-radius: 0;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
@@ -19,4 +82,63 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Docusaurus */
+
+.navbar__sidebar,
+.navbar-sidebar__brand,
+.navbar {
+  box-shadow: none;
+}
+
+.navbar__item {
+  font-weight: 600;
+}
+
+.navbar__items--right .navbar__item {
+  color: var(--ifm-color-primary);
+}
+
+@media (max-width: 996px) {
+  .navbar__logo {
+    display: none;
+  }
+
+  .navbar__toggle .navbar__logo,
+  .navbar-sidebar__brand .navbar__logo {
+    display: block;
+  }
+}
+
+.footer {
+  text-align: center;
+  max-width: 40em;
+  margin: 0 auto;
+}
+
+/* Custom */
+
+.panda-footer-img {
+  display: block;
+  margin: 2em auto;
+}
+
+.panda-support {
+  margin-top: 4em;
+}
+
+.panda-support-img {
+  margin: 0.5em;
+}
+
+.panda-copyright,
+.panda-support-text {
+  margin: 2em;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.panda-icon {
+  font-size: 1.1rem;
 }
