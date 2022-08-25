@@ -1,3 +1,4 @@
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import Layout from '@theme/Layout';
 import React from 'react';
 import clsx from 'clsx';
@@ -78,7 +79,11 @@ function Zoo(): JSX.Element {
       <div className={styles['zoo-gameboy']}>
         <p className={styles['zoo-title']}>Zoo Adventures</p>
         <div className={styles['zoo-inner']}>
-          <ZooAdventures />
+          <BrowserOnly>
+            {() => {
+              return <ZooAdventures />;
+            }}
+          </BrowserOnly>
         </div>
         <p className={styles['zoo-about']}>
           Play with the other animals in the zoo. Put 3x in a row to win.{' '}
