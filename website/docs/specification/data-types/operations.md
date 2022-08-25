@@ -17,7 +17,7 @@ The _operation id_ uniquely identifies an operation. It is equal to the hash of 
 ## Encoding Format
 
 - CBOR is a binary encoding that is used to encode the contents of an operation and produce bytes that can be associated with a Bamboo entry, stored, and sent over a network connection.
-- Operations are encoded as arrays of items, described in more detai below.
+- Operations are encoded as arrays of items, described in more detail below.
 
 :::note Requirement OP1
 
