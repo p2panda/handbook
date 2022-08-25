@@ -82,7 +82,7 @@ const config = {
             docId: 'specification/index',
             position: 'left',
             label: 'Specification',
-          },
+          },          
           {
             type: 'doc',
             docId: 'faq',

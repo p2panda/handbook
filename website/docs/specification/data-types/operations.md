@@ -17,9 +17,9 @@ The _operation id_ uniquely identifies an operation. It is equal to the hash of 
 ## Encoding Format
 
 - CBOR is a binary encoding that is used to encode the contents of an operation and produce bytes that can be associated with a Bamboo entry, stored, and sent over a network connection.
-- Operations are encoded as arrays of items, described in more detai below.
+- Operations are encoded as arrays of items, described in more detail below.
 
-:::note Requirement OP1
+:::caution Requirement OP1
 
 An operation MUST be encoded using hexadecimal encoded [CBOR][cbor] with the following format:
 
@@ -35,7 +35,7 @@ Operations MUST NOT contain any additional items.
 
 - The operation version is the version of the p2panda specification that is followed by that operation.
 
-:::note Requirement OP2
+:::caution Requirement OP2
 
 Every operation MUST have an _operation version_. An operation version MUST be a positive integer number. An operation version MUST NOT be larger than 256.
 
@@ -55,7 +55,7 @@ There are 3 types of operation:
 
 :::
 
-:::note Requirement OP3
+:::caution Requirement OP3
 
 Every operation MUST have an _operation action_, which MUST be one of
 
@@ -70,7 +70,7 @@ Every operation MUST have an _operation action_, which MUST be one of
 - The schema of an operation may define additional requirements for the operation's action, previous and fields items.
   - See the [schema](/specification/data-types/schemas) section for more details.
 
-:::note Requirement OP4
+:::caution Requirement OP4
 
 Every operation MUST have a [schema id](/specification/data-types/schemas).
 
@@ -84,7 +84,7 @@ Every operation MUST have a [schema id](/specification/data-types/schemas).
   - In the case where a graph has no un-merged branches, this array will contain only one id (the resolved graph tip).
   - Publishing an operation which identifies more than one graph tip effectively merges these branches into one.
 
-:::note Requirement OP5
+:::caution Requirement OP5
 
 DELETE and UPDATE operations MUST have _previous_ with `length > 0`. CREATE operations MUST NOT have _previous_.
 
@@ -101,7 +101,7 @@ DELETE and UPDATE operations MUST have _previous_ with `length > 0`. CREATE oper
 - The schema defined by the schema id item of the operation specifies the name and type of each field which can be included in an operation.
 - In order to deserialise typed field values, a copy of the schema is required.
 
-:::note Requirement OP6
+:::caution Requirement OP6
 
 A CREATE operation MUST contain all fields defined by the operation's _operation schema_.
 An UPDATE operation MAY contain any combination of fields from the operation's _operation schema_.
@@ -109,7 +109,7 @@ A DELETE operation MUST NOT contain any fields.
 
 :::
 
-:::note Requirement OP7
+:::caution Requirement OP7
 
 The encoding reflects the core data types of CBOR while they MUST be interpreted as p2panda operation values when decoding with the help of a schema:
 
@@ -119,7 +119,7 @@ The encoding reflects the core data types of CBOR while they MUST be interpreted
 
 :::
 
-:::note Requirement OP8
+:::caution Requirement OP8
 
 The type of all operation field values MUST match the corresponding field in the operation's schema.
 
@@ -129,14 +129,14 @@ The type of all operation field values MUST match the corresponding field in the
 
 - Clients can use operations to publish data changes.
 - Clients must embed operations in bamboo entries to publish them.
-- Clients can create a [document](/specification/data-types/documents#documents) by publishing a CREATE operation.
+- Clients can create a [document](/specification/data-types/documents) by publishing a CREATE operation.
 - Clients can update a document by publishing an _update operation_.
   - Every _update operation_ leads to a new _document view_ of the document that is being updated.
 - Clients can delete a document by publishing a _delete operation_.
-- Nodes can [reduce](/specification/data-types/materialization#reduction) operations to produce a specific _document view_ of their document.
+- Nodes can [reduce](/specification/data-types/documents#reduction) operations to produce a specific _document view_ of their document.
 - Clients can delete a document by publishing a _delete operation_.
 
-:::note Requirement OP9
+:::caution Requirement OP9
 
 Nodes MUST delete all operations of a document once it has been deleted. (_note: this should probably go into the documents section_).
 

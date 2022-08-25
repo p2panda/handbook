@@ -5,7 +5,7 @@ title: Bamboo
 
 - requirements in this section refer only to how p2panda specifies use of bamboo
 
-:::note Requirement BA1
+:::caution Requirement BA1
 
 p2panda uses [Bamboo Ed25519 Yasmf][bamboo_spec] to encode data.
 
@@ -21,7 +21,7 @@ p2panda uses [Bamboo Ed25519 Yasmf][bamboo_spec] to encode data.
 
 ### Hashing
 
-:::note Requirement BA2
+:::caution Requirement BA2
 
 [_Yet Another Smol Multifactor Hash_ (YASMF)][yasmf] MUST be used to produce hashes for Bamboo entries and payloads.
 
@@ -35,7 +35,7 @@ p2panda uses [Bamboo Ed25519 Yasmf][bamboo_spec] to encode data.
 
 ### Encoding
 
-:::note Requirement BA3
+:::caution Requirement BA3
 
 Bamboo entries MUST be encoded using hexadecimal encoding.
 

@@ -3,13 +3,11 @@ id: key-pairs
 title: Key Pairs
 ---
 
-:::note Requirement KY1
+:::caution Requirement KY1
 
 Key pairs MUST use ED25519 keys.
 
 :::
-
-
 
 Correct hexadecimal encoding (when using human-readable encoding format) (#OP1)
 
@@ -25,7 +23,7 @@ Correct hexadecimal encoding (when using human-readable encoding format) (#OP1)
 
 ## Key Management
 
-:::note Requirement KY2
+:::caution Requirement KY2
 
 p2panda clients SHOULD generate a new key pair for every new usage context. The boundaries of a usage context are defined by 1) device storage, 2) software distribution and 3) trust.
 
@@ -34,13 +32,13 @@ p2panda clients SHOULD generate a new key pair for every new usage context. The 
 - This lowers the chance of producing a fork in a Bamboo log.
   - A Bamboo log has a fork when two entries with the same sequence number exist in it.
 
-:::note Requirement KY3
+:::caution Requirement KY3
 
 p2panda clients SHOULD ensure that private keys cannot be read by adversaries.
 
 :::
 
-:::note Requirement KY4
+:::caution Requirement KY4
 
 p2panda clients SHOULD NOT require the transmission of a private key outside a usage context.
 

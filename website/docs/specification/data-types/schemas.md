@@ -55,7 +55,7 @@ title: Schemas
 - encode a _relation_ to one or many other _documents_
 - all relation fields MUST define a schema that all referenced documents must conform to
 - _relation_ fields MAY be self-referential in that their target is of the same schema
-  - self-referential relations MAY be interpreted as instance ordering in [queries](/specification/networking/queries)
+  - self-referential relations MAY be interpreted as instance ordering in [queries](/specification/APIs/queries)
 - there are four kinds of relation fields
   - relations represent the whole referenced document through their _document id_
     - _relation_: reference to a single document
@@ -67,7 +67,7 @@ title: Schemas
 ## System and Application Schemas
 
 - _system schemas_ are defined as part of the p2panda specification
-  - system schemas MAY have unique procedures for [_reduction_](/specification/data-types/materialization#reduction), [_reconciliation_](/specification/data-types/materialization#reconciliation) and _persistence_ of their documents
+  - system schemas MAY have unique procedures for [_reduction_](/specification/data-types/documents#reduction), [_reconciliation_](/specification/data-types/documents#reconciliation) and _persistence_ of their documents
   - the format of system schema operations can be validated by their CDDL definitions
 - _application schemas_ are published by developers
   - they are used to validate the format of application specific data
@@ -127,4 +127,4 @@ title: Schemas
       - `<schema_id>` in the above listing needs to be a valid schema id
       - documents referenced by any relation field, to which this schema field definition applies, need to be of this schema
       - e.g. if you are publishing an operation to update a field with the type `relation(key_group_v1)`, the field value
-      needs to be the document id of a `key_group_v1` document
+        needs to be the document id of a `key_group_v1` document
