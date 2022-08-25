@@ -17,7 +17,7 @@ lish operations for that key group's documents when their key group membership d
 - Specific _permissions_ can be defined for members of a key group.
   - A membership can be limited to publishing operations in specific schemas.
   - A membership can be limited to specific operation actions (e.g. excluding `DELETE` actions).
-- Specific _permissions_ can be defined for individual keys of a key group.
+    8- Specific _permissions_ can be defined for individual keys of a key group.
 - Developers can make key groups the owners of a schema's documents by creating an _authorised schema_.
   - Key group members can publish operations for documents that define the key group as their owner.
   - Key group members can not publish operations for that key group's documents when their key group membership doesn't define the required permissions.
@@ -108,20 +108,19 @@ If rejected, all _key group membership requests_ by the same public key and the 
 
 ## Example: Chat Schema
 
-In this example we want to represent chat messages and their authors. Authors should have a name and a profile picture. We also want to make sure that only key pairs controlled by the author can publish chat messages that are linked to the author's name and picture.
+In this example we want to represent chat messages and their authors. Authors should have a name and a profile picture. We also want to make sure that only key pairs controlled by the author can publish chat messages that are linked to the auth(or)'s name and picture.
 
-Instances of the `account` schema have an `author` pointing at a group that contains all public keys of a user and a `picture` that contains the profile picture as a `blob`.
-
-The `group` schema has a `name` field that we can use to represent the username but we need a way to link a profile picture to that. We create a new schema `account` that contains both an `owner(group)` and a `relation(blob)`.
+Instances of the new `account` schema have an `owner` pointing at a key group that contains all public keys of a user and a `picture` that contains the profile picture as a base64-encoded `string`.
+We can use the name field on the key group as an account user name.
 
 **Schema `account`:**
 
 ```
-group: author_relation(group)
-picture: relation(blob)
+group: owner(key_group_v1)
+picture: string
 ```
 
-Because it has an `author_relation`, operations for this `account` schema are only valid if they are signed by one of the keys contained in the key set referred to in the `author_relation`.
+Because it has an `owner`, operations for this `account` schema are only valid if they are signed by one of the keys contained in the key group referred to in the `owner`.
 
 Now we can create the schema for chat messages. It combines the chat message's content with a link to an instance of the `account` schema.
 
@@ -129,21 +128,27 @@ Now we can create the schema for chat messages. It combines the chat message's c
 
 ```
 content: string
-author: author_relation(account)
+author: owner(account)
 ```
 
-Again, because this uses `author_relation`, operations for this schema are only valid when signed by one of the keys referred to by the `author_relation`.
+Again, because this uses `owner`, operations for this schema are only valid when signed by one of the keys referred to by the `owner`.
 
 How could a query for this schema look like? This is a GraphQL schema for a query that retrieves `chat-message` instances, as well as the name and picture of their authors.
 
 ```
 chat-message {
-    content,
-    author {
-        persona {
-            name
+    fields {
+      content,
+      author {
+        fields {
+          picture,
+          group {
+            fields {
+              name
+            }
+          }
         }
-        picture
+
     }
 }
 ```
