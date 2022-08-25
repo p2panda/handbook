@@ -55,7 +55,7 @@ title: Schemas
 - encode a _relation_ to one or many other _documents_
 - all relation fields MUST define a schema that all referenced documents must conform to
 - _relation_ fields MAY be self-referential in that their target is of the same schema
-  - self-referential relations MAY be interpreted as instance ordering in [queries](/specification/networking/queries)
+  - self-referential relations MAY be interpreted as instance ordering in [queries](/specification/APIs/queries)
 - there are four kinds of relation fields
   - relations represent the whole referenced document through their _document id_
     - _relation_: reference to a single document

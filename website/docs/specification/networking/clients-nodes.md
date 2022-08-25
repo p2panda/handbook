@@ -47,8 +47,8 @@ title: Clients and nodes
 
 [aquadoggo]: https://github.com/p2panda/aquadoggo
 [beep_boop]: https://github.com/p2panda/beep-boop
-[key_groups]: /specification/collaboration/key-groups
+[key_groups]: /specification/core-concepts/permissions
 [p2panda]: https://github.com/p2panda/p2panda
-[queries]: /specification/networking/queries
-[replication]: /specification/networking/replication
+[queries]: /specification/APIs/queries
+[replication]: /specification/APIs/replication
 [tauri]: https://tauri.studio/

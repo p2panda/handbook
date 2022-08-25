@@ -157,4 +157,4 @@ type PageInfo {
 ```
 
 [qp2p]: https://github.com/maidsafe/qp2p
-[queries]: /specification/networking/queries
+[queries]: /specification/APIs/queries

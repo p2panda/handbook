@@ -55,4 +55,4 @@ title: Replication Protocol
 4. Node `A` paginates through the response until it downloaded all new entries, it validates them locally and stores them in its database. Node `A` can make use of the `certificatePool` field of `EncodedEntryAndOperation` if it doesn't have the full log locally to verify it
 
 [qp2p]: https://github.com/maidsafe/qp2p
-[queries]: /specification/networking/queries
+[queries]: /specification/APIs/queries
