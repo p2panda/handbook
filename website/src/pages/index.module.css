@@ -207,7 +207,7 @@
   color: var(--ifm-color-black);
 }
 
-@media (max-width: 996px) {
+@media (max-width: 540px) {
   .zoo-title {
     font-size: 20px;
     letter-spacing: 10px;
@@ -253,6 +253,10 @@
   border-radius: 10px;
   height: 336px;
   overflow: hidden;
+}
+
+[data-theme='dark'] .zoo-inner {
+  background-image: url('/images/game-background-night.png');
 }
 
 @media (max-width: 996px) {

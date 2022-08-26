@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
@@ -7,13 +9,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'p2panda',
-  tagline: 'Official p2panda website',
+  tagline: 'p2panda is a protocol for local-first applications',
   url: 'https://p2panda.org',
   // @TODO: Change this to `/` for replacing p2panda.org with this docusaurus
   baseUrl: '/handbook/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'images/p2panda.svg',
 
   // GitHub pages deployment config.
   organizationName: 'p2panda',
@@ -98,7 +100,6 @@ const config = {
         ],
       },
       footer: {
-        style: 'light',
         copyright: 'CC BY-SA 4.0',
       },
       colorMode: {

@@ -24,10 +24,26 @@
 
 @font-face {
   font-family: "Covik Sans Mono";
+  src: url('/fonts/Covik_Sans_Mono-Medium_Italic.woff2') format('woff2'),
+       url('/fonts/Covik_Sans_Mono-Medium_Italic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Covik Sans Mono";
   src: url('/fonts/Covik_Sans_Mono-Semibold.woff2') format('woff2'),
        url('/fonts/Covik_Sans_Mono-Semibold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
+}
+
+@font-face {
+  font-family: "Covik Sans Mono";
+  src: url('/fonts/Covik_Sans_Mono-Semibold_Italic.woff2') format('woff2'),
+       url('/fonts/Covik_Sans_Mono-Semibold_Italic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
 }
 
 @font-face {
@@ -40,10 +56,10 @@
 
 @font-face {
   font-family: "Covik Sans Mono";
-  src: url('/fonts/Covik_Sans_Mono-Black.woff2') format('woff2'),
-       url('/fonts/Covik_Sans_Mono-Black.woff') format('woff');
-  font-weight: 900;
-  font-style: normal;
+  src: url('/fonts/Covik_Sans_Mono-Bold_Italic.woff2') format('woff2'),
+       url('/fonts/Covik_Sans_Mono-Bold_Italic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
 }
 
 @font-face {
@@ -74,6 +90,13 @@
 
 [data-theme='dark'] {
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Somehow setting --ifm-toc-border-color gets ignored in dark mode, we have to
+ * enforce removing borders manually */
+[data-theme='dark'] aside,
+[data-theme='dark'] .table-of-contents {
+  border: 0 !important;
 }
 
 /* Navbar */
