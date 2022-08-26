@@ -15,13 +15,16 @@
 <h1>Class OperationFields</h1></div>
 <section class="tsd-panel tsd-comment">
 <div class="tsd-comment tsd-typography"><p>Operation fields containing application data.</p>
+
+<h3>Example</h3><pre><code><span class="hl-2">import</span><span class="hl-1"> { </span><span class="hl-0">OperationFields</span><span class="hl-1">, </span><span class="hl-0">encodeOperation</span><span class="hl-1"> } </span><span class="hl-2">from</span><span class="hl-1"> </span><span class="hl-3">&#39;p2panda-js&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">fields</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">OperationFields</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-0">name:</span><span class="hl-1"> </span><span class="hl-3">&#39;Panda Party!&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-0">fields</span><span class="hl-1">.</span><span class="hl-6">insert</span><span class="hl-1">(</span><br/><span class="hl-1">  </span><span class="hl-3">&#39;venue&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">&#39;relation&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-3">&#39;002078619bd4beff4bec4d4ccf75a7a5c25bf5d3c37fbd051a45debf1f17a1f75230&#39;</span><br/><span class="hl-1">);</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">operation</span><span class="hl-1"> = </span><span class="hl-6">encodeOperation</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-0">schemaId:</span><span class="hl-1"> </span><span class="hl-3">&#39;events_00203ebb383f195f2923d51ac9929a8dbf7fba65dcddff874dfbe5ef131362696636&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-0">fields</span><span class="hl-1">,</span><br/><span class="hl-1">});</span>
+</code></pre>
 </div></section>
 <section class="tsd-panel tsd-hierarchy">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
 <li><span class="target">OperationFields</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/1ae1434/p2panda-js/src/operation/operationFields.ts#L31">operation/operationFields.ts:31</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/02e4e9c/p2panda-js/src/operation/operationFields.ts#L50">operation/operationFields.ts:50</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -48,6 +51,9 @@
 <div class="tsd-comment tsd-typography"><p>Creates a new instance of <code>OperationFields</code>.</p>
 
 <h3>Returns</h3><p>OperationFields instance</p>
+
+<h3>Example</h3><pre><code><span class="hl-2">import</span><span class="hl-1"> { </span><span class="hl-0">OperationFields</span><span class="hl-1"> } </span><span class="hl-2">from</span><span class="hl-1"> </span><span class="hl-3">&#39;p2panda-js&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">fields</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">OperationFields</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-0">hasDate:</span><span class="hl-1"> </span><span class="hl-4">true</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-0">latestYear:</span><span class="hl-1"> </span><span class="hl-13">2002</span><span class="hl-1">,</span><br/><span class="hl-1">});</span>
+</code></pre>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -62,7 +68,7 @@ used here</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="OperationFields.html" class="tsd-signature-type" data-tsd-kind="Class">OperationFields</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/1ae1434/p2panda-js/src/operation/operationFields.ts#L46">operation/operationFields.ts:46</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/02e4e9c/p2panda-js/src/operation/operationFields.ts#L74">operation/operationFields.ts:74</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="insert" class="tsd-anchor"></a>
@@ -71,6 +77,9 @@ used here</p>
 <li class="tsd-signature tsd-anchor-link" id="insert.insert-1">insert<span class="tsd-signature-symbol">(</span>fieldName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, fieldType<span class="tsd-signature-symbol">: </span><a href="../types/FieldType.html" class="tsd-signature-type" data-tsd-kind="Type alias">FieldType</a>, value<span class="tsd-signature-symbol">: </span><a href="../types/OperationValueArg.html" class="tsd-signature-type" data-tsd-kind="Type alias">OperationValueArg</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#insert.insert-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Inserts a new field.</p>
+
+<h3>Example</h3><pre><code><span class="hl-2">import</span><span class="hl-1"> { </span><span class="hl-0">OperationFields</span><span class="hl-1"> } </span><span class="hl-2">from</span><span class="hl-1"> </span><span class="hl-3">&#39;p2panda-js&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">fields</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">OperationFields</span><span class="hl-1">();</span><br/><span class="hl-0">fields</span><span class="hl-1">.</span><span class="hl-6">insert</span><span class="hl-1">(</span><span class="hl-3">&#39;venue&#39;</span><span class="hl-1">, </span><span class="hl-3">&#39;relation&#39;</span><span class="hl-1">, </span><span class="hl-3">&#39;002078619bd4beff4bec4d4ccf75a7a5c25bf5d3c37fbd051a45debf1f17a1f75230&#39;</span><span class="hl-1">);</span>
+</code></pre>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -89,7 +98,7 @@ used here</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/1ae1434/p2panda-js/src/operation/operationFields.ts#L86">operation/operationFields.ts:86</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/02e4e9c/p2panda-js/src/operation/operationFields.ts#L121">operation/operationFields.ts:121</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="get" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get</span><a href="#get" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -108,7 +117,7 @@ used here</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="../types/OperationValue.html" class="tsd-signature-type" data-tsd-kind="Type alias">OperationValue</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/1ae1434/p2panda-js/src/operation/operationFields.ts#L122">operation/operationFields.ts:122</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/02e4e9c/p2panda-js/src/operation/operationFields.ts#L157">operation/operationFields.ts:157</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="length" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>length</span><a href="#length" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -119,7 +128,7 @@ used here</p>
 <h3>Returns</h3></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/1ae1434/p2panda-js/src/operation/operationFields.ts#L141">operation/operationFields.ts:141</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/02e4e9c/p2panda-js/src/operation/operationFields.ts#L176">operation/operationFields.ts:176</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="isEmpty" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Empty</span><a href="#isEmpty" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -130,7 +139,7 @@ used here</p>
 <h3>Returns</h3></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/1ae1434/p2panda-js/src/operation/operationFields.ts#L149">operation/operationFields.ts:149</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/02e4e9c/p2panda-js/src/operation/operationFields.ts#L184">operation/operationFields.ts:184</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">

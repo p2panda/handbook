@@ -21,6 +21,9 @@
 
 <h3>Returns</h3><p>Plain operation which has not been checked against
 a schema yet</p>
+
+<h3>Example</h3><pre><code><span class="hl-2">import</span><span class="hl-1"> { </span><span class="hl-0">decodeOperation</span><span class="hl-1"> } </span><span class="hl-2">from</span><span class="hl-1"> </span><span class="hl-3">&#39;p2panda-js&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">encodedOperation</span><span class="hl-1"> =</span><br/><span class="hl-1">  </span><span class="hl-3">&#39;840100781a736368656d615f6669656c645f646566696e697469&#39;</span><span class="hl-1"> +</span><br/><span class="hl-1">  </span><span class="hl-3">&#39;6f6e5f7631a2646e616d656576656e7565647479706563737472&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">result</span><span class="hl-1"> = </span><span class="hl-6">decodeOperation</span><span class="hl-1">(</span><span class="hl-0">encodedOperation</span><span class="hl-1">);</span><br/><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-6">log</span><span class="hl-1">(</span><span class="hl-0">result</span><span class="hl-1">.</span><span class="hl-0">action</span><span class="hl-1">); </span><span class="hl-12">// &quot;create&quot;</span>
+</code></pre>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -31,7 +34,7 @@ a schema yet</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="../types/PlainOperation.html" class="tsd-signature-type" data-tsd-kind="Type alias">PlainOperation</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/1ae1434/p2panda-js/src/operation/decode.ts#L30">operation/decode.ts:30</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/p2panda/p2panda/blob/02e4e9c/p2panda-js/src/operation/decode.ts#L41">operation/decode.ts:41</a></li></ul></aside></li></ul></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
