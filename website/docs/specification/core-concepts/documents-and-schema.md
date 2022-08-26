@@ -1,6 +1,6 @@
 ---
-id: concepts-documents
-title: Documents
+id: documents-and-schema
+title: Documents & Schema
 ---
 
 Documents are what we use to represent mutable data on the p2panda network. Authors can create, update and delete documents.

@@ -11,9 +11,7 @@ const sidebars = {
     'about/contribute',
     'about/history',
   ],
-  learn: [
-    'learn/index',
-  ],
+  learn: ['learn/index'],
   specification: [
     'specification/index',
     'specification/encoding-data',
@@ -33,8 +31,8 @@ const sidebars = {
       type: 'category',
       label: 'Core concepts',
       items: [
-        'specification/core-concepts/concepts-documents',
-        'specification/core-concepts/concepts-schemas',
+        'specification/core-concepts/identity',
+        'specification/core-concepts/documents-and-schema',
         'specification/core-concepts/encryption',
         'specification/core-concepts/permissions',
       ],
