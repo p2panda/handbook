@@ -7,16 +7,12 @@
 .image-frame-inner {
   background-color: var(--ifm-color-gray-100);
   border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2em;
 }
 
 .image-frame img {
   width: 100%;
   max-width: 600px;
-  max-height: 400px;
+  padding: 3em;
 }
 
 .image-frame-title {
