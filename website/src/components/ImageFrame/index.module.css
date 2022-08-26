@@ -19,6 +19,12 @@
   padding: 5em;
 }
 
+@media (max-width: 500px) {
+  .image-frame img {
+    padding: 2em;
+  }
+}
+
 .image-frame-title {
   margin-top: 0.5em;
   color: var(--ifm-color-gray-600);
