@@ -10,7 +10,7 @@ Oh, we’ve just got this postcard from a Penguin:
 
 <ImageFrame
   title="A postcard from Mr. Penguin"
-  url={require('./assets/postcard-from-mr-penguin.png').default}
+  url={require('./assets/postcard-from-mr-penguin.png')}
 />
 
 The Penguin-Postcard-Protocol (PPP) of Shirokuma-Town is a p2p protocol without computers: Every Penguin can send any postcard to any other Penguin through some delivery service which has multiple stations across the town.
@@ -45,7 +45,7 @@ The main data type of Bamboo is an **Entry** which can point at any sort of data
 
 <ImageFrame
   title="Entry 'sealing' any data"
-  url={require('./assets/sealing-any-data.png').default}
+  url={require('./assets/sealing-any-data.png')}
 />
 
 Let’s look a little bit closer into how Bamboo Entries help us here. From now on we will call any data the **Payload**, just to slowly move towards the terminology used in the official Bamboo specification.
@@ -68,7 +68,7 @@ Hashing is a way to convert (large) data into a shorter representation. For exam
 
 <ImageFrame
   title="Comparing hash and size"
-  url={require('./assets/comparing-hash-and-size.png').default}
+  url={require('./assets/comparing-hash-and-size.png')}
 />
 
 :::info Hash specification
@@ -85,7 +85,7 @@ We can verify now if the Payload itself got changed by comparing the `payload_ha
 
 <ImageFrame
   title="Signing an entry with a private key"
-  url={require('./assets/signing-an-entry-with-a-private-key.png').default}
+  url={require('./assets/signing-an-entry-with-a-private-key.png')}
 />
 
 To sign an Entry we need some sort of **Digital Signature Algorithm** which always comes with a **Public-** and **Private Key**.
@@ -128,7 +128,7 @@ When we verify the Signature of the Entry we take the Public Key, the part of th
 
 <ImageFrame
   title="Verifying the Signature of an Entry"
-  url={require('./assets/verify-signature-of-entry.png').default}
+  url={require('./assets/verify-signature-of-entry.png')}
 />
 
 We now have everything to securely authenticate an Entry and it’s Payload. As we can see, this is already better than the Penguin-Postcard-Protocol!
@@ -165,7 +165,7 @@ When a new Entry gets created we can point at the previous Entry by calculating 
 
 <ImageFrame
   title="Entries chained by backlinks"
-  url={require('./assets/entries-chained-by-backlinks.png').default}
+  url={require('./assets/entries-chained-by-backlinks.png')}
 />
 
 Since we are not able to generate hashes without knowing the original data, we can proof that we’ve seen the previous Entry when we created the new one.
@@ -192,7 +192,7 @@ Bamboo allows us to create multiple logs per Author, we just need to give it a u
 
 <ImageFrame
   title="Multiple logs"
-  url={require('./assets/multiple-logs.png').default}
+  url={require('./assets/multiple-logs.png')}
 />
 
 To check that everything fits together we verify for each incoming Entry that the `author` and `log_id` is the same across the whole Log. Every Log can only be maintained by one single Author. This is also the reason why we call Bamboo a _Single Writer_ Append-Only Log.
@@ -213,14 +213,14 @@ With Backlinks this is tricky, as removing Entries would mean that we tamper wit
 
 <ImageFrame
   title="Trying to delete an Entry"
-  url={require('./assets/trying-to-delete-an-entry.png').default}
+  url={require('./assets/trying-to-delete-an-entry.png')}
 />
 
 We could try to just remove the beginning of a Log instead, this will only break the Backlink for the first Entry which we could say is fine, but how can we now tell that someone didn’t hide some information from us by not sending the whole Log? Before we could at least detect the Entry without a `backlink` to find out if we reached the beginning of the Log. If we would remove that information, we’re lost. In this case we would also need to consider such data invalid.
 
 <ImageFrame
   title="Trying to delete beginning of a Log"
-  url={require('./assets/trying-to-delete-beginning-of-log.png').default}
+  url={require('./assets/trying-to-delete-beginning-of-log.png')}
 />
 
 Bamboo solves this problem with a second kind of Hash which is called a **Skiplink**. It allows us to verify the full integrity of the Log even after we’ve deleted some Entries of it.
@@ -237,7 +237,7 @@ This means that we can not delete _everything_ if we still want to proof the int
 
 <ImageFrame
   title="Log with Skiplinks and deleted Entries"
-  url={require('./assets/log-with-skiplinks-and-deleted-entries.png').default}
+  url={require('./assets/log-with-skiplinks-and-deleted-entries.png')}
 />
 
 Another feature of Bamboo is that we can not only delete the Entries but also every Payload, as this data is separated from the Log. This is why we can call Payloads also _Off-Chain Data_: Maybe our Log contains Entries pointing at many large images we want to delete after a while. It would be possible to delete these images, free up some space - while the Log integrity stays intact.
@@ -264,7 +264,7 @@ What happens if we created a log where two Entries contain the same `backlink`? 
 
 <ImageFrame
   title="Forked log"
-  url={require('./assets/forked-log.png').default}
+  url={require('./assets/forked-log.png')}
 />
 
 To detect forks, Bamboo introduces the concept of **Sequence Numbers**. Every Entry in the Log gets an unique number, starting at `1` and growing by `1` with each new Entry. We store it in an Entry as the `seq_num`.
@@ -275,7 +275,7 @@ With the help of Sequence Numbers we can detect now forks more easily. We can do
 
 <ImageFrame
   title="Invalid forked logs"
-  url={require('./assets/invalid-forked-log.png').default}
+  url={require('./assets/invalid-forked-log.png')}
 />
 
 :::tip Is it a fork or not?
