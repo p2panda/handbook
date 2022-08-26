@@ -1,0 +1,23 @@
+.image-frame {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+.image-frame-inner {
+  background-color: var(--ifm-color-gray-100);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+}
+
+.image-frame img {
+  max-width: 600px;
+  max-height: 400px;
+}
+
+.image-frame-title {
+  color: var(--ifm-color-gray-600);
+}
