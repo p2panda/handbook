@@ -1,4 +1,0 @@
----
-id: identity
-title: Identity
----

@@ -9,7 +9,7 @@ title: Documents & Schema
 
 [Nodes][nodes] are responsible for persisting documents and offering them on a public API so they can be queried by clients. They also offer the public API for all write actions relating to documents.
 
-Documents can be assigned to an identity, giving them a concept of permissions, with the ability to add and remove other identities over the life of a document. [Encryption][encryption] is available via the use of `MLS` encryption.
+Documents can be assigned to an identity, giving them a concept of [permissions][permissions], with the ability to add and remove other identities over the life of a document. [Encryption][encryption] is available via the use of `MLS` encryption.
 
 ## Schema
 

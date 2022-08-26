@@ -31,7 +31,7 @@ const sidebars = {
       type: 'category',
       label: 'Core concepts',
       items: [
-        'specification/core-concepts/identity',
+        'specification/core-concepts/authors',
         'specification/core-concepts/documents-and-schema',
         'specification/core-concepts/encryption',
         'specification/core-concepts/permissions',
