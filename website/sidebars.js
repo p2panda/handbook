@@ -11,9 +11,7 @@ const sidebars = {
     'about/contribute',
     'about/history',
   ],
-  learn: [
-    'learn/index',
-  ],
+  learn: ['learn/index', 'learn/entries'],
   specification: [
     'specification/index',
     'specification/encoding-data',
