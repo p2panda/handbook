@@ -92,6 +92,13 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+/* Somehow setting --ifm-toc-border-color gets ignored in dark mode, we have to
+ * enforce removing borders manually */
+[data-theme='dark'] aside,
+[data-theme='dark'] .table-of-contents {
+  border: 0 !important;
+}
+
 /* Navbar */
 
 .navbar__sidebar,

@@ -9,12 +9,17 @@
   border-radius: 10px;
 }
 
+[data-theme='dark'] .image-frame-inner {
+  background-color: var(--ifm-color-gray-900);
+}
+
 .image-frame img {
   width: 100%;
   max-width: 600px;
-  padding: 3em;
+  padding: 5em;
 }
 
 .image-frame-title {
+  margin-top: 0.5em;
   color: var(--ifm-color-gray-600);
 }
