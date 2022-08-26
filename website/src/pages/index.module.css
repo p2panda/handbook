@@ -255,6 +255,10 @@
   overflow: hidden;
 }
 
+[data-theme='dark'] .zoo-inner {
+  background-image: url('/images/game-background-night.png');
+}
+
 @media (max-width: 996px) {
   .zoo-inner {
     background-size: 110%;
