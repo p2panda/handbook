@@ -96,6 +96,7 @@
   --ifm-color-primary-light: #a4afff;
   --ifm-color-primary-lighter: #b7c0ff;
   --ifm-color-primary-lightest: #f0f2ff;
+  --ifm-card-background-color: var(--ifm-color-gray-100);
   --ifm-code-font-size: 95%;
   --ifm-toc-border-color: transparent;
   --ifm-footer-background-color: transparent;
