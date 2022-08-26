@@ -144,7 +144,7 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title="Home"
-      description="Description will go into a meta tag in <head />"
+      description="p2panda is a p2p protocol for secure, energy-efficient and local-first web, mobile and desktop applications"
     >
       <Section className={styles['welcome-section']}>
         <Pentagon size={1000} color={CYAN} right margin={4} />
@@ -188,8 +188,8 @@ export default function Home(): JSX.Element {
         <Pentagon size={750} color={GREEN} margin={4} right />
         <img src={useBaseUrl('/images/panda-pixel-1.png')} width="200" />
         <Title center text="Play with p2panda in Rust or TypeScript">
-          Explore the <a href="tutorials">Tutorials</a> and{' '}
-          <a href="libraries">Libraries</a>
+          Explore the <a href="tutorials">tutorials</a> and{' '}
+          <a href="libraries">libraries</a>
         </Title>
         <Pentagon size={500} color={GREEN} margin={2} hideOnSmallDevices />
       </Section>
