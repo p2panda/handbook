@@ -107,6 +107,7 @@
 }
 
 [data-theme='dark'] {
+  --ifm-card-background-color: var(--ifm-background-surface-color);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
