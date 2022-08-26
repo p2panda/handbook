@@ -41,3 +41,7 @@ Even though p2panda is built upon an append-only log, by specification data does
 ## How can I keep old data?
 
 If you want to keep historical data you can create a "pinned relation" which will "pin" the document view in its given state. Nodes will detect there is a dependency to this particular version and usually not automatically delete pinned document views.
+
+## Wasn't there something about a festival?
+
+Yes! We started as a group which wanted to build a p2p [festival organisation tool](https://github.com/p2panda/festival-tool) and p2panda came out of that. We will still make a festival client (on top of p2panda) and probably organise a festival sometime!
