@@ -5,7 +5,7 @@ title: Libraries
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Core
+## `p2panda`
 
 p2panda provides all tools required to write a client, node or even your own protocol implementation. We call these "core" libraries as they are the starting point for writing more "high-level" libraries or applications.
 
@@ -60,7 +60,7 @@ console.log(keyPair.publicKey());
 </TabItem>
 </Tabs>
 
-## Nodes
+## `aquadoggo`
 
 [`aquadoggo`](https://crates.io/crates/aquadoggo) is the reference node server implementation for the p2panda network running as a command line application. It can also be embedded via the library inside your Rust program which allows you to write offline-first applications where both the client and the node lives inside the same binary.
 
