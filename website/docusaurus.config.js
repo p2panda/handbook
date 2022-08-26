@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
@@ -48,6 +47,11 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      prism: {
+        theme: require('prism-react-renderer/themes/github'),
+        darkTheme: require('prism-react-renderer/themes/oceanicNext'),
+        additionalLanguages: ['rust', 'bash'],
+      },
       navbar: {
         hideOnScroll: true,
         logo: {
