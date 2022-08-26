@@ -15,5 +15,7 @@ export default function AdmonitionWrapper(props) {
     icon = '🐻‍❄️';
   }
 
-  return <Admonition icon={<span className="panda-icon">{icon}</span>} {...props} />;
+  return (
+    <Admonition icon={<span className="panda-icon">{icon}</span>} {...props} />
+  );
 }

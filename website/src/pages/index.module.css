@@ -87,11 +87,11 @@
   margin-top: 1em;
   font-size: 1.25rem;
   line-height: 1.25;
-  color: var(--ifm-color-gray-700);
+  color: var(--ifm-color-content-secondary);
 }
 
 .title-subheading a {
-  color: var(--ifm-color-gray-700);
+  color: var(--ifm-color-content-secondary);
   text-decoration: var(--ifm-link-hover-decoration);
 }
 
@@ -204,6 +204,7 @@
   letter-spacing: 12px;
   font-size: 30px;
   line-height: 1;
+  color: var(--ifm-color-black);
 }
 
 @media (max-width: 996px) {
@@ -214,6 +215,7 @@
 }
 
 .zoo-about {
+  color: var(--ifm-color-black);
   margin-top: 1em;
   margin-bottom: 0;
   text-align: center;
@@ -224,7 +226,7 @@
 }
 
 .zoo-about a {
-  color: black;
+  color: var(--ifm-color-black);
   text-decoration: underline;
 }
 

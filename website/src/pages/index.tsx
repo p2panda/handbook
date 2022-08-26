@@ -3,6 +3,7 @@ import Layout from '@theme/Layout';
 import React from 'react';
 import clsx from 'clsx';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import { useColorMode } from '@docusaurus/theme-common';
 
 import LogoSVG from '@site/static/images/p2panda.svg';
 import styles from './index.module.css';
@@ -21,6 +22,9 @@ function Pentagon(props: {
   hideOnSmallDevices?: boolean;
   hideOnMediumDevices?: boolean;
 }): JSX.Element {
+  const { colorMode } = useColorMode();
+  const background = colorMode === 'light' ? 'white' : 'transparent';
+
   const position = props.right
     ? { right: -(props.size / props.margin) }
     : { left: -(props.size / props.margin) };
@@ -40,9 +44,9 @@ function Pentagon(props: {
           <svg width={props.size} height={props.size} viewBox="0 0 100 100">
             <defs>
               <radialGradient cy="55%" id={id}>
-                <stop offset="40%" stopColor="white" />
+                <stop offset="40%" stopColor={background} />
                 <stop offset="80%" stopColor={props.color} />
-                <stop offset="100%" stopColor="white" />
+                <stop offset="100%" stopColor={background} />
               </radialGradient>
             </defs>
             <polygon
@@ -57,8 +61,13 @@ function Pentagon(props: {
 }
 
 function Drawing(props: { url: string }): JSX.Element {
+  const { colorMode } = useColorMode();
+
   return (
-    <div className={styles['drawing']}>
+    <div
+      className={styles['drawing']}
+      style={colorMode === 'dark' ? { filter: 'invert(100%)' } : {}}
+    >
       <img className={styles['drawing-image']} src={useBaseUrl(props.url)} />
     </div>
   );
@@ -170,7 +179,7 @@ export default function Home(): JSX.Element {
       <Section>
         <Pentagon size={1000} color={BLUE} margin={4} right />
         <Title text="Open protocol specification and research">
-          <a href="specification">Read</a> the specification
+          Read the <a href="specification">specification</a>
         </Title>
         <Drawing url="/images/panda-artwork-1.png" />
       </Section>
