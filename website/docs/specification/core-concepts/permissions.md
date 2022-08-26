@@ -103,8 +103,8 @@ If rejected, all _key group membership requests_ by the same public key and the 
 
 ## Schema Field Definition: Field Type `owner`
 
-- The field definition looks similar to `relation`
-- The schema id in the `references` field must reference an _authorised schema_. Any schema field definition for which this does not hold is invalid.
+- The field definition looks similar to `pinned_relation`
+- The schema id this relation references must be an _authorised schema_. Any schema field definition for which this does not hold is invalid.
 
 ## Example: Chat Schema
 
