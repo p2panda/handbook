@@ -6,7 +6,6 @@ title: Permissions
 # Key Group
 
 The `key_group` schema is a way to group a set of public keys so that they can act as a single identity. Every member key can have different permissions limiting the extent to which they can publish operations as this single identity. Keys can only be added to a key group with a confirmation from both the key itself and an existing member key with the according permissions. Key groups can also be extended with other key groups, which extends the set of keys in the former with those from the latter. Key groups can serve as a building block for many other concepts in p2panda including identity (handles/usernames), multi-device usage, permissions and moderation.
-lish operations for that key group's documents when their key group membership doesn't define the required permissions.
 
 ## Use Case
 
