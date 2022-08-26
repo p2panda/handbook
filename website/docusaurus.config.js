@@ -13,7 +13,7 @@ const config = {
   baseUrl: '/handbook/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'images/p2panda.svg',
 
   // GitHub pages deployment config.
   organizationName: 'p2panda',
@@ -98,7 +98,6 @@ const config = {
         ],
       },
       footer: {
-        style: 'light',
         copyright: 'CC BY-SA 4.0',
       },
       colorMode: {
