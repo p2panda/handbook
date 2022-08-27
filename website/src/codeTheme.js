@@ -1,79 +1,119 @@
 /* eslint-disable no-undef */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const darkTheme = require('prism-react-renderer/themes/vsDark/index.cjs.js');
+const GRAY = '#d3d0c8';
+const BLACK = '#2d2d2d';
+const GREEN = '#9ddab3';
+const YELLOW = '#ffcc66';
+const BLUE = '#6699cc';
+const MAGENTA = '#cc99cc';
+const CYAN = '#66cccc';
+const WHITE = '#f2f0ec';
 
 module.exports = {
   plain: {
-    color: '#ccc',
-    backgroundColor: '#2d2d2d',
+    color: GRAY,
+    backgroundColor: BLACK,
   },
   styles: [
-    ...darkTheme.styles,
+    {
+      types: ['prolog'],
+      style: {
+        color: WHITE,
+      },
+    },
     {
       types: ['comment'],
       style: {
-        color: '#999',
+        color: CYAN,
       },
     },
     {
-      types: ['title'],
+      types: ['builtin', 'changed', 'interpolation-punctuation'],
       style: {
-        color: '#569CD6',
-        fontWeight: 'bold',
+        color: BLUE,
       },
     },
     {
-      types: ['property', 'parameter'],
+      types: ['keyword'],
       style: {
-        color: '#9CDCFE',
+        color: YELLOW,
       },
     },
     {
-      types: ['script'],
+      types: ['number', 'inserted'],
       style: {
-        color: '#D4D4D4',
-      },
-    },
-    {
-      types: ['boolean', 'arrow', 'atrule', 'tag'],
-      style: {
-        color: '#569CD6',
-      },
-    },
-    {
-      types: ['number', 'color', 'unit'],
-      style: {
-        color: '#B5CEA8',
-      },
-    },
-    {
-      types: ['font-matter'],
-      style: {
-        color: '#CE9178',
-      },
-    },
-    {
-      types: ['keyword', 'rule'],
-      style: {
-        color: '#C586C0',
-      },
-    },
-    {
-      types: ['regex'],
-      style: {
-        color: '#D16969',
-      },
-    },
-    {
-      types: ['maybe-class-name'],
-      style: {
-        color: '#4EC9B0',
+        color: MAGENTA,
       },
     },
     {
       types: ['constant'],
       style: {
-        color: '#4FC1FF',
+        color: BLUE,
+      },
+    },
+    {
+      types: ['attr-name', 'variable'],
+      style: {
+        color: WHITE,
+      },
+    },
+    {
+      types: ['deleted', 'string', 'attr-value', 'template-punctuation'],
+      style: {
+        color: MAGENTA,
+      },
+    },
+    {
+      types: ['selector'],
+      style: {
+        color: WHITE,
+      },
+    },
+    {
+      // Fix tag color
+      types: ['tag'],
+      style: {
+        color: WHITE,
+      },
+    },
+    {
+      // Fix tag color for HTML
+      types: ['tag'],
+      languages: ['markup'],
+      style: {
+        color: WHITE,
+      },
+    },
+    {
+      types: ['punctuation', 'operator'],
+      style: {
+        color: WHITE,
+      },
+    },
+    {
+      // Fix punctuation color for HTML
+      types: ['punctuation'],
+      languages: ['markup'],
+      style: {
+        color: WHITE,
+      },
+    },
+    {
+      types: ['function'],
+      style: {
+        color: CYAN,
+        fontWeight: 'bold',
+      },
+    },
+    {
+      types: ['class-name'],
+      style: {
+        color: GREEN,
+      },
+    },
+    {
+      types: ['char'],
+      style: {
+        color: WHITE,
       },
     },
   ],

@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 
 interface Link {
@@ -9,9 +8,11 @@ interface Link {
 }
 
 function LinkCard({ name, url, description }: Link) {
+  const { hostname, pathname } = new URL(url);
+
   return (
     <div className="col col--4 margin-bottom--lg">
-      <div className={clsx('card')}>
+      <div className="card">
         <div className="card__body">
           <h3>{name}</h3>
           <p>{description}</p>
@@ -19,7 +20,8 @@ function LinkCard({ name, url, description }: Link) {
         <div className="card__footer">
           <div className="button-group button-group--block">
             <Link className="button button--secondary truncate" to={url}>
-              {url.replace('https://', '')}
+              {hostname}
+              {pathname}
             </Link>
           </div>
         </div>

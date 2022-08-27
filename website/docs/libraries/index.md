@@ -23,15 +23,15 @@ You can find the API documentations with more examples for both languages under 
 <Tabs groupId="libraries">
 <TabItem value="rust" label="Rust" default>
 
-```
+```bash
 cargo add p2panda-rs
 ```
 
 </TabItem>
 <TabItem value="ts" label="TypeScript">
 
-```
-npm i p2panda-js
+```bash
+npm install p2panda-js
 ```
 
 </TabItem>
@@ -72,7 +72,7 @@ You can find the API documentations under the following links:
 
 ### Installation
 
-```
+```bash
 cargo add aquadoggo
 ```
 

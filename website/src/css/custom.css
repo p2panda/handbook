@@ -103,6 +103,7 @@
   --ifm-footer-color: #666;
   --ifm-alert-shadow: 0;
   --ifm-alert-border-radius: 0;
+  --ifm-code-padding-horizontal: 5px;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
@@ -136,10 +137,6 @@
 
 .navbar__item {
   font-weight: 600;
-}
-
-.navbar__items--right .navbar__item {
-  color: var(--ifm-color-primary);
 }
 
 @media (max-width: 996px) {
