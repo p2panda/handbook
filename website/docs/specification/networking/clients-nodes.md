@@ -35,6 +35,18 @@ title: Clients and nodes
 - [aquadoggo][aquadoggo] is the reference node implementation
 - nodes offer a GraphQL API that is used by [clients][queries] and other [nodes][replication] to connect and exchange data
 
+:::caution Requirement NO1
+
+entries arriving via the [publish][publishing] and [replication][replication] APIs MUST be validated against BA1 and all OP requirements
+
+:::
+
+:::info Node Validation Behaviour
+
+Although the above requirement must be fulfilled by a node for all entries arriving via the public APIs, the ablity to perform this validation and the expected behaviour will differ depending on whether the entry arrives via the [publish][publishing] or [replication][replication] APIs. In the case of the former, all requirements should be validated against existing entries & operations known to this node, and in the case of a validation failure the entry should be rejected. Where entries are arriving via replication, it may not be possible to immediately perform validation, as entries can be arriving asynchronosuly related data required for validation (in `previous`, `schema_id` etc..) may not be present yet.
+
+:::
+
 ## Clients
 
 - clients are computer programs that use the p2panda library to
@@ -51,4 +63,5 @@ title: Clients and nodes
 [p2panda]: https://github.com/p2panda/p2panda
 [queries]: /specification/APIs/queries
 [replication]: /specification/APIs/replication
+[publishing]: /specification/APIs/publishing
 [tauri]: https://tauri.studio/
