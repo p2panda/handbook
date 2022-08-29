@@ -33,14 +33,6 @@ p2panda uses [Bamboo][bamboo_spec] with Ed25519 (Digital Signature Algorithm) an
   - YASMF has the additional requirement that hash functions should be chosen that produce shorter hashes of 256 bits.
   - At the time of writing, YASMF only contains the Blake3b hash, which therefore is the hash function used throughout p2panda. It is fast, safe, and produces hashes that are just 32 bytes long.
 
-### Signatures
-
-:::caution Requirement KY1
-
-Clients MUST use Ed25519 as the Digital Signature Algorithm for Bamboo.
-
-:::
-
 ### Encoding
 
 :::caution Requirement BA3
@@ -62,6 +54,7 @@ A p2panda author is a human or bot who publishes data using p2panda. Authors may
 - Data published using Bamboo always belongs to the public key that signed it, this key is called _author_ in Bamboo.
 - People and bots who use p2panda can have access to more than one key pair, which is why we don't call public keys _author_, as Bamboo does, we call them _public key_.
   - Data in p2panda belongs to the _key pair_ that signed it.
+  - p2panda uses Ed25519 as the Bamboo signature scheme.
   - p2panda users may have more than one key because every device and client uses an additional key.
 - Have a look at the [key pairs][key_pairs] section of this handbook for more detailed information on this topic.
 
