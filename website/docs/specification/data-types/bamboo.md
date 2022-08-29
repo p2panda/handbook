@@ -7,7 +7,7 @@ title: Bamboo
 
 :::caution Requirement BA1
 
-p2panda uses [Bamboo Ed25519 Yasmf][bamboo_spec] to encode data.
+p2panda uses [Bamboo][bamboo_spec] with Ed25519 (Digital Signature Algorithm) and YASMF (Multihash) to encode and secure data.
 
 :::
 
@@ -23,7 +23,7 @@ p2panda uses [Bamboo Ed25519 Yasmf][bamboo_spec] to encode data.
 
 :::caution Requirement BA2
 
-[_Yet Another Smol Multifactor Hash_ (YASMF)][yasmf] MUST be used to produce hashes for Bamboo entries and payloads.
+[_Yet Another Smol Multi-Hash (YASMF)][yasmf] MUST be used to produce hashes for Bamboo entries and payloads.
 
 :::
 
