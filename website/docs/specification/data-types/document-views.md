@@ -26,6 +26,10 @@ The most common document view you will encounter is the current state of a docum
 Following Requirement EN2, operations in a document view id MUST be lexicographically sorted before encoding and when generating a _hash id_.
 :::
 
+:::caution Requirement DV2
+All operations referenced in a document view id must originate from the same document.
+:::
+
 ## The Latest Document View
 
 - it is defined as that document view which incorporates all valid operations that are known to the node and part of the document

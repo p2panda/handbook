@@ -20,8 +20,18 @@ Some things that may be a document in p2panda: a blog post, a wiki page, a chat 
 
 :::caution Requirement DO1
 
-A document MUST contain exactly one _create_operation_.  
-A document's operation graph MUST NOT contain any cycles.  
+A document MUST contain exactly one _create_operation_.
+
+:::
+
+:::caution Requirement DO2
+
+A document's operation graph MUST NOT contain any cycles.
+
+:::
+
+:::caution Requirement DO3
+
 A document MUST NOT contain an operation who's `previous` refers to an operation not present in the document's graph.
 
 :::
@@ -39,13 +49,33 @@ Although here we describe the resolving an operation graph as a property of the 
 - The first step we take is to sort and linearise the document's graph of operations deterministically.
 - We do this by applying a topological depth-first sorting algorithm which meets the following requirements:
 
-:::caution Requirement DO2
+:::caution Requirement DO4
 
-Sorting MUST start from the documents CREATE operation.  
-An operation which refers to the current operation in it's `previous` field MUST be sorted next.  
-If multiple operations refer to the current, the one with the lowest `document_id` MUST be sorted next.  
-All operations in the graph MUST be sorted exactly once.  
+Sorting MUST start from the documents CREATE operation.
+
+:::
+
+:::caution Requirement DO5
+
+An operation which refers to the current operation in it's `previous` field MUST be sorted next.
+
+:::
+
+:::caution Requirement DO6
+
+If multiple operations refer to the current, the one with the lowest `document_id` MUST be sorted next.
+
+:::
+
+:::caution Requirement DO7
+
 When visiting a branch, all operations it contains MUST be visited and sorted before continuing to the rest of the graph.
+
+:::
+
+:::caution Requirement DO8
+
+All operations in the graph MUST be sorted exactly once.
 
 :::
 
