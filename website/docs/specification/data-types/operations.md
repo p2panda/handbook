@@ -3,6 +3,9 @@ id: operations
 title: Operations
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 - Operations represent atomic data changes.
 - Operations are published as the payload of _bamboo entries_.
 - Operations are identified by the hash of their bamboo entry.
@@ -13,6 +16,55 @@ title: Operations
 The _operation id_ uniquely identifies an operation. It is equal to the hash of the Bamboo entry that has the operation as its payload.
 
 :::
+
+<Tabs groupId="entries">
+<TabItem value="rust" label="Rust" default>
+
+```rust
+struct Operation {
+  /// Version of this operation.
+  pub version: OperationVersion,
+
+  /// Describes if this operation creates, updates or deletes data.
+  pub action: OperationAction,
+
+  /// The id of the schema for this operation.
+  pub schema_id: SchemaId,
+
+  /// Optional document view id containing the operation ids directly preceding this one in the
+  /// document.
+  pub previous_operations: Option<DocumentViewId>,
+
+  /// Optional fields map holding the operation data.
+  pub fields: Option<BTreeMap<String, OperationValue>>,
+}
+```
+
+</TabItem>
+<TabItem value="ts" label="TypeScript">
+
+```typescript
+type Operation = {
+  /** Version of this operation encoding */
+  version: VersionNumber;
+
+  /** Operation action */
+  action: OperationAction;
+
+  /** Id of schema this operation matches */
+  schemaId: SchemaId;
+
+  /** Document view id pointing at previous operations, needs to be set
+   * for UPDATE and DELETE operations */
+  previous?: DocumentViewId;
+
+  /** The fields of this operation */
+  fields?: Map<string, OperationValue>;
+};
+```
+
+</TabItem>
+</Tabs>
 
 ## Encoding Format
 
@@ -44,6 +96,28 @@ Every operation MUST have an _operation version_. An operation version MUST be a
 ### Action
 
 - The operation action defines the kind of data change that is described by the operation.
+
+<Tabs groupId="entries">
+<TabItem value="rust" label="Rust" default>
+
+```rust
+enum OperationAction {
+  Create,
+  Update,
+  Delete,
+}
+
+```
+
+</TabItem>
+<TabItem value="ts" label="TypeScript">
+
+```typescript
+type OperationAction = 'create' | 'update' | 'delete';
+```
+
+</TabItem>
+</Tabs>
 
 :::info Definition: Operation Actions
 
@@ -100,6 +174,40 @@ DELETE and UPDATE operations MUST have _previous_ with `length > 0`. CREATE oper
   - see [schema][/specification/data-types/schemas] for further specification of field names and values
 - The schema defined by the schema id item of the operation specifies the name and type of each field which can be included in an operation.
 - In order to deserialise typed field values, a copy of the schema is required.
+
+<Tabs groupId="entries">
+<TabItem value="rust" label="Rust" default>
+
+```rust
+enum OperationValue {
+  Boolean(bool),
+  Integer(i64),
+  Float(f64),
+  String(String),
+  Relation(Relation),
+  RelationList(RelationList),
+  PinnedRelation(PinnedRelation),
+  PinnedRelationList(PinnedRelationList),
+}
+```
+
+</TabItem>
+<TabItem value="ts" label="TypeScript">
+
+```typescript
+type OperationValue =
+  | boolean
+  | bigint
+  | number
+  | string
+  | DocumentId // relation
+  | DocumentId[] // relation list
+  | DocumentViewId // pinned relation
+  | DocumentViewId[]; // pinned relation list
+```
+
+</TabItem>
+</Tabs>
 
 :::caution Requirement OP6
 
