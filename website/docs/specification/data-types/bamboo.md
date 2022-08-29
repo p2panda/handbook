@@ -28,10 +28,10 @@ p2panda uses [Bamboo][bamboo_spec] with Ed25519 (Digital Signature Algorithm) an
 :::
 
 - The original Bamboo requires [_YAMF-hashes_][yamf] to verify the integrity of entries and logs.
-  - YAMF is a multiformat hash that only adds new hash functions when previous ones have been discovered to be broken.
+  - YAMF is a multiformat hash that only adds new hashing algorithms when previous ones have been discovered to be broken.
 - However, p2panda uses bamboo with [_YASMF_-hashes][yasmf].
-  - YASMF has the additional requirement that hash functions should be chosen that produce shorter hashes of 256 bits.
-  - At the time of writing, YASMF only contains the Blake3b hash, which therefore is the hash function used throughout p2panda. It is fast, safe, and produces hashes that are just 32 bytes long.
+  - YASMF has the additional requirement that hashing algorithms should be chosen that produce shorter hashes (256 bits).
+  - At the time of writing, YASMF only contains the BLAKE3 hash, which therefore is the hash function used throughout p2panda. It is fast, safe, and produces hashes that are just 32 bytes long.
 
 ### Encoding
 
