@@ -2,7 +2,7 @@
 
 p2panda is a user-friendly peer-to-peer communications protocol for secure, energy-efficient, offline- and local-first web, mobile and desktop applications. We want this protocol to be a playful tool for people to hack, build, play, and experiment with.
 
-Data changes in p2panda are signed, encrypted and published by clients using the [Bamboo](https://github.com/AljoschaMeyer/bamboo) append-only log data type which gets distributed over the network to other peers. p2panda allows for decentralised and federated network topologies or even hybrids of these and aims at running in web browsers without loosing its cryptographic features.
+Data changes in p2panda are signed, encrypted and published by clients using the [Bamboo](https://github.com/AljoschaMeyer/bamboo) append-only log data type which gets distributed over the network to other peers. p2panda allows for decentralised and federated network topologies or even hybrids of these and aims at running in web browsers without losing its cryptographic features.
 
 > **p2panda is currently very much in prototyping and specification phase, our milestones and progress can be seen below. If you're interested in any of these topics please get in touch!**
 
@@ -11,7 +11,7 @@ Data changes in p2panda are signed, encrypted and published by clients using the
 - **Browser friendliness**: Lightweight clients that can easily be implemented as websites.
 - **Collaboration**: Data can be changed by multiple users at the same time with built-in CRDTs.
 - **Decentralization**: Networks consist of both federated or decentralised nodes.
-- **Deletion**: Data can be deleted without loosing verifiability and log integrity.
+- **Deletion**: Data can be deleted without losing verifiability and log integrity.
 - **Encryption**: Transport communication is end-to-end encrypted via TLS 1.3, data is encrypted for groups via the Messaging Layer Security (MLS) protocol.
 - **Energy efficiency**: Data- and energy-efficient storage and replication.
 - **Fork proof**: Automatic detection of accidentially or maliciously forked append-only logs.

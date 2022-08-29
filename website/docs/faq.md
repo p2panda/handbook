@@ -36,7 +36,7 @@ If you're looking for expressing relations between different sorts of data, simi
 
 ## Can I delete data?
 
-Even though p2panda is built upon an append-only log, by specification data does not need to be stored forever. p2panda aims at being data-efficient and has [deletion](/learn/entries/#deletion) built-in into the core data type without loosing its cryptographic features
+Even though p2panda is built upon an append-only log, by specification data does not need to be stored forever. p2panda aims at being data-efficient and has [deletion](/learn/entries/#deletion) built-in into the core data type without losing its cryptographic features
 
 ## How can I keep old data?
 
