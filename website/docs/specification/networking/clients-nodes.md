@@ -49,7 +49,7 @@ operations arriving via the [publish][publishing] and [replication][replication]
 
 :::caution Requirement NO3
 
-operations arriving via the [publish][publishing] APIs SHOULD be validated against DO1
+operations arriving via the [publish][publishing] APIs SHOULD be validated against DO1 - D03
 
 :::
 
