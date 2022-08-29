@@ -3,6 +3,9 @@ id: bamboo
 title: Bamboo
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 - requirements in this section refer only to how p2panda specifies use of bamboo.
 
 :::caution Requirement BA1
@@ -19,11 +22,76 @@ p2panda uses [Bamboo][bamboo_spec] with Ed25519 (Digital Signature Algorithm) an
   - Entries contain p2panda data that we want to publish.
 - The following sections explain how these concepts from bamboo are used in p2panda.
 
+<Tabs groupId="entries">
+<TabItem value="rust" label="Rust" default>
+
+```rust
+pub struct Entry {
+  /// PublicKey of this entry.
+  pub public_key: PublicKey,
+
+  /// Used log for this entry.
+  pub log_id: LogId,
+
+  /// Sequence number of this entry.
+  pub seq_num: SeqNum,
+
+  /// Hash of skiplink Bamboo entry.
+  pub skiplink: Option<Hash>,
+
+  /// Hash of previous Bamboo entry.
+  pub backlink: Option<Hash>,
+
+  /// Byte size of payload.
+  pub payload_size: u64,
+
+  /// Hash of payload.
+  pub payload_hash: Hash,
+
+  /// Ed25519 signature of entry.
+  pub signature: Signature,
+}
+```
+
+</TabItem>
+<TabItem value="ts" label="TypeScript">
+
+```typescript
+type Entry = {
+  // Public key of the entry author
+  publicKey: string;
+
+  // Log id of entry, starting at 0
+  logId?: bigint;
+
+  // Sequence number of entry, starting at 1
+  seqNum?: bigint;
+
+  // Skiplink hash
+  skiplink?: string;
+
+  // Backlink hash, omitted when first entry in log
+  backlink?: string;
+
+  // Size of the payload in bytes
+  payloadSize: bigint;
+
+  // Hash of the payload
+  payloadHash: string;
+
+  // Ed25519 signature
+  signature: string;
+};
+```
+
+</TabItem>
+</Tabs>
+
 ### Hashing
 
 :::caution Requirement BA2
 
-[_Yet Another Smol Multi-Hash (YASMF)][yasmf] MUST be used to produce hashes for Bamboo entries and payloads.
+[\_Yet Another Smol Multi-Hash (YASMF)][yasmf] MUST be used to produce hashes for Bamboo entries and payloads.
 
 :::
 
