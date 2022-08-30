@@ -1,18 +1,16 @@
 ---
-title: Index
+title: Table of Contents
 ---
-
-# Table of contents
 
 We have structured this specification around core data types, higher-order concepts which build on these types, required APIs and networking patterns.
 
-To see a detailed specification of all data types visit [Core Data Types], higher order concepts of [Identities], [Documents & Schema], [Authorisation] and [Encryption] are described in sections 5 - 8, following this we detail the specific [APIs] an implementation must make available and finally [Networking] describes actors in the network and replication protocol.
+To see a detailed specification of all data types visit [Core Data Types][bamboo], higher order concepts of [Identities], [Documents & Schema][documents-and-schema], [Authorisation] and [Encryption] are described in sections 5 - 8, following this we detail the specific [APIs] an implementation must make available and finally [Networking] describes actors in the network and replication protocol.
 
 **1. [Table of contents][index]**
 
-**2. [Introduction][introduction]**
+**2. [Introduction]**
 
-**3. [Encoding][encoding]**
+**3. [Encoding]**
 
 **4. [Core Data Types][bamboo]**
 
@@ -23,15 +21,15 @@ To see a detailed specification of all data types visit [Core Data Types], highe
 - Documents
 - Document Views
 
-**5. [Identities][identities]**
+**5. [Identities]**
 
 **6. [Documents & Schema][documents-and-schema]**
 
-**7. [Authorisation][authorisation]**
+**7. [Authorisation]**
 
-**8. [Encryption][encryption]**
+**8. [Encryption]**
 
-**9. [APIs][apis]**
+**9. [APIs]**
 
 - Overview
 - Publishing
