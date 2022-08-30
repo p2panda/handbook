@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/handbook/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'images/p2panda.svg',
+  favicon: 'images/deepsea-panda.svg',
 
   // GitHub pages deployment config.
   organizationName: 'p2panda',
@@ -51,7 +51,7 @@ const config = {
         hideOnScroll: true,
         logo: {
           alt: 'p2panda Handbook',
-          src: 'images/handbook.png',
+          src: 'images/neon-panda.svg',
         },
         items: [
           {
