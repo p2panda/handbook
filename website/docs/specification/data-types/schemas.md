@@ -6,32 +6,60 @@ title: Schemas
 - schemas are used to describe and validate the format in which data is published
 - schemas are identified by their [schema id](#schema-id)
 - schemas have a name, a description and a number of _fields_
-- the name of a schema MUST match the regular expression `^[A-Za-z]{1}[A-Za-z0-9_]{0,62}[A-Za-z0-9]{1}$`
-  - the name of a schema MUST be at most 64 characters long
-  - it begins with a letter
-  - it uses only alphanumeric characters, digits and the underscore character ( `_` )
-  - it doesn't end with an underscore
-- the description of a schema MUST consist of unicode characters and MUST be at most 256 characters long
-- a schema MUST have at most 1024 fields
+
+:::caution Requirement SC1
+
+The name of a schema MUST match the regular expression `^[A-Za-z]{1}[A-Za-z0-9_]{0,62}[A-Za-z0-9]{1}$`
+
+- the name of a schema MUST be at most 64 characters long
+- it begins with a letter
+- it uses only alphanumeric characters, digits and the underscore character ( `_` )
+- it doesn't end with an underscore
+
+:::
+
+:::caution Requirement SC2
+
+The description of a schema MUST consist of unicode characters and MUST be at most 256 characters long
+
+:::
+
+:::caution Requirement SC3
+
+A schema MUST have at most 1024 fields
+
+:::
 
 ## Fields
 
 - a field is defined by
   - _field name_
   - _field type_
-- the field name MUST match the regular expression `^[A-Za-z]{1}[A-Za-z0-9_]{0,63}$`
-  - the field name MUST be at most 64 characters long
-  - it begins with a letter
-  - it uses only alphanumeric characters, digits and the underscore character ( `_` )
-- the field type MUST be one of
-  - _bool_
-  - _int_
-  - _float_
-  - _str_
-  - _relation_
-  - _relation list_
-  - _pinned relation_
-  - _pinned relation list_
+
+:::caution Requirement SC4
+
+The field name MUST match the regular expression `^[A-Za-z]{1}[A-Za-z0-9_]{0,63}$`
+
+- the field name MUST be at most 64 characters long
+- it begins with a letter
+- it uses only alphanumeric characters, digits and the underscore character ( `_` )
+
+:::
+
+:::caution Requirement SC5
+
+The field type MUST be one of:
+
+- _bool_
+- _int_
+- _float_
+- _str_
+- _relation_
+- _relation list_
+- _pinned relation_
+- _pinned relation list_
+
+:::
 
 ### _bool_ fields
 
@@ -48,14 +76,16 @@ title: Schemas
 ### _str_ fields
 
 - encode a text string
-- MUST use unicode encoding
+
+:::caution Requirement SC6
+
+_str_ fields MUST use unicode encoding
+
+:::
 
 ### _relation_ fields
 
 - encode a _relation_ to one or many other _documents_
-- all relation fields MUST define a schema that all referenced documents must conform to
-- _relation_ fields MAY be self-referential in that their target is of the same schema
-  - self-referential relations MAY be interpreted as instance ordering in [queries](/specification/APIs/queries)
 - there are four kinds of relation fields
   - relations represent the whole referenced document through their _document id_
     - _relation_: reference to a single document
@@ -64,15 +94,32 @@ title: Schemas
     - _pinned relation_: reference to a single document view.
     - _pinned relation list_: a list of references to document views
 
+:::caution Requirement SC7
+
+All relation fields MUST define a schema that all referenced documents must conform to
+
+:::
+
+:::caution Requirement SC8
+
+_relation_ fields MAY be self-referential in that their target is of the same schema. Self-referential relations MAY be interpreted as document ordering in [queries](/specification/APIs/queries)
+
+:::
+
 ## System and Application Schemas
 
 - _system schemas_ are defined as part of the p2panda specification
-  - system schemas MAY have unique procedures for [_reduction_](/specification/data-types/documents#reduction), [_reconciliation_](/specification/data-types/documents#reconciliation) and _persistence_ of their documents
   - the format of system schema operations can be validated by their CDDL definitions
 - _application schemas_ are published by developers
   - they are used to validate the format of application specific data
   - all developers can create new application schemas by publishing documents of the `SchemaDefinition` and `SchemaFieldDefinition` system schemas
   - they are published as reusable data schemas and can be used in many applications
+
+:::caution Requirement SC9
+
+- system schemas MAY have unique procedures for [_reduction_](/specification/data-types/documents#reduction), [_reconciliation_](/specification/data-types/documents#reconciliation) and _persistence_ of their documents
+
+:::
 
 ### Schema ID
 
@@ -95,13 +142,18 @@ title: Schemas
     - the schema's _document view hash id_
     - example `profile_picture__0020c65567ae37efea293e34a9c7d13f8f2bf23dbdc3b5c7b9ab46293111c48fc78b`
 
+:::caution Requirement SC10
+
+The name string in an application schema which MUST have 1-64 characters, MUST start with a letter and MUST contain only alphanumeric characters and underscores.
+
+:::
+
 ## System Schemas
 
 ### Schema Definition
 
 - schema id: `schema_definition_v1`
 - used to publish [application schemas](#system-and-application-schemas)
-- in order to be a valid description of an application schema, a schema definition's fields MUST conform with the restrictions for schema name, description and fields [described at the top](#)
 - fields:
   - name: string
   - description: string
@@ -114,17 +166,25 @@ title: Schemas
 - fields:
   - name: string
   - type: string
-    - MUST be one of
-      - `bool`: boolean
-      - `int`: integer number
-      - `float`: floating point number
-      - `str`: string
-      - `relation(<schema_id>)`: reference to a document
-      - `relation_list(<schema_id>)`: a list of references to documents
-      - `pinned_relation(<schema_id>)`: reference to a document view
-      - `pinned_relation_list(<schema_id>)`: a list of references to document views
-    - all _relation_ field types need to specify a schema
-      - `<schema_id>` in the above listing needs to be a valid schema id
-      - documents referenced by any relation field, to which this schema field definition applies, need to be of this schema
-      - e.g. if you are publishing an operation to update a field with the type `relation(key_group_v1)`, the field value
-        needs to be the document id of a `key_group_v1` document
+
+:::caution Requirement SC11
+
+`schema_field_definition_v1` _type_ field MUST be one of
+
+- `bool`: boolean
+- `int`: integer number
+- `float`: floating point number
+- `str`: string
+- `relation(<schema_id>)`: reference to a document
+- `relation_list(<schema_id>)`: a list of references to documents
+- `pinned_relation(<schema_id>)`: reference to a document view
+- `pinned_relation_list(<schema_id>)`: a list of references to document views
+
+all _relation_ field types need to specify a schema
+
+- `<schema_id>` in the above listing needs to be a valid schema id
+- documents referenced by any relation field, to which this schema field definition applies, need to be of this schema
+- e.g. if you are publishing an operation to update a field with the type `relation(key_group_v1)`, the field value
+  needs to be the document id of a `key_group_v1` document
+
+:::
