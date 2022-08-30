@@ -1,32 +1,54 @@
 ---
-title: Overview
+title: Table of Contents
 ---
 
-## Requirements
+We have structured this specification around core data types, higher-order concepts which build on these types, required APIs and networking patterns.
 
-- In this document we assign a code to every specification requirement an implementation of p2panda would need to meet.
-- Some of these codes refer to a specific requirement and some a group of related requirements.
+To see a detailed specification of all data types visit [Core Data Types][bamboo], higher order concepts of [Identities], [Documents & Schema][documents-and-schema], [Authorisation] and [Encryption] are described in sections 5 - 8, following this we detail the specific [APIs] an implementation must make available and finally [Networking] describes actors in the network and replication protocol.
 
-## Glossary of core terms
+**1. [Table of contents][index]**
 
-Hexadecimal
+**2. [Introduction]**
 
-CBOR
+**3. [Encoding]**
 
-Hash
+**4. [Core Data Types][bamboo]**
 
-Key Pair
+- Bamboo
+- Key Pairs
+- Operations
+- Schemas
+- Documents
+- Document Views
 
-Private Key
+**5. [Identities]**
 
-Public Key
+**6. [Documents & Schema][documents-and-schema]**
 
-Entry
+**7. [Authorisation]**
 
-Operation
+**8. [Encryption]**
 
-Document
+**9. [APIs]**
 
-Document View
+- Overview
+- Publishing
+- Queries
+- Replication
 
-Materialisation
+**10. [Networking][networking]**
+
+- Clients & Nodes
+- Discovery
+- Replication
+
+[index]: /specification/
+[introduction]: /specification/introduction
+[encoding]: /specification/encoding-data
+[bamboo]: /specification/data-types/bamboo
+[identities]: /specification/identities
+[documents-and-schema]: /specification/documents-and-schema
+[authorisation]: /specification/authorisation
+[encryption]: /specification/encryption
+[apis]: /specification/APIs/apis-overview
+[networking]: /specification/networking/clients-nodes

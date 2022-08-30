@@ -71,7 +71,7 @@ Although NO1 and NO2 must be fulfilled by a node for all entries arriving via th
 
 [aquadoggo]: https://github.com/p2panda/aquadoggo
 [beep_boop]: https://github.com/p2panda/beep-boop
-[key_groups]: /specification/core-concepts/permissions
+[key_groups]: /specification/authorisation
 [p2panda]: https://github.com/p2panda/p2panda
 [queries]: /specification/APIs/queries
 [replication]: /specification/APIs/replication

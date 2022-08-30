@@ -14,10 +14,11 @@ const sidebars = {
   learn: ['learn/index', 'learn/entries', 'learn/operations'],
   specification: [
     'specification/index',
+    'specification/introduction',
     'specification/encoding-data',
     {
       type: 'category',
-      label: 'Data types',
+      label: 'Core data types',
       items: [
         'specification/data-types/bamboo',
         'specification/data-types/key-pairs',
@@ -27,16 +28,10 @@ const sidebars = {
         'specification/data-types/document-views',
       ],
     },
-    {
-      type: 'category',
-      label: 'Core concepts',
-      items: [
-        'specification/core-concepts/authors',
-        'specification/core-concepts/documents-and-schema',
-        'specification/core-concepts/encryption',
-        'specification/core-concepts/permissions',
-      ],
-    },
+    'specification/identities',
+    'specification/documents-and-schema',
+    'specification/authorisation',
+    'specification/encryption',
     {
       type: 'category',
       label: 'APIs',

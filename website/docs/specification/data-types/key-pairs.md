@@ -45,4 +45,4 @@ p2panda clients SHOULD NOT require the transmission of a private key outside a u
 - Transmitting a private key outside of its usage context might be attractive e.g. to migrate a software installation but it is considered a security risk, can lead to forks and hard to get right in terms of user experience.
 - To migrate data clients should rather make use of p2panda [Key Groups][key_groups], by transferring the permissions to a new key pair instead of migrating the old key pair itself
 
-[key_groups]: /specification/core-concepts/permissions
+[key_groups]: /specification/authorisation
