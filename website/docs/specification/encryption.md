@@ -3,7 +3,7 @@ id: encryption
 title: Encryption
 ---
 
-# Secret Groups
+# Encryption: Secret Group
 
 p2panda uses the [MLS][mls] (Messaging Layer Security) protocol for group key negotiation to establish secrets in a large group of users.
 

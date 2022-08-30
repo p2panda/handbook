@@ -1,24 +1,56 @@
 ---
-title: Overview
+title: Index
 ---
 
-## Introduction
+# Table of contents
 
-- short introduction into p2panda, a little more technical than elsewhere
-- `p2panda` is a p2p protocol which provides tools to build local-first websites, mobile- and desktop applications which run in decentralised networks......
-- ...
-- ...
-- link to the `introduction` section in the main website.
+We have structured this specification around core data types, higher-order concepts which build on these types, required APIs and networking patterns.
 
-## Status
+To see a detailed specification of all data types visit [Core Data Types], higher order concepts of [Identities], [Documents & Schema], [Authorisation] and [Encryption] are described in sections 5 - 8, following this we detail the specific [APIs] an implementation must make available and finally [Networking] describes actors in the network and replication protocol.
 
-We haven't reached `v1` of the specification yet so although it is in a relatively stable state breaking changes may still occur.
+**1. [Table of contents][index]**
 
-## Terminology
+**2. [Introduction][introduction]**
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all capitals, as shown here.
+**3. [Encoding][encoding]**
 
-## Requirements
+**4. [Core Data Types][bamboo]**
 
-- In this document we assign a code to every specification requirement an implementation of p2panda would need to meet.
-- Some of these codes refer to a specific requirement and some a group of related requirements.
+- Bamboo
+- Key Pairs
+- Operations
+- Schemas
+- Documents
+- Document Views
+
+**5. [Identities][identities]**
+
+**6. [Documents & Schema][documents-and-schema]**
+
+**7. [Authorisation][authorisation]**
+
+**8. [Encryption][encryption]**
+
+**9. [APIs][apis]**
+
+- Overview
+- Publishing
+- Queries
+- Replication
+
+**10. [Networking][networking]**
+
+- Clients & Nodes
+- Discovery
+- Replication
+
+[index]: /specification/
+[introduction]: /specification/introduction
+[encoding]: /specification/encoding-data
+[bamboo]: /specification/data-types/bamboo
+[identities]: /specification/identities
+[documents-and-schema]: /specification/documents-and-schema
+[authorisation]: /specification/authorisation
+[encryption]: /specification/encryption
+[apis]: /specification/APIs/apis-overview
+[networking]: /specification/networking/clients-nodes
