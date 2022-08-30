@@ -62,10 +62,10 @@ type Entry = {
   publicKey: string;
 
   // Log id of entry, starting at 0
-  logId?: bigint;
+  logId: bigint;
 
   // Sequence number of entry, starting at 1
-  seqNum?: bigint;
+  seqNum: bigint;
 
   // Skiplink hash
   skiplink?: string;
