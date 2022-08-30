@@ -15,7 +15,7 @@ function Footer() {
     <footer className={styles['footer']}>
       <img
         className={styles['footer-img']}
-        src={useBaseUrl('/images/panda-pixel-2.png')}
+        src={useBaseUrl('/images/deepsea-panda.svg')}
         width="100"
       />
       <img
