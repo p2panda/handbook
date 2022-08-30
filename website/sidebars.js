@@ -14,6 +14,7 @@ const sidebars = {
   learn: ['learn/index', 'learn/entries', 'learn/operations'],
   specification: [
     'specification/index',
+    'specification/glossary',
     'specification/encoding-data',
     {
       type: 'category',
