@@ -15,6 +15,7 @@ const sidebars = {
   specification: [
     'specification/index',
     'specification/introduction',
+    'specification/key-concepts',
     'specification/encoding-data',
     {
       type: 'category',
@@ -28,8 +29,6 @@ const sidebars = {
         'specification/data-types/document-views',
       ],
     },
-    'specification/identities',
-    'specification/documents-and-schema',
     'specification/authorisation',
     'specification/encryption',
     {
