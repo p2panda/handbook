@@ -1,6 +1,6 @@
 ---
 id: encoding-data
-title: Encoding
+title: Canonic Encoding
 ---
 
 - p2panda requires a canonical encoding format to guarantee that hashing a value produces the same result across all implementations.
