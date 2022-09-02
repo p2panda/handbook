@@ -5,6 +5,12 @@ title: Authorisation
 
 # Authorisation: Key Group
 
+:::caution Under construction
+
+While this section is almost fully complete and even [implemented][implemented], it might be a little rough at the edges: We're still working on a fun to use high-level API!
+
+:::
+
 The `key_group` schema is a way to group a set of public keys so that they can act as a single identity. Every member key can have different permissions limiting the extent to which they can publish operations as this single identity. Keys can only be added to a key group with a confirmation from both the key itself and an existing member key with the according permissions. Key groups can also be extended with other key groups, which extends the set of keys in the former with those from the latter. Key groups can serve as a building block for many other concepts in p2panda including identity (handles/usernames), multi-device usage, permissions and moderation.
 
 ## Use Case
@@ -63,7 +69,9 @@ A _key group membership request_ is created in order to add its authoring public
 The optional `member` field allows specifying a key group that requests membership instead of the public key that published this operation. A key group membership request that defines a `member` should only be considered valid if its authoring public key has a membership in that key group with `can_authorise` set to `true`.
 
 :::info Jam Queue
-If a `member` is defined and the membership has `can_authorise` set to false, the member key group can still change the key set of the parent key group by changing its own members. This could be prevented by making member a pinned relation.
+
+If a `member` is defined and the membership has `can_authorise` set to false, the member key group can still change the key set of the parent key group by changing its own members. This could be prevented by making `member` a pinned relation.
+
 :::
 
 #### Schema `key_group_membership_v1`
@@ -147,7 +155,8 @@ chat-message {
             }
           }
         }
-
     }
 }
 ```
+
+[implemented]: https://github.com/p2panda/p2panda/pull/279

@@ -3,7 +3,7 @@ id: documents
 title: Documents
 ---
 
-- A Document is a high-level mutable, multi-writer data type constructed from a linked graph of [operations](/specification/data-types/operations).
+- A Document is a high-level mutable, multi-writer data type constructed from a linked graph of [operations][operations].
 - Through a deterministic process the graph can be reduced to a single key-value map.
 - Any two documents (replicas) which contain the same collection of operations will resolve to the same value.
 - A document is identified by the operation id of its root CREATE operation_ (aka _document_id_).
@@ -111,3 +111,5 @@ only the id of the DELETE operation and no document view should be produced.
      - stop reduction here
   4. Stop reduction if there is no next known operation in the document
   5. Continue with step 2. otherwise
+
+[operations]: /specification/data-types/operations

@@ -3,8 +3,10 @@ id: discovery
 title: Discovery
 ---
 
-:::info not implemented
-Discovery is in specification phase and has not been implemented yet.
+:::caution Not implemented
+
+Discovery is in specification phase and has not been implemented yet. We're aiming at different, configurable discovery methods: Manual, mDNS and via signalling servers.
+
 :::
 
 - Discovery is the process by which [nodes][clients_nodes] find other nodes and connect to them
@@ -18,14 +20,5 @@ Discovery is in specification phase and has not been implemented yet.
 - Node operators can choose to have their node broadcast connection parameters that allow other nodes to connect to it
 - Nodes can be configured to broadcast connection parameters via DHT
 - Nodes can be configured to broadcast connection parameters via mDNS
-
-## Manual discovery
-
-- _Node operators can specify IP addresses and ports to replicate with_
-
-## mDNS discovery
-
-- _Nodes broadcast via mDNS that they are ready to replicate_
-- _enabled by default_
 
 [clients_nodes]: /specification/networking/clients-nodes

@@ -5,6 +5,13 @@ title: Encryption
 
 # Encryption: Secret Group
 
+:::caution Under construction
+
+While this section is almost fully complete and even [implemented][implemented], it might be a little rough at the edges: We're still working on a fun to use high-level API!
+
+:::
+
+
 p2panda uses the [MLS][mls] (Messaging Layer Security) protocol for group key negotiation to establish secrets in a large group of users.
 
 To allow flexibility for developers, p2panda offers two different settings of encryption: "Sender Ratchet Secrets" or "Long Term Secrets". Both settings give confidentiality, authenticity and post-compromise security, while the sender ratchet scheme also gives forward secrecy.
@@ -341,5 +348,6 @@ The Welcome message contains information about who gets added (see `KeyPackageRe
 - `KeyPackage` instances have an `LifeTimeExtension` which is timestamp based, this timestamp can theoretically be ignored in a trustless setting
 - InitKeys could potentially be reused. Clients should send a DELETE operation to key packages after they've joined a group.
 
+[implemented]: https://github.com/p2panda/p2panda/tree/main/p2panda-rs/src/secret_group
 [mls]: https://messaginglayersecurity.rocks/
 [secret_groups]: https://laub.liebechaos.org/BmT9pLorTOeu5SsV-4vp6w

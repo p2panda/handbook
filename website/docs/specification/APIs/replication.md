@@ -3,9 +3,9 @@ id: replication
 title: Replication
 ---
 
-- this api consists of GraphQL queries for other nodes to ask about the state of bamboo logs, entries and payloads
-  - these queries are enough to build a flexible replication protocol on top
-- nodes need to implement the API specifications to make sure they are compatible with all other node and client implementations.
+- This api consists of GraphQL queries for other nodes to ask about the state of bamboo logs, entries and payloads
+  - These queries are enough to build a flexible replication protocol on top
+- Nodes need to implement the API specifications to make sure they are compatible with all other node and client implementations.
 
 ## `entryByHash`
 
@@ -82,21 +82,21 @@ entriesNewerThanSeqNum(
 
 ```graphql
 type EncodedEntryAndOperation {
-	"""
-	entry bytes encoded as hexadecimal string
-	"""
-	entry: EncodedEntry!
-
-	"""
-	operation (payload of the entry) bytes encoded as hexadecimal string
-	"""
-	operation: EncodedOperation
-
-	"""
-	get the certificate pool for this entry that can be used to verify the entry
-	is valid
-	"""
-	certificatePool: [EncodedEntry!]!
+  """
+  entry bytes encoded as hexadecimal string
+  """
+  entry: EncodedEntry!
+  
+  """
+  operation (payload of the entry) bytes encoded as hexadecimal string
+  """
+  operation: EncodedOperation
+  
+  """
+  get the certificate pool for this entry that can be used to verify the entry
+  is valid
+  """
+  certificatePool: [EncodedEntry!]!
 }
 ```
 
@@ -104,55 +104,55 @@ type EncodedEntryAndOperation {
 
 ```graphql
 type EncodedEntryAndOperationConnection {
-	"""
-	information to aid in pagination
-	"""
-	pageInfo: PageInfo!
-
-	"""
-	a list of edges.
-	"""
-	edges: [EncodedEntryAndOperationEdge]
+  """
+  information to aid in pagination
+  """
+  pageInfo: PageInfo!
+  
+  """
+  a list of edges.
+  """
+  edges: [EncodedEntryAndOperationEdge]
 }
 
 """
 an edge in a connection
 """
 type EncodedEntryAndOperationEdge {
-	"""
-	the item at the end of the edge
-	"""
-	node: EncodedEntryAndOperation!
-
-	"""
-	a cursor for use in pagination
-	"""
-	cursor: String!
+  """
+  the item at the end of the edge
+  """
+  node: EncodedEntryAndOperation!
+  
+  """
+  a cursor for use in pagination
+  """
+  cursor: String!
 }
 
 """
 information about pagination in a connection
 """
 type PageInfo {
-	"""
-	when paginating backwards, are there more items?
-	"""
-	hasPreviousPage: Boolean!
-
-	"""
-	when paginating forwards, are there more items?
-	"""
-	hasNextPage: Boolean!
-
-	"""
-	when paginating backwards, the cursor to continue
-	"""
-	startCursor: String
-
-	"""
-	when paginating forwards, the cursor to continue
-	"""
-	endCursor: String
+  """
+  when paginating backwards, are there more items?
+  """
+  hasPreviousPage: Boolean!
+  
+  """
+  when paginating forwards, are there more items?
+  """
+  hasNextPage: Boolean!
+  
+  """
+  when paginating backwards, the cursor to continue
+  """
+  startCursor: String
+  
+  """
+  when paginating forwards, the cursor to continue
+  """
+  endCursor: String
 }
 ```
 
