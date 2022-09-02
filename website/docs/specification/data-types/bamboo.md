@@ -3,7 +3,7 @@ id: bamboo
 title: Bamboo
 ---
 
-- requirements in this section refer only to how p2panda specifies use of bamboo.
+_Requirements in this section refer only to how p2panda specifies use of bamboo._
 
 :::caution Requirement BA1
 
@@ -11,15 +11,15 @@ p2panda uses [Bamboo][bamboo_spec] with Ed25519 (Digital Signature Algorithm) an
 
 :::
 
-- p2panda is built on top of [Bamboo][bamboo_spec].
-  - This handbook doesn't repeat everything that's in the Bamboo spec, so it might be helpful to have a look at that (it's not too long).
-- Bamboo is an append-only log data type that ensures security and authenticity of arbitrary data in order to share it in a decentralized and trustless setting.
+- p2panda is built on top of the [Bamboo][bamboo_spec] data type.
+  - This handbook doesn't repeat everything that's in the Bamboo specification, so it might be helpful to have a look at that (it's not too long).
+- Bamboo is an append-only log data type that ensures security and authenticity of arbitrary data in order to share it in a decentralised and trustless setting.
   - Bamboo organises data by _author_.
   - Every author can have many [_logs_](#logs), each of which contains many _entries_.
   - Entries contain p2panda data that we want to publish.
 - The following sections explain how these concepts from bamboo are used in p2panda.
 
-```rust
+```
 struct Entry {
   /// PublicKey of this entry.
   public_key: Bytes(32),
@@ -69,13 +69,13 @@ Bamboo entries MUST be encoded using hexadecimal encoding when being transported
 
 :::
 
-- p2panda uses hex-encoding to make it nicer for humans to look at the data.
+p2panda prefers hex-encoding to make it nicer for humans to look at the data.
 
 ### Authors
 
 :::info Definition: Author
 
-A p2panda author is a human or bot who publishes data using p2panda. Authors may have more than one key pair.
+An p2panda author is a human or bot who publishes data using p2panda. Authors may have more than one key pair.
 
 :::
 
@@ -98,15 +98,15 @@ A p2panda author is a human or bot who publishes data using p2panda. Authors may
 - p2panda uses Bamboo entries to record changes of data while giving us cool features like partial replication, cryptographic integrity and authenticity.
   - Every atomic change is recorded inside an entry.
   - We call these changes _operations_.
-- Have a look at the [operations][operations] section of this handbook for more detailled information on this topic.
+- Have a look at the [operations][operations] section of this handbook for more detailed information on this topic.
 
 ### End of log flag
 
-- Currently p2panda doesn't reserve a special use for the end of log flag. This may change in future versions.
+Currently p2panda doesn't reserve a special use for the end of log flag. This may change in future versions.
 
-[key_pairs]: /specification/data-types/key-pairs
-[bamboo_spec]: https://github.com/bamboo-rs/bamboo-ed25519-yasmf
-[yamf]: https://github.com/AljoschaMeyer/yamf-hash
-[yasmf]: https://github.com/bamboo-rs/yasmf-hash
+[bamboo_spec]: https://github.com/AljoschaMeyer/bamboo
 [documents]: /specification/data-types/documents
+[key_pairs]: /specification/data-types/key-pairs
 [operations]: /specification/data-types/operations
+[yamf]: https://github.com/AljoschaMeyer/yamf-hash
+[yasmf]: https://github.com/bamboo-rs/yasmf-hash-spec

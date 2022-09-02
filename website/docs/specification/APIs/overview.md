@@ -23,7 +23,7 @@ title: Overview
 
 ## Replication API
 
-- this api consists of GraphQL queries for other nodes to ask about the state of bamboo logs, entries and payloads
+- this api consists of GraphQL queries for other nodes to ask about the state of Bamboo logs, entries and payloads
   - these queries are enough to build a flexible replication protocol on top
 - nodes need to implement the API specifications to make sure they are compatible with all other node and client implementations. The Node API is specified here, the Client API is further specified under [queries][queries], both APIs reside inside nodes
 

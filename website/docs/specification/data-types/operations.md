@@ -4,9 +4,9 @@ title: Operations
 ---
 
 - Operations represent atomic data changes.
-- Operations are published as the payload of _bamboo entries_.
-- Operations are identified by the hash of their bamboo entry.
-- Every operation is associated with a [bamboo author](/specification/data-types/key-pairs), which is encoded in the operation's _entry_
+- Operations are published as the payload of _Bamboo entries_.
+- Operations are identified by the hash of their Bamboo entry.
+- Every operation is associated with a [Bamboo author][key-pairs], which is encoded in the operation's _entry_
 
 :::info Definition: Operation ID
 
@@ -14,7 +14,7 @@ The _operation id_ uniquely identifies an operation. It is equal to the hash of 
 
 :::
 
-```rust
+```
 struct Operation {
   /// Version of this operation.
   version: NonZeroU64,
@@ -65,7 +65,7 @@ Every operation MUST have an _operation version_. An operation version MUST be a
 
 - The operation action defines the kind of data change that is described by the operation.
 
-```rust
+```
 enum OperationAction {
   CREATE,
   UPDATE,
@@ -96,11 +96,11 @@ Every operation MUST have an _operation action_, which MUST be one of
 ### Schema Id
 
 - The schema of an operation may define additional requirements for the operation's action, previous and fields items.
-  - See the [schema](/specification/data-types/schemas) section for more details.
+  - See the [schema][schema] section for more details.
 
 :::caution Requirement OP4
 
-Every operation MUST have a [schema id](/specification/data-types/schemas).
+Every operation MUST have a [schema id][schema]
 
 :::
 
@@ -125,11 +125,11 @@ DELETE and UPDATE operations MUST have _previous_ with `length > 0`. CREATE oper
 - Fields map field names to field values
   - field names are strings
   - field values can be of type: `u64`, `f64`, `boolean`, `string`, `relation`, `relation_list`, `pinned_relation`, `pinned_relation_list`
-  - see [schema][/specification/data-types/schemas] for further specification of field names and values
+  - see [schema][schema] for further specification of field names and values
 - The schema defined by the schema id item of the operation specifies the name and type of each field which can be included in an operation.
 - In order to deserialise typed field values, a copy of the schema is required.
 
-```rust
+```
 enum OperationValue {
   Boolean(Bool),
   Integer(I64),
@@ -169,19 +169,23 @@ The type of all operation field values MUST match the corresponding field in the
 ## Usage
 
 - Clients can use operations to publish data changes.
-- Clients must embed operations in bamboo entries to publish them.
-- Clients can create a [document](/specification/data-types/documents) by publishing a CREATE operation.
+- Clients must embed operations in Bamboo entries to publish them.
+- Clients can create a [document][document] by publishing a CREATE operation.
 - Clients can update a document by publishing an UPDATE operation.
   - Every UPDATE operation leads to a new _document view_ of the document that is being updated.
 - Clients can delete a document by publishing a DELETE operation.
-- Nodes can [reduce](/specification/data-types/documents#reduction) operations to produce a specific _document view_ of their document.
+- Nodes can [reduce][reduce] operations to produce a specific _document view_ of their document.
 - Clients can delete a document by publishing a DELETE operation.
 
 :::caution Requirement OP9
 
-Nodes MUST delete all operations of a document once it has been deleted. (_note: this should probably go into the documents section_).
+Nodes MUST delete all operations of a document once it has been deleted. (@TODO: this should probably go into the documents section).
 
 :::
 
 [cbor]: https://cbor.io/
+[document]: /specification/data-types/documents
+[key-pairs]: /specification/data-types/key-pairs
+[reduce]: /specification/data-types/documents#reduction
+[schema]: /specification/data-types/schemas
 [snake_case]: https://en.wikipedia.org/wiki/Snake_case

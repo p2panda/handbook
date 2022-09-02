@@ -15,9 +15,9 @@ Clients MUST use Ed25519 as the Digital Signature Algorithm for Bamboo.
 ## Usage
 
 - p2panda clients create key pairs for their users.
-- Data recipients can identify the author of data from the public key and the signature on a [bamboo entry](/specification/data-types/bamboo#entries).
+- Data recipients can identify the author of data from the public key and the signature on a [Bamboo entry][bamboo-entries]
   - The public key and signature are distributed alongside the data.
-- Data recipients can verify the integrity of data using the signature on bamboo entries.
+- Data recipients can verify the integrity of data using the signature on Bamboo entries.
 
 ## Key Management
 
@@ -45,4 +45,5 @@ p2panda clients SHOULD NOT require the transmission of a private key outside a u
 - Transmitting a private key outside of its usage context might be attractive e.g. to migrate a software installation but it is considered a security risk, can lead to forks and hard to get right in terms of user experience.
 - To migrate data clients should rather make use of p2panda [Key Groups][key_groups], by transferring the permissions to a new key pair instead of migrating the old key pair itself
 
+[bamboo-entries]: /specification/data-types/bamboo#entries
 [key_groups]: /specification/authorisation
