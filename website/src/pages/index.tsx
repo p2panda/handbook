@@ -1,12 +1,21 @@
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import Layout from '@theme/Layout';
-import React from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import clsx from 'clsx';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { useColorMode } from '@docusaurus/theme-common';
 
 import LogoSVG from '@site/static/images/p2panda.svg';
+import PixelPandaDeepSea from '@site/static/images/deepsea-panda.svg';
+import PixelPandaGreen from '@site/static/images/green-panda.svg';
+import PixelPandaNeon from '@site/static/images/neon-panda.svg';
+import PixelPandaYellow from '@site/static/images/yellow-panda.svg';
+
 import styles from './index.module.css';
+
+function randomRange(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min) + min);
+}
 
 const BLUE = '#7e8eff';
 const CYAN = '#81e0ff';
@@ -140,67 +149,134 @@ function Section(props: {
   );
 }
 
+function PandaParty(): JSX.Element {
+  const [size, setSize] = useState(() => {
+    return randomRange(1, 5);
+  });
+
+  const [position, setPosition] = useState(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const update = () => {
+      setVisible(() => {
+        const value = Math.random();
+        return value > 0.5;
+      });
+
+      setSize(randomRange(1, 5));
+
+      setPosition(() => {
+        const value = randomRange(1, 3);
+        if (value === 1) {
+          return null;
+        } else if (value === 2) {
+          return 'low';
+        } else if (value === 3) {
+          return 'mid';
+        }
+      });
+    };
+
+    update();
+
+    const interval = window.setInterval(() => {
+      update();
+    }, 7000);
+
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, []);
+
+  return visible ? (
+    <div
+      className={clsx(styles['panda-party'], {
+        'panda-party-low': position === 'low',
+        'panda-party-mid': position === 'mid',
+      })}
+    >
+      {new Array(size).fill(0).map(() => {
+        return (
+          <>
+            <PixelPandaNeon width={100} />
+            <PixelPandaGreen width={100} />
+            <PixelPandaDeepSea width={100} />
+            <PixelPandaYellow width={100} />
+          </>
+        );
+      })}
+    </div>
+  ) : null;
+}
+
 export default function Home(): JSX.Element {
   return (
-    <Layout
-      title="Home"
-      description="p2panda is a p2p protocol for secure, energy-efficient and local-first web, mobile and desktop applications"
-    >
-      <Section className={styles['welcome-section']}>
-        <Pentagon size={1000} color={CYAN} right margin={4} />
-        <Pentagon size={600} color={CYAN} margin={6} hideOnSmallDevices />
-        <Title center text="p2panda is a protocol for local-first applications">
-          Read more about it in the <a href="about">introduction</a>
-        </Title>
-        <Logo />
-      </Section>
-      <Section className={styles['zoo-section']}>
-        <Zoo />
-      </Section>
-      <Section>
-        <Pentagon size={1500} color={PINK} margin={2} shift />
-        <Drawing url="/images/panda-artwork-2.png" />
-        <Title text="Collaborative peer-to-peer networks" right>
-          <a href="learn">Learn</a> more about the concepts of p2panda
-        </Title>
-        <Pentagon
-          size={700}
-          color={PINK}
-          right
-          margin={2}
-          hideOnMediumDevices
-        />
-      </Section>
-      <img
-        src={useBaseUrl('/images/pandas.png')}
-        className={styles['many-pandas']}
-      />
-      <Section>
-        <Pentagon size={1000} color={BLUE} margin={4} right />
-        <Title text="Open protocol specification and research">
-          Read the <a href="specification">specification</a>
-        </Title>
-        <Drawing url="/images/panda-artwork-1.png" />
-      </Section>
-      <hr className={styles['separator']} />
-      <Section className={styles['play-section']}>
-        <Pentagon size={750} color={GREEN} margin={4} right />
+    <>
+      <PandaParty />
+      <Layout
+        title="Home"
+        description="p2panda is a p2p protocol for secure, energy-efficient and local-first web, mobile and desktop applications"
+      >
+        <Section className={styles['welcome-section']}>
+          <Pentagon size={1000} color={CYAN} right margin={4} />
+          <Pentagon size={600} color={CYAN} margin={6} hideOnSmallDevices />
+          <Title
+            center
+            text="p2panda is a protocol for local-first applications"
+          >
+            Read more about it in the <a href="about">introduction</a>
+          </Title>
+          <Logo />
+        </Section>
+        <Section className={styles['zoo-section']}>
+          <Zoo />
+        </Section>
+        <Section>
+          <Pentagon size={1500} color={PINK} margin={2} shift />
+          <Drawing url="/images/panda-artwork-2.png" />
+          <Title text="Collaborative peer-to-peer networks" right>
+            <a href="learn">Learn</a> more about the concepts of p2panda
+          </Title>
+          <Pentagon
+            size={700}
+            color={PINK}
+            right
+            margin={2}
+            hideOnMediumDevices
+          />
+        </Section>
         <img
-          src={useBaseUrl('/images/happy-panda.svg')}
-          width="200"
-          className={styles['happy-panda']}
+          src={useBaseUrl('/images/pandas.png')}
+          className={styles['many-pandas']}
         />
-        <Title center text="Play with p2panda in Rust or TypeScript">
-          Explore the <a href="tutorials">tutorials</a> and{' '}
-          <a href="libraries">libraries</a>
-        </Title>
-        <Pentagon size={500} color={GREEN} margin={2} hideOnSmallDevices />
-      </Section>
-      <img
-        className={styles['red-pandas']}
-        src={useBaseUrl('/images/panda-artwork-3.png')}
-        width="500"
-      />
-    </Layout>
+        <Section>
+          <Pentagon size={1000} color={BLUE} margin={4} right />
+          <Title text="Open protocol specification and research">
+            Read the <a href="specification">specification</a>
+          </Title>
+          <Drawing url="/images/panda-artwork-1.png" />
+        </Section>
+        <hr className={styles['separator']} />
+        <Section className={styles['play-section']}>
+          <Pentagon size={750} color={GREEN} margin={4} right />
+          <img
+            src={useBaseUrl('/images/happy-panda.svg')}
+            width="200"
+            className={styles['happy-panda']}
+          />
+          <Title center text="Play with p2panda in Rust or TypeScript">
+            Explore the <a href="tutorials">tutorials</a> and{' '}
+            <a href="libraries">libraries</a>
+          </Title>
+          <Pentagon size={500} color={GREEN} margin={2} hideOnSmallDevices />
+        </Section>
+        <img
+          className={styles['red-pandas']}
+          src={useBaseUrl('/images/panda-artwork-3.png')}
+          width="500"
+        />
+      </Layout>
+    </>
   );
 }
