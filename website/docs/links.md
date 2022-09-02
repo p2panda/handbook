@@ -11,9 +11,14 @@ import Links from '@site/src/components/Links';
   "url": "https://github.com/p2panda",
 },
 {
-  "name": "How to contribute",
-  "description": "Document on how to contribute to p2panda development",
-  "url": "https://github.com/p2panda/handbook/blob/main/CONTRIBUTING.md",
+  "name": "Mio Ebisu",
+  "description": "Painter (of cute pixely and non-pixely pandas)",
+  "url": "https://mioebisu.neocities.org/",
+},
+{
+  "name": "Laura Weber",
+  "description": "Illustrator (of cute pandas)",
+  "url": "https://www.lauraweber.net",
 },
 {
   "name": "Shirokuma Cafe",
