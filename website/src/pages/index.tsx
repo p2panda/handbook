@@ -6,16 +6,12 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import { useColorMode } from '@docusaurus/theme-common';
 
 import LogoSVG from '@site/static/images/p2panda.svg';
-import PixelPandaDeepSea from '@site/static/images/deepsea-panda.svg';
-import PixelPandaGreen from '@site/static/images/green-panda.svg';
-import PixelPandaNeon from '@site/static/images/neon-panda.svg';
-import PixelPandaYellow from '@site/static/images/yellow-panda.svg';
+import NeonPanda from '@site/static/images/neon-panda.svg';
+import GreenPanda from '@site/static/images/green-panda.svg';
+import YellowPanda from '@site/static/images/yellow-panda.svg';
+import DeepSeaPanda from '@site/static/images/deepsea-panda.svg';
 
 import styles from './index.module.css';
-
-function randomRange(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min) + min);
-}
 
 const BLUE = '#7e8eff';
 const CYAN = '#81e0ff';
@@ -150,70 +146,21 @@ function Section(props: {
 }
 
 function PandaParty(): JSX.Element {
-  const [size, setSize] = useState(() => {
-    return randomRange(1, 5);
-  });
-
-  const [position, setPosition] = useState(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const update = () => {
-      setVisible(() => {
-        const value = Math.random();
-        return value > 0.5;
-      });
-
-      setSize(randomRange(1, 5));
-
-      setPosition(() => {
-        const value = randomRange(1, 3);
-        if (value === 1) {
-          return null;
-        } else if (value === 2) {
-          return 'low';
-        } else if (value === 3) {
-          return 'mid';
-        }
-      });
-    };
-
-    update();
-
-    const interval = window.setInterval(() => {
-      update();
-    }, 7000);
-
-    return () => {
-      window.clearInterval(interval);
-    };
-  }, []);
-
-  return visible ? (
-    <div
-      className={clsx(styles['panda-party'], {
-        'panda-party-low': position === 'low',
-        'panda-party-mid': position === 'mid',
-      })}
-    >
-      {new Array(size).fill(0).map(() => {
-        return (
-          <>
-            <PixelPandaNeon width={100} />
-            <PixelPandaGreen width={100} />
-            <PixelPandaDeepSea width={100} />
-            <PixelPandaYellow width={100} />
-          </>
-        );
-      })}
+  return (
+    <div className={styles['panda-party']}>
+      <div className={styles['panda-party-floor']}>
+        <DeepSeaPanda />
+        <GreenPanda />
+        <YellowPanda />
+        <NeonPanda />
+      </div>
     </div>
-  ) : null;
+  );
 }
 
 export default function Home(): JSX.Element {
   return (
     <>
-      <PandaParty />
       <Layout
         title="Home"
         description="p2panda is a p2p protocol for secure, energy-efficient and local-first web, mobile and desktop applications"
@@ -230,6 +177,7 @@ export default function Home(): JSX.Element {
           <Logo />
         </Section>
         <Section className={styles['zoo-section']}>
+          <PandaParty />
           <Zoo />
         </Section>
         <Section>

@@ -157,26 +157,38 @@
  */
 
 .panda-party {
-  position: fixed;
-  top: 0;
+  position: absolute;
   right: 0;
-  bottom: 0;
   left: 0;
   z-index: -1;
-  animation: panda-move 7s infinite linear;
-  overflow-x: hidden;
+  overflow: hidden;
+  height: 500px;
+  user-select: none;
+  pointer-events: none;
 }
 
-.panda-part-lower {
-  top: 50%;
+@media (max-width: 996px) {
+  .panda-party {
+    display: none;
+  }
 }
 
-.panda-part-mid {
-  top: 25%;
+.panda-party-floor {
+  margin-top: 50px;
+  animation: panda-move 15s infinite linear;
+}
+
+.panda-party-floor-low {
+  margin-top: 200px;
+}
+
+.panda-party-floor-mid {
+  margin-top: 400px;
 }
 
 .panda-party svg {
   animation: panda-dance 3000ms infinite alternate ease-in-out;
+  width: 100px;
   margin: 4em;
 }
 
@@ -186,11 +198,11 @@
 
 @keyframes panda-move {
   0% {
-    transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
   }
 
   100% {
-    transform: translate3d(100%, -25%, 0);
+    transform: translate3d(100%, 0, 0);
   }
 }
 
@@ -350,7 +362,7 @@
   display: block;
   margin: 0 auto;
   margin-top: 10em;
-  max-width: 800px;
+  max-width: 650px;
   width: 100%;
 }
 
