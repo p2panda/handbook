@@ -48,8 +48,8 @@ const sidebars = {
         'specification/networking/replication-protocol',
       ],
     },
-    'specification/glossary',
     'specification/encoding-data',
+    'specification/glossary',
   ],
 };
 
