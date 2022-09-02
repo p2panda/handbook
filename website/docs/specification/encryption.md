@@ -102,7 +102,7 @@ SecretGroup {
 ```
 KeyPackage {
   // Pointer at previous KeyPackage from that author
-  previous_key_package: authorized_relation(KeyPackage),
+  previous_key_package: owner(KeyPackage),
 
   // Signed MLS Key Package data
   mls_key_package: binary(KeyPackage) {
@@ -120,10 +120,10 @@ KeyPackage {
 ```
 SecretGroupCommit {
   // Points at the secure group this commit belongs to
-  secret_group: authorized_relation(SecretGroup),
+  secret_group: owner(SecretGroup),
 
   // Points at the previous commit to bring them into an order
-  previous_commit: authorized_relation(SecretGroupCommit),
+  previous_commit: owner(SecretGroupCommit),
 
   // MLS Commit Message
   mls_commit_message: binary(MlsPlaintext) {
