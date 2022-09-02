@@ -3,9 +3,6 @@ id: operations
 title: Operations
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 - Operations represent atomic data changes.
 - Operations are published as the payload of _bamboo entries_.
 - Operations are identified by the hash of their bamboo entry.
@@ -17,54 +14,25 @@ The _operation id_ uniquely identifies an operation. It is equal to the hash of 
 
 :::
 
-<Tabs groupId="entries">
-<TabItem value="rust" label="Rust" default>
-
 ```rust
 struct Operation {
   /// Version of this operation.
-  pub version: OperationVersion,
+  version: NonZeroU64,
 
   /// Describes if this operation creates, updates or deletes data.
-  pub action: OperationAction,
+  action: OperationAction,
 
   /// The id of the schema for this operation.
-  pub schema_id: SchemaId,
+  schema_id: String,
 
   /// Optional document view id containing the operation ids directly preceding this one in the
   /// document.
-  pub previous_operations: Option<DocumentViewId>,
+  previous_operations?: String{68}[],
 
   /// Optional fields map holding the operation data.
-  pub fields: Option<BTreeMap<String, OperationValue>>,
+  fields?: HashMap<String, OperationValue>,
 }
 ```
-
-</TabItem>
-<TabItem value="ts" label="TypeScript">
-
-```typescript
-type Operation = {
-  /** Version of this operation encoding */
-  version: VersionNumber;
-
-  /** Operation action */
-  action: OperationAction;
-
-  /** Id of schema this operation matches */
-  schemaId: SchemaId;
-
-  /** Document view id pointing at previous operations, needs to be set
-   * for UPDATE and DELETE operations */
-  previous?: DocumentViewId;
-
-  /** The fields of this operation */
-  fields?: Map<string, OperationValue>;
-};
-```
-
-</TabItem>
-</Tabs>
 
 ## Encoding Format
 
@@ -97,35 +65,21 @@ Every operation MUST have an _operation version_. An operation version MUST be a
 
 - The operation action defines the kind of data change that is described by the operation.
 
-<Tabs groupId="entries">
-<TabItem value="rust" label="Rust" default>
-
 ```rust
 enum OperationAction {
-  Create,
-  Update,
-  Delete,
+  CREATE,
+  UPDATE,
+  DELETE,
 }
-
 ```
-
-</TabItem>
-<TabItem value="ts" label="TypeScript">
-
-```typescript
-type OperationAction = 'create' | 'update' | 'delete';
-```
-
-</TabItem>
-</Tabs>
 
 :::info Definition: Operation Actions
 
 There are 3 types of operation:
 
-1. _create operations_ initialise new documents and set all of their field values.
-2. _update operations_ mutate any number of fields on an existing document.
-3. _delete operations_ delete an existing document.
+1. CREATE operations initialise new documents and set all of their field values.
+2. UPDATE operations mutate any number of fields on an existing document.
+3. DELETE operations delete an existing document.
 
 :::
 
@@ -133,9 +87,9 @@ There are 3 types of operation:
 
 Every operation MUST have an _operation action_, which MUST be one of
 
-- `0` - denotes a CREATE action and results in a _create operation_
-- `1` - denotes an UPDATE action and results in a _update operation_
-- `2` - denotes a DELETE action and results in a _delete operation_
+- `0` - denotes a CREATE action and results in a CREATE operation
+- `1` - denotes an UPDATE action and results in a UPDATE operation
+- `2` - denotes a DELETE action and results in a DELETE operation
 
 :::
 
@@ -175,39 +129,18 @@ DELETE and UPDATE operations MUST have _previous_ with `length > 0`. CREATE oper
 - The schema defined by the schema id item of the operation specifies the name and type of each field which can be included in an operation.
 - In order to deserialise typed field values, a copy of the schema is required.
 
-<Tabs groupId="entries">
-<TabItem value="rust" label="Rust" default>
-
 ```rust
 enum OperationValue {
-  Boolean(bool),
-  Integer(i64),
-  Float(f64),
+  Boolean(Bool),
+  Integer(I64),
+  Float(F64),
   String(String),
-  Relation(Relation),
-  RelationList(RelationList),
-  PinnedRelation(PinnedRelation),
-  PinnedRelationList(PinnedRelationList),
+  Relation(String{68}),
+  RelationList(String{68}[]),
+  PinnedRelation(String{68}[]),
+  PinnedRelationList(String{68}[][]),
 }
 ```
-
-</TabItem>
-<TabItem value="ts" label="TypeScript">
-
-```typescript
-type OperationValue =
-  | boolean
-  | bigint
-  | number
-  | string
-  | DocumentId // relation
-  | DocumentId[] // relation list
-  | DocumentViewId // pinned relation
-  | DocumentViewId[]; // pinned relation list
-```
-
-</TabItem>
-</Tabs>
 
 :::caution Requirement OP6
 
@@ -238,11 +171,11 @@ The type of all operation field values MUST match the corresponding field in the
 - Clients can use operations to publish data changes.
 - Clients must embed operations in bamboo entries to publish them.
 - Clients can create a [document](/specification/data-types/documents) by publishing a CREATE operation.
-- Clients can update a document by publishing an _update operation_.
-  - Every _update operation_ leads to a new _document view_ of the document that is being updated.
-- Clients can delete a document by publishing a _delete operation_.
+- Clients can update a document by publishing an UPDATE operation.
+  - Every UPDATE operation leads to a new _document view_ of the document that is being updated.
+- Clients can delete a document by publishing a DELETE operation.
 - Nodes can [reduce](/specification/data-types/documents#reduction) operations to produce a specific _document view_ of their document.
-- Clients can delete a document by publishing a _delete operation_.
+- Clients can delete a document by publishing a DELETE operation.
 
 :::caution Requirement OP9
 

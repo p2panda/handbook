@@ -6,8 +6,8 @@ title: Documents
 - A Document is a high-level mutable, multi-writer data type constructed from a linked graph of [operations](/specification/data-types/operations).
 - Through a deterministic process the graph can be reduced to a single key-value map.
 - Any two documents (replicas) which contain the same collection of operations will resolve to the same value.
-- A document is identified by the operation id of its root _create operation_ (aka _document_id_).
-- A document assumes the schema of its root _create operation_
+- A document is identified by the operation id of its root CREATE operation_ (aka _document_id_).
+- A document assumes the schema of its root CREATE operation
 - A document is made up of operations published by one or many authors
   - Branches in a document's graph occur when two authors publish operations concurrently
 - Every operation has a `previous` field containing a `document_view_id` which refers to document state _at the moment the operation was encoded_
@@ -20,7 +20,7 @@ Some things that may be a document in p2panda: a blog post, a wiki page, a chat 
 
 :::caution Requirement DO1
 
-A document MUST contain exactly one _create_operation_.
+A document MUST contain exactly one CREATE operation.
 
 :::
 
@@ -38,7 +38,7 @@ A document MUST NOT contain an operation who's `previous` refers to an operation
 
 :::caution Requirement DO4
 
-If a document contains any number of _delete_operations_ it SHOULD be considered deleted. After this point, new operations
+If a document contains any number of DELETE operations_ it SHOULD be considered deleted. After this point, new operations
 SHOULD NOT be appended to any point on the document.
 
 :::
@@ -88,8 +88,8 @@ All operations in the graph MUST be sorted exactly once.
 
 :::caution Requirement D10
 
-If any _delete operation_ is visited, materialisation of the document MUST stop immediately. The resulting document view id MUST include
-only the id of the delete operation and no document view should be produced.
+If any DELETE operation is visited, materialisation of the document MUST stop immediately. The resulting document view id MUST include
+only the id of the DELETE operation and no document view should be produced.
 
 :::
 
@@ -97,11 +97,11 @@ only the id of the delete operation and no document view should be produced.
 
 - The second and final step is to reduce the linearlised list of operations into a single key-value map by applying the following rules:
 
-  1. Deserialise all fields of the document's _create operation_ to produce a _document view_
-  2. If the next operation in the document is an _update operation_
+  1. Deserialise all fields of the document's CREATE operation to produce a _document view_
+  2. If the next operation in the document is an UPDATE operation
      - for every field in the operation
        - overwrite this field's contents on the view with the contents from the operation
-  3. If the next operation in the document is a _delete operation_
+  3. If the next operation in the document is a DELETE operation
      - remove the content on all fields of the view
      - mark the view delete
      - stop reduction here
