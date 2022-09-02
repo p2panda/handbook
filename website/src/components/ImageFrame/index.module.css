@@ -15,7 +15,7 @@
 
 .image-frame img {
   width: 100%;
-  max-width: 600px;
+  max-width: 600px !important;
   padding: 5em;
 }
 
