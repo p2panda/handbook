@@ -152,23 +152,6 @@
   }
 }
 
-.flip {
-  transform: scaleX(-1);
-}
-
-
-.left {
-  position: absolute;
-  left: 10px;
-  z-index: -1;
-}
-
-.right {
-  position: absolute;
-  right: 10px;
-  z-index: -1;
-}
-
 /*
  * Welcome Section
  */
@@ -313,13 +296,16 @@
 
 .many-pandas {
   display: block;
-  margin: 10em auto;
+  margin: 0 auto;
+  margin-top: 10em;
   max-width: 800px;
+  width: 100%;
 }
 
-@media (max-width: 996px) {
+@media (max-width: 1300px) {
   .many-pandas {
-    width: 80%;
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 }
 
@@ -335,7 +321,6 @@
   }
 }
 
-
 /*
  * Play section
  */
@@ -344,3 +329,8 @@
   text-align: right;
   max-width: 800px;
 }
+
+.happy-panda {
+  transform: scaleX(-1);
+}
+

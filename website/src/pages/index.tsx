@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { useColorMode } from '@docusaurus/theme-common';
 
-import LogoSVG from '@site/static/images/neon-panda.svg';
+import LogoSVG from '@site/static/images/p2panda.svg';
 import styles from './index.module.css';
 
 const BLUE = '#7e8eff';
@@ -75,12 +75,11 @@ function Drawing(props: { url: string }): JSX.Element {
 
 function Logo(): JSX.Element {
   return (
-    <div className={`${styles['logo']} ${styles['flip']}`}>
+    <div className={styles['logo']}>
       <LogoSVG />
     </div>
   );
 }
-
 
 function Zoo(): JSX.Element {
   return (
@@ -154,11 +153,6 @@ export default function Home(): JSX.Element {
           Read more about it in the <a href="about">introduction</a>
         </Title>
         <Logo />
-        <img
-          src={useBaseUrl('/images/deepsea-panda.svg')}
-          width="200"
-          className={styles['left']}
-        />
       </Section>
       <Section className={styles['zoo-section']}>
         <Zoo />
@@ -166,11 +160,6 @@ export default function Home(): JSX.Element {
       <Section>
         <Pentagon size={1500} color={PINK} margin={2} shift />
         <Drawing url="/images/panda-artwork-2.png" />
-        <img
-          src={useBaseUrl('/images/green-panda.svg')}
-          width="200"
-          className={styles['left']}
-        />
         <Title text="Collaborative peer-to-peer networks" right>
           <a href="learn">Learn</a> more about the concepts of p2panda
         </Title>
@@ -184,7 +173,6 @@ export default function Home(): JSX.Element {
       </Section>
       <img
         src={useBaseUrl('/images/pandas.png')}
-        width="800"
         className={styles['many-pandas']}
       />
       <Section>
@@ -192,11 +180,6 @@ export default function Home(): JSX.Element {
         <Title text="Open protocol specification and research">
           Read the <a href="specification">specification</a>
         </Title>
-        <img
-          src={useBaseUrl('/images/yellow-panda.svg')}
-          width="200"
-          className={`${styles['flip']} ${styles['right']}`}
-        />
         <Drawing url="/images/panda-artwork-1.png" />
       </Section>
       <hr className={styles['separator']} />
@@ -205,19 +188,19 @@ export default function Home(): JSX.Element {
         <img
           src={useBaseUrl('/images/happy-panda.svg')}
           width="200"
-          className={styles['flip']}
+          className={styles['happy-panda']}
         />
         <Title center text="Play with p2panda in Rust or TypeScript">
           Explore the <a href="tutorials">tutorials</a> and{' '}
           <a href="libraries">libraries</a>
         </Title>
-        <img
-          className={styles['red-pandas']}
-          src={useBaseUrl('/images/panda-artwork-3.png')}
-          width="500"
-        />
         <Pentagon size={500} color={GREEN} margin={2} hideOnSmallDevices />
       </Section>
+      <img
+        className={styles['red-pandas']}
+        src={useBaseUrl('/images/panda-artwork-3.png')}
+        width="500"
+      />
     </Layout>
   );
 }
