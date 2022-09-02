@@ -6,7 +6,7 @@ title: Replication Protocol
 - Replication is the process by which nodes exchange entries and operations to eventually converge all to the same state
   - This makes p2panda an _eventually consistent_ database
   - Nodes autonomously share data with each other without central coordination
-- nodes may not be interested in all available data and can choose to receive only some data
+- Nodes may not be interested in all available data and can choose to receive only some data
   - For example from a set of authors or schemas
 
 ## Transport protocol
