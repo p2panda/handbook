@@ -10,8 +10,6 @@ import GreenPanda from '@site/static/images/green-panda.svg';
 import LogoSVG from '@site/static/images/p2panda.svg';
 import NeonPanda from '@site/static/images/neon-panda.svg';
 import YellowPanda from '@site/static/images/yellow-panda.svg';
-import ZooBackgroundUrl from '@site/static/images/game-background.jpg';
-import ZooBackgroundNightUrl from '@site/static/images/game-background-night.png';
 
 import styles from './index.module.css';
 
@@ -90,6 +88,8 @@ function Logo(): JSX.Element {
 
 function Zoo(): JSX.Element {
   const { colorMode } = useColorMode();
+  const backgroundUrl = useBaseUrl('/images/game-background.jpg');
+  const backgroundNightUrl = useBaseUrl('/images/game-background-night.png');
 
   return (
     <div className={styles['zoo']}>
@@ -100,8 +100,8 @@ function Zoo(): JSX.Element {
           style={{
             backgroundImage:
               colorMode === 'dark'
-                ? `url(${ZooBackgroundNightUrl})`
-                : `url(${ZooBackgroundUrl})`,
+                ? `url(${backgroundNightUrl})`
+                : `url(${backgroundUrl})`,
           }}
         >
           <BrowserOnly>
