@@ -15,7 +15,9 @@ title: Documents
   - The graph describes the causal relationship between all operations in a document.
 
 :::tip Fun fact
+
 Some things that may be a document in p2panda: a blog post, a wiki page, a chat message, a user account, a configuration setting, a game board.
+
 :::
 
 :::caution Requirement DO1
@@ -48,7 +50,9 @@ SHOULD NOT be appended to any point on the document.
 - When viewing documents, it's state must be reduced to a single key-value map, this process involves two steps:
 
 :::info Definition: Materialisation
+
 Although here we describe the resolving an operation graph as a property of the data type _document_ it can also be seen as the process of _materialisation_. This is a term borrowed from database terminology, where views on data can be materialised into virtual tables. This is a useful concept in p2panda and one that is used often.  
+
 :::
 
 ### 1. Reconciliation
@@ -64,7 +68,7 @@ Sorting MUST start from the documents CREATE operation.
 
 :::caution Requirement DO6
 
-An operation which refers to the current operation in it's `previous` field MUST be sorted next.
+An operation which refers to the current operation in its `previous` field MUST be sorted next.
 
 :::
 
