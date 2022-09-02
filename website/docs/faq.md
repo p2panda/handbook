@@ -14,6 +14,10 @@ All data can be edited and deleted by everyone by default. For the future it wil
 
 It can be both! We thought its good to let the developers, users and communities decide what setting is best for them.
 
+## Do you have CRDTs?
+
+Yes, p2panda _Operations_ are Conflict-Resistant-Data-Types (CRDTs). The cool thing is you can define any shape of data and p2panda will figure out how to handle merge conflicts automatically.
+
 ## Why is there a "server" in a decentralised protocol?
 
 p2panda has been designed with browser-friendliness in mind as it is still very hard to build full p2p applications running only in browsers, besides they can become slow on mobile devices when doing all of the heavy work. For this reason p2panda can be used with an external node (you can also call it "server") which does the heavy lifting for browser clients. You don't have to do this if you're interested in fully decentralised setups (you can embed a node _inside_ of your client). That being said, it is still not possible to reliably discover other nodes in a p2p network without some sort of signalling server infrastructure.
@@ -45,3 +49,7 @@ If you want to keep historical data you can create a "pinned relation" which wil
 ## Wasn't there something about a festival?
 
 Yes! We started as a group which wanted to build a p2p [festival organisation tool](https://github.com/p2panda/festival-tool) and p2panda came out of that. We will still make a festival client (on top of p2panda) and probably organise a festival sometime!
+
+## How can I contact you?
+
+Write us an email at [contributors@p2panda.org](mailto:contributors@p2panda.org).
