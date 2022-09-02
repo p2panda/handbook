@@ -14,7 +14,7 @@ title: Glossary
 
 **[Yasmf][yasmf]**: a multiformat hash used in `p2panda`.
 
-**[Author (in bamboo)][bamboo-author]**: the public key included in a bamboo entry.
+**[Author (in Bamboo)][bamboo-author]**: the public key included in a Bamboo entry.
 
 **[Key Pair][key_pairs]**: a string of data that is used to lock or unlock cryptographic functions, including authentication, authorization and encryption.
 

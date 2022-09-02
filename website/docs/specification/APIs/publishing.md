@@ -11,7 +11,7 @@ title: Publishing
 
 - Returns parameters required for encoding new entries
   - Implementations must not have side effects
-- Clients can't encode new entries without information from this endpoint because every entry needs to place itself in the first unused sequence number of a specific [_bamboo log_][bamboo] and also it needs to include the hashes of specific previous entries in its encoding
+- Clients can't encode new entries without information from this endpoint because every entry needs to place itself in the first unused sequence number of a specific [_Bamboo log_][bamboo] and also it needs to include the hashes of specific previous entries in its encoding
   - This information is held by the node
 - Clients may cache the arguments required for the next entry (they are also returned by `publish`)
 - Clients may also persist their entry logs locally to avoid any dependency for retrieving entry arguments of nodes at all
@@ -43,7 +43,7 @@ query nextArgs(
   - The node may [materialise][reduction] the document this new operation belongs to, resulting in a new document view
 - Returns entry arguments required for publishing the next entry for the same document, similar to `nextArgs`
 - Returns an error
-  - When the bamboo log, signature or document integrity could not be verified, the operation was malformed or schema not fulfilled
+  - When the Bamboo log, signature or document integrity could not be verified, the operation was malformed or schema not fulfilled
   - When the node is unable to persist the entry and operation at the moment
 
 ```graphql
