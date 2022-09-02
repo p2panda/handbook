@@ -1,15 +1,17 @@
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import Layout from '@theme/Layout';
-import React, { useEffect, useState, useMemo } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import { useColorMode } from '@docusaurus/theme-common';
 
+import DeepSeaPanda from '@site/static/images/deepsea-panda.svg';
+import GreenPanda from '@site/static/images/green-panda.svg';
 import LogoSVG from '@site/static/images/p2panda.svg';
 import NeonPanda from '@site/static/images/neon-panda.svg';
-import GreenPanda from '@site/static/images/green-panda.svg';
 import YellowPanda from '@site/static/images/yellow-panda.svg';
-import DeepSeaPanda from '@site/static/images/deepsea-panda.svg';
+import ZooBackgroundUrl from '@site/static/images/game-background.jpg';
+import ZooBackgroundNightUrl from '@site/static/images/game-background-night.png';
 
 import styles from './index.module.css';
 
@@ -87,11 +89,21 @@ function Logo(): JSX.Element {
 }
 
 function Zoo(): JSX.Element {
+  const { colorMode } = useColorMode();
+
   return (
     <div className={styles['zoo']}>
       <div className={styles['zoo-gameboy']}>
         <p className={styles['zoo-title']}>Zoo Adventures</p>
-        <div className={styles['zoo-inner']}>
+        <div
+          className={styles['zoo-inner']}
+          style={{
+            backgroundImage:
+              colorMode === 'dark'
+                ? `url(${ZooBackgroundNightUrl})`
+                : `url(${ZooBackgroundUrl})`,
+          }}
+        >
           <BrowserOnly>
             {() => {
               // eslint-disable-next-line @typescript-eslint/no-var-requires
