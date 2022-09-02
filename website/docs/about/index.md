@@ -4,7 +4,7 @@ title: Introduction
 
 ## Local first
 
-In the last years we've learned how boring the internet can be: Centralised, commercial platforms take ownership over our data, sell it even further and on top prescribe how we can use it. With p2panda we're not changing the internet, but we're offering some tools for others to make networked software a little bit more exciting, energy and data efficient, secure but most of all fun, adventurous and playful!
+In the last years we've learned how boring the internet can be: Centralised, commercial platforms take ownership over our data, sell it even further and on top prescribe how we can use it. With p2panda we're not changing the internet, but we're offering some tools for others to make networked software a little bit more exciting, securem, energy and data efficient - but most of all fun, adventurous and playful!
 
 p2panda is a protocol for local-first applications. _local first_ is a somewhat unknown term and hard to grasp for most people who learned how to navigate the internet in its current state. It basically means: The programs you use don't need a _globally_ interconnected internet to function, but can simply run - even when you're offline. And there is even more! If you imagine creating data without any other entity checking against it, for example when you're offline, then you can maybe also imagine that this is very different from how commercial platforms function: You don't _sign up_ or upload your data _somewhere_, your data is already on your computer and you can do with it whatever you feel like.
 
