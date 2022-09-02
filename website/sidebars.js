@@ -33,7 +33,7 @@ const sidebars = {
       type: 'category',
       label: 'APIs',
       items: [
-        'specification/APIs/apis-overview',
+        'specification/APIs/overview',
         'specification/APIs/publishing',
         'specification/APIs/queries',
         'specification/APIs/replication',
