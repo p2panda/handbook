@@ -108,14 +108,6 @@ KeyPackage {
 }
 ```
 
-### `SecretGroupProposal`
-
-```
-SecretGroupProposal {
-  @TODO
-}
-```
-
 ### `SecretGroupCommit`
 
 ```
@@ -277,10 +269,6 @@ Clients can announce themselves on the network by publishing `KeyPackage` instan
 
 1. Use p2panda `PublicKey` as an unique `Credential` identifier for a secret group member. Use p2panda `PrivateKey` to sign new MLS key packages.
 2. Generate new `KeyPackage` and publish it as instance.
-
-### Propose group changes
-
-TODO
 
 ### Encryption
 
