@@ -73,7 +73,7 @@ Hashing is a way to convert (large) data into a shorter representation. For exam
 
 :::info Hash specification
 
-We need to specify _how_ we hash something so we can recreate and validate hashes at any point. p2panda uses the [BLAKE3](https://github.com/BLAKE3-team/BLAKE3) hashing algorithm and wraps it around the [YASMF](https://github.com/AljoschaMeyer/yamf-hash) format to allow future changes where we might want to change the hashing algorithm without breaking anything from before.
+We need to specify _how_ we hash something so we can recreate and validate hashes at any point. p2panda uses the [BLAKE3](https://github.com/BLAKE3-team/BLAKE3) hashing algorithm and wraps it around the [YASMF](https://github.com/bamboo-rs/yasmf-hash-spec) format to allow future changes where we might want to change the hashing algorithm without breaking anything from before.
 
 :::
 
