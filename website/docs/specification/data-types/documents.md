@@ -36,6 +36,13 @@ A document MUST NOT contain an operation who's `previous` refers to an operation
 
 :::
 
+:::caution Requirement DO4
+
+If a document contains any number of _delete_operations_ it SHOULD be considered deleted. After this point, new operations
+SHOULD NOT be appended to any point on the document.
+
+:::
+
 ## Viewing a document
 
 - When viewing documents, it's state must be reduced to a single key-value map, this process involves two steps:
@@ -49,33 +56,40 @@ Although here we describe the resolving an operation graph as a property of the 
 - The first step we take is to sort and linearise the document's graph of operations deterministically.
 - We do this by applying a topological depth-first sorting algorithm which meets the following requirements:
 
-:::caution Requirement DO4
+:::caution Requirement DO5
 
 Sorting MUST start from the documents CREATE operation.
 
 :::
 
-:::caution Requirement DO5
+:::caution Requirement DO6
 
 An operation which refers to the current operation in it's `previous` field MUST be sorted next.
 
 :::
 
-:::caution Requirement DO6
+:::caution Requirement DO7
 
 If multiple operations refer to the current, the one with the lowest `document_id` MUST be sorted next.
 
 :::
 
-:::caution Requirement DO7
+:::caution Requirement DO8
 
 When visiting a branch, all operations it contains MUST be visited and sorted before continuing to the rest of the graph.
 
 :::
 
-:::caution Requirement DO8
+:::caution Requirement DO9
 
 All operations in the graph MUST be sorted exactly once.
+
+:::
+
+:::caution Requirement D10
+
+If any _delete operation_ is visited, materialisation of the document MUST stop immediately. The resulting document view id MUST include
+only the id of the delete operation and no document view should be produced.
 
 :::
 

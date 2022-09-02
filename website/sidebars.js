@@ -15,10 +15,12 @@ const sidebars = {
   specification: [
     'specification/index',
     'specification/glossary',
+    'specification/introduction',
+    'specification/key-concepts',
     'specification/encoding-data',
     {
       type: 'category',
-      label: 'Data types',
+      label: 'Core data types',
       items: [
         'specification/data-types/bamboo',
         'specification/data-types/key-pairs',
@@ -28,16 +30,8 @@ const sidebars = {
         'specification/data-types/document-views',
       ],
     },
-    {
-      type: 'category',
-      label: 'Core concepts',
-      items: [
-        'specification/core-concepts/authors',
-        'specification/core-concepts/documents-and-schema',
-        'specification/core-concepts/encryption',
-        'specification/core-concepts/permissions',
-      ],
-    },
+    'specification/authorisation',
+    'specification/encryption',
     {
       type: 'category',
       label: 'APIs',

@@ -1,32 +1,47 @@
 ---
-title: Overview
+title: Table of Contents
 ---
 
-## Requirements
+**1. [Table of contents][index]**
 
-- In this document we assign a code to every specification requirement an implementation of p2panda would need to meet.
-- Some of these codes refer to a specific requirement and some a group of related requirements.
+**2. [Introduction]**
 
-## Glossary of core terms
+**3. [Key Concepts][key-concepts]**
 
-Hexadecimal
+**4. [Encoding]**
 
-CBOR
+**5. [Core Data Types][bamboo]**
 
-Hash
+- Bamboo
+- Key Pairs
+- Operations
+- Schemas
+- Documents
+- Document Views
 
-Key Pair
+**6. [Authorisation]**
 
-Private Key
+**7. [Encryption]**
 
-Public Key
+**8. [APIs]**
 
-Entry
+- Overview
+- Publishing
+- Queries
+- Replication
 
-Operation
+**9. [Networking][networking]**
 
-Document
+- Clients & Nodes
+- Discovery
+- Replication
 
-Document View
-
-Materialisation
+[index]: /specification/
+[introduction]: /specification/introduction
+[encoding]: /specification/encoding-data
+[bamboo]: /specification/data-types/bamboo
+[key-concepts]: /specification/key-concepts
+[authorisation]: /specification/authorisation
+[encryption]: /specification/encryption
+[apis]: /specification/APIs/apis-overview
+[networking]: /specification/networking/clients-nodes

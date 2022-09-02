@@ -4,11 +4,11 @@ title: FAQ
 
 ## Can I use p2panda already?
 
-We're very close to a first stable core specification and reference implementation but would like a little bit more time to *use* p2panda before we decide on a first version. You can already write applications on top of p2panda, but beware that there might be still some breaking API changes. Also please note that p2panda has not been audited yet for any security vulnerabilities.
+We're very close to a first stable core specification and reference implementation but would like a little bit more time to _use_ p2panda before we decide on a first version. You can already write applications on top of p2panda, but beware that there might be still some breaking API changes. Also please note that p2panda has not been audited yet for any security vulnerabilities.
 
 ## How about permissions?
 
-All data can be edited and deleted by everyone by default. For the future it will be possible to use a [Key Group](/specification/core-concepts/permissions). Key groups maintain ownership and permissions for many public keys of documents and allow you to form more complex permission models. We're currently finalizing the specification of key groups and will begin implementation soon. If you're already concerned about permission you could filter out writes by unknown public keys in your node for example.
+All data can be edited and deleted by everyone by default. For the future it will be possible to use a [Key Group](/specification/authorisation). Key groups maintain ownership and permissions for many public keys of documents and allow you to form more complex permission models. We're currently finalizing the specification of key groups and will begin implementation soon. If you're already concerned about permission you could filter out writes by unknown public keys in your node for example.
 
 ## Is p2panda decentralised or federated?
 
@@ -20,7 +20,7 @@ p2panda has been designed with browser-friendliness in mind as it is still very 
 
 ## Does p2panda encrypt data?
 
-By default all published data is not encrypted. p2panda offers [Secret Group](/specification/core-concepts/encryption) to allow optional group encryption between multiple peers. For this p2panda uses [Messaging Layer Security](https://messaginglayersecurity.rocks/) (MLS) under the hood. While technically it is already possible to write encrypted applications (we will provide an example soon), we are still working on a high-level API which will make using encryption more seamless for developers.
+By default all published data is not encrypted. p2panda offers [Secret Group](/specification/encryption) to allow optional group encryption between multiple peers. For this p2panda uses [Messaging Layer Security](https://messaginglayersecurity.rocks/) (MLS) under the hood. While technically it is already possible to write encrypted applications (we will provide an example soon), we are still working on a high-level API which will make using encryption more seamless for developers.
 
 ## Does p2panda run on smartphones?
 

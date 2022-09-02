@@ -152,6 +152,23 @@
   }
 }
 
+.flip {
+  transform: scaleX(-1);
+}
+
+
+.left {
+  position: absolute;
+  left: 10px;
+  z-index: -1;
+}
+
+.right {
+  position: absolute;
+  right: 10px;
+  z-index: -1;
+}
+
 /*
  * Welcome Section
  */
@@ -290,6 +307,18 @@
 
 @media (max-width: 996px) {
   .red-pandas {
+    width: 80%;
+  }
+}
+
+.many-pandas {
+  display: block;
+  margin: 10em auto;
+  max-width: 800px;
+}
+
+@media (max-width: 996px) {
+  .many-pandas {
     width: 80%;
   }
 }
