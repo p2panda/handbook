@@ -1,5 +1,5 @@
 ---
-id: apis-overview
+id: overview
 title: Overview
 ---
 
@@ -19,7 +19,7 @@ title: Overview
   - Linked documents can be retrieved
   - Documents can be sorted by arbitrary fields
   - Documents can be sorted by self-referential orderings
-  - Documents can be queried by `document_view_id` in order to receive a [documents][view] onto it's data at a specific materialised state
+  - Documents can be queried by `document_view_id` in order to receive a [documents][view] onto its data at a specific materialised state
 
 ## Replication API
 

@@ -37,7 +37,7 @@ To secure and authenticate _any_ data, we’re using a special data type named *
 
 :::info Infotainment intermission
 
-The name is no coincidence! Pandas love bamboo! The Bamboo data type was designed (also) with p2panda in mind. Read about it’s specification [here](https://github.com/AljoschaMeyer/bamboo).
+The name is no coincidence! Pandas love bamboo! The Bamboo data type was designed (also) with p2panda in mind. Read about its specification [here](https://github.com/AljoschaMeyer/bamboo).
 
 :::
 
@@ -94,7 +94,7 @@ To sign an Entry we need some sort of **Digital Signature Algorithm** which alwa
 
 Where do we get these keys from? We can simply generate them ourselves without any central authority!
 
-To make sure we can create a key pair without anyone else accidentially creating the same we use cryptographically secure pseudorandom number generators (CSPRNG). These generators are usually given by every computer and help us with finding a very large, random number which very likely will not occur a second time in the world ever.
+To make sure we can create a key pair without anyone else accidentally creating the same we use cryptographically secure pseudorandom number generators (CSPRNG). These generators are usually given by every computer and help us with finding a very large, random number which very likely will not occur a second time in the world ever.
 
 A Digital Signature Algorithm defines how these random numbers are used to derive a Private Key and then a Public Key from it.
 
@@ -102,7 +102,7 @@ A Digital Signature Algorithm defines how these random numbers are used to deriv
 
 The private part is a secret information only the author of this Entry knows about. With the Signature Algorithm we take the Entry and the Private Key as inputs and generate the Signature itself. Finally we store it in the `signature` field of the Entry.
 
-:::info Anologies never work
+:::info Analogies never work
 
 An (somewhat) analogy to public key cryptography would be IRL signatures we write with a pen on paper: A person signs a document to show that they “approved” this version of it - but also to authenticate themselves. Ideally only the person knows how to write that signature and nobody else will be able to fake it. This is where the analogy falls a little bit apart: In public key cryptography faking the private key is much harder or almost impossible.
 
@@ -122,7 +122,7 @@ Whenever we receive an Entry and Payload now from somewhere, we can check if the
 
 We can verify now if the Payload and Entry didn’t get changed and really belong together, but how do we know that the Signature belongs to that Author?
 
-Besides the `signature` the Entry has needs to provide an `author` field which contains the _Public Key_ part of the original author. In contrast to the Private Key the public part is not a secret and can be shared with others.
+Besides the `signature` the Entry needs to provide an `author` field which contains the _Public Key_ part of the original author. In contrast to the Private Key the public part is not a secret and can be shared with others.
 
 When we verify the Signature of the Entry we take the Public Key, the part of the Entry which was used during signing and the Signature itself to check if they all belong together.
 
@@ -131,7 +131,7 @@ When we verify the Signature of the Entry we take the Public Key, the part of th
   url={require('./assets/verify-signature-of-entry.png')}
 />
 
-We now have everything to securely authenticate an Entry and it’s Payload. As we can see, this is already better than the Penguin-Postcard-Protocol!
+We now have everything to securely authenticate an Entry and its Payload. As we can see, this is already better than the Penguin-Postcard-Protocol!
 
 With all of this together the Entry contains: `author`, `signature`, `payload_hash` and `payload_size` - and there is even more coming!
 
@@ -145,7 +145,7 @@ But again, can we trust the delivery service to not just stamp an arbitrary date
 
 Time on computers is funny (or time in general). How does the computer know what time it is? Usually it got told at one point where it should start counting and from that point on some small quartz crystal is just ticking the time further, hopefully not getting too much out of sync with the clocks of other devices. The computer even has a small battery for that quartz crystal so it can keep on ticking when it is turned off. Computers with internet usually sync themselves regularly to some sort of central time service, to prevent the delay getting too horrible.
 
-When it gets really important we _want_ to know the date of something, for example when signing a contract digitally! There is a a lot of research in [Secure Time-stamping](https://en.wikipedia.org/wiki/Trusted_timestamping) which addresses this problem with computers.
+When it gets really important we _want_ to know the date of something, for example when signing a contract digitally! There is a lot of research in [Secure Time-stamping](https://en.wikipedia.org/wiki/Trusted_timestamping) which addresses this problem with computers.
 
 Interestingly the Bamboo specification was inspired by a thesis on Secure Time-stamping, read it [here](https://www.researchgate.net/publication/216824681_Secure_and_Efficient_Time-Stamping_Systems).
 
@@ -168,7 +168,7 @@ When a new Entry gets created we can point at the previous Entry by calculating 
   url={require('./assets/entries-chained-by-backlinks.png')}
 />
 
-Since we are not able to generate hashes without knowing the original data, we can proof that we’ve seen the previous Entry when we created the new one.
+Since we are not able to generate hashes without knowing the original data, we can prove that we’ve seen the previous Entry when we created the new one.
 
 :::info A hash is a hash is a hash
 
@@ -176,7 +176,7 @@ Again, similar to `payload_hash`, that `backlink` was generated with BLAKE3 usin
 
 :::
 
-As soon as we receive an Entry we can recalculate the hashes and verify that the `backlink` is actually correct. If we receive many entries we have to do this for all of them by _walking_ the Backlink path from last to first Entry. With this we can proof the _causal order_ or _relative time_ of the entries and that they all belong together.
+As soon as we receive an Entry we can recalculate the hashes and verify that the `backlink` is actually correct. If we receive many entries we have to do this for all of them by _walking_ the Backlink path from last to first Entry. With this we can prove the _causal order_ or _relative time_ of the entries and that they all belong together.
 
 ## Logs
 
@@ -188,14 +188,14 @@ Like logs of bamboo plants growing out of the ground.  🎍 🎍 🎍
 
 :::
 
-Bamboo allows us to create multiple logs per Author, we just need to give it a unique **Log Id** which is a number starting at `0`. Through this we can identify which Entries belongs to which Log as they keep it as the `log_id`. Together with the Backlinks we can make sure that they also really stay inside the claimed Log.
+Bamboo allows us to create multiple logs per Author, we just need to give it a unique **Log Id** which is a number starting at `0`. Through this we can identify which Entries belong to which Log as they keep it as the `log_id`. Together with the Backlinks we can make sure that they also really stay inside the claimed Log.
 
 <ImageFrame
   title="Multiple logs"
   url={require('./assets/multiple-logs.png')}
 />
 
-To check that everything fits together we verify for each incoming Entry that the `author` and `log_id` is the same across the whole Log. Every Log can only be maintained by one single Author. This is also the reason why we call Bamboo a _Single Writer_ Append-Only Log.
+To check that everything fits together we verify for each incoming Entry that the `author` and `log_id` are the same across the whole Log. Every Log can only be maintained by one single Author. This is also the reason why we call Bamboo a _Single Writer_ Append-Only Log.
 
 :::note Single Writer vs. Multi Writer
 
@@ -207,7 +207,7 @@ Why do we want to have multiple Logs? It can have different reasons, depending o
 
 ## Deletion
 
-With the ever-growing nature of Append-Only Logs we might end up with extremely long lists of Entries which comes with two problems: a) we want to safe some space on our hard-disk b) we don’t want to always look at _all_ Backlinks just to verify the integrity of _all_ Entries. This takes too much time!
+With the ever-growing nature of Append-Only Logs we might end up with extremely long lists of Entries which comes with two problems: a) we want to save some space on our hard-disk b) we don’t want to always look at _all_ Backlinks just to verify the integrity of _all_ Entries. This takes too much time!
 
 With Backlinks this is tricky, as removing Entries would mean that we tamper with the integrity of the hashes. Holes in a log can easily be detected and will break the chain, we would need to consider such Bamboo data invalid.
 
@@ -216,7 +216,7 @@ With Backlinks this is tricky, as removing Entries would mean that we tamper wit
   url={require('./assets/trying-to-delete-an-entry.png')}
 />
 
-We could try to just remove the beginning of a Log instead, this will only break the Backlink for the first Entry which we could say is fine, but how can we now tell that someone didn’t hide some information from us by not sending the whole Log? Before we could at least detect the Entry without a `backlink` to find out if we reached the beginning of the Log. If we would remove that information, we’re lost. In this case we would also need to consider such data invalid.
+We could try to just remove the beginning of a Log instead, this will only break the Backlink for the first Entry which we could say is fine, but how can we now tell that someone didn’t hide some information from us by not sending the whole Log? Before we could at least detect the Entry without a `backlink` to find out if we reached the beginning of the Log. If we remove that information, we’re lost. In this case we would also need to consider such data invalid.
 
 <ImageFrame
   title="Trying to delete beginning of a Log"
@@ -225,7 +225,7 @@ We could try to just remove the beginning of a Log instead, this will only break
 
 Bamboo solves this problem with a second kind of Hash which is called a **Skiplink**. It allows us to verify the full integrity of the Log even after we’ve deleted some Entries of it.
 
-Skiplinks are formed slightly different than Backlinks: Instead of_ always_ pointing at the previous Entry they _sometimes_ point at Entries which are more far away in the past. Based on these rules not every Entry needs to contain a Skiplink: For example in a Log with 8 Entries inside only the 4th and 8th Entry would contain a Skiplink.
+Skiplinks are formed slightly differently than Backlinks: Instead of_ always_ pointing at the previous Entry they _sometimes_ point at Entries which are more far away in the past. Based on these rules not every Entry needs to contain a Skiplink: For example in a Log with 8 Entries inside only the 4th and 8th Entry would contain a Skiplink.
 
 Skiplinks form an alternative path through the log which is much faster to follow than if we would go through all Backlinks. Also it allows us to delete all Entries which are not on that path.
 
@@ -254,7 +254,7 @@ Removing Entries or Payloads is not only interesting for freeing up space on our
 
 :::note Coming up next
 
-While we have loads of ideas and draft concepts around _Sparse Replication_ we haven’t implemented it yet in p2panda. Write us if you are interested in this topic!
+While we have loads of ideas and draft concepts around _Sparse Replication_ we haven’t implemented it yet in p2panda. Write to us if you are interested in this topic!
 
 :::
 
@@ -271,7 +271,7 @@ To detect forks, Bamboo introduces the concept of **Sequence Numbers**. Every En
 
 This strictly enforced numbering system requires that every Entry is exactly only one step away from the previous one, we can not suddenly jump from Sequence Number `2` to `9` for example.
 
-With the help of Sequence Numbers we can detect now forks more easily. We can do this by either detecting: a) duplicate Sequence Numbers b) too large jumps between the Entries Sequence Numbers.
+With the help of Sequence Numbers we can now detect forks more easily. We can do this by either detecting: a) duplicate Sequence Numbers b) too large jumps between the Entries Sequence Numbers.
 
 <ImageFrame
   title="Invalid forked logs"

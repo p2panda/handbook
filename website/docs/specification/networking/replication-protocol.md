@@ -42,7 +42,7 @@ title: Replication Protocol
 
 ### Basic Replication
 
-- Retreives new entries from another node
+- Retrieves new entries from another node
 - More sophisticated replication protocols can be built on top
   - The "basic replication" protocol serves as a base
   - Nodes may not be interested in all available data and can choose to receive only some data, for example by only requesting operations following a certain schema
@@ -52,7 +52,7 @@ title: Replication Protocol
 1. Node `A` gets latest known sequence number `s` for log `k` of author `p` from own database
 2. Node `A` makes a GraphQL request `entriesNewerThanSeqNum` and asks Node `B` if it has newer entries of log `k` and author `p` starting from sequence number `s`
 3. Node `B` replies with a paginated list of encoded entries and operations. If it doesn't have that log or if there are no newer entries, it replies with an empty result
-4. Node `A` paginates through the response until it downloaded all new entries, it validates them locally and stores them in its database. Node `A` can make use of the `certificatePool` field of `EncodedEntryAndOperation` if it doesn't have the full log locally to verify it
+4. Node `A` paginates through the response until it downloads all new entries, it validates them locally and stores them in its database. Node `A` can make use of the `certificatePool` field of `EncodedEntryAndOperation` if it doesn't have the full log locally to verify it
 
 [qp2p]: https://github.com/maidsafe/qp2p
 [queries]: /specification/APIs/queries

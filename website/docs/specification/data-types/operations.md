@@ -107,9 +107,9 @@ Every operation MUST have a [schema id][schema]
 ### Previous
 
 - _previous_ specifies where an operation should be placed when constructing the graph of operations required to materialise a document.
-  - It contains an array of _operation_id_'s which identify the tip operation of any un-merged branches in this document at the time of
+  - It contains an array of _operation_id_'s which identify the tip operation of any unmerged branches in this document at the time of
     publishing this operation.
-  - In the case where a graph has no un-merged branches, this array will contain only one id (the resolved graph tip).
+  - In the case where a graph has no unmerged branches, this array will contain only one id (the resolved graph tip).
   - Publishing an operation which identifies more than one graph tip effectively merges these branches into one.
 
 :::caution Requirement OP5

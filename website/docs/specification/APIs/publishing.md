@@ -43,7 +43,7 @@ query nextArgs(
   - The node may [materialise][reduction] the document this new operation belongs to, resulting in a new document view
 - Returns entry arguments required for publishing the next entry for the same document, similar to `nextArgs`
 - Returns an error
-  - When the bamboo log, signature or document integrity could not be verified, the operation was malformed or schema not fullfilled
+  - When the bamboo log, signature or document integrity could not be verified, the operation was malformed or schema not fulfilled
   - When the node is unable to persist the entry and operation at the moment
 
 ```graphql

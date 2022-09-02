@@ -8,7 +8,7 @@ We're very close to a first stable core specification and reference implementati
 
 ## How about permissions?
 
-All data can be edited and deleted by everyone by default. For the future it will be possible to use a [Key Group](/specification/authorisation). Key groups maintain ownership and permissions for many public keys of documents and allow you to form more complex permission models. We're currently finalizing the specification of key groups and will begin implementation soon. If you're already concerned about permission you could filter out writes by unknown public keys in your node for example.
+All data can be edited and deleted by everyone by default. For the future it will be possible to use a [Key Group](/specification/authorisation). Key groups maintain ownership and permissions for many public keys of documents and allow you to form more complex permission models. We're currently finalising the specification of key groups and will begin implementation soon. If you're already concerned about permission you could filter out writes by unknown public keys in your node for example.
 
 ## Is p2panda decentralised or federated?
 

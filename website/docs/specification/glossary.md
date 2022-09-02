@@ -6,7 +6,7 @@ title: Glossary
 
 **[hex-encoding][encoding]**: human-friendly representation of binary-coded values using the hexadecimal numeral system. The `p2panda` GraphQL [APIs][api]: require values to be hex-encoded.
 
-**[Bamboo][bamboo]**: an append-only log data type that ensures security and authenticity of arbitrary data in order to share it in a decentralized and trustless setting.
+**[Bamboo][bamboo]**: an append-only log data type that ensures security and authenticity of arbitrary data in order to share it in a decentralised and trustless setting.
 
 **[Hashing][hash]**: a cryptography method that converts any form of data to a unique text string.
 
@@ -51,4 +51,4 @@ title: Glossary
 [yasmf]: https://github.com/bamboo-rs/yasmf-hash
 [documents]: /specification/data-types/documents
 [operations]: /specification/data-types/operations
-[api]: /specification/APIs
+[api]: /specification/APIs/overview

@@ -62,7 +62,7 @@ Although here we describe the resolving an operation graph as a property of the 
 
 :::caution Requirement DO5
 
-Sorting MUST start from the documents CREATE operation.
+Sorting MUST start from the document's CREATE operation.
 
 :::
 
