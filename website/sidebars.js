@@ -5,8 +5,6 @@ const sidebars = {
   about: [
     'about/index',
     'about/things-were-interested-in',
-    'about/implementations',
-    'about/specification',
     'about/roadmap',
     'about/contribute',
     'about/history',
