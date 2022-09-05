@@ -109,9 +109,9 @@ http://localhost:2020/graphql
 
 ### Send a query
 
-Maybe you have never worked with [GraphQL](https://graphql.org/) before but we can just send some queries to the node for fun. You can enter a query in the left area of the playground, click the large _Play_ button in the middle. This will send the query to the node and it's JSON response will show in the right area.
+Maybe you have never worked with [GraphQL](https://graphql.org/) before but we can just send some queries to the node for fun. You can enter a query in the left area of the playground and click the large _Play_ button in the middle. This will send the query to the node and it's JSON response will show in the right area.
 
-Try this following query:
+Try this following query by entering it in the left textarea and clicking the _Play_ button:
 
 ```graphql
 {
@@ -124,7 +124,7 @@ Try this following query:
 }
 ```
 
-It will return a relative unspectacular response, looking like this:
+It will return the following, relative unspectacular response in the right area:
 
 ```json
 {
@@ -134,7 +134,7 @@ It will return a relative unspectacular response, looking like this:
 }
 ```
 
-With this query we asked our `aquadoggo` if it knows any schemas and since we have just started it it doesn't know any yet! This is why the response is empty .. its soon time to teach the `aquadoggo` some tricks but this is part of the next [how to create a schema tutorial](/tutorials/send-to-node).
+Still, this is already doing a lot! With this query we asked our `aquadoggo` if it knows any schemas and since we have just started it it doesn't know any yet! This is why the response is empty .. it's soon time to teach the `aquadoggo` some tricks but this is part of the next [how to create a schema tutorial](/tutorials/send-to-node). For now we get to know the doggo a little bit better.
 
 ### Documentation
 
@@ -150,7 +150,7 @@ There are a couple of more queries you can find when you click on the _Docs_ tab
 
 ## Configuration
 
-Now we know how to start a node and how to interact with it via GraphQL! Let's see now how we can configure and adjust it to our special needs. This is mainly a collection of "cool tricks" and not a full documentation of `aquadoggo`, also you probably might not need all of this in the beginning.
+Now we learned how to start a node and how to interact with it via GraphQL! Let's see now how we can configure and adjust it to our special needs. This is mainly a collection of _cool tricks_ and not a full documentation of `aquadoggo`, also you probably might not need all of this in the beginning, but maybe it comes in handy soon!
 
 ### Data directory
 
