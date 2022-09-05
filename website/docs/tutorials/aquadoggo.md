@@ -22,7 +22,7 @@ Nodes are usually agnostic to the applications using them, this means that one n
 * Terminal
 * Browser
 
-## Install Rust
+<details><summary>How do I install Rust?</summary>
 
 Make sure you have have a working Rust environment installed on your computer before you begin with the tutorial. You can check this by running `rustc --version` in your terminal. This tutorial was written with Rust version `1.63.0` but it will probably also work with other versions.
 
@@ -33,6 +33,8 @@ If you don't have Rust installed yet you can follow the steps on the official Ru
 This tutorial requires you to have a working Rust environment. If you have never worked with Rust before this is no problem! Setting it up is fairly easy and besides of using some basic command line commands there is no more Rust knowledge required to make the node run on your computer.
 
 :::
+
+</details>
 
 ## Download `aquadoggo`
 
@@ -227,7 +229,7 @@ sqlite3 ~/.local/share/aquadoggo/aquadoggo-node.sqlite3
 
 :::tip Run SQLite in-memory
 
-Another cool SQLite feature is that you can just store the database _in memory_, this means that it will be gone after you quite `aquadoggo`. This is also very useful if you really just want to try something out without storing the data somewhere longer.
+Another cool SQLite feature is that you can just store the database _in memory_, this means that it will be gone after you quit `aquadoggo`. This is also very useful if you really just want to try something out without storing the data somewhere longer.
 
 ```bash
 DATABASE_URL=sqlite::memory: cargo run
@@ -255,6 +257,6 @@ let config = Configuration::default();
 let node = Node::start(config).await;
 ```
 
-This is very similar to using the command line application, just that you can ship your applications now with a node running _inside_! Users will then automatically start the node whenever they start the application. Together with [Tauri](https://tauri.studio) your applications can even be written in JavaScript if and still use `aquadoggo` internally, even when you're not a Rust developer.
+This is very similar to using the command line application, just that you can ship your applications now with a node running _inside_! Users will then automatically start the node whenever they start the application. Together with [Tauri](https://tauri.studio) your applications can even be written in JavaScript and still use `aquadoggo` internally - even when you're not a Rust developer!
 
 :::
