@@ -41,7 +41,9 @@ function Footer() {
           NGI-POINTER Project funded under grant agreement No 871528
         </p>
       </div>
-      <p className={styles['footer-text']}>{copyright}</p>
+      <p className={styles['footer-text']}>
+        {copyright} - <a href="mailto:contributors@p2panda.org">Contact</a>
+      </p>
     </footer>
   );
 }
