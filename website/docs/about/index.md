@@ -49,4 +49,5 @@ Without the help of all of these people p2panda would have never been realised ð
 
 * [Aljoscha Meyer](https://aljoscha-meyer.de) p2p researcher and developer
 * [Piet Geursen](https://github.com/pietgeursen/bamboo-rs) Rust developer
+* [Raphael Robert](https://twitter.com/raphaelrobert) MLS co-author
 * [Sophie Kuna](https://github.com/sophiiistika) Early member of p2panda gang
