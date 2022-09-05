@@ -156,8 +156,6 @@ Now we learned how to start a node and how to interact with it via GraphQL! Let'
 
 Whenever we start a new node it will create a directory on your computer where it stores the database inside. On Linux this directory is by default under `~/.local/share/aquadoggo` and `/Users/<username>/Library/Application Support/aquadoggo` on MacOS systems.
 
-:::
-
 We can use the `--data-dir` command line argument to change the path of this folder to something else. For example:
 
 ```bash
