@@ -2,29 +2,16 @@
 title: Things we're interested in
 ---
 
-Previous ideas:
+import EmojiBox from '@site/src/components/EmojiBox';
 
-- Browser friendliness
-- Collaboration
-- Decentralisation
-- Deletion
-- Encryption
-- Energy efficiency
-- Fork proof
-- Identities
-- Integrity
-- Local- & offline-first
-- Low-power electronics
-- Content moderation
-- Partial replication
-- Data schemas
-- Warmth
-
-New ideas:
-
-- Could be nice to focus more on the why and the ends instead of the how and means.
-- Data sovereignty
-- These points are quite specific about p2p protocols and could be grouped
-- this reads like a list of principals and it has been guiding us a lot in the same way but we aren't calling it that to not give the impression that these must be followed at all cost
-- https://laub.liebechaos.org/tbAJGxMFQvqy8Ut_sKlLoQ#
-- https://github.com/p2panda/festival-tool/blob/main/DESIGN.md
+<EmojiBox title="Browser Friendliness" icon="🦝">Lightweight clients that can easily be implemented as websites</EmojiBox>
+<EmojiBox title="Collaboration" icon="🐎">Data can be edited together, even when you are offline</EmojiBox>
+<EmojiBox title="Data Sovereignty" icon="🐮">Users own the data they create</EmojiBox>
+<EmojiBox title="Decentralisation" icon="🐄">No authority over data or how it is displayed</EmojiBox>
+<EmojiBox title="Deletion" icon="🦣">Some data does not need to stay forever, it can even delete itself automatically after some time</EmojiBox>
+<EmojiBox title="Energy Efficiency" icon="🐰">Data- and energy-efficient storage and replication</EmojiBox>
+<EmojiBox title="Identitites" icon="🐨">A user account model that gives people options for managing one or multiple online identities across devices.</EmojiBox>
+<EmojiBox title="Local-First" icon="🐼">Access to online services without reliable and performant internet infrastructure. Independence from the corporate cloud.</EmojiBox>
+<EmojiBox title="Privacy" icon="🦉">Secure encryption for sensitive and private data for users and all sorts of groups</EmojiBox>
+<EmojiBox title="Social" icon="🐧">Computers are used by humans</EmojiBox>
+<EmojiBox title="Warmth" icon="🐸">Computers make it easy to get carried away by their rigidly structured ways. However, every computer also contains an undeniable spark of pure chaos. We want to capture that spark to ignite a campfire for you to gather around and get cosy</EmojiBox>

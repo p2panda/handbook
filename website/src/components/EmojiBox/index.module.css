@@ -1,0 +1,11 @@
+.emoji-box {
+  margin-bottom: 1em;
+}
+
+.emoji-box-icon {
+  border-radius: 0;
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
