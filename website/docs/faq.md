@@ -12,11 +12,11 @@ All data can be edited and deleted by everyone by default. For the future it wil
 
 ## Is p2panda decentralised or federated?
 
-It can be both! We thought its good to let the developers, users and communities decide what setting is best for them.
+It can be both! We thought its good to let the developers, users and communities decide what setting is best for them. In any case, independent on how the users finally run their nodes, they will always be able to talk to each other, regardless of their are hosted locally (decentralised) or shared between many clients (federated).
 
 ## Can I upload images, videos, audio with p2panda?
 
-We haven't build a "Blob" (Binary Large Object) feature into p2panda yet, though we're already having many [ideas](https://github.com/p2panda/handbook/labels/Blobs) (think BitTorrent with social and encryption features, materialization of data directly into the file system and serving it via HTTP on nodes). If you already want to use images in your p2panda applications, there is a workaround: Encode the image data as base64 and handle store it inside the operation as a string.
+We haven't build a "Blob" (Binary Large Object) feature into p2panda yet, though we're already having many [ideas](https://github.com/p2panda/handbook/labels/Blobs) (think BitTorrent with social and encryption features, materialization of data directly into the file system and serving it via HTTP on nodes). If you already want to use images in your p2panda applications, there is a workaround: Encode the image data as base64 and store it inside the operation as a string.
 
 ## Do you have CRDTs?
 
