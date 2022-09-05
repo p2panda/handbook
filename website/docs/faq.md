@@ -14,6 +14,10 @@ All data can be edited and deleted by everyone by default. For the future it wil
 
 It can be both! We thought its good to let the developers, users and communities decide what setting is best for them.
 
+## Can I upload images, videos, audio with p2panda?
+
+We haven't build a "Blob" (Binary Large Object) feature into p2panda yet, though we're already having many [ideas](https://github.com/p2panda/handbook/labels/Blobs) (think BitTorrent with social and encryption features, materialization of data directly into the file system and serving it via HTTP on nodes). If you already want to use images in your p2panda applications, there is a workaround: Encode the image data as base64 and handle store it inside the operation as a string.
+
 ## Do you have CRDTs?
 
 Yes, p2panda _Operations_ are Conflict-Resistant-Data-Types (CRDTs). The cool thing is you can define any shape of data and p2panda will figure out how to handle merge conflicts automatically.
