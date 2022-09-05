@@ -2,9 +2,16 @@
 title: Introduction
 ---
 
+import ImageFrame from '@site/src/components/ImageFrame';
+
 ## Local first
 
 In the last years we've learned how boring the internet can be: Centralised, commercial platforms take ownership over our data, sell it even further and on top prescribe how we can use it. With p2panda we're not changing the internet, but we're offering some tools for others to make networked software a little bit more exciting, secure, energy and data efficient - but most of all fun, adventurous and playful!
+
+<ImageFrame
+  title="Ideas on how to appear at the next conference"
+  url={require('./assets/panda-head.jpg')}
+/>
 
 p2panda is a protocol for local-first applications. _local first_ is a somewhat unknown term and hard to grasp if you think about the internet in its current state. It basically means: The programs you use don't need a _globally_ interconnected internet to function, but can simply run - even when you're offline. And there is even more! If you imagine creating data without any other entity checking against it, for example when you're offline, then this is very different from how commercial platforms function: You don't _sign up_ or upload your data _somewhere_, your data is already on your computer and you can do with it whatever you feel like.
 
@@ -16,6 +23,11 @@ Since data in p2panda is not owned by any central authority it can also be proce
 
 Data can grow endlessly which is also a problem in decentralised networks, with p2panda we encourage deletion and ephemeral data, only sending and storing data you really need.
 
+<ImageFrame
+  title="An adventure game explaining p2panda"
+  url={require('./assets/adventure-game.jpg')}
+/>
+
 Storing data _everywhere_ can make software and data more open but it can also be a huge problem for privacy. For this p2panda integrates Messaging Layer Security (MLS) which is a protocol for secure message encryption, even for very large groups.
 
 Building p2p protocols is complicated and challenging for developers but we want it to be playful and fun. With p2panda it should be possible to focus on building radical local-first software and explore exciting new UX patterns without diving too deep into p2p details.
@@ -24,4 +36,17 @@ The core or p2panda is built in Rust from which we also compile WebAssembly for 
 
 ## Team
 
-"We", that is [Andreas Dzialocha](https://adz.garden), [Sam Andreae](https://samandreae.com/) and [Vincent Ahrend](https://www.vincentahrend.com), the current core team of p2panda. Hello!
+"We", that is [Andreas Dzialocha](https://adz.garden), [Sam Andreae](https://samandreae.com/) and [Vincent Ahrend](https://www.vincentahrend.com), the current core team of p2panda. Hello! ⛺
+
+<ImageFrame
+  title="This is us during our first intensive workshop week in 2021"
+  url={require('./assets/safari-1.jpg')}
+/>
+
+## Friends
+
+Without the help of all of these people p2panda would have never been realised 💕
+
+* [Aljoscha Meyer](https://aljoscha-meyer.de) p2p researcher and developer
+* [Piet Geursen](https://github.com/pietgeursen/bamboo-rs) Rust developer
+* [Sophie Kuna](https://github.com/sophiiistika) Early member of p2panda gang
