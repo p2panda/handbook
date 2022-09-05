@@ -1,5 +1,8 @@
 .emoji-box {
+  padding: 1em;
   margin-bottom: 1em;
+  border-radius: 10px;
+  background-color: var(--ifm-card-background-color);
 }
 
 .emoji-box-icon {
