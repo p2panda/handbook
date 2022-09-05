@@ -9,7 +9,7 @@ const sidebars = {
     'about/contribute',
     'about/history',
   ],
-  learn: ['learn/index', 'learn/entries', 'learn/operations'],
+  learn: ['learn/index', 'learn/entries', 'learn/operations', 'learn/networks'],
   specification: [
     'specification/index',
     'specification/key-concepts',
