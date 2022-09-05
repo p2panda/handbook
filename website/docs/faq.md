@@ -42,9 +42,17 @@ Yes, you can embed an p2panda [node](https://github.com/p2panda/aquadoggo) insid
 
 If you're looking for expressing relations between different sorts of data, similar to SQL, you should read about relation fields in operations. With p2panda you can express a reference to another document which automatically gets materialised in a GraphQL query.
 
+## Can nodes replicate data with each other?
+
+While we're having a simple replication mechanism already implemented you can use, it is also not very ergonomic yet. Currently you need to manually specify the IP address, author and log id of the Bamboo entries you want to replicate, which is tedious. We're using this currently as a proof-of-concept and will transition to a more intuitive, scaleable and efficient approach using [qp2p](https://github.com/maidsafe/qp2p) based on QUIC.
+
+## Can nodes already find each other on the network?
+
+We haven't implemented discovery yet but will begin soon with simple mDNS discovery in local networks. Later on we're imagining signalling servers who will help us with getting around the limitations of [NAT traversal](https://tailscale.com/blog/how-nat-traversal-works/) in p2p networks.
+
 ## Can I delete data?
 
-Even though p2panda is built upon an append-only log, by specification data does not need to be stored forever. p2panda aims at being data-efficient and has [deletion](/learn/entries/#deletion) built-in into the core data type without losing its cryptographic features
+Even though p2panda is built upon an append-only log, by specification data does not need to be stored forever. p2panda aims at being data-efficient and has [deletion](/learn/entries/#deletion) built-in into the core data type without losing its cryptographic features.
 
 ## How can I keep old data?
 
