@@ -91,7 +91,13 @@ Ah, this looks more interesting now:
 [2022-09-05T15:59:14Z INFO  aquadoggo::graphql::schema] Subscribing GraphQL manager to schema provider
 ```
 
-If you want to see even more you can change the log verbosity from `info` to `debug` or even `trace`, but then you will see a whole flood of information you might not always need. If you're curious to see _even_ more then you can enable logging for _everything_ (that is, even logs from dependencies) via: `RUST_LOG=debug cargo run`.
+If you want to see even more you can change the log verbosity from `info` to `debug` or even `trace`, but then you will see a whole flood of information you might not always need.
+
+:::tip Even more logging
+
+If you're curious to see _even_ more then you can enable logging for _everything_ (that is, even logs from dependencies) via: `RUST_LOG=debug cargo run`.
+
+:::
 
 ## GraphQL playground
 
