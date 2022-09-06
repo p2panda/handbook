@@ -5,6 +5,11 @@
   background-color: var(--ifm-card-background-color);
 }
 
+.emoji-box-light {
+  border: var(--ifm-card-background-color) solid 3px;
+  background-color: transparent;
+}
+
 .emoji-box-icon {
   border-radius: 0;
   font-size: 36px;

@@ -7,11 +7,16 @@ interface Props {
   title: string;
   children: JSX.Element;
   icon: string;
+  light?: boolean;
 }
 
-export default function EmojiBox({ icon, title, children }: Props) {
+export default function EmojiBox({ icon, title, children, light }: Props) {
   return (
-    <div className={clsx('avatar', styles['emoji-box'])}>
+    <div
+      className={clsx('avatar', styles['emoji-box'], {
+        [styles['emoji-box-light']]: light,
+      })}
+    >
       <div className={clsx('avatar__photo', styles['emoji-box-icon'])}>
         {icon}
       </div>
