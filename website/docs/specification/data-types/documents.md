@@ -6,7 +6,7 @@ title: Documents
 - A Document is a high-level mutable, multi-writer data type constructed from a linked graph of [operations][operations].
 - Through a deterministic process the graph can be reduced to a single key-value map.
 - Any two documents (replicas) which contain the same collection of operations will resolve to the same value.
-- A document is identified by the operation id of its root CREATE operation* (aka \_document_id*).
+- A document is identified by the operation id of its root CREATE operation (aka _document_id_).
 - A document assumes the schema of its root CREATE operation
 - A document is made up of operations published by one or many authors
   - Branches in a document's graph occur when two authors publish operations concurrently
@@ -40,7 +40,7 @@ A document MUST NOT contain an operation who's `previous` refers to an operation
 
 :::caution Requirement DO4
 
-If a document contains any number of DELETE operations\_ it SHOULD be considered deleted. After this point, new operations
+If a document contains any number of DELETE operations it SHOULD be considered deleted. After this point, new operations
 SHOULD NOT be appended to any point on the document.
 
 :::
