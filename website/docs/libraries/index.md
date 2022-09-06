@@ -93,3 +93,9 @@ cargo run
 # Turn on some logging for debugging
 RUST_LOG=aquadoggo=debug cargo run
 ```
+
+:::tip There is a tutorial!
+
+Psst. Maybe you're interested in reading the [tutorial on how to use `aquadoggo`](/tutorials/aquadoggo)?
+
+:::
