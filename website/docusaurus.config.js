@@ -51,7 +51,7 @@ const config = {
         hideOnScroll: true,
         logo: {
           alt: 'p2panda Handbook',
-          src: 'images/neon-panda.svg',
+          src: 'images/p2panda-book.png',
         },
         items: [
           {
