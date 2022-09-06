@@ -57,7 +57,7 @@ Operations MUST NOT contain any additional items.
 
 :::caution Requirement OP2
 
-Every operation MUST have an _operation version_. An operation version MUST be a positive integer number. An operation version MUST NOT be larger than 256.
+Every operation MUST have an _operation version_. An operation version MUST be a positive `u64` integer.
 
 :::
 
@@ -67,9 +67,9 @@ Every operation MUST have an _operation version_. An operation version MUST be a
 
 ```
 enum OperationAction {
-  CREATE,
-  UPDATE,
-  DELETE,
+  CREATE = 0,
+  UPDATE = 1,
+  DELETE = 2,
 }
 ```
 
