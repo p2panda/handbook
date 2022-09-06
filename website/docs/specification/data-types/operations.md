@@ -179,7 +179,7 @@ The type of all operation field values MUST match the corresponding field in the
 
 :::caution Requirement OP9
 
-Nodes MUST delete all operations of a document once it has been deleted. (@TODO: this should probably go into the documents section).
+Nodes MUST delete all operations of a document once it has been deleted.
 
 :::
 
