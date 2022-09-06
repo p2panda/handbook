@@ -2,14 +2,8 @@
 title: Glossary
 ---
 
-* **Application data**: @TODO
-* **Author**: @TODO
-* **Document View**: @TODO
-* **Materialisation**: @TODO
 * **Private Key**: The private key in a key pair, used for signing data.
 * **Public Key**: The public key in a key pair, used to identify an author and verify signed data.
-* **Schema**: @TODO
-* **System data**: @TODO
 * **[Author (in Bamboo)][bamboo-author]**: The public key included in a Bamboo entry.
 * **[Bamboo][bamboo]**: An append-only log data type that ensures security and authenticity of arbitrary data in order to share it in a decentralised and trustless setting.
 * **[CBOR][cbor]**: Concise Binary Object Representation data format used for encoding [operations][operations].
