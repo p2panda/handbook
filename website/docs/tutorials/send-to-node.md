@@ -229,7 +229,7 @@ By the way, in p2panda it is important to have [multiple keys](/specification/da
 
 We've created a new field now, so we can also directly inspect it via the GraphQL playground of the `aquadoggo` node. For this you can just surf to [http://localhost:2020/graphql](http://localhost:2020/graphql) and run the following query in the left area:
 
-```graphql
+```
 {
   all_schema_field_definition_v1 {
     meta {
@@ -431,7 +431,7 @@ We're already having the schema id and we can insert it into `005-update-message
 
 Again, the GraphQL playground can help us here. We can simply just query all chat messages and ask for their regarding `viewId` with the following query:
 
-```graphql
+```
 {
   all_<insert your schema id here> {
     meta {
