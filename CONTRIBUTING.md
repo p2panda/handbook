@@ -35,7 +35,7 @@ The p2panda [Handbook](https://github.com/p2panda/handbook) has a [`/specificati
 **Requirements**
 
 * NodeJS v18 and npm v8 (recommended install via a Node version mananger like [`n`](https://github.com/tj/n) or [`nvm`](https://github.com/nvm-sh/nvm))
-* Rust 1.63 (stable) (install via [`rustup`](https://www.rust-lang.org/tools/install)
+* Rust 1.63 (stable) (install via [`rustup`](https://www.rust-lang.org/tools/install))
 * [wasm-bindgen](https://rustwasm.github.io/wasm-bindgen/reference/cli.html)
 * [wasm-opt](https://github.com/WebAssembly/binaryen/discussions/3797)
 
