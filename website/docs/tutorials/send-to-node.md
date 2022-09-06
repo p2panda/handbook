@@ -118,6 +118,8 @@ Creating a schema only happens once! Afterwards you and others can just use it, 
 
 :::
 
+All the next steps will take place inside the `send-to-node` directory you downloaded via git. Make sure you are in that folder in your terminal!
+
 ### Create `message` field
 
 As already mentioned, `send-to-node` requires us to format the data we want to send in JSON. In a text editor of your choice we can write our first operation into a file named `001-message-field.json`:
