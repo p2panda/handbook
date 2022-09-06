@@ -24,7 +24,7 @@ Nodes are usually agnostic to the applications using them, this means that one n
 
 :::info Never worked with Rust before?
 
-This tutorial requires you to have a working Rust environment. If you have never worked with Rust before this is no problem! Setting it up is fairly easy and besides using some basic command line commands there is no more Rust knowledge required to make `aquadoggo` and `send-to-node` run on your computer.
+This tutorial requires you to have a working Rust environment. If you have never worked with Rust before this is no problem! Setting it up is fairly easy and besides using some basic command line commands there is no more Rust knowledge required to make `aquadoggo` run on your computer.
 
 :::
 
