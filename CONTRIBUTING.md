@@ -151,7 +151,7 @@ The p2panda [Handbook](https://github.com/p2panda/handbook) has a [`/specificati
 
   // Correct
   use thing::from::here::but::actually::{ThisThing, AndThatThing};
-  use thing::from::and_here::{HereAsWell};
+  use thing::from::and_here::HereAsWell;
   ```
 
 - We try to write in British English, but don't worry if you're not a native speaker.
