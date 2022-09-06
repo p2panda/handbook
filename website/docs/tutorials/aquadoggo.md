@@ -4,7 +4,7 @@ title: "Tutorial: Set up a local node"
 
 This tutorial walks you through setting up a locally running p2panda node on your computer and shows you how you can configure it and interact with it via the GraphQL playground.
 
-Its good to know how to run your own node if you want to start developing p2panda clients. You can try out new schemas and applications with them or just experiment!
+It's good to know how to run your own node if you want to start developing p2panda clients. You can try out new schemas and applications with them or just experiment!
 
 We will use the reference node implementation [`aquadoggo`](https://github.com/p2panda/aquadoggo) for this, which is a command line application written in Rust.
 
@@ -24,13 +24,13 @@ Nodes are usually agnostic to the applications using them, this means that one n
 
 <details><summary>How do I install Rust?</summary>
 
-Make sure you have have a working Rust environment installed on your computer before you begin with the tutorial. You can check this by running `rustc --version` in your terminal. This tutorial was written with Rust version `1.63.0` but it will probably also work with other versions.
+Make sure you have a working Rust environment installed on your computer before you begin with the tutorial. You can check this by running `rustc --version` in your terminal. This tutorial was written with Rust version `1.63.0` but it will probably also work with other versions.
 
 If you don't have Rust installed yet you can follow the steps on the official Rust website: [How to install Rust](https://www.rust-lang.org/tools/install).
 
 :::info Never worked with Rust before?
 
-This tutorial requires you to have a working Rust environment. If you have never worked with Rust before this is no problem! Setting it up is fairly easy and besides of using some basic command line commands there is no more Rust knowledge required to make the node run on your computer.
+This tutorial requires you to have a working Rust environment. If you have never worked with Rust before this is no problem! Setting it up is fairly easy and besides using some basic command line commands there is no more Rust knowledge required to make the node run on your computer.
 
 :::
 
@@ -111,7 +111,7 @@ http://localhost:2020/graphql
 
 ### Send a query
 
-Maybe you have never worked with [GraphQL](https://graphql.org/) before but we can just send some queries to the node for fun. You can enter a query in the left area of the playground and click the large _Play_ button in the middle. This will send the query to the node and it's JSON response will show in the right area.
+Maybe you have never worked with [GraphQL](https://graphql.org/) before but we can just send some queries to the node for fun. You can enter a query in the left area of the playground and click the large _Play_ button in the middle. This will send the query to the node and its JSON response will show in the right area.
 
 Try this following query by entering it in the left textarea and clicking the _Play_ button:
 
@@ -136,7 +136,7 @@ It will return the following, relative unspectacular response in the right area:
 }
 ```
 
-Still, this is already doing a lot! With this query we asked our `aquadoggo` if it knows any schemas and since we have just started it it doesn't know any yet! This is why the response is empty .. it's soon time to teach the `aquadoggo` some tricks but this is part of the next [how to create a schema tutorial](/tutorials/send-to-node). For now we get to know the doggo a little bit better.
+Still, this is already doing a lot! With this query we asked our `aquadoggo` if it knows any schemas and since we have just started it it doesn't know any yet! This is why the response is empty .. It's soon time to teach the `aquadoggo` some tricks but this is part of the next [how to create a schema tutorial](/tutorials/send-to-node). For now we get to know the doggo a little bit better.
 
 ### Documentation
 
