@@ -580,3 +580,9 @@ npm start
 ```
 
 This will run the web application under [http://localhost:8080](http://localhost:8080). You can open it in your browser and start playing with it. If you're curious you can also check the GraphQL playground of the `aquadoggo` and make some queries there to compare!
+
+:::tip High-Level frameworks
+
+For this tutorial we have been using `p2panda-js` which is a fairly _low-level_ API. In the future we want to offer more _high-level_ frameworks like [`shirokuma`](https://github.com/p2panda/shirokuma) which will take care of even more things for us, like internally handling the GraphQL queries, caching arguments to create entries and persisting key pairs automatically for us.
+
+:::
