@@ -11,17 +11,17 @@ In this tutorial we want to register a new schema on a p2panda node and create o
 * Terminal
 * Browser
 
+:::info Never worked with Rust before?
+
+This tutorial requires you to have a working Rust environment. If you have never worked with Rust before this is no problem! Setting it up is fairly easy and besides using some basic command line commands there is no more Rust knowledge required to make the node run on your computer.
+
+:::
+
 <details><summary>How do I install Rust?</summary>
 
 Make sure you have a working Rust environment installed on your computer before you begin with the tutorial. You can check this by running `rustc --version` in your terminal. This tutorial was written with Rust version `1.63.0` but it will probably also work with other versions.
 
 If you don't have Rust installed yet you can follow the steps on the official Rust website: [How to install Rust](https://www.rust-lang.org/tools/install).
-
-:::info Never worked with Rust before?
-
-This tutorial requires you to have a working Rust environment. If you have never worked with Rust before this is no problem! Setting it up is fairly easy and besides using some basic command line commands there is no more Rust knowledge required to make `aquadoggo` and `send-to-node` run on your computer.
-
-:::
 
 </details>
 
