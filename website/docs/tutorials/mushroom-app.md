@@ -95,7 +95,7 @@ In p2panda we can create _Schemas_ which will help us to define the shape of the
 
 For every p2panda application we want to build, we have to define the schemas first we want to use. It could be that there are many even, depending on how complex your program will become.
 
-Usually we only have to define the schemas only once, as soon as they are deployed on a real node they can be spread across the network: Other nodes will download it automatically when they think it's a good idea to support your schema.
+Usually we have to define the schemas only once, as soon as they are deployed on a real node they can be spread across the network: Other nodes will download it automatically when they think it's a good idea to support your schema.
 
 :::note Nodes supporting schemas
 
@@ -172,9 +172,11 @@ Your schema ids will look a little bit different since every generated schema is
 
 ## Build the application
 
-Designing and creating a schema is a very large part of building an p2panda application. The other part is building it! And now we're back at very normal web development: Spend long time figuring out how to set up TypeScript, Webpack, some linters etc. to play nicely together, building React components and views integrating a router and so on. If you are a web developer then this part will be very familiar to you, so let's focus rather on the parts which make it a _special_ p2panda application.
+Designing and creating a schema is a very large part of building an p2panda application. The other part is implementing the interface! Suddenly we're back at _normal_ web development: Spending long time figuring out how to set up TypeScript, Webpack, some linters like eslint and prettier etc., building React components and views integrating a router and so on. If you are a web developer then this part will be very familiar to you, so let's focus rather on the parts which make it a _special_ p2panda application.
 
-To build something with p2panda in TypeScript or JavaScript we can use the package [`p2panda-js`](https://www.npmjs.com/package/p2panda-js). With it we can do the most important things: 1. Initialise the WebAssembly code 2. Generate a key pair 3. Create p2panda operations and entries 4. Send them to a node 5. Query documents from a node to display them in the app. Let's go through them step by step!
+To build something with p2panda in TypeScript or JavaScript we can use the package [`p2panda-js`](https://www.npmjs.com/package/p2panda-js). With it we can do the most important things: 1. Initialise the WebAssembly code 2. Generate a key pair 3. Create p2panda operations and entries 4. Send them to a node 5. Query documents from a node to display them in the app.
+
+Let's go through them step by step!
 
 ### Initialise WebAssembly
 
@@ -269,7 +271,7 @@ function getKeyPair(): KeyPair {
 
 Now we can just call `getKeyPair` and we will either receive a new key pair when doing it for the first time or the old one if we're coming back.
 
-But how do we now share this information across the whole React application? As a React developer you might now different patterns probably: Prop drilling, Redux, Contexts .. there are many options and it is basically up to you. In the mushroom app we've decided to use the [Context](https://reactjs.org/docs/context.html) pattern which gets especially interesting if we have many components. Let's have a look at the [`src/KeyPairContext.tsx`](https://github.com/p2panda/mushroom-app-tutorial/blob/main/src/KeyPairContext.tsx) file:
+But how do we now share this information across the whole React application? As a React developer you might know some patterns probably: Prop drilling, Redux, Contexts .. there are many options and it is basically up to you! In the mushroom app we've decided to use the [Context](https://reactjs.org/docs/context.html) pattern which gets especially interesting if we have many components. Let's have a look at the [`src/KeyPairContext.tsx`](https://github.com/p2panda/mushroom-app-tutorial/blob/main/src/KeyPairContext.tsx) file:
 
 ```typescript
 import React, { useMemo } from 'react';
@@ -308,9 +310,9 @@ The `KeyPairProvider` helps us to establish the state of the `KeyPairContext` by
 
 ```typescript
 <KeyPairContext.Consumer>
-{({ publicKey }) => {
-  return <p>Hello, {publicKey}!</p>;
-}}
+  {({ publicKey }) => {
+    return <p>Hello, {publicKey}!</p>;
+  }}
 </KeyPairContext.Consumer>
 ```
 
@@ -338,6 +340,7 @@ import { KeyPair, signAndEncodeEntry, encodeOperation } from 'p2panda-js';
 const keyPair = new KeyPair();
 
 const operation = encodeOperation({
+  action: 'create',
   schemaId: 'mushroom_0020c3accb0b0c8822ecc0309190e23de5f7f6c82f660ce08023a1d74e055a3d7c4d',
   fields: {
     title: 'Mario Mushroom',
@@ -352,9 +355,11 @@ const entry = signAndEncodeEntry({
 }, keyPair);
 ```
 
+Yes! We're creating our first `mushroom` document here!
+
 :::tip Playing in NodeJS
 
-`p2panda-js` also runs in NodeJS and there you don't even need to initialise the WebAssembly! It is fun to play with the API in the interactive NodeJS environment. Just type `node` inside the the `mushroom-app-tutorial` folder, type `const p2panda = require('p2panda-js')`, hit `Enter`, and then you can directly get started, for example by writing `const keyPair = new p2panda.KeyPair()`! It is fun to create some operations, encode and decode and inspect them directly.
+`p2panda-js` also runs in NodeJS and there you don't even need to initialise the WebAssembly! It is fun to play with the API in the interactive NodeJS environment. Just type `node` inside the the `mushroom-app-tutorial` folder, type `const p2panda = require('p2panda-js')`, hit `Enter`, and then you can directly get started, for example by writing `const keyPair = new p2panda.KeyPair()`! It is fun to create some operations, encode, decode and inspect them directly.
 
 :::
 
@@ -362,7 +367,7 @@ In the example above we are already using the schema id we've created before. Us
 
 :::note Schema migrations
 
-Updating a schema after releasing an application will not break it by the way! Schema ids are _immutable_ identifiers of the schema for exactly _that_ version of it. If you introduce a new version, old applications will still point at the previous schema id and the new ones can already support the latest schema.
+Updating a schema after releasing an application will not break it! Schema ids are _immutable_ identifiers of the schema for exactly _that_ version of it. If you introduce a new version, old applications will still point at the previous schema id and the new ones can already support the latest schema.
 
 In the future we want to offer [Lenses](https://www.inkandswitch.com/cambria/) to automatically support old and new schemas, especially in a p2p system this gets very important after a while.
 
@@ -379,7 +384,7 @@ const client = new GraphQLClient('http://localhost:2020/graphql');
 
 :::tip GraphQL libraries
 
-In this tutorial we're using [`graphql-request`](https://www.npmjs.com/package/graphql-request) as a GraphQL client, we like this one because it is very simple and lightweight - but there are many others as well, for example [Apollo](https://www.apollographql.com/).
+In this tutorial we're using [`graphql-request`](https://www.npmjs.com/package/graphql-request) as a GraphQL client. We like this one because it is very simple and lightweight, but there are many others as well, for example [Apollo](https://www.apollographql.com/).
 
 :::
 
@@ -416,7 +421,7 @@ async function nextArgs(publicKey: string, viewId?: string): Promise<NextArgs> {
 
 :::note Why is `seqNum` and `logId` a string?
 
-p2panda supports `u64` integers for sequence numbers and log id but JavaScript only supports up to [53bit](https://262.ecma-international.org/6.0/#sec-number.max_safe_integer) to encode numbers. There is [`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt/BigInt) as well but we can't use it inside of JSON (which is the format of the GraphQL response).
+p2panda supports `u64` integers for sequence numbers and log id but JavaScript only supports up to [53bit](https://262.ecma-international.org/6.0/#sec-number.max_safe_integer) to encode numbers. There is [`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt/BigInt) as well but we can't use it inside of JSON (which is the format of the GraphQL response). This is why we represent numbers in JavaScript as strings! They can be of any size then and latest when they arrive in the WebAssembly code they will be checked and correctly converted into `u64`.
 
 :::
 
@@ -486,13 +491,13 @@ export async function publish(
 
 This is it! We can now create `mushroom` documents.
 
-If we're updating or deleting a document we need to specify _what_ document we want to apply these changes on. This we do by passing in the `viewId`. The `viewId` you can also get from the GraphQL API, whenever you query for the documents you want to update or delete.
+If we're updating or deleting a document we need to specify _what_ document we want to apply these changes on. This we do by passing in the `viewId`. The `viewId` you can get from the GraphQL API, whenever you query for the documents you want to update or delete.
 
-All of this code you find in the [`src/requests.ts`](https://github.com/p2panda/mushroom-app-tutorial/blob/main/src/requests.ts) file, there you will find other queries as well, for example to create `mushroom_finding` documents.
+All of this you find in the [`src/requests.ts`](https://github.com/p2panda/mushroom-app-tutorial/blob/main/src/requests.ts) file, there you will find other queries as well, for example to create `mushroom_finding` documents.
 
 ### Query documents
 
-After creating the mushroom documents we want to query them as well. We can do this like that:
+After creating the `mushroom` documents we want to query them as well. We can do this like that:
 
 ```typescript
 type Meta = {
@@ -533,7 +538,7 @@ async function getAllMushrooms(): Promise<MushroomResponse[]> {
 }
 ```
 
-If you prepend the schema id you want to query with `all_`, you get the collection of _all_ mushrooms.
+If you prepend the schema id in the query with `all_` you receive a collection of _all_ `mushroom` documents.
 
 :::note Pagination, filters and sorting
 
