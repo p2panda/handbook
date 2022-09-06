@@ -32,13 +32,12 @@ The p2panda [Handbook](https://github.com/p2panda/handbook) has a [`/specificati
 
 ## How to setup my development environment?
 
-p2panda is currently in an early development phase. We aim at releasing a stable API and backwards compatibility for future updates as soon as we reach our first major version (`1.0.0`). Until then you might need to set up a local development environment to test your p2panda experiments.
-
 **Requirements**
 
-* NodeJS v16 and npm v8 (recommended install via a Node version mananger like [`n`](https://github.com/tj/n) or [`nvm`](https://github.com/nvm-sh/nvm))
-* Rust 1.58 (stable) (install via [`rustup`](https://www.rust-lang.org/tools/install)
-* wasm-pack 0.10.2 (run `cargo install wasm-pack` or [read more](https://rustwasm.github.io/wasm-pack/installer/))
+* NodeJS v18 and npm v8 (recommended install via a Node version mananger like [`n`](https://github.com/tj/n) or [`nvm`](https://github.com/nvm-sh/nvm))
+* Rust 1.63 (stable) (install via [`rustup`](https://www.rust-lang.org/tools/install)
+* wasm-bindgen
+* wasm-opt (optional)
 
 **1. Build `p2panda-js`**
 
@@ -54,7 +53,6 @@ p2panda is currently in an early development phase. We aim at releasing a stable
 
 **3. Build your p2panda project**
 
-- You can clone our example application *beep-boop* to test your p2panda setup. Download it via `git clone https://github.com/p2panda/beep-boop` and run `npm install` and `npm start` to open it in your browser under http://localhost:4000
 - You can refer to the latest `p2panda-js` version by linking to the package you've compiled in the steps above. Run `npm link p2panda-js` to use it inside of the project you're working on
 
 ## Style Guide
@@ -64,57 +62,65 @@ p2panda is currently in an early development phase. We aim at releasing a stable
 - Imports are grouped by: 1. `std`, 2. external crates, 3. `crate` 4. `super`.
 
   ```rust
-    use std::collections::BTreeMap;
-    
-    use rstest::rstest;
+  use std::collections::BTreeMap;
 
-    use crate::hash::Hash;
-    use crate::operation::OperationId;
-    use crate::test_utils::fixtures::random_hash;
+  use rstest::rstest;
 
-    use super::DocumentId;
+  use crate::hash::Hash;
+  use crate::operation::OperationId;
+  use crate::test_utils::fixtures::random_hash;
+
+  use super::DocumentId;
   ```
-  
-- Prefer using `crate` imports over `super`, except in `tests` modules where you import something from the same file.
+
+- Prefer using `crate` imports over `super`, except in `tests` modules where you import something from the same file.This helps reducing mental overhead when switching a lot between files plus you can copy & paste import lines easier between files without changing the paths.
 
   ```rust
   use crate::hash::Hash;
   use crate::document::DocumentViewId;
-  
+
   struct TheThingImTesting;
-  
+
   #[cfg(test)]
   mod tests {
     use super::TheThingImTesting;
   }
   ```
-  
-- Newlines are appreciated to structure your code into logical blocks and make it easier to follow it.
+
+- Newlines are useful to structure your code into logical blocks and make it easier to follow it.
 
   ```rust
   let some_thing = im_initialising_it();
   let some_other_thing = more_initialisation();
-  
+
   let result = do_request(&some_thing, &some_other_thing).await?;
-  
+
   assert_eq!(result, 42);
   ```
 
-- Code often does not explain itself, give it a comment!
+- Code does not explain itself sometimes, give it a comment!
 
   ```rust
   // The queue is empty, but this node has dependencies missing then there
   // is either a cycle or missing nodes.
   return Err(GraphError::BadlyFormedGraph);
   ```
-  
+
 - Whenever you `unwrap`, explain why in a comment.
 
   ```rust
-  // We unwrap here because this can never go wrong
+  // We unwrap here because it would be bad manners to inspect a present.
   trojan_horse.unwrap();
   ```
-  
+
+- If you selectively disable clippy rules for your code add a comment to explain why.
+
+  ```rust
+  // The consumer for this method will be implemented as part of [link to issue]
+  #[allow(dead_code)]
+  pub fn future_functionality() {
+  ```
+
 - We write documentation for _everything_, struct members, methods, modules, etc.
 
 - Doc-Strings appear before [attributes](https://doc.rust-lang.org/reference/attributes.html).
@@ -127,7 +133,34 @@ p2panda is currently in an early development phase. We aim at releasing a stable
   }
   ```
 
-- We try to write in British English.
+- Avoid nesting imports.
+
+  ```rust
+  // Wrong
+  use thing::from::{
+    here::{
+      but::actually {
+        ThisThing,
+        AndThatThing,
+      }
+    },
+    and_here::{
+       HereAsWell,
+    }
+  };
+
+  // Correct
+  use thing::from::here::but::actually::{ThisThing, AndThatThing};
+  use thing::from::and_here::{HereAsWell};
+  ```
+
+- We try to write in British English, but don't worry if you're not a native speaker.
+
+  ```
+  - "Materialisation" instead of "Materialization"
+  - "Decentralisation" instead of "Decentralization"
+  - ...
+  ```
 
 - Module-level docstrings are not followed by a newline.
 
@@ -141,7 +174,7 @@ p2panda is currently in an early development phase. We aim at releasing a stable
   //! [`Bamboo`]: https://github.com/AljoschaMeyer/bamboo
   mod decode;
   ```
-  
+
 - Every file needs a license header: `// SPDX-License-Identifier: AGPL-3.0-or-later`.
 
 - Make `cargo clippy` and `cargo fmt` happy.
