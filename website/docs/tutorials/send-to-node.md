@@ -303,7 +303,7 @@ This looks slightly different from the previous operations we were sending, but 
 
 You would probably like to start with `name` as the first field, right? The ordering of the field names _needs_ to be alphabetical though. You can try a different order, but the `aquadoggo` will reject it with a friendly error message telling you what order it expected the fields to be.
 
-All of this is required to ensure an [canonical encoding](/specifiation/canonic-encoding) of operations.
+All of this is required to ensure an [canonical encoding](/specification/encoding-data) of operations.
 
 :::
 
