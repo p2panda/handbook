@@ -60,6 +60,23 @@ p2panda does not use JSON internally, even though `send-to-node` works with `.js
 
 :::
 
+### Install `send-to-node`
+
+Run the following commands in your terminal if you haven't installed `send-to-node` yet. It is a Rust program you can compile on your computer:
+
+```bash
+# Clone the `send-to-node` git repository
+git clone https://github.com/p2panda/send-to-node.git
+
+# Move into the folder you've just created
+cd send-to-node
+
+# Compile and run to test it
+cargo run -- --help
+```
+
+Compiling `send-to-node` might take a couple of seconds in the beginning, but next time it will start directly.
+
 ## Start node
 
 We want to send data to a node, but for this we need a node first! You can follow the [Set up a local node](/tutorials/aquadoggo) to learn how to do this in detail, or just run the following steps here:
