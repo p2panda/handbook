@@ -6,7 +6,7 @@ title: Documents
 - A Document is a high-level mutable, multi-writer data type constructed from a linked graph of [operations][operations].
 - Through a deterministic process the graph can be reduced to a single key-value map.
 - Any two documents (replicas) which contain the same collection of operations will resolve to the same value.
-- A document is identified by the operation id of its root CREATE operation_ (aka _document_id_).
+- A document is identified by the operation id of its root CREATE operation (aka _document_id_).
 - A document assumes the schema of its root CREATE operation
 - A document is made up of operations published by one or many authors
   - Branches in a document's graph occur when two authors publish operations concurrently
@@ -40,8 +40,14 @@ A document MUST NOT contain an operation who's `previous` refers to an operation
 
 :::caution Requirement DO4
 
-If a document contains any number of DELETE operations_ it SHOULD be considered deleted. After this point, new operations
+If a document contains any number of DELETE operations it SHOULD be considered deleted. After this point, new operations
 SHOULD NOT be appended to any point on the document.
+
+:::
+
+:::caution Requirement DO5
+
+A documents' operations MUST be encoded on entries which are published to a single log for each contributing author/public key.
 
 :::
 
@@ -51,7 +57,7 @@ SHOULD NOT be appended to any point on the document.
 
 :::info Definition: Materialisation
 
-Although here we describe the resolving an operation graph as a property of the data type _document_ it can also be seen as the process of _materialisation_. This is a term borrowed from database terminology, where views on data can be materialised into virtual tables. This is a useful concept in p2panda and one that is used often.  
+Although here we describe the resolving an operation graph as a property of the data type _document_ it can also be seen as the process of _materialisation_. This is a term borrowed from database terminology, where views on data can be materialised into virtual tables. This is a useful concept in p2panda and one that is used often.
 
 :::
 
@@ -60,37 +66,37 @@ Although here we describe the resolving an operation graph as a property of the 
 - The first step we take is to sort and linearise the document's graph of operations deterministically.
 - We do this by applying a topological depth-first sorting algorithm which meets the following requirements:
 
-:::caution Requirement DO5
+:::caution Requirement DO6
 
 Sorting MUST start from the document's CREATE operation.
 
 :::
 
-:::caution Requirement DO6
+:::caution Requirement DO7
 
 An operation which refers to the current operation in its `previous` field MUST be sorted next.
 
 :::
 
-:::caution Requirement DO7
+:::caution Requirement DO8
 
 If multiple operations refer to the current, the one with the lowest `document_id` MUST be sorted next.
 
 :::
 
-:::caution Requirement DO8
+:::caution Requirement DO9
 
 When visiting a branch, all operations it contains MUST be visited and sorted before continuing to the rest of the graph.
 
 :::
 
-:::caution Requirement DO9
+:::caution Requirement D10
 
 All operations in the graph MUST be sorted exactly once.
 
 :::
 
-:::caution Requirement D10
+:::caution Requirement D11
 
 If any DELETE operation is visited, materialisation of the document MUST stop immediately. The resulting document view id MUST include
 only the id of the DELETE operation and no document view should be produced.
