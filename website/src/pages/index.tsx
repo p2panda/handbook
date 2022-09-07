@@ -108,7 +108,7 @@ function Zoo(): JSX.Element {
             {() => {
               // eslint-disable-next-line @typescript-eslint/no-var-requires
               const { ZooAdventures } = require('zoo-adventures');
-              return <ZooAdventures />;
+              return <ZooAdventures updateIntervalMs={5000} />;
             }}
           </BrowserOnly>
         </div>
