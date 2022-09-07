@@ -39,7 +39,7 @@ The core or p2panda is built in Rust from which we also compile WebAssembly for 
 "We", that is [Andreas Dzialocha](https://adz.garden), [Sam Andreae](https://samandreae.com/) and [Vincent Ahrend](https://www.vincentahrend.com), the current core team of p2panda. Hello! ⛺
 
 <ImageFrame
-  title="This is us during our first intensive workshop week in 2021"
+  title="This is us during our first intensive workshop week in 2021: Vincent, Sam, Sophie and Andreas!"
   url={require('./assets/safari-1.jpg')}
 />
 
