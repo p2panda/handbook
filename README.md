@@ -28,9 +28,13 @@ p2panda is a user-friendly peer-to-peer protocol for secure, energy-efficient lo
 
 Data changes in p2panda are signed, encrypted and published by clients using the [Bamboo](https://github.com/AljoschaMeyer/bamboo) append-only log data type which gets distributed over the network to other peers. p2panda allows for decentralised and federated network topologies or even hybrids of these and aims at running in web browsers without losing its cryptographic features.
 
-## Get started
+## Handbook
 
-* [`Website`](https://p2panda.org)
+<a href="https://p2panda.org">
+  <img src="https://raw.githubusercontent.com/p2panda/.github/main/assets/handbook.png" width="100" />
+</a>
+
+* [`About`](https://p2panda.org/about)
 * [`Learn`](https://p2panda.org/learn)
 * [`Tutorials`](https://p2panda.org/tutorials)
 * [`Libraries`](https://p2panda.org/libraries)
@@ -84,8 +88,9 @@ Read more about p2panda on our [website](https://p2panda.org/about)!
 
 ## Further links
 
-- [C36C3](https://media.ccc.de/v/36c3-10756-p2panda) Presentation at Chaos Communication Congress 2019
+- [C36C3](https://media.ccc.de/v/36c3-10756-p2panda) - Presentation at Chaos Communication Congress 2019
 - [Shirokuma Cafe](https://en.wikipedia.org/wiki/Shirokuma_Cafe)
+- [Mio Ebisu](https://mioebisu.neocities.org/) - Cute panda graphics
 - [Laura Weber](http://www.lauraweber.net/) - Cute panda illustrations
 
 ## License
