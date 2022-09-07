@@ -28,6 +28,15 @@ p2panda is a user-friendly peer-to-peer protocol for secure, energy-efficient lo
 
 Data changes in p2panda are signed, encrypted and published by clients using the [Bamboo](https://github.com/AljoschaMeyer/bamboo) append-only log data type which gets distributed over the network to other peers. p2panda allows for decentralised and federated network topologies or even hybrids of these and aims at running in web browsers without losing its cryptographic features.
 
+## Get started
+
+* [`Website`](https://p2panda.org)
+* [`Learn`](https://p2panda.org/learn)
+* [`Tutorials`](https://p2panda.org/tutorials)
+* [`Libraries`](https://p2panda.org/libraries)
+* [`Specification`](https://p2panda.org/specification)
+* [`FAQ`](https://p2panda.org/faq)
+
 ## Topics we're interested in
 
 * 🦝 **Browser Friendliness** Lightweight clients that can easily be implemented as websites
