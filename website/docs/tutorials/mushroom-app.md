@@ -8,7 +8,7 @@ In this tutorial we will build an web app for finding and identifying mushrooms 
 
 :::note This is not a React tutorial
 
-This tutorial assumes that you already have experience in using npm, React, Webpack and TypeScript. We want to rather focus on _using_ the JavaScript library `p2panda-js`. That being said, if you are a beginner in web development, this is also for you as most of the code has already been written!
+This tutorial assumes that you already have experience in using npm, React, Webpack and TypeScript. We want to rather focus on _using_ the JavaScript library `p2panda-js`. That being said, if you are a beginner, this is also for you as most of the code has already been written!
 
 :::
 
@@ -87,11 +87,13 @@ cd mushroom-app-tutorial
 npm install
 ```
 
+Let's stay in the `mushroom-app-tutorial` directory from now on, we will look into some code and run a script here.
+
 ## Create a schema
 
-We already know what the mushroom app will be capable of, but we need to define as well how the data _will look like_. What sort of data do we want to create and visualise in this application?
+We already know what the mushroom app will be capable of, but we need to define as well how the data _will look like_. What sort of data do we want to publish, query and visualise in this application?
 
-In p2panda we can create _Schemas_ which will help us to define the shape of the data we need. Nodes will register these schemas and start supporting them. As soon as a node supports a schema you can send that data to it and the node will give you a nice GraphQL API to query it in different ways.
+In p2panda we can create _schemas_ which will help us to define the shape of the data we need. Nodes will register these schemas and start supporting them. As soon as a node supports a schema you can send that data to it and the node will give you a nice GraphQL API to query it in different ways.
 
 For every p2panda application we want to build, we have to define the schemas first we want to use. It could be that there are many even, depending on how complex your program will become.
 
@@ -137,7 +139,7 @@ Since p2panda doesn't have any native support for binary data yet (like images o
 
 ### Register schemas
 
-:::note How to create a schema?
+:::info How to create a schema?
 
 There is another tutorial showing you [how you can create schemas](/tutorials/send-to-node) with the command line tool `send-to-node`. For this tutorial this is not necessary, but if you are wondering what is going on, you should check this out first!
 
@@ -316,6 +318,15 @@ The `KeyPairProvider` helps us to establish the state of the `KeyPairContext` by
 </KeyPairContext.Consumer>
 ```
 
+If you need the `keyPair` already before, you can import the `useContext` hook and access all values like that:
+
+```typescript
+import { useContext } from 'react';
+const { keyPair } = useContext(KeyPairContext);
+```
+
+Really handy!
+
 We have to make sure to establish the `KeyPairProvider` in the application as well, we're doing this right at the beginning, next to `InitWasm`:
 
 ```typescript
@@ -332,7 +343,15 @@ const Root: React.FC = () => {
 
 ### Create operations and entries
 
-Operations and entries are the building blocks of p2panda, they _define_ the contents of everything else: Schemas, Documents, and so on. With `p2panda-js` we can create operations like that:
+Operations and entries are the building blocks of p2panda, they _define_ the contents of everything else: Schemas, Documents, and so on.
+
+:::info Entries and operations?
+
+If you haven't heard about them yet, you can read the _learn_ sections on [Entries](/learn/entries) and [Operations](/learn/operations).
+
+:::
+
+With `p2panda-js` we can create operations like that:
 
 ```typescript
 import { KeyPair, signAndEncodeEntry, encodeOperation } from 'p2panda-js';
@@ -341,7 +360,7 @@ const keyPair = new KeyPair();
 
 const operation = encodeOperation({
   action: 'create',
-  schemaId: 'mushroom_0020c3accb0b0c8822ecc0309190e23de5f7f6c82f660ce08023a1d74e055a3d7c4d',
+  schemaId: MUSHROOM_SCHEMA_ID,
   fields: {
     title: 'Mario Mushroom',
     latin: 'Marius Fungus',
@@ -540,7 +559,7 @@ async function getAllMushrooms(): Promise<MushroomResponse[]> {
 
 If you prepend the schema id in the query with `all_` you receive a collection of _all_ `mushroom` documents.
 
-:::note Pagination, filters and sorting
+:::info Pagination, filters and sorting
 
 The [specification](https://p2panda.org/handbook/specification/APIs/queries) already mentions pagination, filters and sorting but we have not implemented it yet, it will come soon!
 
@@ -586,7 +605,7 @@ npm start
 
 This will run the web application under [http://localhost:8080](http://localhost:8080). You can open it in your browser and start playing with it. If you're curious you can also check the GraphQL playground of the `aquadoggo` and make some queries there to compare!
 
-:::tip High-Level frameworks
+:::info High-Level frameworks
 
 For this tutorial we have been using `p2panda-js` which is a fairly _low-level_ API. In the future we want to offer more _high-level_ frameworks like [`shirokuma`](https://github.com/p2panda/shirokuma) which will take care of even more things for us, like internally handling the GraphQL queries, caching arguments to create entries and persisting key pairs automatically for us.
 
