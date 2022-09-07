@@ -96,3 +96,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: p2panda-js/docs
           destination_dir: lib/p2panda-js
+          cname: p2panda.org
