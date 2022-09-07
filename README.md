@@ -1,45 +1,63 @@
-# p2:panda_face:
+<div align="center">
+  <img src="https://raw.githubusercontent.com/p2panda/.github/d7bbf898819bed472ca0126784c4d985bb641ec3/assets/panda.svg" width="250" />
+</div>
+
+<h1 align="center">p2panda</h1>
+
+<div align="center">
+  <strong>A protocol for local-first applications</strong>
+</div>
+
+<div align="center">
+  <h3>
+    <a href="https://p2panda.org">Website</a>
+    <span> | </span>
+    <a href="https://p2panda.org/libraries">Libraries</a>
+    <span> | </span>
+    <a href="https://p2panda.org/specification">Specification</a>
+    <span> | </span>
+    <a href="https://p2panda.org/about/contribute">
+      Contribute
+    </a>
+  </h3>
+</div>
+
+<br />
 
 p2panda is a user-friendly peer-to-peer protocol for secure, energy-efficient local-first applications. We want this protocol to be a playful tool for people to hack, build, play, and experiment with.
 
 Data changes in p2panda are signed, encrypted and published by clients using the [Bamboo](https://github.com/AljoschaMeyer/bamboo) append-only log data type which gets distributed over the network to other peers. p2panda allows for decentralised and federated network topologies or even hybrids of these and aims at running in web browsers without losing its cryptographic features.
 
-> **p2panda is currently finalising its specification, our milestones and progress can be seen below. If you're interested in any of these topics please get in touch!**
-
 ## Topics we're interested in
 
-- **Browser friendliness**: Lightweight clients that can easily be implemented as websites.
-- **Collaboration**: Data can be changed by multiple users at the same time with built-in CRDTs.
-- **Decentralization**: Networks consist of both federated or decentralised nodes.
-- **Deletion**: Data can be deleted without losing verifiability and log integrity.
-- **Encryption**: Transport communication is end-to-end encrypted via TLS 1.3, data is encrypted for groups via the Messaging Layer Security (MLS) protocol.
-- **Energy efficiency**: Data- and energy-efficient storage and replication.
-- **Fork proof**: Automatic detection of accidentially or maliciously forked append-only logs.
-- **Identities**: A user account model that gives people options for managing one or multiple online identities across devices.
-- **Integrity**: Authorship of all published data can be verified through signatures.
-- **Local- & offline first**: Access to online services without reliable and performant internet infrastructure. Independence from the corporate cloud.
-- **Low-power electronics**: Useable on low power devices.
-- **Moderation**: Decentralised content moderation for users and groups.
-- **Partial replication**: Nodes do not need to download the whole log to verify them.
-- **Schemas**: User data is stored in published, versioned data schemas so data can be reliably accessed across services.
-- **Warmth**: Computers make it easy to get carried away by their rigidly structured ways. However, every computer also contains an undeniable spark of pure chaos. We want to capture that spark to ignite a campfire for you to gather around and get cosy.
+* 🦝 **Browser Friendliness** Lightweight clients that can easily be implemented as websites
+* 🐎 **Collaboration** Data can be edited together, even when you are offline
+* 🐮 **Data Sovereignty**  Users own the data they create
+* 🐄 **Decentralisation** No authority over data or how it is displayed
+* 🦣 **Deletion** Some data does not need to stay forever, it can even delete itself automatically after some time
+* 🐰 **Energy Efficiency** Data- and energy-efficient storage and replication
+* 🐨 **Identitites** A user account model that gives people options for managing one or multiple online identities across devices
+* 🐼 **Local-First** Access to online services without reliable and performant internet infrastructure. Independence from the corporate cloud
+* 🦉 **Privacy** Secure encryption for sensitive and private data for users and all sorts of groups
+* 🐧 **Social** Computers are used by humans
+* 🐸 **Warmth** Computers make it easy to get carried away by their rigidly structured ways. However, every computer also contains an undeniable spark of pure chaos. We want to capture that spark to ignite a campfire for you to gather around and get cosy
 
 ## Background
 
 p2panda emerged out of activities around the self-curated zine [BLATT 3000](https://blatt3000.de) (2014) and subsequent festivals [VERANTWORTUNG 3000](https://blatt3000.de/verantwortung3000/) (2016) and [HOFFNUNG 3000](https://blatt3000.de/hoffnung3000/) (2017), the latter of these being the catalyst for building a custom platform designed to help communities organise in a decentralised manner, also called [HOFFNUNG 3000](https://hoffnung3000.de/).
 
-While exploring building a p2p festival platform we met many people from the communities around Secure Scuttlebutt, DAT / Hypercore, Cabal, Chaos Computer Club, Fediverse, Antiuniversity Now, Pixelache trying to understand how this technology affects the way we organise ourselves.
+While exploring building a p2p festival platform we met many people from the communities around Earthstar, Secure Scuttlebutt, DAT / Hypercore, Cabal, Chaos Computer Club, Fediverse, Antiuniversity Now, Pixelache trying to understand how this technology affects the way we organise ourselves.
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/p2panda/design-document/main/assets/pandas.jpg" width="500" alt="p2panda - サービス！サービス！" />
   <p>サービス！サービス！</p>
 </div>
 
-This led to a group of people interested in realising a protocol for p2p communication, which ultimately should serve as a tool to build applications, like a festival tool and more. We've been meeting regularly on Mondays since 2019 to hack p2panda and have recently reached the point where we have a publicly running [demo project](https://p2panda.org/demo). We have also been active in some other projects including the [Liebe Chaos Verein](https://liebechaos.org/), organising a [p2p gathering](https://p2p-berlin.org/) and a reading group in Berlin. Obviously we're still going to organise another festival sometime :panda_face:.
+This led to a group of people interested in realising a protocol for p2p communication, which ultimately should serve as a tool to build applications, like a festival tool and more. We've been meeting regularly on Mondays since 2019 to hack p2panda and have also been active in some other projects including the [Liebe Chaos Verein](https://liebechaos.org/), organising a p2p gathering and a reading group in Berlin. Obviously we're still going to organise another festival sometime :panda_face:.
+
+Read more about p2panda on our [website](https://p2panda.org/about)!
 
 ## Overview
-
-> **These libraries and applications are current work-in-progress reference implementations. See the Milestones below for current progress status.**
 
 **Libraries**
 
@@ -51,63 +69,9 @@ This led to a group of people interested in realising a protocol for p2p communi
 
 **Clients**
 
+- [`send-to-node`](https://github.com/p2panda/send-to-node): Minimal client to send data to a p2panda node
 - [`zoo-adventures`](https://github.com/p2panda/zoo-adventures): "Connect Four" Game. See it live under: https://p2panda.org
-- [`fishyfish`](https://github.com/p2panda/fishyfish): Command line interface to manage p2panda nodes.
-
-## Milestones
-
-### The past
-
-- [x] Ed25519 key pair generation and handling
-- [x] Bamboo `Entry` creation
-- [x] `Entry` signing and validation
-- [x] SQLite / PostgreSQL support for data storage
-- [x] WebAssembly support in the browser
-- [x] `aquadoggo` HTTP and WebSocket API
-- [x] Publish first v0.1.0 `p2panda-rs` crate and `p2panda-js` npm package
-- [x] Operation specification, creation and validation
-- [x] CBOR encoding and basic CDDL validation of messages
-- [x] Experimental chat demo application
-- [x] Embed `aquadoggo` library in Tauri container
-- [x] Stabilize `p2panda-js` API, release 0.2.0
-- [x] Publish `aquadoggo` crate 0.1.0
-- [x] `bamboo-rs-ed25519-yasmf` crate published
-- [x] Use YASMF hashes in `p2panda-rs` and `p2panda-js`
-- [x] Materialisation of data from operations
-- [x] Schemas describing the format of operations 
-- [x] OpenMLS group encryption capabilities in `p2panda-rs`
-- [x] Schema migrations
-- [x] Multi-writer materialisation in `aquadoggo`
-- [x] Implement System Schemas in `aquadoggo`
-- [x] Implement Application Schemas in `aquadoggo`
-- [x] Basic replication protocol
-- [x] Manually follow other nodes
-- [x] p2panda first draft specification
-- [x] Dynamic GraphQL API to query data
-- [x] Schemas- and data validation
-
-### Now
-
-- [ ] p2panda specification 1.0 release :panda_face:
-
-### The future
-
-- [ ] Shared identities with `KeyGroup` in `p2panda-rs`
-- [ ] Multi-writer permissions in `aquadoggo`
-- [ ] Transport encryption between nodes via TLS 1.3
-- [ ] Automatic local discovery via mDNS
-- [ ] Schema backwards compatibility via lenses
-- [ ] Automatic internet discovery via signalling servers
-- [ ] Efficient replication protocol
-- [ ] Automatic deletion of unused data ("Garbage Collection")
-- [ ] Automatic detection of forked logs
-
-## How to contribute
-
-- We meet every Monday at 19:00 CET, for coding and planning, drop us a message if you would like to join.
-- Join our chat channel _#p2panda_: https://wald.liebechaos.org/channel/p2panda
-- Here you can find our meeting notes: https://wolke.liebechaos.org/s/oEErg5TMqZM9HB6
-- Check out our issues, PRs and source code on GitHub: https://github.com/p2panda
+- [`mushroom-app-tutorial`](https://github.com/p2panda/mushroom-app-tutorial): Tutorial Client to learn p2panda
 
 ## Further links
 
