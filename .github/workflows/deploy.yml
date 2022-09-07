@@ -41,6 +41,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
+          cname: p2panda.org
 
   deploy-js-docs:
     name: Deploy p2panda-js API documentation
