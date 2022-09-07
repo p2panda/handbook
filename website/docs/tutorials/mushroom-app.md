@@ -561,7 +561,7 @@ If you prepend the schema id in the query with `all_` you receive a collection o
 
 :::info Pagination, filters and sorting
 
-The [specification](https://p2panda.org/handbook/specification/APIs/queries) already mentions pagination, filters and sorting but we have not implemented it yet, it will come soon!
+The [specification](https://p2panda.org/specification/APIs/queries) already mentions pagination, filters and sorting but we have not implemented it yet, it will come soon!
 
 :::
 

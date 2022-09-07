@@ -146,7 +146,7 @@ There are a couple of more queries you can find when you click on the _Docs_ tab
 
 :::note What are all these queries?
 
-`entriesNewerThanSeqNum`, `entryByLogIdAndSeqNum` and `entryByHash` are currently all required to [replicate](/specification/APIs/replication) data from one node to another ("Replication API"), these will mostly be used by other nodes. The other queries serve to find out which schemas exist, they will be used by [clients](https://p2panda.org/handbook/specification/APIs/queries) ("Client API"). Surely there will be more queries coming in the future.
+`entriesNewerThanSeqNum`, `entryByLogIdAndSeqNum` and `entryByHash` are currently all required to [replicate](/specification/APIs/replication) data from one node to another ("Replication API"), these will mostly be used by other nodes. The other queries serve to find out which schemas exist, they will be used by [clients](https://p2panda.org/specification/APIs/queries) ("Client API"). Surely there will be more queries coming in the future.
 
 :::
 

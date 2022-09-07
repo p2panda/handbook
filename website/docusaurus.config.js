@@ -8,8 +8,7 @@ const config = {
   title: 'p2panda',
   tagline: 'p2panda is a protocol for local-first applications',
   url: 'https://p2panda.org',
-  // @TODO: Change this to `/` for replacing p2panda.org with this docusaurus
-  baseUrl: '/handbook/',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'images/deepsea-panda.svg',
