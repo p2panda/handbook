@@ -70,14 +70,14 @@ type DocumentMeta {
 
 ## `<schema_id>`
 
-- returns a single document that uses this schema
-  - implementations must have no side effects
-- the name of this field is equal to the _schema id_ of the schema it represents
-- either the `id` or `viewId` field argument must be set
-  - if `id` contains a document id, the response must contain the [_latest document view_][latest-document-view] for that document
-  - if `viewId` contains a document view id, the response must contain this document view
-  - if both field arguments are given the view id is used
-- not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
+- Returns a single document that uses this schema
+  - Implementations must have no side effects
+- The name of this field is equal to the _schema id_ of the schema it represents
+- Either the `id` or `viewId` field argument must be set
+  - If `id` contains a document id, the response must contain the [_latest document view_][latest-document-view] for that document
+  - If `viewId` contains a document view id, the response must contain this document view
+  - If both field arguments are given the view id is used
+- Not every node holds all documents and especially not all document views (historical states of a document) in its database because of the decentralised nature of p2panda. in this case a "not found" error will be returned
 
 ```graphql
 type QueryRoot {
@@ -99,32 +99,32 @@ type QueryRoot {
 
 ## `all_<schema_id>`
 
-- returns the [latest document view][latest-document-view] for many documents of a given schema
-  - implementations must have no side effects
-- deleted documents must not be included in the response unless they are explicitly included using a filter
-- response is paginated, can be sorted and filtered
+- Returns the [latest document view][latest-document-view] for many documents of a given schema
+  - Implementations must have no side effects
+- Deleted documents must not be included in the response unless they are explicitly included using a filter
+- Response is paginated, can be sorted and filtered
 
 **Filters**
 
-- filters can be applied on any operation field of type `float`, `str` and `integer`
-  - in special cases also `relation` and `pinned_relation` can be filtered, see self-referential relations section below
-- if no filter is selected all document views following that given schema will be selected
+- Filters can be applied on any operation field of type `float`, `str` and `integer`
+  - In special cases also `relation` and `pinned_relation` can be filtered, see self-referential relations section below
+- If no filter is selected all document views following that given schema will be selected
 
 **Ordering**
 
-- if no ordering is selected the documents will be ordered by document id, ascending
+- If no ordering is selected the documents will be ordered by document id, ascending
 
 **Pagination**
 
-- our pagination adheres to the [connection specification][connection-specification] of graphql
-  - a `cursor` is an opaque and unique identifier of every connection edge and can be implemented differently as long as it aids pagination
-    - we recommend a base64 encoded document view id as a cursor
-    - as stated by the [pagination specification][pagination-specification] of graphql the encoding should aid reminding developers that this data is opaque should not be relied upon
+- Our pagination adheres to the [connection specification][connection-specification] of graphql
+  - A `cursor` is an opaque and unique identifier of every connection edge and can be implemented differently as long as it aids pagination
+    - We recommend a base64 encoded document view id as a cursor
+    - As stated by the [pagination specification][pagination-specification] of graphql the encoding should aid reminding developers that this data is opaque should not be relied upon
 
 **Self-referential fields**
 
-- if the selected `orderBy` field is a [self-referential relation][self-referential-relation] the node will return a topologically ordered list of that reference graph in the same manner as the [reduction][reduction] algorithm works
-- if the selected filter field is a self-referential relation the topologically ordered list will be filtered
+- If the selected `orderBy` field is a [self-referential relation][self-referential-relation] the node will return a topologically ordered list of that reference graph in the same manner as the [reduction][reduction] algorithm works
+- If the selected filter field is a self-referential relation the topologically ordered list will be filtered
 
 ```graphql
 type QueryRoot {
