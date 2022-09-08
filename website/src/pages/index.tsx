@@ -27,9 +27,6 @@ function Pentagon(props: {
   hideOnSmallDevices?: boolean;
   hideOnMediumDevices?: boolean;
 }): JSX.Element {
-  const { colorMode } = useColorMode();
-  const background = colorMode === 'light' ? 'white' : 'transparent';
-
   const position = props.right
     ? { right: -(props.size / props.margin) }
     : { left: -(props.size / props.margin) };
@@ -49,9 +46,9 @@ function Pentagon(props: {
           <svg width={props.size} height={props.size} viewBox="0 0 100 100">
             <defs>
               <radialGradient cy="55%" id={id}>
-                <stop offset="40%" stopColor={background} />
+                <stop offset="40%" stopColor={props.color} stopOpacity={0}  />
                 <stop offset="80%" stopColor={props.color} />
-                <stop offset="100%" stopColor={background} />
+                <stop offset="100%" stopColor={props.color} stopOpacity={0} />
               </radialGradient>
             </defs>
             <polygon
