@@ -292,6 +292,12 @@ There is a lot of theory around [CRDTs](https://en.wikipedia.org/wiki/Conflict-f
 
 :::
 
+:::tip Materialisation
+
+Do you wonder what the cool algorithm is which *reconciles* and *reduces* the operation graph in the way we just described? If you get up in the morning and you are tired, you might be too slow to remember if you need to put your socks or underpants or pants or shirt or pullover on first. With [Topological Sorting](https://en.wikipedia.org/wiki/Topological_sorting) we can sort *Dependency Graphs* in a way where they will tell us what we have to do first before: Your socks are not dependent on anything, you can put them on whenever, but you should put on your underpants before you put on your pants for example! This is exactly what p2panda does: We traverse the operation graph with an Topological Sorting algorithm, bringing all operations into one ordered list, based on their dependencies. Where do we get the dependencies from? The `previous` links of course!
+
+:::
+
 We have missed out on one initial point though which actually was the reason why we started this section: Why is `previous` an array field? Let’s imagine there is someone new who wants to apply an UPDATE Operation on the Document. Where would this user apply this update to? On the Penguin Document View or the Elephant Document View? The correct answer would be: On both of them, because this is the latest state of the Operation Graph, and for this we need an array.
 
 [IMAGE]
