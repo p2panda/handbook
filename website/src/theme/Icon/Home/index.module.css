@@ -1,4 +1,6 @@
-.panda-icon {
-    height: 1.5em;
-    transform: scaleX(-1);
+.icon-home {
+  position: relative;
+  top: 8px;
+  height: 2em;
+  transform: scaleX(-1);
 }

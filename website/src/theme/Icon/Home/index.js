@@ -1,5 +1,6 @@
 import React from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+
 import styles from './index.module.css';
 
 export default function IconHome() {
@@ -7,7 +8,7 @@ export default function IconHome() {
     <img
       src={useBaseUrl('/images/deepsea-panda.svg')}
       width="30"
-      className={styles['panda-icon']}
+      className={styles['icon-home']}
     />
   );
 }
