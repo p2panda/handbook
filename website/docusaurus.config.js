@@ -103,7 +103,7 @@ const config = {
       colorMode: {
         disableSwitch: true, // Do not show light/dark mode switch
         respectPrefersColorScheme: true, // Automatically set mode to user preferences instead
-        defaultMode: 'dark',
+        defaultMode: 'light',
       },
       prism: {
         theme: require('./src/codeTheme'),
