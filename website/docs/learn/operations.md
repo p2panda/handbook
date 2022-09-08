@@ -58,7 +58,7 @@ If there is a DELETE Operation in the Document then the complete Document can be
 
 Documents are simple _Key-Value Maps_ which means that there is always a name of a field connected to some value. An User-Profile-Document could for example look like that:
 
-```
+```json
 {
   "username": "panda",
   "is_cute": true,
@@ -90,7 +90,7 @@ There will surely be more Operation Values in the future! An array would be good
 
 :::note Relations
 
-Next to the basic types there are also _Relations_. We will cover them in the next chapter.
+Next to the basic types there are also _Relations_. We will cover them in another chapter.
 
 :::
 
