@@ -4,12 +4,6 @@ title: Operations and Documents
 
 import ImageFrame from '@site/src/components/ImageFrame';
 
-:::caution I'm working on this right now
-
-Hello. This is work in progress and done soon!
-
-:::
-
 Most of the time, whenever we do something, we usually do it in multiple steps. For example when we cook a good curry for our friends.
 
 <ImageFrame
