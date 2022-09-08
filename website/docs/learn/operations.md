@@ -65,7 +65,7 @@ If there is a DELETE Operation in the Document then the complete Document can be
 
 <ImageFrame
   title="Deleted Documents will not show up anymore"
-  url={require('./assets/deleted-documents-do-not-show-up.png')}
+  url={require('./assets/deleted-documents-do-not-show.png')}
 />
 
 ## Operation Fields
@@ -85,7 +85,7 @@ When we create a new Document with a CREATE Operation we have to make sure that 
 
 <ImageFrame
   title="Updating Operation Fields"
-  url={require('./assets/updating-operation-field.png')}
+  url={require('./assets/updating-operation-fields.png')}
 />
 
 With this we can imagine more complex Documents which can contain many different sorts of fields!
