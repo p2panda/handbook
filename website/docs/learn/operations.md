@@ -2,6 +2,8 @@
 title: Operations and Documents
 ---
 
+import ImageFrame from '@site/src/components/ImageFrame';
+
 :::caution I'm working on this right now
 
 Hello. This is work in progress and done soon!
@@ -10,7 +12,10 @@ Hello. This is work in progress and done soon!
 
 Most of the time, whenever we do something, we usually do it in multiple steps. For example when we cook a good curry for our friends.
 
-[IMAGE]
+<ImageFrame
+  title="Cooking curry for friends"
+  url={require('./assets/cooking-curry-for-friends.png')}
+/>
 
 We can think of many other examples, but all of them have one thing in common: Every step changes the _state_ of things.
 
@@ -28,7 +33,10 @@ Operations are the core of p2panda, they can come in different shapes and surely
 
 Another way to look at Operations is to see them as a chain of actions we apply to something, for example updating our current username.
 
-[IMAGE]
+<ImageFrame
+  title="Updating username with Operations"
+  url={require('./assets/updating-username-with-operations.png')}
+/>
 
 To describe this Operation we could say: “Every Operation updates our username” and this is also exactly how p2panda Operations work: We can define UPDATE Operations on data, like usernames! And there is a little bit more: The first Operation is always CREATE, to announce that there is a new username at all. And maybe you want to also DELETE it even again at one point.
 
@@ -48,11 +56,17 @@ For example: In our initial cooking scenario the series of Operations would lead
 
 To create a new Document we send a CREATE Operation, to update it we follow with UPDATE Operations and then eventually we want to delete it with a final DELETE Operation.
 
-[IMAGE]
+<ImageFrame
+  title="Lifetime of a Document"
+  url={require('./assets/lifetime-of-a-document.png')}
+/>
 
 If there is a DELETE Operation in the Document then the complete Document can be considered deleted. In the following example we have Operations updating _diary entry_ Documents. The user created already 3 Documents but deleted one recently.
 
-[IMAGE]
+<ImageFrame
+  title="Deleted Documents will not show up anymore"
+  url={require('./assets/deleted-documents-do-not-show-up.png')}
+/>
 
 ## Operation Fields
 
@@ -69,7 +83,10 @@ Documents are simple _Key-Value Maps_ which means that there is always a name of
 
 When we create a new Document with a CREATE Operation we have to make sure that all **Operation Fields** are given. For UPDATE Operations we only have to mention the fields we want to change. DELETE Operations do not need to mention any fields as we’re simply just telling everyone that we want the Document to be deleted.
 
-[IMAGE]
+<ImageFrame
+  title="Updating Operation Fields"
+  url={require('./assets/updating-operation-field.png')}
+/>
 
 With this we can imagine more complex Documents which can contain many different sorts of fields!
 
@@ -96,9 +113,12 @@ Next to the basic types there are also _Relations_. We will cover them in anothe
 
 ## Schema
 
-Our User-Profile-Document has a specific shape which needed to be fulfilled:
+Our User-Profile-Document has a specific shape which needs to be fulfilled:
 
-[IMAGE]
+<ImageFrame
+  title="Panda defining a Schema"
+  url={require('./assets/panda-defining-a-schema.png')}
+/>
 
 Everyone in the p2panda network can define the shape of a Document and announce it in form of a **Schema**. Now users can refer to that Schema by using its identifier, the **Schema Id**. Whenever they publish an Operation with a certain Schema Id, the Operation needs to match the fields of the given Schema.
 
@@ -163,7 +183,7 @@ You can decode this data again using the [https://cbor.me](https://cbor.me) play
 
 Whenever we encode an Operation and sign it with an Bamboo Entry we _sign_ the data and make it _immutable_ from that point on. If we would change the Operation now afterwards, the _Signature_ would break and we would need to reject this Operation as something invalid.
 
-:::tip Thank you Bamboo
+:::tip Thank you Bamboo 💘
 
 Bamboo Entries _seal_ Operations for us. They are the data type which makes sure that nobody tampered with our data after we’ve sent it out.
 
@@ -171,7 +191,10 @@ Bamboo Entries _seal_ Operations for us. They are the data type which makes sure
 
 Since we used an Bamboo Entry to get this security and immutability we also receive an unique identifier after signing, encoding and hashing it: The Hash of the Entry becomes our **Operation Id**. It is an unique sequence of numbers which will indicate that we exactly want to refer to _this_ Operation.
 
-[IMAGE]
+<ImageFrame
+  title="Process to create an Entry Hash aka Operation Id"
+  url={require('./assets/process-to-create-an-operation-id.png')}
+/>
 
 There are a couple of steps involved to achieve this: The Operation gets encoded as we’ve just learned, then hashed for the Bamboo Entry where it will be inserted as the _Payload Hash_. The Bamboo Entry gets signed, encoded and then hashed as well. _That_ resulting Entry Hash will be our Operation Id!
 
@@ -195,7 +218,10 @@ Similar to how you would refer to a row in a SQL database by its unique identifi
 
 In p2panda everything can happen, since it is a decentralised system, so we need to be prepared for many users updating a document at the same time. Or someone updated something, but did it when they were offline! As a thought experiment, let’s imagine multiple updates to the same document:
 
-[IMAGE]
+<ImageFrame
+  title="Two users updating a document at the same time"
+  url={require('./assets/two-users-updating-at-the-same-time.png')}
+/>
 
 Who was first? That’s hard to tell! Usually we would just say that who has written last to the database will _win_. If Elephant was slightly later sending its change it will say `My name is: “Elephant”`. In p2panda we don’t have that central server though which just _knows_ who arrived later. We have many independent nodes where the updates might arrive differently. On the node of Penguin it might say `My name is: “Elephant”` and on the node of the Elephant it’s `My name is: “Penguin”`, because the foreign updates arrived later due to the networking delays .. This is horrible!
 
@@ -203,7 +229,10 @@ To fix this problem we need to _know_ what Penguin and Elephant did _see_ when t
 
 For this we ask the user to also publish a `previous` field inside of every Operation if they want to update or delete a document. Inside this `previous` field they can specify what the latest **Document View** was they knew about.
 
-[IMAGE]
+<ImageFrame
+  title="Document Views"
+  url={require('./assets/document-views.png')}
+/>
 
 Whenever an Operation takes place, it will generate a new Document View. We can understand them as a _version_ or _revision_ of our Documents. When sending a CREATE Operation there is one Document and one Document View, both will contain the same data, as so far there is only one version of it. 
 
@@ -256,7 +285,10 @@ Graphs are structures made of [vertices and edges](https://en.wikipedia.org/wiki
 
 In our above example Penguin and Elephant behaved very well: They applied their changes correctly after each other. But what if Elephant would have applied its change at the same point as Penguin? We are back at square one.
 
-[IMAGE]
+<ImageFrame
+  title="Concurrent updates by Penguin and Elephant"
+  url={require('./assets/concurrent-updates.png')}
+/>
 
 We end up with a situation where our Document suddenly has two different ends!
 
@@ -278,7 +310,10 @@ What is the state of the Document now? Does it contain `My name is: “Penguin�
 
 This situation we call a **Merge Conflict**. It occurs when two users edit the same Operation Field at the same time. To resolve it we need a **Conflict Resolution** strategy and it is actually fairly simple: In p2panda we simply let the Operation win with the higher Operation Id!
 
-[IMAGE]
+<ImageFrame
+  title="Conflict Resolution with resulting Document"
+  url={require('./assets/conflict-resolution.png')}
+/>
 
 In our example the Operation Id `C` is higher than the one of Operation Id `B`. So the Elephant will win! The good thing about this solution is also that all nodes which will see these Operations will decide for the same outcome. This makes the Conflict Resolution Strategy _deterministic_.
 
@@ -300,7 +335,10 @@ Do you wonder what the cool algorithm is which *reconciles* and *reduces* the op
 
 We have missed out on one initial point though which actually was the reason why we started this section: Why is `previous` an array field? Let’s imagine there is someone new who wants to apply an UPDATE Operation on the Document. Where would this user apply this update to? On the Penguin Document View or the Elephant Document View? The correct answer would be: On both of them, because this is the latest state of the Operation Graph, and for this we need an array.
 
-[IMAGE]
+<ImageFrame
+  title="Merging two Operation Graph Branches into one"
+  url={require('./assets/merging.png')}
+/>
 
 This new animal in town creates a new Operation with Id `D` and relates to both Operation `B` and `C` in its `previous` field. We call this a **Merge**.
 
@@ -308,6 +346,9 @@ We can use a Merge as a strategy to _manually_ resolve a Merge Conflict. But it�
 
 As already mentioned, solving Merge Conflicts is only important when we write to the same Operation Field, if we’re concurrently writing to different fields then we also don’t have a conflict. Let’s look at this example:
 
-[IMAGE]
+<ImageFrame
+  title="Concurrent writes to different Operation Fields"
+  url={require('./assets/concurrent-writes.png')}
+/>
 
 We can see that Operation Graphs are quite powerful. In a way we can see them as a tool which helps us to describe what we knew about the world when we decided something. In p2panda these views can be quite different: Some users might have been applying changes for weeks without connection to the internet. As soon as they went back online and _synced up_ their changes with the others, we can see in the Operation Graph that a lot happened while the offline user made all of these changes. But this is not a problem, thanks to CRDTs.
