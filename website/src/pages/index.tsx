@@ -194,7 +194,7 @@ export default function Home(): JSX.Element {
         </Section>
         <Section>
           <Pentagon size={1500} color={PINK} margin={2} shift />
-          <Drawing url="/images/panda-artwork-2.png" />
+          <Drawing url="/images/panda-school.png" />
           <Title text="Collaborative peer-to-peer networks" right>
             <a href="learn">Learn</a> more about the concepts of p2panda
           </Title>
