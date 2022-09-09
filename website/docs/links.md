@@ -21,6 +21,16 @@ import Links from '@site/src/components/Links';
   "url": "https://www.lauraweber.net",
 },
 {
+  "name": "Secure Scuttlebutt",
+  "description": "Social network and a decentralised platform",
+  "url": "https://scuttlebutt.nz/",
+},
+{
+  "name": "Earthstar",
+  "description": "Earthstar is a specification and Javascript library for building online tools you can truly call your own",
+  "url": "https://earthstar-project.org/",
+},
+{
   "name": "Shirokuma Cafe",
   "description": "Panda, Penguin and Polar-Bear meet here every day",
   "url": "https://en.wikipedia.org/wiki/Shirokuma_Cafe",
