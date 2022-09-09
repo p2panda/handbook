@@ -1,7 +1,8 @@
 import React from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import { useColorMode } from '@docusaurus/theme-common';
 import { useThemeConfig } from '@docusaurus/theme-common';
+
+import ColorMode from '@site/src/components/ColorMode';
 
 import styles from './index.module.css';
 
@@ -9,7 +10,8 @@ function Footer() {
   const {
     footer: { copyright },
   } = useThemeConfig();
-  const { colorMode } = useColorMode();
+
+  const serviceUrl = useBaseUrl('/images/service-service.png');
 
   return (
     <footer className={styles['footer']}>
@@ -18,12 +20,18 @@ function Footer() {
         src={useBaseUrl('/images/deepsea-panda.svg')}
         width="100"
       />
-      <img
-        className={styles['footer-img']}
-        style={colorMode === 'dark' ? { filter: 'invert(100%)' } : {}}
-        src={useBaseUrl('/images/service-service.png')}
-        width="200"
-      />
+      <ColorMode>
+        {(colorMode) => {
+          return (
+            <img
+              className={styles['footer-img']}
+              style={colorMode === 'dark' ? { filter: 'invert(100%)' } : {}}
+              src={serviceUrl}
+              width="200"
+            />
+          );
+        }}
+      </ColorMode>
       <div className={styles['supporters']}>
         <img
           className={styles['supporters-img']}

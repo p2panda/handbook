@@ -1,9 +1,9 @@
-import BrowserOnly from '@docusaurus/BrowserOnly';
 import Layout from '@theme/Layout';
 import React from 'react';
 import clsx from 'clsx';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import { useColorMode } from '@docusaurus/theme-common';
+
+import ColorMode from '@site/src/components/ColorMode';
 
 import DeepSeaPanda from '@site/static/images/deepsea-panda.svg';
 import GreenPanda from '@site/static/images/green-panda.svg';
@@ -63,15 +63,21 @@ function Pentagon(props: {
 }
 
 function Drawing(props: { url: string }): JSX.Element {
-  const { colorMode } = useColorMode();
+  const url = useBaseUrl(props.url);
 
   return (
-    <div
-      className={styles['drawing']}
-      style={colorMode === 'dark' ? { filter: 'invert(100%)' } : {}}
-    >
-      <img className={styles['drawing-image']} src={useBaseUrl(props.url)} />
-    </div>
+    <ColorMode>
+      {(colorMode) => {
+        return (
+          <div
+            className={styles['drawing']}
+            style={colorMode === 'dark' ? { filter: 'invert(100%)' } : {}}
+          >
+            <img className={styles['drawing-image']} src={url} />
+          </div>
+        );
+      }}
+    </ColorMode>
   );
 }
 
@@ -84,7 +90,6 @@ function Logo(): JSX.Element {
 }
 
 function Zoo(): JSX.Element {
-  const { colorMode } = useColorMode();
   const backgroundUrl = useBaseUrl('/images/game-background.jpg');
   const backgroundNightUrl = useBaseUrl('/images/game-background-night.jpg');
 
@@ -92,23 +97,26 @@ function Zoo(): JSX.Element {
     <div className={styles['zoo']}>
       <div className={styles['zoo-gameboy']}>
         <p className={styles['zoo-title']}>Zoo Adventures</p>
-        <div
-          className={styles['zoo-inner']}
-          style={{
-            backgroundImage:
-              colorMode === 'dark'
-                ? `url(${backgroundNightUrl})`
-                : `url(${backgroundUrl})`,
+        <ColorMode>
+          {(colorMode) => {
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            const { ZooAdventures } = require('zoo-adventures');
+
+            return (
+              <div
+                className={styles['zoo-inner']}
+                style={{
+                  backgroundImage:
+                    colorMode === 'dark'
+                      ? `url(${backgroundNightUrl})`
+                      : `url(${backgroundUrl})`,
+                }}
+              >
+                <ZooAdventures updateIntervalMs={5000} />
+              </div>
+            );
           }}
-        >
-          <BrowserOnly>
-            {() => {
-              // eslint-disable-next-line @typescript-eslint/no-var-requires
-              const { ZooAdventures } = require('zoo-adventures');
-              return <ZooAdventures updateIntervalMs={5000} />;
-            }}
-          </BrowserOnly>
-        </div>
+        </ColorMode>
         <p className={styles['zoo-about']}>
           Play with the other animals in the zoo. Put 3x in a row to win.{' '}
           <a
