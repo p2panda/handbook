@@ -275,7 +275,7 @@ Invited group members can join a secret group by applying the given `SecretGroup
 Clients can announce themselves on the network by publishing `KeyPackage` documents containing key material which is used by MLS to invite new members into a secret group.
 
 1. Use p2panda `PublicKey` as an unique `Credential` identifier for a secret group member. Use p2panda `PrivateKey` to sign new MLS key packages.
-2. Generate new `KeyPackage` and publish it as an document.
+2. Generate new `KeyPackage` and publish it as a document.
 
 ### Encryption
 
@@ -325,14 +325,14 @@ The Welcome message contains information about who gets added (see `KeyPackageRe
 
 1. During materialisation the node would look at every `SecretGroupCommit`
 2. Check if it's an Add, Remove or Update Commit
-3. If its an Add Commit, it would look into the Welcome message and it's attached `KeyPackageRef` values
+3. If it's an Add Commit, it would look into the Welcome message and it's attached `KeyPackageRef` values
 4. It would store these information in the database and make them queryable
 
 ## Design notes
 
 - It is theoretically possible to remove secrets or even reset all secrets during a new MLS group epoch for special scenarios (for example the group decides to not allow any new members to access previous data). The protocol does not prescribe any integrity of the long term secrets, though the default implementation will keep all secrets for now.
 - `SecretGroupCommit` operations can only be created by one key pair to keep risk of merge conflicts as small as possible (see notes below on "Group admin centralisation")
-- Explain why we encrypt only message values and leak meta data: Node / Client separation
+- Explain why we encrypt only message values and leak metadata: Node / Client separation
 - Mention burner key pairs: https://decentpatterns.xyz/library/disposable-identity/
 - Mention why we sign things multiple times (MLS signatures + p2panda signatures)
 

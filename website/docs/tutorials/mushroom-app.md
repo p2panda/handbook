@@ -12,7 +12,7 @@ This tutorial assumes that you already have experience in using npm, React, Webp
 
 :::
 
-The idea of the application is inspired by [PlantNet](https://plantnet.org): Users can create entries of different mushrooms to create some sort of community-run encyclopedia. If you're around in the forest you can take a picture of a spotted mushroom, give it a GPS position and mark it with the mushroom database entry you _think_ it might be. You can even select multiple mushrooms if you are not sure. The uploaded pictures of all users will show up in some sort of feed.
+The idea of the application is inspired by [PlantNet](https://plantnet.org): Users can create entries of different mushrooms to create some sort of community-run encyclopaedia. If you're around in the forest you can take a picture of a spotted mushroom, give it a GPS position and mark it with the mushroom database entry you _think_ it might be. You can even select multiple mushrooms if you are not sure. The uploaded pictures of all users will show up in some sort of feed.
 
 <ImageFrame
   title="This is how the app looks like"
@@ -23,7 +23,7 @@ Of course this is a very simple mushrooming app and we can think of many cool fe
 
 :::tip Visual identification of mushrooms
 
-All cool polar mushroom animals know that it is not always possible to identify mushrooms based on pictures. There are many other factors as well: The smell, the color of the spores, the surrounding, time of the year, change of color after rain and more! Sometimes you even need a microscope to see the spores - to really be sure.
+All cool polar mushroom animals know that it is not always possible to identify mushrooms based on pictures. There are many other factors as well: The smell, the colour of the spores, the surroundings, time of the year, change of colour after rain and more! Sometimes you even need a microscope to see the spores - to really be sure.
 
 :::
 
@@ -117,7 +117,7 @@ Enough of all of this theory! How does the data now look like for our mushroom a
 
 ### `mushroom` Schema
 
-We want users to make _encyclopedia_ entries about all sorts of mushrooms, similar to a wiki. We keep it simple for now: The `mushroom` schema needs a `title`, a `description`, the `latin` name (because we are real mycologists) and an `edible` flag which indicates if we can eat this mushroom or if it is deadly poisonous.
+We want users to make _encyclopaedia_ entries about all sorts of mushrooms, similar to a wiki. We keep it simple for now: The `mushroom` schema needs a `title`, a `description`, the `latin` name (because we are real mycologists) and an `edible` flag which indicates if we can eat this mushroom or if it is deadly poisonous.
 
 * `title`: String
 * `description`: String
@@ -126,7 +126,7 @@ We want users to make _encyclopedia_ entries about all sorts of mushrooms, simil
 
 ### `mushroom_finding` Schema
 
-Next to the `mushroom` entries we need the `mushroom_finding` feed of the users. They want to upload a picture (as `blob`), define a `lat` and `lon` GPS position and mark which `mushrooms` they think it could have been. The users can select one or many mushrooms by simply just referring to the encyclopedia entries.
+Next to the `mushroom` entries we need the `mushroom_finding` feed of the users. They want to upload a picture (as `blob`), define a `lat` and `lon` GPS position and mark which `mushrooms` they think it could have been. The users can select one or many mushrooms by simply just referring to the encyclopaedia entries.
 
 Relating to the mushroom entries is possible with a _relation list_. This is a special sort of field where we can refer to documents of the same or even another schema, simply by mentioning their identifiers.
 

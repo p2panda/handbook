@@ -105,7 +105,7 @@ only the id of the DELETE operation and no document view should be produced.
 
 ### 2. Reduction
 
-- The second and final step is to reduce the linearlised list of operations into a single key-value map by applying the following rules:
+- The second and final step is to reduce the linearised list of operations into a single key-value map by applying the following rules:
 
   1. Deserialise all fields of the document's CREATE operation to produce a _document view_
   2. If the next operation in the document is an UPDATE operation

@@ -12,11 +12,11 @@ All data can be edited and deleted by everyone by default. For the future it wil
 
 ## Is p2panda decentralised or federated?
 
-It can be both! We thought its good to let the developers, users and communities decide what setting is best for them. In any case, independent on how the users finally run their nodes, they will always be able to talk to each other, regardless of their are hosted locally (decentralised) or shared between many clients (federated).
+It can be both! We thought it's good to let the developers, users and communities decide what setting is best for them. In any case, independent of how the users finally run their nodes, they will always be able to talk to each other, whether they are hosted locally (decentralised) or shared between many clients (federated).
 
 ## Can I upload images, videos, audio with p2panda?
 
-We haven't build a "Blob" (Binary Large Object) feature into p2panda yet, though we're already having many [ideas](https://github.com/p2panda/handbook/labels/Blobs) (think BitTorrent with social and encryption features, materialization of data directly into the file system and serving it via HTTP on nodes). If you already want to use images in your p2panda applications, there is a workaround: Encode the image data as base64 and store it inside the operation as a string.
+We haven't build a "Blob" (Binary Large Object) feature into p2panda yet, though we're already having many [ideas](https://github.com/p2panda/handbook/labels/Blobs) (think BitTorrent with social and encryption features, materialisation of data directly into the file system and serving it via HTTP on nodes). If you already want to use images in your p2panda applications, there is a workaround: Encode the image data as base64 and store it inside the operation as a string.
 
 ## Do you have CRDTs?
 
@@ -44,7 +44,7 @@ If you're looking for expressing relations between different sorts of data, simi
 
 ## Can nodes replicate data with each other?
 
-While we're having a simple replication mechanism already implemented you can use, it is also not very ergonomic yet. Currently you need to manually specify the IP address, author and log id of the Bamboo entries you want to replicate, which is tedious. We're using this currently as a proof-of-concept and will transition to a more intuitive, scaleable and efficient approach using [qp2p](https://github.com/maidsafe/qp2p) based on QUIC.
+While we're having a simple replication mechanism already implemented you can use, it is also not very ergonomic yet. Currently you need to manually specify the IP address, author and log id of the Bamboo entries you want to replicate, which is tedious. We're using this currently as a proof-of-concept and will transition to a more intuitive, scalable and efficient approach using [qp2p](https://github.com/maidsafe/qp2p) based on QUIC.
 
 ## Can nodes already find each other on the network?
 

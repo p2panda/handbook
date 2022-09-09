@@ -81,7 +81,7 @@ Next to the `payload_hash` an Entry also holds the size of the Payload in a fiel
 
 ### What if the Entry got changed?
 
-We can verify now if the Payload itself got changed by comparing the `payload_hash` and `payload_size` - but what if the Entry itself got manipulated? To solve this, every Entry contains a **Signature**! It needs to be generated after the Entry values got set.
+We can verify now if the Payload itself got changed by comparing the `payload_hash` and `payload_size` - but what if the Entry itself got manipulated? To solve this, every Entry contains a **Signature**! It needs to be generated after the Entry values are set.
 
 <ImageFrame
   title="Signing an entry with a private key"
@@ -143,7 +143,7 @@ But again, can we trust the delivery service to not just stamp an arbitrary date
 
 :::tip Icebears philosophical beard
 
-Time on computers is funny (or time in general). How does the computer know what time it is? Usually it got told at one point where it should start counting and from that point on some small quartz crystal is just ticking the time further, hopefully not getting too much out of sync with the clocks of other devices. The computer even has a small battery for that quartz crystal so it can keep on ticking when it is turned off. Computers with internet usually sync themselves regularly to some sort of central time service, to prevent the delay getting too horrible.
+Time on computers is funny (or time in general). How does the computer know what time it is? Usually it just starts counting from one point and from there one some small quartz crystal is just ticking the time further, hopefully not getting too out of sync with the clocks of other devices. The computer even has a small battery for that quartz crystal so it can keep on ticking when it is turned off. Computers connected with the internet usually sync themselves regularly to some sort of central time service, to prevent the delay getting too horrible.
 
 When it gets really important we _want_ to know the date of something, for example when signing a contract digitally! There is a lot of research in [Secure Time-stamping](https://en.wikipedia.org/wiki/Trusted_timestamping) which addresses this problem with computers.
 
@@ -159,7 +159,7 @@ It is also okay to use timestamps in p2p protocols if we really want them. Somet
 
 :::
 
-Bamboo Entries can not solve the problem of _absolute_ time for us as it is simply _not possible_ to do this in a decentralised system, but we can introduce something like a _relative_ time, we can at least proof that an Entry got created _after_ another.
+Bamboo Entries can not solve the problem of _absolute_ time for us as it is simply _not possible_ to do this in a decentralised system, but we can introduce something like a _relative_ time, we can at least prove that an Entry got created _after_ another.
 
 When a new Entry gets created we can point at the previous Entry by calculating the Hash of it and mentioning it in the new Entry. This **Backlink Hash** is stored as the `backlink`. Through this we form some sort of _linked list_ or _chain_ of entries. The first Entry does not contain a `backlink`.
 
@@ -244,7 +244,7 @@ Another feature of Bamboo is that we can not only delete the Entries but also ev
 
 :::tip Math magic
 
-Read about the math behind Skiplinks in the [Bamboo specification](https://github.com/AljoschaMeyer/bamboo#links-and-entry-verification) if you are interested in how it works.
+Read about the maths behind Skiplinks in the [Bamboo specification](https://github.com/AljoschaMeyer/bamboo#links-and-entry-verification) if you are interested in how it works.
 
 If you’re interested in the deeper theory of Binary Linking Schemes, you can also read this great [summary](https://aljoscha-meyer.de/linkingschemes).
 

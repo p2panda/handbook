@@ -124,10 +124,10 @@ Currently schemas prescribe only the `name` and `type` of a field, but later we 
 
 ## Encoding
 
-After we’ve created an operation we usually want to **publish** it by sending it to our node. For this we take the following steps:
+After we’ve created an operation we usually want to **publish** by sending it to our node. For this we take the following steps:
 
 1. Encode the operation
-2. Create an new Bamboo entry and use operation as its payload
+2. Create a new Bamboo entry and use operation as its payload
 3. Sign and encode the entry
 4. Send entry and operation to node
 
@@ -146,8 +146,8 @@ For Operations the [specification](http:///handbook/data-types/operations) presc
 We can see here that Operations are encoded as an array with a couple of fields inside which might already look familiar to us:
 
 1. The first field indicates the **Operation Version**. It helps us to understand what encoding we can expect from the following data when we receive a new Operation from somewhere. It is set to `1` here which is the first version.
-2. The second field indicates the **Operation Action **we already talked about before. `0` stands for CREATE, `1` for UPDATE and `2` for DELETE. In this example we’re looking at a CREATE Operation.
-3. The third field indicates the **Schema Id** we also talked about before. In the example its shortened, but we can imagine that this is where we set what schema this operation wants to fulfil.
+2. The second field indicates the **Operation Action** we already talked about before. `0` stands for CREATE, `1` for UPDATE and `2` for DELETE. In this example we’re looking at a CREATE Operation.
+3. The third field indicates the **Schema Id** we also talked about before. In the example it's shortened, but we can imagine that this is where we set what schema this operation wants to fulfil.
 4. The fourth and last field here are the **Operation Fields** with the actual application data we want to publish.
 
 This Operation Format will be now encoded as CBOR bytes which is a well known and slim encoding format. This is how it would look like (bytes represented as hexadecimal numbers):
@@ -183,7 +183,7 @@ Bamboo Entries _seal_ Operations for us. They are the data type which makes sure
 
 :::
 
-Since we used an Bamboo Entry to get this security and immutability we also receive an unique identifier after signing, encoding and hashing it: The Hash of the Entry becomes our **Operation Id**. It is an unique sequence of numbers which will indicate that we exactly want to refer to _this_ Operation.
+Since we used an Bamboo Entry to get this security and immutability we also receive a unique identifier after signing, encoding and hashing it: The Hash of the Entry becomes our **Operation Id**. It is an unique sequence of numbers which will indicate that we exactly want to refer to _this_ Operation.
 
 <ImageFrame
   title="Process to create an Entry Hash aka Operation Id"
@@ -217,11 +217,11 @@ In p2panda everything can happen, since it is a decentralised system, so we need
   url={require('./assets/two-users-updating-at-the-same-time.png')}
 />
 
-Who was first? That’s hard to tell! Usually we would just say that who has written last to the database will _win_. If Elephant was slightly later sending its change it will say `My name is: “Elephant”`. In p2panda we don’t have that central server though which just _knows_ who arrived later. We have many independent nodes where the updates might arrive differently. On the node of Penguin it might say `My name is: “Elephant”` and on the node of the Elephant it’s `My name is: “Penguin”`, because the foreign updates arrived later due to the networking delays .. This is horrible!
+Who was first? That’s hard to tell! Usually we would just say that who has written last to the database will _win_. If Elephant was slightly later sending its change it would say `My name is: “Elephant”`. In p2panda we don’t have that central server though which just _knows_ who arrived later. We have many independent nodes where the updates might arrive differently. On the node of Penguin it might say `My name is: “Elephant”` and on the node of the Elephant it’s `My name is: “Penguin”`, because the foreign updates arrived later due to the networking delays .. This is horrible!
 
 To fix this problem we need to _know_ what Penguin and Elephant did _see_ when they updated the document. What was their last _point of view_ when they wanted to update something? Maybe the Penguin only saw the original “Panda” profile and applied its changes, but Elephant saw later that Penguin made an update and applied its changes afterwards?
 
-For this we ask the user to also publish a `previous` field inside of every Operation if they want to update or delete a document. Inside this `previous` field they can specify what the latest **Document View** was they knew about.
+For this we ask the user to also publish a `previous` field inside of every Operation if they want to update or delete a document. Inside this `previous` field they can specify what the latest **Document View** was what they knew about.
 
 <ImageFrame
   title="Document Views"
@@ -317,13 +317,13 @@ With these features we made Operations a **Conflict Resistant Data Type (CRDT)**
 
 :::tip Two simple rules to make a CRDT
 
-There is a lot of theory around [CRDTs](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type), but really, its basically these two rules you need to define to get one: How do you order data and what is the rule when something conflicts?
+There is a lot of theory around [CRDTs](https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type), but really, it's basically these two rules you need to define to get one: How do you order data and what is the rule when something conflicts?
 
 :::
 
 :::tip Materialisation
 
-Do you wonder what the cool algorithm is which *reconciles* and *reduces* the operation graph in the way we just described? If you get up in the morning and you are tired, you might be too slow to remember if you need to put your socks or underpants or pants or shirt or pullover on first. With [Topological Sorting](https://en.wikipedia.org/wiki/Topological_sorting) we can sort *Dependency Graphs* in a way where they will tell us what we have to do first before: Your socks are not dependent on anything, you can put them on whenever, but you should put on your underpants before you put on your pants for example! This is exactly what p2panda does: We traverse the operation graph with an Topological Sorting algorithm, bringing all operations into one ordered list, based on their dependencies. Where do we get the dependencies from? The `previous` links of course!
+Do you wonder what the cool algorithm is which *reconciles* and *reduces* the operation graph in the way we just described? If you get up in the morning and you are tired, you might be too slow to remember if you need to put your socks or underpants or pants or shirt or pullover on first. With [Topological Sorting](https://en.wikipedia.org/wiki/Topological_sorting) we can sort *Dependency Graphs* in a way where they will tell us what we have to do first before: Your socks are not dependent on anything, you can put them on whenever, but you should put on your underpants before you put on your pants for example! This is exactly what p2panda does: We traverse the operation graph with a Topological Sorting algorithm, bringing all operations into one ordered list, based on their dependencies. Where do we get the dependencies from? The `previous` links of course!
 
 :::
 

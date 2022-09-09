@@ -28,7 +28,7 @@ Data can grow endlessly which is also a problem in decentralised networks, with 
   url={require('./assets/adventure-game.jpg')}
 />
 
-Storing data _everywhere_ can make software and data more open but it can also be a huge problem for privacy. For this p2panda integrates Messaging Layer Security (MLS) which is a protocol for secure message encryption, even for very large groups.
+Storing data _everywhere_ can make software and data more open but it can also be a huge problem for privacy. For this p2panda integrated Messaging Layer Security (MLS) which is a protocol for secure message encryption, even for very large groups.
 
 Building p2p protocols is complicated and challenging for developers but we want it to be playful and fun. With p2panda it should be possible to focus on building radical local-first software and explore exciting new UX patterns without diving too deep into p2p details.
 
