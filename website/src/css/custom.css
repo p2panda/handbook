@@ -124,6 +124,7 @@
 [data-theme='dark'] .avatar,
 [data-theme='dark'] .card {
   background-color: rgb(36, 37, 38) !important;
+  border-color: transparent !important;
 }
 
 /* Utils */

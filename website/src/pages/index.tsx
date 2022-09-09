@@ -139,15 +139,22 @@ function Title(props: {
   children?: React.ReactNode;
 }): JSX.Element {
   return (
-    <div
-      className={clsx(styles['title'], {
-        [styles['title-right']]: props.right,
-        [styles['title-center']]: props.center,
-      })}
-    >
-      <h1 className={styles['title-heading']}>{props.text}</h1>
-      <p className={styles['title-subheading']}>{props.children}</p>
-    </div>
+    <ColorMode>
+      {(colorMode) => {
+        return (
+          <div
+            className={clsx(styles['title'], {
+              [styles['title-dark']]: colorMode === 'dark',
+              [styles['title-right']]: props.right,
+              [styles['title-center']]: props.center,
+            })}
+          >
+            <h1 className={styles['title-heading']}>{props.text}</h1>
+            <p className={styles['title-subheading']}>{props.children}</p>
+          </div>
+        );
+      }}
+    </ColorMode>
   );
 }
 

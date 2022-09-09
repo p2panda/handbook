@@ -63,6 +63,10 @@
   text-align: left;
 }
 
+.title-dark {
+  color: white !important;
+}
+
 .title-center {
   margin-left: auto;
   margin-right: auto;
