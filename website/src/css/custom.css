@@ -119,6 +119,12 @@
   border: 0 !important;
 }
 
+/* Cards also seem to be broken when switching to dark mode, let's enforce it
+ * here */
+[data-theme='dark'] .card {
+  background-color: rgb(36, 37, 38) !important;
+}
+
 /* Utils */
 
 .truncate {
