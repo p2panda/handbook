@@ -29,6 +29,10 @@ ignore$
 \.ocf$
 \.otf$
 \.pdf$
+\.tsx$
+\.ts$
+\.css$
+\.js$
 \.pem$
 \.png$
 \.psd$
