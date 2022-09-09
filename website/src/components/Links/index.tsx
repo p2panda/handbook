@@ -21,7 +21,7 @@ function LinkCard({ name, url, description }: Link) {
           <div className="button-group button-group--block">
             <Link className="button button--secondary truncate" to={url}>
               {hostname}
-              {pathname}
+              {pathname !== '/' && pathname}
             </Link>
           </div>
         </div>
