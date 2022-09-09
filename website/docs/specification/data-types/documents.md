@@ -40,8 +40,7 @@ A document MUST NOT contain an operation who's `previous` refers to an operation
 
 :::caution Requirement DO4
 
-If a document contains any number of DELETE operations it SHOULD be considered deleted. After this point, new operations
-SHOULD NOT be appended to any point on the document.
+A document MAY contain any number of DELETE operations. Document's which contain one or more DELETE operations no longer produce a materialised view. 
 
 :::
 
@@ -99,7 +98,7 @@ All operations in the graph MUST be sorted exactly once.
 :::caution Requirement D11
 
 If any DELETE operation is visited, materialisation of the document MUST stop immediately. The resulting document view id MUST include
-only the id of the DELETE operation and no document view should be produced.
+only the id of the DELETE operation and a document view SHOULD NOT be produced.
 
 :::
 

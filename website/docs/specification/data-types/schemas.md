@@ -114,12 +114,7 @@ _relation_ fields MAY be self-referential in that their target is of the same sc
   - They are used to validate the format of application specific data
   - All developers can create new application schemas by publishing documents of the `SchemaDefinition` and `SchemaFieldDefinition` system schemas
   - They are published as reusable data schemas and can be used in many applications
-
-:::caution Requirement SC9
-
-- System schemas MAY have unique procedures for [_reduction_][reduction], [_reconciliation_][reconciliation] and _persistence_ of their documents
-
-:::
+  - System schemas may have unique procedures for [_reduction_][reduction], [_reconciliation_][reconciliation] and _persistence_ of their documents
 
 ### Schema ID
 
@@ -142,7 +137,7 @@ _relation_ fields MAY be self-referential in that their target is of the same sc
     - The schema's _document view hash id_
     - Example: `profile_picture__0020c65567ae37efea293e34a9c7d13f8f2bf23dbdc3b5c7b9ab46293111c48fc78b`
 
-:::caution Requirement SC10
+:::caution Requirement SC9
 
 The name string in an application schema which MUST have 1-64 characters, MUST start with a letter and MUST contain only alphanumeric characters and underscores.
 
@@ -157,7 +152,7 @@ The name string in an application schema which MUST have 1-64 characters, MUST s
 - Fields:
   - `name`: string
   - `description`: string
-  - `fields`: a pinned relation list referencing `SchemaFieldDefinition` documents
+  - `fields`: a pinned relation list referencing `schema_field_definition_v1` documents
 
 ### Schema Field Definition
 
@@ -167,7 +162,7 @@ The name string in an application schema which MUST have 1-64 characters, MUST s
   - `name`: string
   - `type`: string
 
-:::caution Requirement SC11
+:::caution Requirement SC10
 
 `schema_field_definition_v1` _type_ field MUST be one of
 
