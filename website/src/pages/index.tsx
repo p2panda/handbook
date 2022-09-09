@@ -46,7 +46,7 @@ function Pentagon(props: {
           <svg width={props.size} height={props.size} viewBox="0 0 100 100">
             <defs>
               <radialGradient cy="55%" id={id}>
-                <stop offset="40%" stopColor={props.color} stopOpacity={0}  />
+                <stop offset="40%" stopColor={props.color} stopOpacity={0} />
                 <stop offset="80%" stopColor={props.color} />
                 <stop offset="100%" stopColor={props.color} stopOpacity={0} />
               </radialGradient>
@@ -86,7 +86,7 @@ function Logo(): JSX.Element {
 function Zoo(): JSX.Element {
   const { colorMode } = useColorMode();
   const backgroundUrl = useBaseUrl('/images/game-background.jpg');
-  const backgroundNightUrl = useBaseUrl('/images/game-background-night.png');
+  const backgroundNightUrl = useBaseUrl('/images/game-background-night.jpg');
 
   return (
     <div className={styles['zoo']}>
@@ -230,7 +230,7 @@ export default function Home(): JSX.Element {
         </Section>
         <img
           className={styles['red-pandas']}
-          src={useBaseUrl('/images/panda-artwork-3.png')}
+          src={useBaseUrl('/images/panda-artwork-2.png')}
           width="500"
         />
       </Layout>

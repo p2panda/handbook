@@ -22,7 +22,7 @@ This led to a group of people interested in realising a protocol for p2p communi
 
 <ImageFrame
   title="Vincent, Andreas and Sophie speaking about decentralised festival protocols at Chaos Communication Congress in 2019"
-  url={require('./assets/ccc-2.png')}
+  url={require('./assets/ccc.jpg')}
 />
 
 In 2021-2022 we've received NGI Pointer funding to bring p2panda to its first official release. Over the last months we focused a lot on a _core_ set of p2panda functionality which is: Data creation, validation and querying with many features on top: Permission, Encryption, Schemas and more. Our main focus was to find a language around the problems we wanted to solve, making many diagrams to understand the structures we were looking for, designing APIs so it is easier for developers to get started with p2panda - and finally implementing them.

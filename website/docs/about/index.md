@@ -40,7 +40,7 @@ The core or p2panda is built in Rust from which we also compile WebAssembly for 
 
 <ImageFrame
   title="This is us during our first intensive workshop week in 2021: Vincent, Sam, Sophie and Andreas!"
-  url={require('./assets/safari-1.jpg')}
+  url={require('./assets/safari.jpg')}
 />
 
 ## Friends
