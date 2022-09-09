@@ -1,8 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import ColorMode from '@site/src/components/ColorMode';
-
 import styles from './index.module.css';
 
 interface Props {
@@ -14,24 +12,18 @@ interface Props {
 
 export default function EmojiBox({ icon, title, children, light }: Props) {
   return (
-    <ColorMode>
-      {() => {
-        return (
-          <div
-            className={clsx('avatar', styles['emoji-box'], {
-              [styles['emoji-box-light']]: light,
-            })}
-          >
-            <div className={clsx('avatar__photo', styles['emoji-box-icon'])}>
-              {icon}
-            </div>
-            <div className="avatar__intro">
-              <div className="avatar__name">{title}</div>
-              <small className="avatar__subtitle">{children}</small>
-            </div>
-          </div>
-        );
-      }}
-    </ColorMode>
+    <div
+      className={clsx('avatar', styles['emoji-box'], {
+        [styles['emoji-box-light']]: light,
+      })}
+    >
+      <div className={clsx('avatar__photo', styles['emoji-box-icon'])}>
+        {icon}
+      </div>
+      <div className="avatar__intro">
+        <div className="avatar__name">{title}</div>
+        <small className="avatar__subtitle">{children}</small>
+      </div>
+    </div>
   );
 }
