@@ -1,5 +1,5 @@
 ---
-title: Entries
+title: Bamboo Entries
 ---
 
 import ImageFrame from '@site/src/components/ImageFrame';
