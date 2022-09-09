@@ -38,3 +38,7 @@ jobs:
         spell_check_this: check-spelling/spell-check-this@prerelease
         post_comment: 0
         experimental_apply_changes_via_bot: 1
+        extra_dictionaries:
+          cspell:html/html.txt
+          cspell:css/css.txt
+          cspell:typescript/typescript.txt
