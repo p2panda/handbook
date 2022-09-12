@@ -56,7 +56,7 @@ A fun exercise could be to try implement `send-to-node` in JavaScript with the [
 
 :::note Why JSON?
 
-p2panda does not use JSON internally, even though `send-to-node` works with `.json` files. It is just the choosen format for this program to create operations. Internally all operations are actually encoded as [CBOR](http://localhost:3000/specification/data-types/operations#encoding-format).
+p2panda does not use JSON internally, even though `send-to-node` works with `.json` files. It is just the choosen format for this program to create operations. Internally all operations are actually encoded as [CBOR](/specification/data-types/operations/#encoding-format).
 
 :::
 
