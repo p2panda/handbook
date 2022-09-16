@@ -95,7 +95,7 @@ An p2panda author is a human or bot who publishes data using p2panda. Authors ma
 
 :::caution Requirement BA4
 
-Bamboo log ids MUST increment monotonically per author.
+Bamboo log ids for any public key MUST increment monotonically by one.
 
 :::
 
