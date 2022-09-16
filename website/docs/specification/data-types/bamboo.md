@@ -93,6 +93,12 @@ An p2panda author is a human or bot who publishes data using p2panda. Authors ma
 - In p2panda every Bamboo log is used to collect a key pair's contributions to one [document][documents].
 - Every log contains up to 2^64 - 1 entries.
 
+:::caution Requirement BA4
+
+Bamboo log ids for any public key MUST increment monotonically by one.
+
+:::
+
 ### Entries
 
 - p2panda uses Bamboo entries to record changes of data while giving us cool features like partial replication, cryptographic integrity and authenticity.
