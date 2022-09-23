@@ -42,7 +42,7 @@ Let's download `aquadoggo`! For this we first download the whole git repository 
 
 ```bash
 # Download git repository
-git clone git@github.com:p2panda/aquadoggo.git
+git clone https://github.com/p2panda/aquadoggo.git
 
 # Enter the folder you've just created
 cd aquadoggo
