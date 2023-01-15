@@ -371,4 +371,4 @@ bc
 
 ## Next up
 
-The Payload of Entries are **Operations** in p2panda. Operations give more features on top of Bamboo, for example _Multi-Writer_ updates for collaboration on the same data across Logs and Authors, _Encryption_ and _Conflict Resistant Data Types_ (CRDTs). Read more about them [next](/learn/operations).
+The Payload of Entries are **Operations** in p2panda. Operations give more features on top of Bamboo, for example _Multi-Writer_ updates for collaboration on the same data across Logs and Authors, _Encryption_ and _Conflict-free Replicated Data Types_ (CRDTs). Read more about them [next](/learn/operations).

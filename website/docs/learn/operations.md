@@ -313,7 +313,7 @@ In our example the Operation Id `C` is higher than the one of Operation Id `B`. 
 
 Is this fair? Since Operation Ids are based on Entry Hashes which are unique it is randomly decided who will win. This is maybe arbitrary but more fair than sorting the winner by timestamp, since you would be able to make up a higher timestamp in a decentralised protocol.
 
-With these features we made Operations a **Conflict Resistant Data Type (CRDT)**. That means: We can make updates on arbitrary documents but never have to worry about merge conflicts which will make the whole system fail. With these two simple rules we can already solve it: 1. Operations are ordered in an Operation Graph based on their `previous` fields 2. Conflicting updates on the same Operation Field are won by the Operation with the higher Operation Id.
+With these features we made Operations a **Conflict-free Replicated Data Type (CRDT)**. That means: We can make updates on arbitrary documents but never have to worry about merge conflicts which will make the whole system fail. With these two simple rules we can already solve it: 1. Operations are ordered in an Operation Graph based on their `previous` fields 2. Conflicting updates on the same Operation Field are won by the Operation with the higher Operation Id.
 
 :::tip Two simple rules to make a CRDT
 
