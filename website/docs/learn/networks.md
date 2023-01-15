@@ -166,7 +166,7 @@ We’ve seen now the relationship between Clients and Nodes. Clients are the _cr
 
 Since Clients only need to talk via GraphQL to a Node they can be easily implemented without much effort. 
 
-We can now imagine all sorts of clients: An [mushrooming app](http://tutorials/mushroom-app), a [computer game](https://github.com/p2panda/zoo-adventures) or a cool [festival tool](https://github.com/p2panda/festival-tool) to set up events. They can run as web applications in the browser or can be implemented as native applications, also running on mobile phones.
+We can now imagine all sorts of clients: An [mushrooming app](/tutorials/mushroom-app), a [computer game](https://github.com/p2panda/zoo-adventures) or a cool [festival tool](https://github.com/p2panda/festival-tool) to set up events. They can run as web applications in the browser or can be implemented as native applications, also running on mobile phones.
 
 But how do we implement a Node? The good news is: There is already one reference implementation called [`aquadoggo`](/tutorials/aquadoggo)and since Nodes are _agnostic_ to the data they process, you probably can just use this one. It gets even better: Nodes can support all sorts of applications as long as they know about the Schema the application needs!
 
