@@ -20,7 +20,7 @@ We haven't build a "Blob" (Binary Large Object) feature into p2panda yet, though
 
 ## Do you have CRDTs?
 
-Yes, p2panda _Operations_ are Conflict-Resistant-Data-Types (CRDTs). The cool thing is you can define any shape of data and p2panda will figure out how to handle merge conflicts automatically.
+Yes, p2panda _Operations_ are Conflict-free Replicated Data Types (CRDTs). The cool thing is you can define any shape of data and p2panda will figure out how to handle merge conflicts automatically.
 
 ## Why is there a "server" in a decentralised protocol?
 
