@@ -2,6 +2,12 @@
 
 > ⚠️ This document is a work in progress and might not contain everything that you expect in a `CONTRIBUTING.md` file. If you already have some questions, comments or need help you can message us directly via https://wald.liebechaos.org.
 
+## Code of Conduct
+
+>  Note: p2panda is a project maintained both by volunteers and people dedicated to it in various organisational forms. While we are working hard to improve the infrastructure, stability and code, please be respectful with the current contributors around this project which dedicate their limited time to make all of this work. ❤️
+
+To create a safe environment for all contributors and members, p2panda is governed by our [Code of Conduct](https://github.com/p2panda/handbook/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [contributors@p2panda.org](mailto:contributors@p2panda.org).
+
 ## How to contribute to the protocol specification?
 
 The p2panda [Handbook](https://github.com/p2panda/handbook) has a [`/specification`](/website/docs/specification) folder containing the official protocol specification formatted as Markdown files. To contribute to the specification for any part of the protocol, the following process takes place:
