@@ -4,7 +4,7 @@
 
 ## How to contribute to the protocol specification?
 
-The p2panda [Handbook](https://github.com/p2panda/handbook) has a [`/specification`](/specification) folder containing the official protocol specification formatted as Markdown files. To contribute to the specification for any part of the protocol, the following process takes place:
+The p2panda [Handbook](https://github.com/p2panda/handbook) has a [`/specification`](/website/docs/specification) folder containing the official protocol specification formatted as Markdown files. To contribute to the specification for any part of the protocol, the following process takes place:
 
 **1. Jam Phase**
 
