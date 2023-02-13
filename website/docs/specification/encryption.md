@@ -331,18 +331,13 @@ The Welcome message contains information about who gets added (see `KeyPackageRe
 ## Design notes
 
 - It is theoretically possible to remove secrets or even reset all secrets during a new MLS group epoch for special scenarios (for example the group decides to not allow any new members to access previous data). The protocol does not prescribe any integrity of the long term secrets, though the default implementation will keep all secrets for now.
-- `SecretGroupCommit` operations can only be created by one key pair to keep risk of merge conflicts as small as possible (see notes below on "Group admin centralisation")
-- Explain why we encrypt only message values and leak metadata: Node / Client separation
+- Explain why we encrypt only message values and leak some metadata: Node / Client separation
 - Mention burner key pairs: https://decentpatterns.xyz/library/disposable-identity/
 - Mention why we sign things multiple times (MLS signatures + p2panda signatures)
+- Group permissions (who is allowed to add / remove members) can be handled with a key group layer on top
 
 ## Potential issues
 
-- Group admin centralisation:
-  - Group starvation when group admin client is not responsive
-  - Group admin can ignore update proposals and lower security of the group
-  - Note: it is theoretically possible to design a multi-writer setting around secret group commits to decentralise group admins but this comes with other problems (eventual consistency gets even harder)
-  - One scenario is to start a new group with the same secrets
 - Clients which are not informed about the latest MLS group epoch could encrypt messages based on outdated secrets. Clients could keep past MLS group states to account for messages encrypted in previous epochs, for example in cases of network partition
 - MLS application messages are generated with an internal ordering which has a certain tolerance. This out-of-order tolerance should be fairly high in p2panda settings
 - `KeyPackage` documents have a `LifeTimeExtension` which is timestamp based, this timestamp can theoretically be ignored in a trustless setting
