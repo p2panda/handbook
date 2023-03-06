@@ -97,6 +97,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: p2panda-js/docs
           destination_dir: lib/p2panda-js
+          keep_files: true
 
   deploy-shirokuma-docs:
     name: Deploy shirokuma API documentation
@@ -128,3 +129,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs
           destination_dir: lib/shirokuma
+          keep_files: true
