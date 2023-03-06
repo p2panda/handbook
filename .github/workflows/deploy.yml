@@ -128,5 +128,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs
-          destination_dir: lib/shirokuma
+          destination_dir: bla/shirokuma
           keep_files: true
