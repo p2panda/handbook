@@ -34,7 +34,6 @@ const sidebars = {
         'specification/APIs/overview',
         'specification/APIs/publishing',
         'specification/APIs/queries',
-        'specification/APIs/replication',
       ],
     },
     {
