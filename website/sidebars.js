@@ -44,6 +44,7 @@ const sidebars = {
         'specification/networking/discovery',
       ],
     },
+    'specification/replication',
     'specification/encoding-data',
     'specification/glossary',
   ],
