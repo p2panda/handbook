@@ -43,7 +43,6 @@ const sidebars = {
       items: [
         'specification/networking/clients-nodes',
         'specification/networking/discovery',
-        'specification/networking/replication-protocol',
       ],
     },
     'specification/encoding-data',
