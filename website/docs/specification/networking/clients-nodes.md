@@ -33,17 +33,17 @@ title: Clients and nodes
   - As a daemon on a user's computer
     - Multiple p2panda clients could talk to one node on the same computer
 - [aquadoggo][aquadoggo] is the reference node implementation
-- Nodes offer a GraphQL API that is used by [clients][queries] and other [nodes][replication] to connect and exchange data
+- Nodes offer a GraphQL API that is used by [clients][queries]
 
 :::caution Requirement NO1
 
-Entries arriving via the [publish][publishing] and [replication][replication] APIs MUST be validated against BA1
+Entries arriving via the [publish][publishing] and replication APIs MUST be validated against BA1
 
 :::
 
 :::caution Requirement NO2
 
-Operations arriving via the [publish][publishing] and [replication][replication] APIs MUST be validated against all OP requirements
+Operations arriving via the [publish][publishing] and replication APIs MUST be validated against all OP requirements
 
 :::
 
@@ -55,7 +55,7 @@ Operations arriving via the [publish][publishing] APIs SHOULD be validated again
 
 :::info Node Validation Behaviour
 
-Although NO1 and NO2 must be fulfilled by a node for all entries arriving via the public APIs, the ablity to perform this validation and the expected behaviour will differ depending on whether the entry arrives via the [publish][publishing] or [replication][replication] APIs. In the case of the former, all requirements should be validated on arrival against existing entries & operations known to this node, and in the case of a validation failure the entry should be rejected. Where entries are arriving via replication, it may not be possible to immediately perform validation because required data may not have arrived at the node yet.
+Although NO1 and NO2 must be fulfilled by a node for all entries arriving via the public APIs, the ablity to perform this validation and the expected behaviour will differ depending on whether the entry arrives via the [publish][publishing] or replication APIs. In the case of the former, all requirements should be validated on arrival against existing entries & operations known to this node, and in the case of a validation failure the entry should be rejected. Where entries are arriving via replication, it may not be possible to immediately perform validation because required data may not have arrived at the node yet.
 
 :::
 
