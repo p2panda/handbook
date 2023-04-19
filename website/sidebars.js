@@ -42,7 +42,7 @@ const sidebars = {
       label: 'Networking',
       items: [
         'specification/networking/clients-nodes',
-        'specification/networking/discovery',
+        'specification/networking/networking',
         'specification/networking/replication-protocol',
       ],
     },
