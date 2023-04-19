@@ -77,7 +77,10 @@ type QueryRoot {
 - A node's GraphQL schema contains both statically defined and dynamically created types.
 - these types may relate to query arguments for handling filtering, ordering and pagination or types present on query responses.
 - dynamically created types always contain the `schema_id` of the schema they are derived from in their name, whereas static types do not.
-- the following is a list of all types which can be found in a node's root GraphQL schema
+- for simple values scalar types are used:
+  - Document fields with the types `Boolean`, `Integer`, `Float` and `String` are represented with the corresponding GraphQL scalar types.
+  - Document fields with the relation types `Relation` / `RelationList` and `PinnedRelation` / `PinnedRelationList` use the type generated for that field's schema.
+- the following is a list of all other generated and static types which can be found in a node's root GraphQL schema.
 
 ### Responses
 
@@ -379,60 +382,6 @@ enum <schema_id>OrderBy {
   # ... potentially more fields
 }
 
-```
-
-- Nodes generate some GraphQL types for every schema that can be queried:
-  1. a type `<schema_id>` that contains fields for document metadata and the associated document view
-  2. a type `<schema_id>Fields` to represent the document view's fields with the actual data contained in the document
-- Document fields with the types `Boolean`, `Integer`, `Float` and `String` are represented with the corresponding GraphQL scalar types.
-- Document fields with the relation types `Relation` / `RelationList` and `PinnedRelation` / `PinnedRelationList` use the type generated for that field's schema.
-
-```graphql
-type <schema_id> {
-  """
-  meta information about the returned document and document view
-  """
-  meta: DocumentMeta,
-
-  """
-  actual data contained in the document view
-  """
-  fields: <schema_id>Fields,
-}
-
-type <schema_id>Fields {
-  """
-  named fields containing the actual, materialised values of this document
-  view. the form is defined by the regarding p2panda schema
-  """
-  <field_name>: <field_type>
-
-  """
-  ... potentially more fields
-  """
-}
-
-type DocumentMeta {
-  """
-  identifier of the returned document
-  """
-  documentId: DocumentId!
-
-  """
-  document view id contained in this response
-  """
-  viewId: DocumentViewId!
-
-  """
-  this field is `true` if this document has been deleted
-  """
-  deleted: Boolean!
-
-  """
-  this field is `true` if this document view has been updated at least once
-  """
-  edited: Boolean!
-}
 ```
 
 [aquadoggo]: https://github.com/p2panda/aquadoggo
