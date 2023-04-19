@@ -36,6 +36,7 @@ const sidebars = {
         'specification/APIs/publishing',
         'specification/APIs/queries',
         'specification/APIs/replication',
+        'specification/APIs/blob-http',
       ],
     },
     {
