@@ -118,9 +118,11 @@ Try this following query by entering it in the left textarea and clicking the _P
 ```graphql
 {
   all_schema_definition_v1 {
-    fields {
-      name
-      description
+    documents {
+      fields {
+        name
+        description
+      }
     }
   }
 }

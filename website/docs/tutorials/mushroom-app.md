@@ -539,15 +539,17 @@ type MushroomResponse = {
 async function getAllMushrooms(): Promise<MushroomResponse[]> {
   const query = gql`{
     mushrooms: all_${MUSHROOM_SCHEMA_ID} {
-      meta {
-        documentId
-        viewId
-      }
-      fields {
-        description
-        edible
-        latin
-        title
+      documents {
+        meta {
+          documentId
+          viewId
+        }
+        fields {
+          description
+          edible
+          latin
+          title
+        }
       }
     }
   }`;
@@ -575,15 +577,17 @@ async function getMushroom(
 ): Promise<MushroomResponse> {
   const query = gql`{
     mushroom: ${MUSHROOM_SCHEMA_ID}(id: "${documentId}") {
-      meta {
-        documentId
-        viewId
-      }
-      fields {
-        description
-        edible
-        latin
-        title
+      documents {
+        meta {
+          documentId
+          viewId
+        }
+        fields {
+          description
+          edible
+          latin
+          title
+        }
       }
     }
   }`;

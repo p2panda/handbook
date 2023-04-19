@@ -22,11 +22,13 @@ Reading from them is fairly easy: We just need to send a GraphQL query like that
 ```graphql
 {
   all_mushroom_0020... {
-    fields {
-      title
-      edible
-      description
-      latin
+    documents {
+      fields {
+        title
+        edible
+        description
+        latin
+      }
     }
   }
 }
