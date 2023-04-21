@@ -368,7 +368,8 @@ input <schema_id>Filter {
 
 ### Ordering
 
-```graqhql
+```graphql
+
 # Possible ordering direction for collection queries.
 enum OrderDirection {
   ASC
