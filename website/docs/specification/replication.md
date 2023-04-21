@@ -25,9 +25,9 @@ title: Replication
 - The goal of replication is two peers converging to the same state, over data they are mutually interested in. This involves some sort of announcement mechanisms which aids finding peers who are interested in the same data.
 - Data in a p2panda network can be categorised in form of schemas. Schemas are dedicated to support specific applications. A node expresses its support of an application by supporting the required schemas, trying to actively find and gather all new data from them.
 - Before two peers begin the replication process they must first identify other peers which may hold data they are interested in.
-- To do this they publish an `Announce` message which contains the schemas that they support. Doing this is like saying "I am interested in receiving and sharing any data associated with these [schema][schema]".
+- To do this they publish an `Announce` message which contains the schemas that they support. Doing this is like saying "I am interested in receiving and sharing any data associated with these [schemas][schemas]".
 - Throughout this document we introduce two exemplary peers, Peer A and Peer B, which replicate with each other:
-    - Peer A has a set A of [documents][documents] of [schema][schema] S
+    - Peer A has a set A of [documents][documents] of [schemas][schemas] S
     - Peer B has another, diverging set B of documents of schema S
     - Peer A announces they are interested in documents of schema S by publishing an `Announce` message
     - Peer B eventually receives the `Announce` message from Peer A, comparing it to its own interest
@@ -43,13 +43,13 @@ title: Replication
 
 `version` is the version of the replication protocol the peer supports, all following messages and mechanisms are related to that version. The first version is `1`. 
 `timestamp` represents the UNIX timestamp of the moment the announcement message has been created. Strictly speaking it does not need to be a real timestamp but MUST always be larger than the previously published one.
-`schema_id[]` is a list of [schema][schema] ids the peer is announcing its interest in.
+`schema_id[]` is a list of [schemas][schemas] ids the peer is announcing its interest in.
 
 - Every peer is represented by exactly only one announcement state. On arrival of a new `Announce` message the previous state gets replaced with the latest one.
 - To understand which `Announce` message is the latest, the receiving peer compares the new `timestamp` with the current one. If an `Announce` message arrived with a smaller or equal `timestamp` it gets ignored, if it is larger the new state replaces the old one.
 - Through this peers can safely broadcast announcements while still making sure that the order is preserved, even when messages arrive out-of-order or too late.
-- Peers can "unannounce" their interest in certain data by removing the [schema][schema] id in the new announcement messages. They can remove all announcements by simply sending an announcement message without any [schema][schema] ids.
-- In the future this message can also include additional parameters, where data can be included or excluded based on the public key of an author or a certain sub-set of the data based on [documents][documents] ids, even specific requirements like text searches are imaginable ("I'm interested in data containing the word x in [schema][schema] S"), similar to the filters of the current [documents][documents] GraphQL API.
+- Peers can "unannounce" their interest in certain data by removing the [schemas][schemas] id in the new announcement messages. They can remove all announcements by simply sending an announcement message without any [schemas][schemas] ids.
+- In the future this message can also include additional parameters, where data can be included or excluded based on the public key of an author or a certain sub-set of the data based on [documents][documents] ids, even specific requirements like text searches are imaginable ("I'm interested in data containing the word x in [schemas][schemas] S"), similar to the filters of the current [documents][documents] GraphQL API.
 
 ## 2. Replication
 
@@ -78,12 +78,12 @@ title: Replication
 `session_id` is an identifier used throughout the replication session to identify messages for this session. This helps the peers to connect the messages to the right session, especially when multiple sessions take place at the same time with the same peer. The session id starts with `0` and is incremented by `1` for every session and every peer. Session IDs can be reset after enough time of inactivity between two peers and usually don't need to be persisted.
 `schema_id[]` allows us to identify the range of [documents][documents] we are interested in synchronizing (ie. all [documents][documents] associated with this set of schemas).
 
-- Every item in this list needs to be contained in the latest announcement state. If one [schema][schema] id inside the `SyncRequest` message of Peer B is not part of the announcement of Peer A, the request gets ignored.
+- Every item in this list needs to be contained in the latest announcement state. If one [schemas][schemas] id inside the `SyncRequest` message of Peer B is not part of the announcement of Peer A, the request gets ignored.
 
 ### 2.1. Identifying divergent state
 
-- If we announced this [schema][schema] then we move onto identifying any divergent state, this involves the following steps:
-    - Calculate tuples of `(PublicKey, LogId, SeqNum)` for _all authors who made contributions to any document associated with the [schema][schema] we are synchronizing_. 
+- If we announced this [schemas][schemas] then we move onto identifying any divergent state, this involves the following steps:
+    - Calculate tuples of `(PublicKey, LogId, SeqNum)` for _all authors who made contributions to any document associated with the [schemas][schemas] we are synchronizing_. 
     - Sort this resulting list in lexical order (from here on we will refer to this sorted list as the sync range).
 - In this step we want to efficiently identify all data which one peer may hold which the other does not yet have. This is a two way process, where ultimately both peers may need something from the other.
 - With this range we now want to identify any divergent state between peers:
@@ -252,4 +252,4 @@ SyncDone live_mode=false
 [bamboo]: /specification/data-types/bamboo
 [documents]: /specification/data-types/documents
 [networking]: /specification/networking
-[schema]: /specification/data-types/schema
+[schemas]: /specification/data-types/schemas
