@@ -39,7 +39,7 @@ query nextArgs(
     - The entry adheres to the [bamboo specification][bamboo] and has a valid signature and log integrity
     - The operation adheres to the [operation specification][operations]
     - The operation is linked to the entry with a correct payload hash and size
-  - The node should persist the entry and operation and make it available to other nodes via [replication][replication]
+  - The node should persist the entry and operation and make it available to other nodes for replication
   - The node may [materialise][reduction] the document this new operation belongs to, resulting in a new document view
 - Returns entry arguments required for publishing the next entry for the same document, similar to `nextArgs`
 - Returns an error
@@ -99,5 +99,4 @@ type NextArguments {
 [operations]: /specification/data-types/operations
 [pagination-specification]: https://graphql.org/learn/pagination/#pagination-and-edges
 [reduction]: /specification/data-types/documents#reduction
-[replication]: /specification/APIs/replication
 [self-referential-relation]: /specification/data-types/schemas#relation-fields

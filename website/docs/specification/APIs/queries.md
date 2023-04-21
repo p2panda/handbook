@@ -264,5 +264,4 @@ type <schema_id>PageEdge {
 [operations]: /specification/data-types/operations
 [pagination-specification]: https://graphql.org/learn/pagination/#pagination-and-edges
 [reduction]: /specification/data-types/documents#reduction
-[replication]: /specification/APIs/replication
 [self-referential-relation]: /specification/data-types/schemas#relation-fields

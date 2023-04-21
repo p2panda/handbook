@@ -34,7 +34,6 @@ const sidebars = {
         'specification/APIs/overview',
         'specification/APIs/publishing',
         'specification/APIs/queries',
-        'specification/APIs/replication',
       ],
     },
     {
@@ -43,9 +42,9 @@ const sidebars = {
       items: [
         'specification/networking/clients-nodes',
         'specification/networking/networking',
-        'specification/networking/replication-protocol',
       ],
     },
+    'specification/replication',
     'specification/encoding-data',
     'specification/glossary',
   ],
