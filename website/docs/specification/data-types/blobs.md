@@ -3,7 +3,7 @@ id: blobs
 title: Blobs
 ---
 
-The blob specification describes system schema and validation conditions used when publishing binary application data. Blobs require their own materialization logic and these system schema allow a node to distinguish blob documents from other application data and behave accordingly. Conceptually, blobs can be considered to be "attachments" on other documents. It is not intended that blobs alone serve as a general purpose content delivery system. We expect blobs to be attached to other documents via relation fields, replication and materialization logic can be optimized based on this assumption. See the [blob http specification][@TODO] to read how blobs are materialized and served on a node.
+The blob specification describes system [schemas][schemas] and validation conditions used when publishing binary application data. Blobs require their own materialization logic and these system [schemas][schemas] allow a node to distinguish blob [documents][documents] from other application data and behave accordingly. Conceptually, blobs can be considered to be "attachments" on other [documents][documents]. It is not intended that blobs alone serve as a general purpose content delivery system. We expect blobs to be attached to other [documents][documents] via relation fields, replication and materialization logic can be optimized based on this assumption. See the [blob http specification][blob-http] to read how blobs are materialized and served on a node.
 
 ## System schemas
 
@@ -35,9 +35,13 @@ The blob specification describes system schema and validation conditions used wh
 ## Notes on Storage
 
 - `blob_v1` and `blob_piece_v1` data is persisted on a node
-- materialization logic differs from other documents, see the [blob http specification][@TODO] to read more 
+- materialization logic differs from other documents, see the [blob http specification][blob-http] to read more 
 
 ## Notes on Replication
 
 - Nodes can choose to ignore blobs when they exceed certain minimum or maximum length requirements or have unsupported mime types
 - Nodes can choose to only replicate blob pieces when there is at least one relation to the blob itself from other documents
+
+[schemas]: /specification/data-types/schemas
+[documents]: /specification/data-types/documents
+[blob-http]: /specification/APIs/blob-http
