@@ -23,6 +23,7 @@ const sidebars = {
         'specification/data-types/schemas',
         'specification/data-types/documents',
         'specification/data-types/document-views',
+        'specification/data-types/blobs',
       ],
     },
     'specification/authorisation',
@@ -34,6 +35,7 @@ const sidebars = {
         'specification/APIs/overview',
         'specification/APIs/publishing',
         'specification/APIs/queries',
+        'specification/APIs/blob-http',
       ],
     },
     {
