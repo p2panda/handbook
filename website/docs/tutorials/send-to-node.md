@@ -1,15 +1,15 @@
 ---
-title: "Tutorial: Create a schema"
+title: 'Tutorial: Create a schema'
 ---
 
 In this tutorial we want to register a new schema on a p2panda node and create our first document with it! We will use the [`send-to-node`](https://github.com/p2panda/send-to-node) command line tool and [`aquadoggo`](https://github.com/p2panda/aquadoggo) node for this.
 
 ## What do I need?
 
-* Rust
-* Editor
-* Terminal
-* Browser
+- Rust
+- Editor
+- Terminal
+- Browser
 
 :::info Never worked with Rust before?
 
@@ -106,7 +106,7 @@ Timestamps in p2p applications are interesting. Check out the [Entry](/learn/ent
 
 :::
 
-To do this we need to send three operations: 
+To do this we need to send three operations:
 
 1. One operation creating the `message` field
 2. One operation creating the `timestamp` field
@@ -172,8 +172,8 @@ You will see later that there are other schema ids as well, and by creating a `c
 
 The last and fourth field is probably the most interesting one, it contains the actual data we want to send: The operation _fields_ with all our _values_! You see, it is a simple key-value map where we're setting two fields:
 
-* `name` is set to `message`
-* `type` is set to `str`
+- `name` is set to `message`
+- `type` is set to `str`
 
 First of all, where does `name` and `type` come from? It comes from the defined _schema id_ `schema_field_definition_v1` which is a system schema _requiring_ us to fill out these fields by specification: Every schema field _needs_ a `name` and a `type`.
 
@@ -238,7 +238,7 @@ Let's remember this operation id for now, we need it later. Ah, of course its to
 
 :::info Sensitive data
 
-Private keys are sensitive information which should never leave your computer, usually you want to keep them somewhere in a well protected place. For this tutorial it may not be that important though, you could delete that file again and generate a new one if you want. If you keep the file `send-to-node` will re-use it next time which is cool. 
+Private keys are sensitive information which should never leave your computer, usually you want to keep them somewhere in a well protected place. For this tutorial it may not be that important though, you could delete that file again and generate a new one if you want. If you keep the file `send-to-node` will re-use it next time which is cool.
 
 By the way, in p2panda it is important to have [multiple keys](/specification/data-types/key-pairs) for different applications, purposes or devices.
 
@@ -251,12 +251,14 @@ We've created a new field now, so we can also directly inspect it via the GraphQ
 ```
 {
   all_schema_field_definition_v1 {
-    meta {
-      documentId
-    }
-    fields {
-      name
-      type
+    documents {
+      meta {
+        documentId
+      }
+      fields {
+        name
+        type
+      }
     }
   }
 }
@@ -368,9 +370,11 @@ We can even query that schema now, you just need to insert your schema id before
 ```
 {
   all_<insert your schema id here> {
-    fields {
-      message
-      timestamp
+    documents {
+      fields {
+        message
+        timestamp
+      }
     }
   }
 }
@@ -453,13 +457,15 @@ Again, the GraphQL playground can help us here. We can simply just query all cha
 ```
 {
   all_<insert your schema id here> {
-    meta {
-      documentId
-      viewId
-    }
-    fields {
-      message
-      timestamp
+    documents {
+      meta {
+        documentId
+        viewId
+      }
+      fields {
+        message
+        timestamp
+      }
     }
   }
 }
@@ -490,12 +496,7 @@ Last but not least we want to delete our chat message, just to also learn how to
 This is our last JSON file named `006-delete-message.json`:
 
 ```json
-[
-  1,
-  2,
-  "<insert your schema id here>",
-  ["<insert your last view id here>"]
-]
+[1, 2, "<insert your schema id here>", ["<insert your last view id here>"]]
 ```
 
 Woah, no _fields_? Yes, we do not need them when we delete a document. Also you may have noticed that the _action_ field is now set to `2` to indicate that this is a DELETE operation.
