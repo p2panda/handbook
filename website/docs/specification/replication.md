@@ -5,16 +5,16 @@ title: Replication
 
 ## Introduction
 
-- A core data type of p2panda are [bamboo][bamboo] append-only logs which contain sequences of application events. We build multi-writer [documents][documents] on top of these logs. Through the append-only nature of these data types it  can design an efficient replication protocol.
-- These are very useful in a p2p setting for achieving eventual consistency of data between peers on the network. Remotely connected peers can perform a simple log-height negotiation and then exchange only the data the other peer is missing.
+- A core data type of p2panda are [bamboo][bamboo] append-only logs which contain sequences of application events. We build multi-writer [documents][documents] on top of these logs.
+- Append-only logs are very useful in a p2p setting for achieving eventual consistency of data between peers on the network. Remotely connected peers can perform a simple log-height negotiation and then exchange only the data the other peer is missing.
 - This document specifies how p2panda implements and expands on this replication protocol, including an announcement layer and efficient synchronization of multiple logs.
 
-### Scope
+### Assumptions
 
 - This document makes a number of assumptions on subjects outside of it's scope. These include:
     - Discovery: it is assumed peers can discover the addresses of other peers on their network.
     - Connectivity: it is assumed that peers can establish reliable, ordered and bi-directional transport channels
-- p2panda uses the `libp2p` framework for discovery and other p2p networking mechanisms and QUIC for transport. Further details are given in the Network Specification of p2panda.
+- p2panda uses the `libp2p` framework for discovery and other p2p networking mechanisms with QUIC as the transport. Further details are given in the [networking][networking] section.
 
 ## Encoding
 
@@ -22,17 +22,17 @@ title: Replication
 
 ## 1. Announcement
 
-- The goal of replication is two peers converging to the same data state they are both interested in. This involves some sort of announcement mechanisms which aids finding peers being interested in the same data.
+- The goal of replication is two peers converging to the same state, over data they are mutually interested in. This involves some sort of announcement mechanisms which aids finding peers who are interested in the same data.
 - Data in a p2panda network can be categorised in form of schemas. Schemas are dedicated to support specific applications. A node expresses its support of an application by supporting the required schemas, trying to actively find and gather all new data from them.
 - Before two peers begin the replication process they must first identify other peers which may hold data they are interested in.
 - To do this they publish an `Announce` message which contains the schemas that they support. Doing this is like saying "I am interested in receiving and sharing any data associated with these [schema][schema]".
 - Throughout this document we introduce two exemplary peers, Peer A and Peer B, which replicate with each other:
     - Peer A has a set A of [documents][documents] of [schema][schema] S
-    - Peer B has another, diverging set B of [documents][documents] of [schema][schema] S
-    - Peer A announces they are interested in [documents][documents] of [schema][schema] S by publishing an `Announce` message
+    - Peer B has another, diverging set B of documents of schema S
+    - Peer A announces they are interested in documents of schema S by publishing an `Announce` message
     - Peer B eventually receives the `Announce` message from Peer A, comparing it to its own interest
 - Peers can actively _push_ data to other peers who announced their interest
-- Peers do not need to publish `Announce` messages to the network to participate in replication. They can still actively monitor announcements on the network and establish connection as soon as they see fit
+- Peers do not need to publish `Announce` messages to the network to participate in replication. They can still actively monitor announcements on the network and establish connection as soon as they see fit.
 - The mechanism for sending and receiving announcement messages in the network is out of scope of this document, a very suitable pattern is publish-subscribe.
 
 ### `Announce` message
@@ -54,7 +54,9 @@ title: Replication
 ## 2. Replication
 
 - Replication is the process of two peers synchronizing the data they hold locally, eventually arriving at the state where both peers hold the same data.
-- In p2panda this mechanism is initiated by a `SyncRequest` message and is then followed by two distinct replication phases: 1. Identification of the diverging state and 2. Exchange of data.
+- In p2panda this mechanism is initiated by a `SyncRequest` message and is then followed by two distinct replication phases: 
+    1. Identification of the diverging state and.. 
+    2. Exchange of data.
 - After learning about the other peers interests through the `Announce` message, Peer B can initiate replication with Peer A by sending a message to initiate replication. This replication session can concern a sub-set of the announced schemas.
 - Over time many replication session can take place following one announcement, individually concerning different sub-sets of the announcement.
 - Peer A and Peer B can have multiple sync sessions at the same time.
@@ -84,18 +86,18 @@ title: Replication
     - Calculate tuples of `(PublicKey, LogId, SeqNum)` for _all authors who made contributions to any document associated with the [schema][schema] we are synchronizing_. 
     - Sort this resulting list in lexical order (from here on we will refer to this sorted list as the sync range).
 - In this step we want to efficiently identify all data which one peer may hold which the other does not yet have. This is a two way process, where ultimately both peers may need something from the other.
-- With this range we can now want to identify any divergent state between peers:
+- With this range we now want to identify any divergent state between peers:
     - Missing logs
     - Logs with more entries / higher sequence number
 - The naive way of achieving this would be for both peers to send the complete range to each other. They would then be able to calculate locally any state that diverged. This would result in unbounded lists of data being continually shared across the network, and has been proven in other p2p protocols to be a highly inefficient pattern.
-- p2panda relies on a messaging protocol called "range-based set reconciliation" to efficiently identify sub-ranges within our range which differ between peers.
+- p2panda employs a messaging protocol called "range-based set reconciliation" to efficiently identify sub-ranges within our sync range which differ between peers.
 
 #### Range-based set reconciliation
 
 Thesis proposing the protocol: https://github.com/AljoschaMeyer/master_thesis
 Protocol implementation in TypeScript: https://github.com/earthstar-project/range-reconcile
 
-- The `range-reconcile` implementation p2panda makes use of a number of requirements we satisfy in this specification, these are:
+- The `range-reconcile` implementation p2panda makes use of has a number of requirements we satisfy in this specification, these are:
     - Deterministically sorted range of items to be synced
     - Encoding format for messages
     - Lifting monoid
@@ -191,7 +193,7 @@ Protocol implementation in TypeScript: https://github.com/earthstar-project/rang
 
 - On receiving an entry the remote peer should perform all expected validation checks of the contained data.
     - Next to the already specified validation checks for Bamboo Entries and p2panda Operations we need to additionally check:
-    - Is the data related to what was requested
+        - Is the data related to what was requested
 
 #### Finalisation
 
@@ -209,6 +211,8 @@ Protocol implementation in TypeScript: https://github.com/earthstar-project/rang
 ]
 ```
 
+### Live Mode
+
 Two peers talking to each other for the first time, first starting with set reconciliation, replicating all data and then after finishing this upgrading to live mode. At one point (for example because the routing algorithm decided to change peers) we can close that communication as well by sending a `SyncDone` message again, but with `live_mode` set to false.
 
 ```
@@ -220,7 +224,7 @@ SyncDone live_mode=true
 SyncDone live_mode=false
 ```
 
-Two peers taling to each other, but opting out of live mode straight away, only replicating once over set reconciliation.
+Two peers talking to each other, but opting out of live mode straight away, only replicate once over set reconciliation.
 
 ```
 SyncRequest
@@ -229,18 +233,11 @@ SyncRequest
 SyncDone live_mode=false
 ```
 
-### Live Mode
-
-- Peers can skip set reconciliation and directly send `Entry` messages after initiating the replication session. Set reconciliation can be seen as an optimization.
-- This is especially interesting if peers are interested in continuing exchanging data after the first replication session. They can "optimistically" send new data without asking if the other peer already has it.
-- Live mode is always bi-directional, meaning that both peers can send their latest data to each other
-- Live mode can be finished by sending another `SyncDone` message, where the `live_mode` flag is set to `false`
-
 ### Naive Mode
 
 - If for any reason it is un-desireable for a node implementation to support the recommended replication method using Set Reconciliation, then they can still participate in the network by supporting only naive replication by sending a `Have` message directly after receiving a `SyncRequest` message.
 - Naive mode should be announced in the peers `Announce` message.
-- A `Have` message should contain a set of _all public key, log id, seq num tuples the peer holds for the requested `SyncRange`. 
+- A `Have` message should contain a set of _all_ public key, log id, seq num tuples the peer holds for the requested `SyncRange`. 
 
 #### `Have` message
 
@@ -254,4 +251,5 @@ SyncDone live_mode=false
 
 [bamboo]: /specification/data-types/bamboo
 [documents]: /specification/data-types/documents
+[networking]: /specification/networking
 [schema]: /specification/data-types/schema
