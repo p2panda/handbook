@@ -142,11 +142,12 @@ Still, this is already doing a lot! With this query we asked our `aquadoggo` if 
 
 You can see, this is already how we can interact with the node at any time, we can simply just write queries in the playground using our browser! When building a p2panda client you do nothing else: The client sends GraphQL queries to the node and handles the JSON responses! If you're curious now on how to build a client you can check out this [how to build a client tutorial](/tutorials/mushroom-app).
 
-There are a couple of more queries you can find when you click on the _Docs_ tab in the right sidebar. Next to the `all_schema_definition_v1` query you find others, for example `all_schema_field_definition_v1` or `entryByHash` etc. Later you will find more queries here you created yourself by introducing new schemas to the node!
+There are a couple of more queries you can find when you click on the _Docs_ tab in the right sidebar. Next to the `all_schema_definition_v1` query you find others, for example
+`all_schema_field_definition_v1` or `schema_definition_v1` etc.... Later you will find more queries here you created yourself by introducing new schemas to the node!
 
 :::note What are all these queries?
 
-`entriesNewerThanSeqNum`, `entryByLogIdAndSeqNum` and `entryByHash` are currently all required to [replicate](/specification/APIs/replication) data from one node to another ("Replication API"), these will mostly be used by other nodes. The other queries serve to find out which schemas exist, they will be used by [clients](https://p2panda.org/specification/APIs/queries) ("Client API"). Surely there will be more queries coming in the future.
+These queries serve to find out which schemas exist, they will be used by [clients](https://p2panda.org/specification/APIs/queries) ("Client API"). Surely there will be more queries coming in the future.
 
 :::
 

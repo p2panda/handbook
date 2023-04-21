@@ -156,7 +156,7 @@ Replication makes sure that data spreads across the decentralised network. This 
 
 :::tip What replication protocol do we use?
 
-You can ask a Node via GraphQL what they know about and then again query the actual Entries and Operations you need. This allows developers to build their own _replication protocols_ on top of the GraphQL API, depending on the needs of their Nodes! p2panda recommends and implements some very common [replication protocols](/specification/networking/replication-protocol): For example if you just want to have _all_ data, or from a specific _schema_, or everything of the users you follow.
+@TODO
 
 :::
 
