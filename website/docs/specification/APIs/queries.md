@@ -82,6 +82,39 @@ type QueryRoot {
   - Document fields with the relation types `Relation` / `RelationList` and `PinnedRelation` / `PinnedRelationList` use the type generated for that field's schema.
 - the following is a list of all other generated and static types which can be found in a node's root GraphQL schema.
 
+### Scalars
+
+```graphql
+# cursor used in paginated queries.
+scalar Cursor
+
+# id of a p2panda document.
+scalar DocumentId
+
+# document view id of a p2panda document. Refers to a specific point in a documents history
+# and can be used to deterministically reconstruct it's state at that time.
+scalar DocumentViewId
+
+# signed bamboo entry, encoded as a hexadecimal string.
+scalar EncodedEntry
+
+# entry payload and p2panda operation, CBOR bytes encoded as a hexadecimal string.
+scalar EncodedOperation
+
+# hash of a signed bamboo entry.
+scalar EntryHash
+
+# log id of a bamboo entry.
+scalar LogId
+
+# public key that signed the entry.
+scalar PublicKey
+
+# sequence number of an entry.
+scalar SeqNum
+
+```
+
 ### Responses
 
 ```graphql
