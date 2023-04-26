@@ -33,6 +33,11 @@ function Footer() {
         }}
       </ColorMode>
       <div className={styles['supporters']}>
+      <img
+          className={styles['supporters-img']}
+          src={useBaseUrl('/images/nlnet-logo.svg')}
+          width="140"
+        />
         <img
           className={styles['supporters-img']}
           src={useBaseUrl('/images/ngi-logo.png')}
