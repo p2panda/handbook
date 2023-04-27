@@ -22,9 +22,9 @@ The blob specification describes system [schemas][schemas] and validation condit
     - This can be done by collecting all claimed pieces and calculating total length
     - OR only validating that each `blob_piece_v1` is the correct length and then validating the `length` value by checking the number of items in the `pieces` list
 - The claimed `mime_type` should be validated
-- Validating blob pieces differs if they arrive through `publish` and via `replication`
-    - `publish`: all blob pieces should already exist before publishing the `blob`
-    - `replication`: a `blob` must exist with a relation to the `pieces` before the pieces are accepted. This means we don't accept arbitrary blob data until we know the blob hash id, as we may want to choose to lazy load a blob's actual data.
+- Validating blob pieces differs if they arrive through the Client API or Replication API
+    - Client API: all blob pieces should already exist before publishing the `blob`
+    - Replication API: a `blob` must exist with a relation to the `pieces` before the pieces are accepted. This means we don't accept arbitrary blob data until we know the blob hash id, as we may want to choose to lazy load a blob's actual data.
 - If a validation step fails, an error should be returned to the client and _all_ related `blob_piece_v1` and the `blob_v1` entries should be deleted
 
 ### Blob Piece
