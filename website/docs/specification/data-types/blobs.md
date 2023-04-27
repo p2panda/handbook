@@ -22,7 +22,7 @@ We designed blobs to be as generic as possible, giving developers the option to 
 
 :::
 
-#### Validation
+:::caution Requirements
 
 - The claimed `length` of a `blob_v1` document should be validated on publishing
     - This can be done by collecting all claimed pieces and calculating total length
@@ -33,6 +33,8 @@ We designed blobs to be as generic as possible, giving developers the option to 
     - Replication API: a `blob` must exist with a relation to the `pieces` before the pieces are accepted. This means we don't accept arbitrary blob data until we know the blob hash id, as we may want to choose to lazy load a blob's actual data.
 - If a validation step fails, an error should be returned to the client and _all_ related `blob_piece_v1` and the `blob_v1` entries should be deleted
 
+:::
+
 ### Blob Piece
 
 - Schema id: `blob_piece_v1`
@@ -40,9 +42,11 @@ We designed blobs to be as generic as possible, giving developers the option to 
 - Fields:
     - `data`: bytes contained in this blob piece (bytes)
 
-#### Validation
+:::caution Requirements
 
 - All blob pieces must be of maximum 256KB size
+
+:::
 
 ## Notes on Storage
 
