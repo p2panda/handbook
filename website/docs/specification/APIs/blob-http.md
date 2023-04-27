@@ -7,7 +7,7 @@ This document describes how Blobs are materialized to the filesystem and served 
 
 ## Materialization
 
-- When a `blob_v1` document and all it's `blob_piece_v1` pieces are present on a node it can be materialized and served to client applications over a `http` endpoint
+- When a `blob_v1` document and all it's `blob_piece_v1` pieces are present on a node it can be materialized and served to client applications over a HTTP endpoint
 - Unlike other documents which are materialized into tables in a database, blobs are materialized directly on the filesystem
 - Even if all pieces are present, a blob is only materialized when it is referenced in a relation field by another document
 - As these relations can be either _pinned_ or _unpinned_ we support materializing a blob by both it's document id and document view id
