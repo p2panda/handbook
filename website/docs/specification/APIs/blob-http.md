@@ -3,7 +3,7 @@ id: blob-http
 title: Blob HTTP service
 ---
 
-This document describes how `blobs` are materialized to the filesystem and served from a node over HTTP endpoints.
+This document describes how Blobs are materialized to the filesystem and served from a node over HTTP endpoints.
 
 ## Materialization
 
