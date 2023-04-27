@@ -16,6 +16,12 @@ The blob specification describes system [schemas][schemas] and validation condit
     - `mime_type` IANA mime-type (string)
     - `pieces`: list of pieces which make up this blob (pinned relation list of `blob_piece_v1`)
 
+:::tip Why no file name or path?
+
+We designed blobs to be as generic as possible, giving developers the option to come up with their own application schemas on top of them. Information like a file name or path is _optional_ meta data. If you need it, you can for example create a schema which contains a `file_name`, `path` field and a relation to a `blob_v1` document. This can be interesting for building an application which materializes files into a specific folder structure, similar to BitTorrent.
+
+:::
+
 #### Validation
 
 - The claimed `length` of a `blob_v1` document should be validated on publishing
