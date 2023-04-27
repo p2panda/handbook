@@ -7,35 +7,41 @@ The blob specification describes system [schemas][schemas] and validation condit
 
 ## System schemas
 
-### `blob_v1`
+### Blob
 
-`length`: length of file in bytes (u64)  
-`mime_type` IANA mime-type (string)  
-`pieces`: list of pieces which make up this blob (pinned relation list of `blob_piece_v1`)  
+- Schema id: `blob_v1`
+- Representing a binary file
+- Fields:
+    - `length`: length of file in bytes (u64)
+    - `mime_type` IANA mime-type (string)
+    - `pieces`: list of pieces which make up this blob (pinned relation list of `blob_piece_v1`)
 
 #### Validation
 
-- the claimed `length` of a `blob_v1` document should be validated on publishing
-    - this can be done by collecting all claimed pieces and calculating total length
+- The claimed `length` of a `blob_v1` document should be validated on publishing
+    - This can be done by collecting all claimed pieces and calculating total length
     - OR only validating that each `blob_piece_v1` is the correct length and then validating the `length` value by checking the number of items in the `pieces` list
-- the claimed `mime_type` should be validated
-- validating blob pieces differs if they arrive through `publish` and via `replication`
+- The claimed `mime_type` should be validated
+- Validating blob pieces differs if they arrive through `publish` and via `replication`
     - `publish`: all blob pieces should already exist before publishing the `blob`
     - `replication`: a `blob` must exist with a relation to the `pieces` before the pieces are accepted. This means we don't accept arbitrary blob data until we know the blob hash id, as we may want to choose to lazy load a blob's actual data.
-- if a validation step fails, an error should be returned to the client and _all related `blob_piece_v1` and the `blob_v1` entries should be deleted_
+- If a validation step fails, an error should be returned to the client and _all_ related `blob_piece_v1` and the `blob_v1` entries should be deleted
 
-### `blob_piece_v1`
+### Blob Piece
 
-`data`: bytes contained in this blob piece
+- Schema id: `blob_piece_v1`
+- Representing the (partial) binary data of a file
+- Fields:
+    - `data`: bytes contained in this blob piece (bytes)
 
 #### Validation
 
-- all blob pieces must be of maximum 256KB size
+- All blob pieces must be of maximum 256KB size
 
 ## Notes on Storage
 
 - `blob_v1` and `blob_piece_v1` data is persisted on a node
-- materialization logic differs from other documents, see the [blob http specification][blob-http] to read more 
+- The materialization logic differs from other documents, see the [blob http specification][blob-http] to read more
 
 ## Notes on Replication
 
