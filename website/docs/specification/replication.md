@@ -237,7 +237,7 @@ SyncDone live_mode=false
 
 - If for any reason it is un-desireable for a node implementation to support the recommended replication method using Set Reconciliation, then they can still participate in the network by supporting only naive replication by sending a `Have` message directly after receiving a `SyncRequest` message.
 - Naive mode should be announced in the peers `Announce` message.
-- A `Have` message should contain a set of _all_ public key, log id, seq num tuples the peer holds for the requested `SyncRange`. 
+- A `Have` message should contain a set of _all_ public key, log id, seq num tuples the peer holds for the requested sync range.
 
 #### `Have` message
 
