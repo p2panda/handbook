@@ -54,8 +54,8 @@ title: Replication
 ## 2. Replication
 
 - Replication is the process of two peers synchronizing the data they hold locally, eventually arriving at the state where both peers hold the same data.
-- In p2panda this mechanism is initiated by a `SyncRequest` message and is then followed by two distinct replication phases: 
-    1. Identification of the diverging state and.. 
+- In p2panda this mechanism is initiated by a `SyncRequest` message and is then followed by two distinct replication phases:
+    1. Identification of the diverging state
     2. Exchange of data.
 - After learning about the other peers interests through the `Announce` message, Peer B can initiate replication with Peer A by sending a message to initiate replication. This replication session can concern a sub-set of the announced schemas.
 - Over time many replication session can take place following one announcement, individually concerning different sub-sets of the announcement.
@@ -68,22 +68,22 @@ title: Replication
 [
     <message_type=0 {u64}>,
     <session_id {u64}>,
-    <mode {u64}>, // @TBC
+    <mode {u64}>,
     [<schema_id {string}>, ...]
 ]
 ```
 
-`message_type` is `0`.
-`mode` where `0` is "naive" HAVE mode and `1` is using set reconciliation
-`session_id` is an identifier used throughout the replication session to identify messages for this session. This helps the peers to connect the messages to the right session, especially when multiple sessions take place at the same time with the same peer. The session id starts with `0` and is incremented by `1` for every session and every peer. Session IDs can be reset after enough time of inactivity between two peers and usually don't need to be persisted.
-`schema_id[]` allows us to identify the range of [documents][documents] we are interested in synchronizing (ie. all [documents][documents] associated with this set of schemas).
+- `message_type` is `0`.
+- `mode` where `0` is "naive" HAVE mode and `1` is using set reconciliation
+- `session_id` is an identifier used throughout the replication session to identify messages for this session. This helps the peers to connect the messages to the right session, especially when multiple sessions take place at the same time with the same peer. The session id starts with `0` and is incremented by `1` for every session and every peer. Session IDs can be reset after enough time of inactivity between two peers and usually don't need to be persisted.
+- `schema_id[]` allows us to identify the range of [documents][documents] we are interested in synchronizing (ie. all [documents][documents] associated with this set of schemas).
 
 - Every item in this list needs to be contained in the latest announcement state. If one [schemas][schemas] id inside the `SyncRequest` message of Peer B is not part of the announcement of Peer A, the request gets ignored.
 
 ### 2.1. Identifying divergent state
 
-- If we announced this [schemas][schemas] then we move onto identifying any divergent state, this involves the following steps:
-    - Calculate tuples of `(PublicKey, LogId, SeqNum)` for _all authors who made contributions to any document associated with the [schemas][schemas] we are synchronizing_. 
+- If we announced these [schemas][schemas] then we move onto identifying any divergent state, this involves the following steps:
+    - Calculate tuples of `(PublicKey, LogId, SeqNum)` for _all_ authors who made contributions to any document associated with the [schemas][schemas] we are synchronizing. 
     - Sort this resulting list in lexical order (from here on we will refer to this sorted list as the sync range).
 - In this step we want to efficiently identify all data which one peer may hold which the other does not yet have. This is a two way process, where ultimately both peers may need something from the other.
 - With this range we now want to identify any divergent state between peers:
@@ -162,7 +162,7 @@ Protocol implementation in TypeScript: https://github.com/earthstar-project/rang
         ]
         ```
     - All messages contain a `session_id` which was determined during `SyncRequest`
-- The lifting monoid we use is based on the `xxHash` hashing algorithm.
+- The lifting monoid we use is based on the xxHash hashing algorithm.
 - From this point on set reconciliation progresses until divergent state is identified. To read more about the messaging protocol please refer to the above documents.
 - Set reconciliation and exchange of actual append-only log entries can take place at the same time as we're gaining knowledge about the other peer's state continously.
 - When a Peer B receives an `EmptySet` message right from the beginning, the Peer B is asked to send all entries of the requested schemas to Peer A.
@@ -217,7 +217,7 @@ Two peers talking to each other for the first time, first starting with set reco
 
 ```
 SyncRequest
-.. A LOT OF SET RECON MESSAGES .. A LOT OF `Entry` messages .. (different log heights)
+.. A LOT OF SET RECONCILIATION MESSAGES .. A LOT OF `Entry` messages .. (different log heights)
 .. A LOT OF `Entry` messages .. (missing logs)
 SyncDone live_mode=true
 .. A LOT OF `Entry` messages ..
