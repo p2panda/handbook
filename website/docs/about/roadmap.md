@@ -31,19 +31,18 @@ title: Roadmap
 - [x] p2panda first draft specification
 - [x] Dynamic GraphQL API to query data
 - [x] Schemas- and data validation
+- [x] p2panda specification 1.0 release :panda_face:
+- [x] Transport encryption between nodes via TLS 1.3
+- [x] Automatic local discovery via mDNS
+- [x] Automatic internet discovery via signalling servers
 
 ## Now
 
-- [ ] p2panda specification 1.0 release :panda_face:
+- [ ] Efficient replication protocol
 
 ## Future
 
 - [ ] Shared identities with `KeyGroup` in `p2panda-rs`
 - [ ] Multi-writer permissions in `aquadoggo`
-- [ ] Transport encryption between nodes via TLS 1.3
-- [ ] Automatic local discovery via mDNS
 - [ ] Schema backwards compatibility via lenses
-- [ ] Automatic internet discovery via signalling servers
-- [ ] Efficient replication protocol
 - [ ] Automatic deletion of unused data ("Garbage Collection")
-- [ ] Automatic detection of forked logs
