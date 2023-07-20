@@ -74,7 +74,7 @@ title: Replication
 ```
 
 - `message_type` is `0`.
-- `mode` where `0` is "naive" HAVE mode and `1` is using set reconciliation
+- `mode` where `0` is Log Height mode and `1` is using Set Reconciliation mode
 - `session_id` is an identifier used throughout the replication session to identify messages for this session. This helps the peers to connect the messages to the right session, especially when multiple sessions take place at the same time with the same peer. The session id starts with `0` and is incremented by `1` for every session and every peer. Session IDs can be reset after enough time of inactivity between two peers and usually don't need to be persisted.
 - `schema_id[]` allows us to identify the range of [documents][documents] we are interested in synchronizing (ie. all [documents][documents] associated with this set of schemas).
 
@@ -233,10 +233,10 @@ SyncRequest
 SyncDone live_mode=false
 ```
 
-### Naive Mode
+### Log Height Mode
 
-- If for any reason it is un-desireable for a node implementation to support the recommended replication method using Set Reconciliation, then they can still participate in the network by supporting only naive replication by sending a `Have` message directly after receiving a `SyncRequest` message.
-- Naive mode should be announced in the peers `Announce` message.
+- If for any reason it is un-desireable for a node implementation to support the recommended replication method using Set Reconciliation, then they can still participate in the network by supporting only Log Height replication by sending a `Have` message directly after receiving a `SyncRequest` message.
+- Log Height mode should be announced in the peers `Announce` message.
 - A `Have` message should contain a set of _all_ public key, log id, seq num tuples the peer holds for the requested sync range.
 
 #### `Have` message
