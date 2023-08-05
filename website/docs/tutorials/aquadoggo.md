@@ -48,6 +48,17 @@ git clone https://github.com/p2panda/aquadoggo.git
 cd aquadoggo
 ```
 
+## Copy the sample config file
+
+Aquadoggo has a configuration file to tell it how to work. Even though you cloned autodoggo from git, the config file is excluded from git so that you can modify it yourself. However, you do need something to get you started, so you'll need to make a copy of the example config file.
+
+```bash
+# Copy the example config file
+cp ./aquadoggo_cli/example_config.toml ./config.toml
+```
+
+You can make changes inside your new config.toml file if you want, but for now we just need the defaults.
+
 ## Start the node
 
 To run the node now you only have to run this command inside the project's folder:
@@ -65,7 +76,7 @@ When the compilation finished and the program started you will see .. almost not
      Running `target/debug/aquadoggo`
 ```
 
-This is because by default the program will not spit out any information except when you explicitly asked about it. 
+This is because by default the program will not spit out any information except when you explicitly asked about it.
 
 The node is already running, you are done!
 
