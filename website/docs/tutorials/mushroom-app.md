@@ -555,7 +555,7 @@ async function getAllMushrooms(): Promise<MushroomResponse[]> {
   }`;
 
   const { mushrooms } = await client.request(query);
-  return mushrooms;
+  return mushrooms.documents;
 }
 ```
 
@@ -577,17 +577,15 @@ async function getMushroom(
 ): Promise<MushroomResponse> {
   const query = gql`{
     mushroom: ${MUSHROOM_SCHEMA_ID}(id: "${documentId}") {
-      documents {
-        meta {
-          documentId
-          viewId
-        }
-        fields {
-          description
-          edible
-          latin
-          title
-        }
+      meta {
+        documentId
+        viewId
+      }
+      fields {
+        description
+        edible
+        latin
+        title
       }
     }
   }`;

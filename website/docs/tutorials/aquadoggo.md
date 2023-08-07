@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Set up a local node"
+title: 'Tutorial: Set up a local node'
 ---
 
 This tutorial walks you through setting up a locally running p2panda node on your computer and shows you how you can configure it and interact with it via the GraphQL playground.
@@ -18,9 +18,9 @@ Nodes are usually agnostic to the applications using them, this means that one n
 
 ## What do I need?
 
-* Rust
-* Terminal
-* Browser
+- Rust
+- Terminal
+- Browser
 
 :::info Never worked with Rust before?
 
@@ -30,7 +30,7 @@ This tutorial requires you to have a working Rust environment. If you have never
 
 <details><summary>How do I install Rust?</summary>
 
-Make sure you have a working Rust environment installed on your computer before you begin with the tutorial. You can check this by running `rustc --version` in your terminal. This tutorial was written with Rust version `1.63.0` but it will probably also work with other versions.
+Make sure you have a working Rust environment installed on your computer before you begin with the tutorial. You can check this by running `rustc --version` in your terminal. This tutorial was written with Rust version `1.70.0` but it will probably also work with other versions.
 
 If you don't have Rust installed yet you can follow the steps on the official Rust website: [How to install Rust](https://www.rust-lang.org/tools/install).
 
@@ -65,7 +65,7 @@ When the compilation finished and the program started you will see .. almost not
      Running `target/debug/aquadoggo`
 ```
 
-This is because by default the program will not spit out any information except when you explicitly asked about it. 
+This is because by default the program will not spit out any information except when you explicitly asked about it.
 
 The node is already running, you are done!
 
@@ -84,13 +84,14 @@ Ah, this looks more interesting now:
 ```
     Finished dev [unoptimized + debuginfo] target(s) in 0.10s
      Running `target/debug/aquadoggo`
-[2022-09-05T15:59:14Z INFO  aquadoggo::manager] Start materializer service
-[2022-09-05T15:59:14Z INFO  aquadoggo::materializer::worker] Register reduce worker with pool size 16
-[2022-09-05T15:59:14Z INFO  aquadoggo::materializer::worker] Register dependency worker with pool size 16
-[2022-09-05T15:59:14Z INFO  aquadoggo::materializer::worker] Register schema worker with pool size 16
-[2022-09-05T15:59:14Z INFO  aquadoggo::manager] Start replication service
-[2022-09-05T15:59:14Z INFO  aquadoggo::manager] Start http service
-[2022-09-05T15:59:14Z INFO  aquadoggo::graphql::schema] Subscribing GraphQL manager to schema provider
+[2023-08-07T12:52:59Z INFO  aquadoggo::manager] Start materializer service
+[2023-08-07T12:52:59Z INFO  aquadoggo::materializer::worker] Register reduce worker with pool size 16
+[2023-08-07T12:52:59Z INFO  aquadoggo::materializer::worker] Register dependency worker with pool size 16
+[2023-08-07T12:52:59Z INFO  aquadoggo::materializer::worker] Register schema worker with pool size 16
+[2023-08-07T12:52:59Z INFO  aquadoggo::manager] Start http service
+[2023-08-07T12:52:59Z INFO  aquadoggo::manager] Start network service
+[2023-08-07T12:52:59Z INFO  aquadoggo::network::service] Local peer id: <NODE_PEER_ID>
+[2023-08-07T12:52:59Z INFO  aquadoggo::manager] Start replication service
 ```
 
 If you want to see even more you can change the log verbosity from `info` to `debug` or even `trace`, but then you will see a whole flood of information you might not always need.
@@ -245,6 +246,39 @@ DATABASE_URL=sqlite::memory: cargo run
 `aquadoggo` checks if there are any pending SQL migrations on every start up. If it detects missing migrations it will run it automatically against the given database.
 
 :::
+
+### Supported Schema IDs
+
+By default, your `aquadoggo` doesn't restrict the schema it replicates and materializes, it is interested in _anything_ it may come in contact with on the network. If you want to restrict this, you can do so by defining a list of `supported_schema_ids` in a `config.toml` file.
+
+There is an example of how this file looks at `./aquadoggo_cli/example_config.toml`. In order to configure `supported_schema_ids`, first copy this file into the directory where you are running `aquadoggo`.
+
+```bash
+# Copy the example config file
+cp ./aquadoggo_cli/example_config.toml ./config.toml
+```
+
+Then you can add the ids of schema you want your node to support. A configuration which looks like this would support no schema:
+
+```toml
+supported_schema_ids = []
+
+```
+
+A config like this would enable support of two in-built `p2panda` system schema, and one user defined application schema:
+
+```toml
+supported_schema_ids = [
+    # Built-in system schema
+    "schema_field_definition_v1",
+    "schema_definition_v1",
+
+    # User published application schema
+    "blog_0020a01f72a5f28f6a559b4942e3525de2bb2413d05897526fe2250e3b57384983a2",
+]
+```
+
+Restart your node for the new configuration to take effect. Your `aquadoggo` will now only speak with other nodes which support the same schema, and it will only build publish and query endpoints for schema which are listed in the configuration file.
 
 ## Done!
 
