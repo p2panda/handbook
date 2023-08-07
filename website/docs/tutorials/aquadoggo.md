@@ -249,21 +249,16 @@ DATABASE_URL=sqlite::memory: cargo run
 
 ### Supported Schema IDs
 
-By default, your `aquadoggo` doesn't restrict the schema it replicates and materializes, it is
-interested in _anything_ it may come in contact with on the network. If you want to restrict this,
-you can do so by defining a list of `supported_schema_ids`.
+By default, your `aquadoggo` doesn't restrict the schema it replicates and materializes, it is interested in _anything_ it may come in contact with on the network. If you want to restrict this, you can do so by defining a list of `supported_schema_ids`.
 
-There is an example of how this file looks at `./aquadoggo_cli/example_config.toml`. In order to
-configure `supported_schema_ids`, first copy this file into the directory where you are running
-`aquadoggo`.
+There is an example of how this file looks at `./aquadoggo_cli/example_config.toml`. In order to configure `supported_schema_ids`, first copy this file into the directory where you are running `aquadoggo`.
 
 ```bash
 # Copy the example config file
 cp ./aquadoggo_cli/example_config.toml ./config.toml
 ```
 
-Then you can add the ids of schema you want your node to support. A configuration which looks like
-this would support no schema:
+Then you can add the ids of schema you want your node to support. A configuration which looks like this would support no schema:
 
 ```toml
 supported_schema_ids = []
@@ -283,9 +278,7 @@ supported_schema_ids = [
 ]
 ```
 
-Restart your node for the new configuration to take effect. Your `aquadoggo` will now only speak
-with other nodes which support the same schema, and it will only build publish and query endpoints
-for schema which are listed in the configuration file.
+Restart your node for the new configuration to take effect. Your `aquadoggo` will now only speak with other nodes which support the same schema, and it will only build publish and query endpoints for schema which are listed in the configuration file.
 
 ## Done!
 
