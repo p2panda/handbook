@@ -249,7 +249,7 @@ DATABASE_URL=sqlite::memory: cargo run
 
 ### Supported Schema IDs
 
-By default, your `aquadoggo` doesn't restrict the schema it replicates and materializes, it is interested in _anything_ it may come in contact with on the network. If you want to restrict this, you can do so by defining a list of `supported_schema_ids`.
+By default, your `aquadoggo` doesn't restrict the schema it replicates and materializes, it is interested in _anything_ it may come in contact with on the network. If you want to restrict this, you can do so by defining a list of `supported_schema_ids` in a `config.toml` file.
 
 There is an example of how this file looks at `./aquadoggo_cli/example_config.toml`. In order to configure `supported_schema_ids`, first copy this file into the directory where you are running `aquadoggo`.
 
