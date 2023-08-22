@@ -38,12 +38,19 @@ title: Replication
 ### `Announce` message
 
 ```
-[<version {u64}>, <timestamp {u64}>, [<schema_id {string}>, ...]]
+[
+    <message_type=0 {u64}>,
+    <version {u64}>,
+    <timestamp {u64}>,
+    [<schema_id {string}>, ...]
+]
 ```
 
-`version` is the version of the replication protocol the peer supports, all following messages and mechanisms are related to that version. The first version is `1`. 
-`timestamp` represents the UNIX timestamp of the moment the announcement message has been created. Strictly speaking it does not need to be a real timestamp but MUST always be larger than the previously published one.
-`schema_id[]` is a list of [schemas][schemas] ids the peer is announcing its interest in.
+
+- `message_type` is `0`.
+- `version` is the version of the replication protocol the peer supports, all following messages and mechanisms are related to that version. The first version is `1`. 
+- `timestamp` represents the UNIX timestamp of the moment the announcement message has been created. Strictly speaking it does not need to be a real timestamp but MUST always be larger than the previously published one.
+- `schema_id[]` is a list of [schemas][schemas] ids the peer is announcing its interest in.
 
 - Every peer is represented by exactly only one announcement state. On arrival of a new `Announce` message the previous state gets replaced with the latest one.
 - To understand which `Announce` message is the latest, the receiving peer compares the new `timestamp` with the current one. If an `Announce` message arrived with a smaller or equal `timestamp` it gets ignored, if it is larger the new state replaces the old one.
@@ -66,16 +73,16 @@ title: Replication
 
 ```
 [
-    <message_type=0 {u64}>,
+    <message_type=1 {u64}>,
     <session_id {u64}>,
     <mode {u64}>,
     [<schema_id {string}>, ...]
 ]
 ```
 
-- `message_type` is `0`.
-- `mode` where `0` is Log Height mode and `1` is using Set Reconciliation mode
+- `message_type` is `1`.
 - `session_id` is an identifier used throughout the replication session to identify messages for this session. This helps the peers to connect the messages to the right session, especially when multiple sessions take place at the same time with the same peer. The session id starts with `0` and is incremented by `1` for every session and every peer. Session IDs can be reset after enough time of inactivity between two peers and usually don't need to be persisted.
+- `mode` where `0` is *Log Height* mode and `1` is using *Set Reconciliation* mode
 - `schema_id[]` allows us to identify the range of [documents][documents] we are interested in synchronizing (ie. all [documents][documents] associated with this set of schemas).
 
 - Every item in this list needs to be contained in the latest announcement state. If one [schemas][schemas] id inside the `SyncRequest` message of Peer B is not part of the announcement of Peer A, the request gets ignored.
@@ -95,7 +102,7 @@ title: Replication
 #### Range-based set reconciliation
 
 Thesis proposing the protocol: https://github.com/AljoschaMeyer/master_thesis
-Protocol implementation in TypeScript: https://github.com/earthstar-project/range-reconcile
+Protocol implementation in TypeScript: https://github.com/earthstar-project/range-reconcile and Rust: https://github.com/keks/unionize
 
 - The `range-reconcile` implementation p2panda makes use of has a number of requirements we satisfy in this specification, these are:
     - Deterministically sorted range of items to be synced
@@ -106,7 +113,7 @@ Protocol implementation in TypeScript: https://github.com/earthstar-project/rang
     - `EmptySet` message
         ```
         [
-            <message_type=1 {u64}>,
+            <message_type=20 {u64}>,
             <session_id {u64}>,
             <can_respond {bool}>
         ]
@@ -114,7 +121,7 @@ Protocol implementation in TypeScript: https://github.com/earthstar-project/rang
     - `LowerBound` message
         ```
         [
-            <message_type=2 {u64}>,
+            <message_type=21 {u64}>,
             <session_id {u64}>,
             [<public_key {string}>, <log_id {u64}>, <seq_num {u64}>]
         ]
@@ -122,7 +129,7 @@ Protocol implementation in TypeScript: https://github.com/earthstar-project/rang
     - `Payload` message
         ```
         [
-            <message_type=3 {u64}>,
+            <message_type=22 {u64}>,
             <session_id {u64}>,
             <value {[<public_key {string}>, <log_id {u64}>, <seq_num {u64}>]}>,
             <can_respond {bool}>?,
@@ -132,7 +139,7 @@ Protocol implementation in TypeScript: https://github.com/earthstar-project/rang
     - `EmptyPayload` message
         ```
         [
-            <message_type=4 {u64}>,
+            <message_type=23 {u64}>,
             <session_id {u64}>,
             <upper_bound {[<public_key {string}>, <log_id {u64}>, <seq_num {u64}>]}>
         ]
@@ -140,7 +147,7 @@ Protocol implementation in TypeScript: https://github.com/earthstar-project/rang
     - `Done` message
         ```
         [
-            <message_type=5 {u64}>,
+            <message_type=24 {u64}>,
             <session_id {u64}>,
             <upper_bound {[<public_key {string}>, <log_id {u64}>, <seq_num {u64}>]}>
         ]
@@ -148,7 +155,7 @@ Protocol implementation in TypeScript: https://github.com/earthstar-project/rang
     - `Fingerprint` message
         ```
         [
-            <message_type=6 {u64}>,
+            <message_type=25 {u64}>,
             <session_id {u64}>,
             <lift_type {TODO}>,
             <upper_bound {[<public_key {string}>, <log_id {u64}>, <seq_num {u64}>]}>
@@ -157,7 +164,7 @@ Protocol implementation in TypeScript: https://github.com/earthstar-project/rang
     - `Terminal` message
         ```
         [
-            <message_type=7 {u64}>,
+            <message_type=26 {u64}>,
             <session_id {u64}>,
         ]
         ```
@@ -182,7 +189,7 @@ Protocol implementation in TypeScript: https://github.com/earthstar-project/rang
 
 ```
 [
-    <message_type=8 {u64}>,
+    <message_type=2 {u64}>,
     <session_id {u64}>,
     <entry {bytes}>,
     <operation {bytes}>
@@ -205,7 +212,7 @@ Protocol implementation in TypeScript: https://github.com/earthstar-project/rang
 
 ```
 [
-    <message_type=9 {u64}>,
+    <message_type=3 {u64}>,
     <session_id {u64}>,
     <live_mode {bool}>
 ]
