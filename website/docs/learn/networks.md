@@ -141,7 +141,7 @@ Another technique of getting to know some other Nodes at a party is to enter it 
 
 :::info What discovery protocol do we use?
 
-Which technique does p2panda have? We haven’t implemented one yet, but one thing is clear: We want you to pick the one which you think is best as they all have advantages and disadvantages and most of all, different social implications!
+In our current `aquadoggo` implementation we use mDNS for local networks and a rendesvouz server to find other nodes on the internet. You can read more about it in our [specification](/specification/networking).
 
 :::
 
@@ -158,7 +158,7 @@ Replication makes sure that data spreads across the decentralised network. This 
 
 :::tip What replication protocol do we use?
 
-@TODO
+Read about our replication protocol in our [specification](/specification/replication).
 
 :::
 
