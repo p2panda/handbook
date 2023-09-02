@@ -30,24 +30,9 @@ All cool polar mushroom animals know that it is not always possible to identify 
 ## What do I need?
 
 * NodeJS
-* Rust
 * Editor
 * Terminal
 * Browser
-
-:::info Never worked with Rust before?
-
-This tutorial requires you to have a working Rust environment. If you have never worked with Rust before this is no problem! Setting it up is fairly easy and besides using some basic command line commands there is no more Rust knowledge required to make `aquadoggo`, the p2panda node, run on your computer.
-
-:::
-
-<details><summary>How do I install Rust?</summary>
-
-Make sure you have a working Rust environment installed on your computer before you begin with the tutorial. You can check this by running `rustc --version` in your terminal. This tutorial was written with Rust version `1.63.0` but it will probably also work with other versions.
-
-If you don't have Rust installed yet you can follow the steps on the official Rust website: [How to install Rust](https://www.rust-lang.org/tools/install).
-
-</details>
 
 <details><summary>How do I install NodeJS?</summary>
 
@@ -57,18 +42,20 @@ You can check out the official [Installing Node.js via package manager](https://
 
 ## Start node
 
-Every p2panda client needs a node to talk to, so let's start one! You can follow the [Set up a local node](/tutorials/aquadoggo) to learn how to do this in detail, or just run the following steps here:
+Every p2panda client needs a node to talk to, so let's start one! You can follow the [Set up a local node](/tutorials/aquadoggo) tutorial to learn how to compile a node yourself, but for this tutorial we are going to use a pre-compiled binaries.
+
+Visit the [releases](https://github.com/p2panda/aquadoggo/releases) page on the `aquadoggo` github repository and download the binary compiled for your system and unpack in a directory of your choice. In the command line, navigate to the directory where the `aquadoggo` binary is and run the following command: 
 
 ```bash
-# Clone the `aquadoggo` git repository
-git clone https://github.com/p2panda/aquadoggo.git
-
-# Move into the folder you've just created
-cd aquadoggo
-
-# Compile and start the node with basic logging enabled
-RUST_LOG=aquadoggo=info cargo run
+# Start your aquadoggo node.
+./aquadoggo
 ```
+
+:::tip No binary for your system?
+
+If there is no binary available for your system, don't worry, you can follow the [Set up a local node](/tutorials/aquadoggo) tutorial to learn how to compile a node yourself.
+
+:::
 
 Now you have a local node running on port `2020`. You can check if everything is alright by opening your browser and surfing to [http://localhost:2020/graphql](http://localhost:2020/graphql), do you see the GraphQL playground? Super. We will play with it soon!
 
