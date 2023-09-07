@@ -124,17 +124,18 @@ DELETE and UPDATE operations MUST have _previous_ with `length > 0`. CREATE oper
 - Depending on the operation's action and schema, different requirements exist for which data must be contained in the operation.
 - Fields map field names to field values
   - field names are strings
-  - field values can be of type: `u64`, `f64`, `boolean`, `string`, `relation`, `relation_list`, `pinned_relation`, `pinned_relation_list`
+  - field values can be of type: `u64`, `f64`, `boolean`, `bytes`, `string`, `relation`, `relation_list`, `pinned_relation`, `pinned_relation_list`
   - see [schema][schema] for further specification of field names and values
 - The schema defined by the schema id item of the operation specifies the name and type of each field which can be included in an operation.
 - In order to deserialise typed field values, a copy of the schema is required.
 
 ```
 enum OperationValue {
-  Boolean(Bool),
-  Integer(I64),
-  Float(F64),
+  Boolean(bool),
+  Integer(i64),
+  Float(f64),
   String(String),
+  Bytes(Vec<u8>),
   Relation(String{68}),
   RelationList(String{68}[]),
   PinnedRelation(String{68}[]),

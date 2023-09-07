@@ -53,6 +53,7 @@ The field type MUST be one of:
 - _bool_
 - _int_
 - _float_
+- _bytes_
 - _str_
 - _relation_
 - _relation list_
@@ -72,6 +73,10 @@ The field type MUST be one of:
 ### _float_ fields
 
 - Encode a 64 bit floating point number
+
+### _bytes_ fields
+
+- Encode a bytes (u8) string
 
 ### _str_ fields
 
@@ -169,7 +174,8 @@ The name string in an application schema which MUST have 1-64 characters, MUST s
 - `bool`: boolean
 - `int`: integer number
 - `float`: floating point number
-- `str`: string
+- `bytes`: bytes string
+- `str`: text string
 - `relation(<schema_id>)`: reference to a document
 - `relation_list(<schema_id>)`: a list of references to documents
 - `pinned_relation(<schema_id>)`: reference to a document view
