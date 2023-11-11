@@ -4,11 +4,11 @@ title: FAQ
 
 ## Can I use p2panda already?
 
-We're very close to a first stable core specification and reference implementation but would like a little bit more time to _use_ p2panda before we decide on a first version. You can already write applications on top of p2panda, but beware that there might be still some breaking API changes. Also please note that p2panda has not been audited yet for any security vulnerabilities.
+You can already write full p2p applications on top of p2panda since all core features (collaborative editing, schemas, queries, discovery, replication, blobs etc.) are implemented and stable, still we do not recommend to run these applications in untrusted and open network scenarios. p2panda has not been audited yet for any security vulnerabilities and still lacks important features around security and data privacy. With this years funding we're focusing on capabilities and encryption followed by a security audit. After this period we will reach our first official release where we can assure security and privacy over user data.
 
 ## How about permissions?
 
-All data can be edited and deleted by everyone by default. For the future it will be possible to use a [Key Group](/specification/authorisation). Key groups maintain ownership and permissions for many public keys of documents and allow you to form more complex permission models. We're currently finalising the specification of key groups and will begin implementation soon. If you're already concerned about permission you could filter out writes by unknown public keys in your node for example.
+All data can currently be edited and deleted by everyone. In our upcoming funding period we will be focussing on introducing a capability system to allow more fine-grained control over what permissions users have, including reading, writing and deleting data but also custom permissions which are specific to your application logic.
 
 ## Is p2panda decentralised or federated?
 
@@ -16,7 +16,7 @@ It can be both! We thought it's good to let the developers, users and communitie
 
 ## Can I upload images, videos, audio with p2panda?
 
-We haven't build a "Blob" (Binary Large Object) feature into p2panda yet, though we're already having many [ideas](https://github.com/p2panda/handbook/labels/Blobs) (think BitTorrent with social and encryption features, materialisation of data directly into the file system and serving it via HTTP on nodes). If you already want to use images in your p2panda applications, there is a workaround: Encode the image data as base64 and store it inside the operation as a string.
+Yes! The blob feature is inspired by BitTorrent but with social and encryption features on top. Data is sliced into 256kb pieces and identified with a hash as it is based on our p2panda core data types. We materialize data directly into the file system and serve it via HTTP on nodes.
 
 ## Do you have CRDTs?
 
@@ -28,11 +28,11 @@ p2panda has been designed with browser-friendliness in mind as it is still very 
 
 ## Does p2panda encrypt data?
 
-By default all published data is not encrypted. p2panda offers [Secret Group](/specification/encryption) to allow optional group encryption between multiple peers. For this p2panda uses [Messaging Layer Security](https://messaginglayersecurity.rocks/) (MLS) under the hood. While technically it is already possible to write encrypted applications (we will provide an example soon), we are still working on a high-level API which will make using encryption more seamless for developers.
+By default all published data is not encrypted. p2panda offers [Secret Group](/specification/encryption) to allow group encryption between multiple peers. For this p2panda uses [Messaging Layer Security](https://messaginglayersecurity.rocks/) (MLS) under the hood. While technically it is already possible to write encrypted applications (we will provide an example soon), for the upcoming funding period we are working on a high-level API which will make using encryption more seamless for developers.
 
 ## Does p2panda run on smartphones?
 
-We already did some experiments with running p2panda nodes via [Termux](https://termux.dev/en/) on our Android phones with very low memory footprints and without any problems. If [Tauri](https://tauri.app/) starts supporting Android, Windows and iOS builds out-of-the-box it will be very easy to integrate a p2panda node there as well. Until then you can try the [hacky path](https://hackmd.io/XIcEwk4GSxy8APZhSa0UnA) with this document from the Tauri team (we might try it ourselves soon as well and share an example here).
+Yes! Very well actually, [we've shipped an Android app](https://github.com/p2panda/meli/) built with flutter using p2panda with FFI bindings inside of it.
 
 ## Is p2panda "offline-first"?
 
@@ -44,15 +44,15 @@ If you're looking for expressing relations between different sorts of data, simi
 
 ## Can nodes replicate data with each other?
 
-While we're having a simple replication mechanism already implemented you can use, it is also not very ergonomic yet. Currently you need to manually specify the IP address, author and log id of the Bamboo entries you want to replicate, which is tedious. We're using this currently as a proof-of-concept and will transition to a more intuitive, scalable and efficient approach using [qp2p](https://github.com/maidsafe/qp2p) based on QUIC.
+Yes! We have a [replication protocol](/specification/replication) which is implemented in [`aquadoggo`](https://github.com/p2panda/aquadoggo/). The nodes will automatically discover and sync with each other.
 
 ## Can nodes already find each other on the network?
 
-We haven't implemented discovery yet but will begin soon with simple mDNS discovery in local networks. Later on we're imagining signalling servers who will help us with getting around the limitations of [NAT traversal](https://tailscale.com/blog/how-nat-traversal-works/) in p2p networks.
+Yes! Nodes can find each other in a local network via mDNS and on the internet with the help of rendesvouz nodes. Check out [`aquadoggo`](https://github.com/p2panda/aquadoggo/) which is our current node implementation.
 
 ## Can I delete data?
 
-Even though p2panda is built upon an append-only log, by specification data does not need to be stored forever. p2panda aims at being data-efficient and has [deletion](/learn/entries/#deletion) built-in into the core data type without losing its cryptographic features.
+Our data types support deletion of different kinds, either in form of "garbage collection" (automatically detecting and removing unused data), "pruning" (removing history of a document) or "full deletion" (removing everything), even without leaving a tombstone for each deleted document. Please note that while we have ideas and specifications for these things actual deletion is not implemented yet but we're aiming for it in our next funding period. For the future we're also looking into making ephemeral documents a default, data will automatically be deleted when it has not been explicitly kept alive after a certain amount of time.
 
 ## How can I keep old data?
 
