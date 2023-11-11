@@ -5,6 +5,7 @@ title: Things we're interested in
 import EmojiBox from '@site/src/components/EmojiBox';
 
 <EmojiBox title="Browser Friendliness" icon="🦝">Lightweight clients that can easily be implemented as websites</EmojiBox>
+<EmojiBox title="Capabilities" icon="🐢">Fine-grained permissions and roles for users</EmojiBox>
 <EmojiBox title="Collaboration" icon="🐎">Data can be edited together, even when you are offline</EmojiBox>
 <EmojiBox title="Data Sovereignty" icon="🐮">Users own the data they create</EmojiBox>
 <EmojiBox title="Decentralisation" icon="🐄">No authority over data or how it is displayed</EmojiBox>
