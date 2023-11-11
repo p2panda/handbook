@@ -36,10 +36,10 @@ The core or p2panda is built in Rust from which we also compile WebAssembly for 
 
 ## Team
 
-"We", that is [Andreas Dzialocha](https://adz.garden), [Sam Andreae](https://samandreae.com/) and [Vincent Ahrend](https://www.vincentahrend.com), the current core team of p2panda. Hello! ⛺
+"We", that is [Andreas Dzialocha](https://adz.garden) and [Sam Andreae](https://samandreae.com/), the current core team of p2panda. Hello! ⛺
 
 <ImageFrame
-  title="This is us during our first intensive workshop week in 2021: Vincent, Sam, Sophie and Andreas!"
+  title="This is us during our first intensive workshop week in 2021 with our former core contributors: Vincent, Sam, Sophie and Andreas!"
   url={require('./assets/safari.jpg')}
 />
 
@@ -51,3 +51,4 @@ Without the help of all of these people p2panda would have never been realised �
 * [Piet Geursen](https://github.com/pietgeursen/bamboo-rs) Rust developer
 * [Raphael Robert](https://twitter.com/raphaelrobert) MLS co-author
 * [Sophie Kuna](https://github.com/sophiiistika) Early member of p2panda gang
+* [Vincent Ahrend](https://github.com/cafca) p2panda core contributor until 2022
