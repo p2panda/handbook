@@ -62,7 +62,7 @@ console.log(keyPair.publicKey());
 
 ## `aquadoggo`
 
-[`aquadoggo`](https://crates.io/crates/aquadoggo) is the reference node server implementation for the p2panda network running as a command line application. It can also be embedded via the library inside your Rust program which allows you to write offline-first applications where both the client and the node live inside the same binary.
+[`aquadoggo`](https://github.com/p2panda/aquadoggo/) is the reference node server implementation for the p2panda network running as a command line application. It can also be embedded via the library inside your Rust program which allows you to write offline-first applications where both the client and the node live inside the same binary.
 
 ### Documentation
 
@@ -80,8 +80,11 @@ cargo add aquadoggo
 
 ```rust
 use aquadoggo::{Configuration, Node};
+use p2panda_rs::identity::KeyPair;
+
 let config = Configuration::default();
-let node = Node::start(config).await;
+let key_pair = KeyPair::new();
+let node = Node::start(key_pair, config).await;
 ```
 
 ### Run local node
@@ -91,7 +94,7 @@ let node = Node::start(config).await;
 cargo run
 
 # Turn on some logging for debugging
-RUST_LOG=aquadoggo=debug cargo run
+cargo run -- --log-level INFO
 ```
 
 :::tip There is a tutorial!
