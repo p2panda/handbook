@@ -12,9 +12,9 @@
   <h3>
     <a href="https://p2panda.org">Website</a>
     <span> | </span>
-    <a href="https://p2panda.org/libraries">Libraries</a>
+    <a href="https://p2panda.org/sdks">SDKs</a>
     <span> | </span>
-    <a href="https://p2panda.org/specification">Specification</a>
+    <a href="https://p2panda.org/specifications">Specification</a>
     <span> | </span>
     <a href="https://p2panda.org/about/contribute">
       Contribute
@@ -34,8 +34,8 @@ p2panda is a user-friendly peer-to-peer protocol for secure, energy-efficient lo
 
 * [`About`](https://p2panda.org/about)
 * [`Tutorials`](https://p2panda.org/tutorials)
-* [`SDK`](https://p2panda.org/sdk)
-* [`Specification`](https://p2panda.org/specification)
+* [`SDKs`](https://p2panda.org/sdks)
+* [`Specification`](https://p2panda.org/specifications)
 * [`FAQ`](https://p2panda.org/faq)
 
 ## Topics we're interested in
@@ -70,7 +70,7 @@ Read more about p2panda on our [website](https://p2panda.org/about)!
 
 ## Overview
 
-**Libraries**
+**SDKs**
 
 - [`p2panda`](https://github.com/p2panda/p2panda): Provides tools to write a client for the p2panda network. It is shipped both as a Rust crate `p2panda-rs` with WebAssembly bindings and a NPM package `p2panda-js` with TypeScript definitions running in NodeJS or any modern web browser.
 
