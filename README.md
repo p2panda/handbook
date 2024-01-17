@@ -33,9 +33,8 @@ p2panda is a user-friendly peer-to-peer protocol for secure, energy-efficient lo
 </a>
 
 * [`About`](https://p2panda.org/about)
-* [`Learn`](https://p2panda.org/learn)
 * [`Tutorials`](https://p2panda.org/tutorials)
-* [`Libraries`](https://p2panda.org/libraries)
+* [`SDK`](https://p2panda.org/sdk)
 * [`Specification`](https://p2panda.org/specification)
 * [`FAQ`](https://p2panda.org/faq)
 
