@@ -14,6 +14,7 @@
   left: 0;
   right: 0;
   z-index: -2;
+  overflow-x: hidden;
   padding: 100px;
   user-select: none;
   pointer-events: none;
@@ -28,10 +29,6 @@
 }
 
 @media (max-width: 996px) {
-  .pentagon-container {
-    overflow-x: hidden;
-  }
-
   .pentagon-shift {
     position: static;
   }
@@ -319,6 +316,12 @@
   .zoo-gameboy {
     padding-left: 1em;
     padding-right: 1em;
+  }
+}
+
+@media (max-width: 580px) {
+  .zoo-gameboy {
+    width: 100%;
   }
 }
 
