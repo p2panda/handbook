@@ -3,6 +3,12 @@ id: key-pairs
 title: Key Pairs
 ---
 
+:::danger Deprecated
+
+This section will soon be replaced with our new [namakemono](/specifications/namakemono) data type which is similar, but cooler.
+
+:::
+
 :::caution Requirement KY1
 
 Clients MUST use Ed25519 as the Digital Signature Algorithm for Bamboo.

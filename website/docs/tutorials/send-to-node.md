@@ -295,7 +295,7 @@ Finally we want to create the actual schema! Here we define the `name` of the sc
 
 We need to send three operations to create a schema, this is so much work! But remember, we're doing it with a very minimal `send-to-node` tool right now for the purpose of learning how it works _under the hood_ or _behind the scenes_ and so on.
 
-Later there will be tools like `fishyfish` to create schemas in one step, they handle all of these requests automatically for you. Or you can write your own tool or scripts of course using the p2panda [SDKs](/sdk).
+Later there will be tools like `fishyfish` to create schemas in one step, they handle all of these requests automatically for you. Or you can write your own tool or scripts of course using the p2panda [SDKs](/sdks).
 
 :::
 
@@ -518,6 +518,6 @@ Think about it from the perspective of a "traditional" database. You probably ne
 
 ## Done!
 
-Yay! Now you know how to create a schema and even documents with the `send-to-node` tool. You could also write your own program which sends and signs the operations using the p2panda [SDK](/sdk). Querying documents and publishing operations via GraphQL is basically everything a p2panda client is doing. In this tutorial we did it _manually_ but a client of course would do it all for us in the background.
+Yay! Now you know how to create a schema and even documents with the `send-to-node` tool. You could also write your own program which sends and signs the operations using the p2panda [SDKs](/sdks). Querying documents and publishing operations via GraphQL is basically everything a p2panda client is doing. In this tutorial we did it _manually_ but a client of course would do it all for us in the background.
 
 Check out the [next tutorial](/tutorials/mushroom-app) on how to build a client in React if you're curious about how to actually do this.

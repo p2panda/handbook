@@ -75,15 +75,15 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'sdk/index',
+            docId: 'sdks/index',
             position: 'left',
-            label: 'SDK',
+            label: 'SDKs',
           },
           {
             type: 'doc',
-            docId: 'specification/index',
+            docId: 'specifications/index',
             position: 'left',
-            label: 'Specification',
+            label: 'Specifications',
           },
           {
             type: 'doc',

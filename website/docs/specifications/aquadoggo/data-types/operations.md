@@ -3,6 +3,12 @@ id: operations
 title: Operations
 ---
 
+:::danger Deprecated
+
+This section will soon be replaced with our new [namakemono](/specifications/namakemono) data type which is similar, but cooler.
+
+:::
+
 - Operations represent atomic data changes.
 - Operations are published as the payload of _Bamboo entries_.
 - Operations are identified by the hash of their Bamboo entry.

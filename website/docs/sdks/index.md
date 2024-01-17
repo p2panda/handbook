@@ -1,5 +1,5 @@
 ---
-title: SDK
+title: SDKs
 ---
 
 import Tabs from '@theme/Tabs';

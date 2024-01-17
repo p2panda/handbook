@@ -12,45 +12,55 @@ const sidebars = {
   // @TODO: We need to re-write the learn section a little as things like "Bamboo" etc. got removed from the specification.
   // See related issue: https://github.com/p2panda/handbook/issues/306
   // learn: ['learn/index', 'learn/entries', 'learn/operations', 'learn/networks'],
-  specification: [
-    'specification/index',
-    'specification/key-concepts',
+  specifications: [
+    'specifications/index',
+    'specifications/namakemono/index',
     {
       type: 'category',
-      label: 'Core data types',
+      label: 'aquadoggo API',
       items: [
-        'specification/data-types/bamboo',
-        'specification/data-types/key-pairs',
-        'specification/data-types/operations',
-        'specification/data-types/schemas',
-        'specification/data-types/documents',
-        'specification/data-types/document-views',
-        'specification/data-types/blobs',
+        {
+          type: 'doc',
+          id: 'specifications/aquadoggo/index',
+          label: 'Introduction',
+        },
+        'specifications/aquadoggo/key-concepts',
+        {
+          type: 'category',
+          label: 'Core data types',
+          items: [
+            'specifications/aquadoggo/data-types/bamboo',
+            'specifications/aquadoggo/data-types/key-pairs',
+            'specifications/aquadoggo/data-types/operations',
+            'specifications/aquadoggo/data-types/schemas',
+            'specifications/aquadoggo/data-types/documents',
+            'specifications/aquadoggo/data-types/document-views',
+            'specifications/aquadoggo/data-types/blobs',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'APIs',
+          items: [
+            'specifications/aquadoggo/APIs/overview',
+            'specifications/aquadoggo/APIs/publishing',
+            'specifications/aquadoggo/APIs/queries',
+            'specifications/aquadoggo/APIs/blob-http',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Networking',
+          items: [
+            'specifications/aquadoggo/networking/clients-nodes',
+            'specifications/aquadoggo/networking/networking',
+          ],
+        },
+        'specifications/aquadoggo/replication',
+        'specifications/aquadoggo/encoding-data',
+        'specifications/aquadoggo/glossary',
       ],
     },
-    'specification/authorisation',
-    'specification/encryption',
-    {
-      type: 'category',
-      label: 'APIs',
-      items: [
-        'specification/APIs/overview',
-        'specification/APIs/publishing',
-        'specification/APIs/queries',
-        'specification/APIs/blob-http',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Networking',
-      items: [
-        'specification/networking/clients-nodes',
-        'specification/networking/networking',
-      ],
-    },
-    'specification/replication',
-    'specification/encoding-data',
-    'specification/glossary',
   ],
 };
 

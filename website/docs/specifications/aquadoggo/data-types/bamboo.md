@@ -3,6 +3,12 @@ id: bamboo
 title: Bamboo
 ---
 
+:::danger Deprecated
+
+This section will soon be replaced with our new [namakemono](/specifications/namakemono) data type which is similar, but cooler.
+
+:::
+
 _Requirements in this section refer only to how p2panda specifies use of bamboo._
 
 :::caution Requirement BA1
