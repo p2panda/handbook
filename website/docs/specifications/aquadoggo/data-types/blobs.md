@@ -59,6 +59,6 @@ We designed blobs to be as generic as possible, giving developers the option to 
 - Nodes can choose to ignore blobs when they exceed certain minimum or maximum length requirements or have unsupported mime types
 - Nodes can choose to only replicate blob pieces when there is at least one relation to the blob itself from other documents
 
-[schemas]: /specification/data-types/schemas
-[documents]: /specification/data-types/documents
-[blob-http]: /specification/APIs/blob-http
+[schemas]: /specifications/aquadoggo/data-types/schemas
+[documents]: /specifications/aquadoggo/data-types/documents
+[blob-http]: /specifications/aquadoggo/APIs/blob-http

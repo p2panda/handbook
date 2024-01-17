@@ -55,7 +55,7 @@ A fun exercise could be to try implement `send-to-node` in JavaScript with the [
 
 :::note Why JSON?
 
-p2panda does not use JSON internally, even though `send-to-node` works with `.json` files. It is just the choosen format for this program to create operations. Internally all operations are actually encoded as [CBOR](/specification/data-types/operations/#encoding-format).
+p2panda does not use JSON internally, even though `send-to-node` works with `.json` files. It is just the choosen format for this program to create operations. Internally all operations are actually encoded as [CBOR](/specifications/aquadoggo/data-types/operations).
 
 :::
 
@@ -141,11 +141,11 @@ What does all of this mean? We look at an array with four fields inside. Let's g
 
 **Version**
 
-The first field with the value `1` indicates the version we're using to write this operation. For now it will probably stay `1` for a longer time until there are any important updates to the p2panda [specification](/specification).
+The first field with the value `1` indicates the version we're using to write this operation. For now it will probably stay `1` for a longer time until there are any important updates to the p2panda [specification](/specifications).
 
 **Action**
 
-The second field with the value `0` indicates the _action_ of this operation. `0` stands for CREATE, `1` would stand for UPDATE and `2` for DELETE. You can read more about operations in the [learn](/learn/operations) section or the [specification](/specification/data-types/operations) but for now it is enough to understand that with these three actions we can create, update or delete _documents_.
+The second field with the value `0` indicates the _action_ of this operation. `0` stands for CREATE, `1` would stand for UPDATE and `2` for DELETE. You can read more about operations in the [learn](/learn/operations) section or the [specification](/specifications/aquadoggo/data-types/operations) but for now it is enough to understand that with these three actions we can create, update or delete _documents_.
 
 In this particular case we're creating a new _schema field_ document, the one containing the `message` field! This is why the action is set to `0`.
 
@@ -163,7 +163,7 @@ You will see later that there are other schema ids as well, and by creating a `c
 
 :::note System vs. application schemas
 
-`schema_field_definition_v1` is a _system_ schema which means that it is already registered by default on every node which follows the [p2panda specification](/specification/data-types/schemas). Our `chat` schema will be an _application_ schema, it is not used for special p2panda cases like creating a new schema but for building a chat application!
+`schema_field_definition_v1` is a _system_ schema which means that it is already registered by default on every node which follows the [p2panda specification](/specifications/aquadoggo/data-types/schemas). Our `chat` schema will be an _application_ schema, it is not used for special p2panda cases like creating a new schema but for building a chat application!
 
 :::
 
@@ -182,7 +182,7 @@ You can try to send a `schema_field_definition_v1` with missing or wrong fields 
 
 :::
 
-The `name` field indicates what the name of our future schema field should be and we decided it should be `message`. You can put in anything else here if you want to come up with a different schema, just make sure it follows the [naming rules](/specification/data-types/schemas).
+The `name` field indicates what the name of our future schema field should be and we decided it should be `message`. You can put in anything else here if you want to come up with a different schema, just make sure it follows the [naming rules](/specifications/aquadoggo/data-types/schemas).
 
 The `type` field indicates what type this `message` field should have. We can pick a couple of options here, but `str` is probably what we want. Otherwise there is:
 
@@ -239,7 +239,7 @@ Let's remember this operation id for now, we need it later. Ah, of course its to
 
 Private keys are sensitive information which should never leave your computer, usually you want to keep them somewhere in a well protected place. For this tutorial it may not be that important though, you could delete that file again and generate a new one if you want. If you keep the file `send-to-node` will re-use it next time which is cool.
 
-By the way, in p2panda it is important to have [multiple keys](/specification/data-types/key-pairs) for different applications, purposes or devices.
+By the way, in p2panda it is important to have [multiple keys](/specifications/aquadoggo/data-types/key-pairs) for different applications, purposes or devices.
 
 :::
 
@@ -323,7 +323,7 @@ This looks slightly different from the previous operations we were sending, but 
 
 You would probably like to start with `name` as the first field, right? The ordering of the field names _needs_ to be alphabetical though. You can try a different order, but the `aquadoggo` will reject it with a friendly error message telling you what order it expected the fields to be.
 
-All of this is required to ensure an [canonical encoding](/specification/encoding-data) of operations.
+All of this is required to ensure an [canonical encoding](/specifications/aquadoggo/encoding-data) of operations.
 
 :::
 
@@ -449,7 +449,7 @@ With the help of the `previous` field we can build a whole _Operation Graph_ of 
 
 Another thing to note here is that we do not have to mention _all_ fields of our `chat` schema, but only the ones we want to update, in this case it is the `message` field.
 
-We're already having the schema id and we can insert it into `005-update-message.json` but where do we get that _view id_ from? It is basically the last known version of that document we want to apply the changes on, we also call this a [_Document View Id_](/specification/data-types/document-views).
+We're already having the schema id and we can insert it into `005-update-message.json` but where do we get that _view id_ from? It is basically the last known version of that document we want to apply the changes on, we also call this a [_Document View Id_](/specifications/aquadoggo/data-types/document-views).
 
 Again, the GraphQL playground can help us here. We can simply just query all chat messages and ask for their regarding `viewId` with the following query:
 

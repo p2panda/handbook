@@ -16,15 +16,15 @@ title: Glossary
 * **[Operation][operations]**: p2panda data type which describes data mutations. Collections of linked operations form causal mutation graphs which are the foundation for p2panda [Documents][documents].
 * **[Yasmf][yasmf]**: A multiformat hash used in p2panda.
 
-[api]: /specification/APIs/overview
-[bamboo-author]: /specification/data-types/bamboo#author
-[bamboo]: /specification/data-types/bamboo
+[api]: /specifications/aquadoggo/APIs/overview
+[bamboo-author]: /specifications/aquadoggo/data-types/bamboo
+[bamboo]: /specifications/aquadoggo/data-types/bamboo
 [bamboo_spec]: https://github.com/bamboo-rs/bamboo-ed25519-yasmf
-[cbor]: /specification/encoding-data#cbor
-[documents]: /specification/data-types/documents
-[encoding]: /specification/data-types/bamboo#encoding
-[hash]: /specification/data-types/bamboo#hashing
-[key_pairs]: /specification/data-types/key-pairs
-[operations]: /specification/data-types/operations
+[cbor]: /specifications/aquadoggo/encoding-data#cbor
+[documents]: /specifications/aquadoggo/data-types/documents
+[encoding]: /specifications/aquadoggo/data-types/bamboo#encoding
+[hash]: /specifications/aquadoggo/data-types/bamboo#hashing
+[key_pairs]: /specifications/aquadoggo/data-types/key-pairs
+[operations]: /specifications/aquadoggo/data-types/operations
 [yamf]: https://github.com/AljoschaMeyer/yamf-hash
 [yasmf]: https://github.com/bamboo-rs/yasmf-hash

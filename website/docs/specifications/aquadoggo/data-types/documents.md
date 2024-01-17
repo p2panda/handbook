@@ -117,4 +117,4 @@ only the id of the DELETE operation and a document view SHOULD NOT be produced.
   4. Stop reduction if there is no next known operation in the document
   5. Continue with step 2. otherwise
 
-[operations]: /specification/data-types/operations
+[operations]: /specifications/aquadoggo/data-types/operations

@@ -41,5 +41,5 @@ All operations referenced in a document view id must originate from the same doc
 - It is defined as that document view which incorporates all valid operations that are known to the node and part of the document
 - As two nodes in the p2panda network may not share knowledge of the same operations, the latest document view may differ from node to node
 
-[reconciliation]: /specification/data-types/documents#reconciliation
-[reduction]: /specification/data-types/documents#reduction
+[reconciliation]: /specifications/aquadoggo/data-types/documents
+[reduction]: /specifications/aquadoggo/data-types/documents

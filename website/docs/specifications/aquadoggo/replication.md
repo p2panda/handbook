@@ -256,7 +256,7 @@ SyncDone live_mode=false
 ]
 ```
 
-[bamboo]: /specification/data-types/bamboo
-[documents]: /specification/data-types/documents
-[networking]: /specification/networking
-[schemas]: /specification/data-types/schemas
+[bamboo]: /specifications/aquadoggo/data-types/bamboo
+[documents]: /specifications/aquadoggo/data-types/documents
+[networking]: /specifications/aquadoggo/networking
+[schemas]: /specifications/aquadoggo/data-types/schemas

@@ -4,7 +4,7 @@ title: Overview
 
 import ImageFrame from '@site/src/components/ImageFrame';
 
-In this _Learn_ section we want to introduce you to the concepts around p2panda. It will not be as _formal_ as the [Specification](/specification) but also more _theoretical_ than the [Tutorials](/tutorials). With all of the other resources together you should get a good overview of what p2panda is about.
+In this _Learn_ section we want to introduce you to the concepts around p2panda. It will not be as _formal_ as the [Specification](/specifications) but also more _theoretical_ than the [Tutorials](/tutorials). With all of the other resources together you should get a good overview of what p2panda is about.
 
 <ImageFrame
   title="The p2panda handbook"

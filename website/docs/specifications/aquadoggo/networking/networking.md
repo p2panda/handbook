@@ -206,4 +206,4 @@ around an external onion service layer.
 [QUIC]: https://en.wikipedia.org/wiki/QUIC
 [`aquadoggo`]: https://github.com/p2panda/aquadoggo/
 [libp2p]: https://libp2p.io
-[replication protocol]: /specification/replication
+[replication protocol]: /specifications/aquadoggo/replication

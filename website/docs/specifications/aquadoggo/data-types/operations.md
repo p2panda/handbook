@@ -191,8 +191,8 @@ Nodes MUST delete all operations of a document once it has been deleted.
 :::
 
 [cbor]: https://cbor.io/
-[document]: /specification/data-types/documents
-[key-pairs]: /specification/data-types/key-pairs
-[reduce]: /specification/data-types/documents#reduction
-[schema]: /specification/data-types/schemas
+[document]: /specifications/aquadoggo/data-types/documents
+[key-pairs]: /specifications/aquadoggo/data-types/key-pairs
+[reduce]: /specifications/aquadoggo/data-types/documents
+[schema]: /specifications/aquadoggo/data-types/schemas
 [snake_case]: https://en.wikipedia.org/wiki/Snake_case

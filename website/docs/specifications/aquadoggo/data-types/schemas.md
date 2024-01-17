@@ -190,6 +190,6 @@ All _relation_ field types need to specify a schema
 
 :::
 
-[queries]: /specification/APIs/queries
-[reconciliation]: /specification/data-types/documents#reconciliation
-[reduction]: /specification/data-types/documents#reduction
+[queries]: /specifications/aquadoggo/APIs/queries
+[reconciliation]: /specifications/aquadoggo/data-types/documents
+[reduction]: /specifications/aquadoggo/data-types/documents

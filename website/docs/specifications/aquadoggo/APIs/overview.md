@@ -21,13 +21,13 @@ title: Overview
   - Documents can be queried by `document_view_id` in order to receive a [documents][view] onto its data at a specific materialised state
 
 [aquadoggo]: https://github.com/p2panda/aquadoggo
-[bamboo]: /specification/data-types/bamboo
-[connection-specification]: https://relay.dev/graphql/connections.htm
-[documents]: /specification/data-types/documents
+[bamboo]: /specifications/aquadoggo/data-types/bamboo
+[connection-specifications/aquadoggo]: https://relay.dev/graphql/connections.htm
+[documents]: /specifications/aquadoggo/data-types/documents
 [graphql]: https://graphql.org/
-[latest-document-view]: /specification/data-types/documents#the-latest-document-view
-[nodes]: /specification/networking/clients-nodes
-[operations]: /specification/data-types/operations
-[pagination-specification]: https://graphql.org/learn/pagination/#pagination-and-edges
-[reduction]: /specification/data-types/documents#reduction
-[self-referential-relation]: /specification/data-types/schemas#relation-fields
+[latest-document-view]: /specifications/aquadoggo/data-types/documents
+[nodes]: /specifications/aquadoggo/networking/clients-nodes
+[operations]: /specifications/aquadoggo/data-types/operations
+[pagination-specifications/aquadoggo]: https://graphql.org/learn/pagination/#pagination-and-edges
+[reduction]: /specifications/aquadoggo/data-types/documents
+[self-referential-relation]: /specifications/aquadoggo/data-types/schemas#relation-fields

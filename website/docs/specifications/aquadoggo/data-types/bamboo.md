@@ -117,8 +117,8 @@ Bamboo log ids for any public key MUST increment monotonically by one.
 Currently p2panda doesn't reserve a special use for the end of log flag. This may change in future versions.
 
 [bamboo_spec]: https://github.com/AljoschaMeyer/bamboo
-[documents]: /specification/data-types/documents
-[key_pairs]: /specification/data-types/key-pairs
-[operations]: /specification/data-types/operations
+[documents]: /specifications/aquadoggo/data-types/documents
+[key_pairs]: /specifications/aquadoggo/data-types/key-pairs
+[operations]: /specifications/aquadoggo/data-types/operations
 [yamf]: https://github.com/AljoschaMeyer/yamf-hash
 [yasmf]: https://github.com/bamboo-rs/yasmf-hash-spec

@@ -28,7 +28,7 @@ p2panda has been designed with browser-friendliness in mind as it is still very 
 
 ## Does p2panda encrypt data?
 
-By default all published data is not encrypted. p2panda offers [Secret Group](/specification/encryption) to allow group encryption between multiple peers. For this p2panda uses [Messaging Layer Security](https://messaginglayersecurity.rocks/) (MLS) under the hood. While technically it is already possible to write encrypted applications (we will provide an example soon), for the upcoming funding period we are working on a high-level API which will make using encryption more seamless for developers.
+By default all published data is not encrypted. p2panda plans a decentralised variant of [Messaging Layer Security](https://messaginglayersecurity.rocks/) (MLS) under the hood for strong encryption. For the upcoming funding period we are working on a dMLS client API which will make using encryption seamless for developers.
 
 ## Does p2panda run on smartphones?
 
@@ -44,7 +44,7 @@ If you're looking for expressing relations between different sorts of data, simi
 
 ## Can nodes replicate data with each other?
 
-Yes! We have a [replication protocol](/specification/replication) which is implemented in [`aquadoggo`](https://github.com/p2panda/aquadoggo/). The nodes will automatically discover and sync with each other.
+Yes! We have a [replication protocol](/specifications/aquadoggo/replication) which is implemented in [`aquadoggo`](https://github.com/p2panda/aquadoggo/). The nodes will automatically discover and sync with each other.
 
 ## Can nodes already find each other on the network?
 

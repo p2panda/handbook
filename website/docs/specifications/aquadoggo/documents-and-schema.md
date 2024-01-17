@@ -17,10 +17,10 @@ Documents can be assigned to an identity, giving them a concept of [permissions]
 
 Some schema are specified as part of the p2panda protocol, these are called [system schema][system-schema], others are dynamically published by application developers and distributed across the network, these are called [application schema][application-schema]
 
-[documents]: /specification/data-types/documents
-[schemas]: /specification/data-types/schemas
-[application-schema]: /specification/data-types/schemas#system-and-application-schemas
-[system-schema]: /specification/data-types/schemas#system-schemas
-[nodes]: /specification/networking/clients-nodes
-[encryption]: /specification/encryption
-[authorisation]: /specification/authorisation
+[documents]: /specifications/aquadoggo/data-types/documents
+[schemas]: /specifications/aquadoggo/data-types/schemas
+[application-schema]: /specifications/aquadoggo/data-types/schemas#system-and-application-schemas
+[system-schema]: /specifications/aquadoggo/data-types/schemas#system-schemas
+[nodes]: /specifications/aquadoggo/networking/clients-nodes
+[encryption]: /specifications/aquadoggo/encryption
+[authorisation]: /specifications/aquadoggo/authorisation
