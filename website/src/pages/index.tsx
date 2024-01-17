@@ -239,7 +239,7 @@ export default function Home(): JSX.Element {
           />
           <Title center text="Play with p2panda in Rust or TypeScript">
             Explore the <a href="tutorials">tutorials</a> and{' '}
-            <a href="libraries">libraries</a>
+            <a href="sdks">SDKs</a>
           </Title>
           <Pentagon size={500} color={GREEN} margin={2} hideOnSmallDevices />
         </Section>
