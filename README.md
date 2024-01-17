@@ -26,8 +26,6 @@
 
 p2panda is a user-friendly peer-to-peer protocol for secure, energy-efficient local-first applications. We want this protocol to be a playful tool for people to hack, build, play, and experiment with.
 
-Data changes in p2panda are signed, encrypted and published by clients using the [Bamboo](https://github.com/AljoschaMeyer/bamboo) append-only log data type which gets distributed over the network to other peers. p2panda allows for decentralised and federated network topologies or even hybrids of these and aims at running in web browsers without losing its cryptographic features.
-
 ## Handbook
 
 <a href="https://p2panda.org">
@@ -44,6 +42,7 @@ Data changes in p2panda are signed, encrypted and published by clients using the
 ## Topics we're interested in
 
 * 🦝 **Browser Friendliness** Lightweight clients that can easily be implemented as websites
+* 🐢 **Capabilities** Fine-grained permissions and roles for users
 * 🐎 **Collaboration** Data can be edited together, even when you are offline
 * 🐮 **Data Sovereignty**  Users own the data they create
 * 🐄 **Decentralisation** No authority over data or how it is displayed
@@ -103,4 +102,6 @@ Read more about p2panda on our [website](https://p2panda.org/about)!
 <img src="https://raw.githubusercontent.com/p2panda/.github/main/assets/nlnet-logo.svg" width="auto" height="80px"><br />
 <img src="https://raw.githubusercontent.com/p2panda/.github/main/assets/eu-flag-logo.png" width="auto" height="80px">
 
-_This project has received funding from the European Union’s Horizon 2020 research and innovation programme within the framework of the NGI-POINTER Project funded under grant agreement No 871528_
+*This project has received funding from the European Union’s Horizon 2020
+research and innovation programme within the framework of the NGI-POINTER
+Project funded under grant agreement No 871528 and NGI-ASSURE No 957073*
