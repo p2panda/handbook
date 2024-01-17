@@ -28,6 +28,10 @@
 }
 
 @media (max-width: 996px) {
+  .pentagon-container {
+    overflow-x: hidden;
+  }
+
   .pentagon-shift {
     position: static;
   }
