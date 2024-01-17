@@ -88,6 +88,8 @@
 :root {
   --ifm-font-family-base: 'Covik Sans Mono';
   --ifm-font-family-monospace: 'IBM Plex Mono';
+  --ifm-font-size-base: 110%;
+  --ifm-line-height-base: 1.7;
   --ifm-heading-font-weight: 700;
   --ifm-color-primary: #7e8eff;
   --ifm-color-primary-dark: #586dff;
