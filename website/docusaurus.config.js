@@ -95,6 +95,12 @@ const config = {
             position: 'right',
             label: 'Links',
           },
+          {
+            type: 'doc',
+            docId: 'contact',
+            position: 'right',
+            label: 'Contact',
+          },
         ],
       },
       footer: {
