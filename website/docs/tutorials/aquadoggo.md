@@ -28,12 +28,11 @@ This tutorial requires you to have a working Rust environment. If you have never
 
 :::
 
-<details><summary>How do I install Rust?</summary>
+<details>
+    <summary>How do I install Rust?</summary>
+    Make sure you have a working Rust environment installed on your computer before you begin with the tutorial. You can check this by running `rustc --version` in your terminal. This tutorial was written with Rust version `1.70.0` but it will probably also work with other versions.
 
-Make sure you have a working Rust environment installed on your computer before you begin with the tutorial. You can check this by running `rustc --version` in your terminal. This tutorial was written with Rust version `1.70.0` but it will probably also work with other versions.
-
-If you don't have Rust installed yet you can follow the steps on the official Rust website: [How to install Rust](https://www.rust-lang.org/tools/install).
-
+    If you don't have Rust installed yet you can follow the steps on the official Rust website: [How to install Rust](https://www.rust-lang.org/tools/install).
 </details>
 
 ## Download `aquadoggo`

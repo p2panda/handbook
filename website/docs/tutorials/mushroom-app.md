@@ -34,10 +34,9 @@ All cool polar mushroom animals know that it is not always possible to identify 
 * Terminal
 * Browser
 
-<details><summary>How do I install NodeJS?</summary>
-
-You can check out the official [Installing Node.js via package manager](https://nodejs.org/en/download/package-manager/) guidelines here. But we would recommend you installing a NodeJS version manager like [nvm](https://github.com/nvm-sh/nvm), or even better [n](https://github.com/tj/n). We used the NodeJS version `18.8.0` for this tutorial.
-
+<details>
+    <summary>How do I install NodeJS?</summary>
+    You can check out the official [Installing Node.js via package manager](https://nodejs.org/en/download/package-manager/) guidelines here. But we would recommend you installing a NodeJS version manager like [nvm](https://github.com/nvm-sh/nvm), or even better [n](https://github.com/tj/n). We used the NodeJS version `18.8.0` for this tutorial.
 </details>
 
 ## Start node
