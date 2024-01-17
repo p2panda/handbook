@@ -225,7 +225,7 @@ export default function Home(): JSX.Element {
         <Section>
           <Pentagon size={1000} color={BLUE} margin={4} right />
           <Title text="Open protocol specification and research">
-            Read the <a href="specification">specification</a>
+            Read the <a href="specifications">specification</a>
           </Title>
           <Drawing url="/images/panda-artwork-1.png" />
         </Section>
