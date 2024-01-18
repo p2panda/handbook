@@ -13,18 +13,19 @@ import ImageFrame from '@site/src/components/ImageFrame';
   url={require('./assets/extensions.png')}
 />
 
-**namakemono** was designed to solve hard privacy and efficiency problems when building collaborative applications in peer-to-peer systems. This includes:
+**namakemono** was designed to solve common privacy- and efficiency problems when building collaborative applications in peer-to-peer systems. This includes:
 
 * **Offline-first collaboration:** Create and edit data with others, even when you're offline. Distributed systems usually compromise on "how long" you can be offline, namakemono gives you the tools to stay offline as long as you want
 * **Fine-grained capabilities:** Full control over your data by defining who can sync, create, update or delete what. Usually capability system require nodes to be online, namakemono allows capabilities to be offline-first
 * **End-to-end encryption:** Secure and scaleable group encryption with a decentralised variant of the Messaging-Layer-Security (MLS) protocol
 * **Don't grow data forever, except if you want to:** Keep the history of all changes if you need them, or delete old data instantly when your application does not require it, even of other authors
+* **Hybrid networks:** Use namakemono in both peer-to-peer or federated networks, or even both of them at the same time
 * **Privacy-respecting deletion:** Delete whole collections of data with one tombstone or let data disappear by itself, giving it an expiry date
 * **Schemas:** Define and distribute versioned and migratable schemas of your choice to validate incoming data
 * **Collections:** Structure hierarchies of data collections, combining them with permissions to model user-roles, moderation, admin access and more typical application concerns
 * **Re-use your key-pair:** .. on multiple devices without being afraid of accidental forks
 * **Efficient and partial sync:** namakemono is still a linked-list and can leverage from fast, simple and efficient log-replication
-* **Flexible:** Use any CRDT, data validation format, encoding, digital signature algorithm or hashing algorithm you want!
+* **Flexible:** Use any CRDT, database, transport, data validation format, encoding, digital signature algorithm or hashing algorithm you want!
 
 :::note Status: Draft
 
@@ -42,7 +43,7 @@ If you have any comments or feedback on this specification. Please [contact us](
 />
 
 <ImageFrame
-  title="Old data in the log + metadata can be removed directly as soon as new data arrives! How much history you want to keep is configurable."
+  title="Old data in the log + metadata can be removed directly as soon as new data arrives! How much history you want to keep is configurable"
   url={require('./assets/log-depth.png')}
 />
 
@@ -211,7 +212,7 @@ If you have any comments or feedback on this specification. Please [contact us](
 * Example: Using a CRDT into the operation body (like [YJS](https://docs.yjs.dev/) documents, for collaborative text editing for example), you might be interested *only* in the last operations per author and merge them to receive the latest document state:
 
 <ImageFrame
-  title="Document with maximum depth = 1, useful for working with CRDTs like y-js"
+  title="Document with maximum depth(1), useful for working with CRDTs like y-js"
   url={require('./assets/yjs-example.png')}
 />
 
