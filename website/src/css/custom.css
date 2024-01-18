@@ -129,6 +129,12 @@
   border-color: transparent !important;
 }
 
+/* Since docusaurus v3 the `main-wrapper` is a flex-box which breaks
+ * our landing page */
+.main-wrapper {
+  display: block !important;
+}
+
 /* Utils */
 
 .truncate {
