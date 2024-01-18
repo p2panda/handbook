@@ -6,7 +6,7 @@ import ImageFrame from '@site/src/components/ImageFrame';
 
 > 🦥 namakemono = Sloth (Japanese) = Slow and forgetful = very delay-tolerant, offline-first and privacy-respecting 🩷
 
-**namakemono** is a protocol designed for peer-to-peer and federated applications. It gives them sloth-superpowers: offline-first collaboration, fine-grained permissions, data validation, schema migration, decentralised MLS encryption, low memory footprint, efficient replication and privacy-respecting deletion.
+**namakemono** is a protocol for peer-to-peer and federated applications. It gives them sloth-superpowers: offline-first collaboration, fine-grained permissions, data validation, schema migration, decentralised MLS encryption, low memory footprint, efficient replication and privacy-respecting deletion.
 
 <ImageFrame
   title="Sloth-Superpowers!"
@@ -16,7 +16,7 @@ import ImageFrame from '@site/src/components/ImageFrame';
 **namakemono** was designed to solve hard privacy and efficiency problems when building collaborative applications in peer-to-peer systems. This includes:
 
 * **Offline-first collaboration:** Create and edit data with others, even when you're offline. Distributed systems usually compromise on "how long" you can be offline, namakemono gives you the tools to stay offline as long as you want
-* **Fine-grained capabilities:** Full control over your data by defining who can sync, create, update or delete what. Usually capability system require nodes to be online, namakemono designed a system which is offline-first
+* **Fine-grained capabilities:** Full control over your data by defining who can sync, create, update or delete what. Usually capability system require nodes to be online, namakemono allows capabilities to be offline-first
 * **End-to-end encryption:** Secure and scaleable group encryption with a decentralised variant of the Messaging-Layer-Security (MLS) protocol
 * **Don't grow data forever, except if you want to:** Keep the history of all changes if you need them, or delete old data instantly when your application does not require it, even of other authors
 * **Privacy-respecting deletion:** Delete whole collections of data with one tombstone or let data disappear by itself, giving it an expiry date
