@@ -409,11 +409,14 @@ Encryption is mostly handled by MLS and our "Secret Group" specification which i
 
 ## Replication
 
-* Nodes essentially ask for what documents (for example scoped by document ids, collection id, schema id, etc.) they are interested in and always prefer "latest" documents to be sent first (usually sorted by `timestamp`).
-* Replication in itself is taking place by exchanging "log heights" since all documents can be expressed as logs, even when including forks (the forked branch is considered its own "log")
-* Log heights are tuples of `(document id, public key, latest known seq num)`
-* The latest known operation id needs to be added as well if it is known that a fork exists
-* Nodes can not retrieve any data from any author or document if no `sync` capability was given
+- Nodes essentially ask for what documents (for example scoped by schema id, timestamp range,
+  collection ids, document ids etc.) they are interested in. As documents drop out of this scope
+  they can be garbage collected. Through configuring this scope they have control over the data
+  they persist locally and replicate on the network.
+- Replication in itself is taking place by exchanging "log heights" since all documents can be expressed as logs, even when including forks (the forked branch is considered its own "log")
+- Log heights are tuples of `(document id, public key, latest known seq num)`
+- The latest known operation id needs to be added as well if it is known that a fork exists
+- Nodes can not retrieve any data from any author or document if no `sync` capability was given
 
 <ImageFrame
   title="Two nodes replicating data with each other"
