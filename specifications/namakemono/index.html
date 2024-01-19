@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.1.0">
 <title data-rh="true">namakemono | p2panda</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://p2panda.org/specifications/namakemono/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="namakemono | p2panda"><meta data-rh="true" name="description" content="🦥 namakemono = Sloth (Japanese) = Slow and forgetful = very delay-tolerant, offline-first and privacy-respecting 🩷"><meta data-rh="true" property="og:description" content="🦥 namakemono = Sloth (Japanese) = Slow and forgetful = very delay-tolerant, offline-first and privacy-respecting 🩷"><link data-rh="true" rel="icon" href="/images/deepsea-panda.svg"><link data-rh="true" rel="canonical" href="https://p2panda.org/specifications/namakemono/"><link data-rh="true" rel="alternate" href="https://p2panda.org/specifications/namakemono/" hreflang="en"><link data-rh="true" rel="alternate" href="https://p2panda.org/specifications/namakemono/" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.5e54c1db.css">
-<script src="/assets/js/runtime~main.17ac1b39.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7d9a5b9e.js" defer="defer"></script>
 <script src="/assets/js/main.475c34c0.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -83,21 +83,6 @@
 </li>
 <li>By default it is not permitted to write to any document if you&#x27;re not the original author. Through <a href="#capabilities">&quot;Capabilities&quot;</a> we can add more authors, giving them the permission to write to your documents</li>
 </ul>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="views">Views<a href="#views" class="hash-link" aria-label="Direct link to Views" title="Direct link to Views">​</a></h2>
-<ul>
-<li>Document views represent the immutable state of a document at a particular point in its history of edits<!-- -->
-<ul>
-<li>Every change of a document results in a new document view</li>
-</ul>
-</li>
-<li>A document view is identified by its set of graph tips: the document view id<!-- -->
-<ul>
-<li>Each graph tip is represented as an operation id</li>
-</ul>
-</li>
-<li>It&#x27;s possible to replicate the exact state of a document from the document view id, as long as the history was preserved</li>
-<li>Document views are required for <code>previous</code> links, extensions, like capabilities or encryption</li>
-</ul>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="ordering">Ordering<a href="#ordering" class="hash-link" aria-label="Direct link to Ordering" title="Direct link to Ordering">​</a></h2>
 <ul>
 <li>We need a way to determine which operations took place before others when collaborating on the same document</li>
@@ -113,6 +98,21 @@
 <li>If no <code>previous</code> links have been given the <code>timestamp</code> is used to determine the ordering<!-- -->
 <div class="image-frame_fg61"><div class="image-frame-inner_Xabn"><div style="background-size:cover;background-repeat:no-repeat;position:relative;background-image:url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAABUklEQVR4nGNgYGBg0Kw/7WXcfmGqdtvl9tiFd12+f37b8PP334n///9PYkAGum03ssw7Lr7Ubzl/I3np/cz///+e+PHr99v////PhyphBJNSrc8yNTvvPlFou3fFb+GrpP//f8z79uPnvv///9ejmLiuPi1jdVPOg1X16Zf2z2pJ+Pz7/9Q3H75u+fHjVwWKwg+t+tmvO6yev2o1vvFlbmTil///+798+b7ux49fJSgKf5xSyb+/Q/nz411yj75eDsl6/Obv5pfv3l/7+fN3P4rC94sNUh7MNr71eJbu6fdbYhIevfmx8vX7Tye///zZjqLwaY11/v0G10/3q+0ePp+Rkf3y6999Hz5+evT379/pqAobLQrutTh+ud9o9fj5rJTsp5/+bHv59v3Nb99+TEJV2GzldrfdbebdOqvuN2sbAx+++vjg8Ys3/z9/+bIWFo4A3J7GJJfnrPIAAAAASUVORK5CYII=&quot;)"><svg style="width:100%;height:auto;max-width:100%;margin-bottom:-4px" width="1950" height="1955"></svg><noscript><img style="width:100%;height:auto;max-width:100%;margin-bottom:-4px;position:absolute;top:0;left:0" src="/assets/ideal-img/ordering.84e6ba0.1950.png" srcset="/assets/ideal-img/ordering.84e6ba0.1950.png 1950w" alt="Ordering operations of a document by timestamp" width="1950" height="1955"></noscript></div></div><div class="image-frame-title_UNlE">Ordering operations of a document by timestamp</div></div>
 </li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="views">Views<a href="#views" class="hash-link" aria-label="Direct link to Views" title="Direct link to Views">​</a></h2>
+<ul>
+<li>Document views represent the immutable state of a document at a particular point in its history of edits<!-- -->
+<ul>
+<li>Every change of a document results in a new document view</li>
+</ul>
+</li>
+<li>A document view is identified by its set of graph tips: the document view id<!-- -->
+<ul>
+<li>Each graph tip is represented as an operation id</li>
+</ul>
+</li>
+<li>It&#x27;s possible to replicate the exact state of a document from the document view id, as long as the history was preserved</li>
+<li>Document views are required for <code>previous</code> links, extensions, like capabilities or encryption</li>
 </ul>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="forks">Forks<a href="#forks" class="hash-link" aria-label="Direct link to Forks" title="Direct link to Forks">​</a></h2>
 <ul>
@@ -133,7 +133,7 @@
 <li>In this case causal ordering (<code>previous</code> links) between operations is sometimes lost and operation ordering falls-back to using <code>timestamp</code></li>
 </ul>
 </li>
-<li><strong>Deep documents</strong>: keep all causal history back to root<!-- -->
+<li><strong>Deep documents</strong>: keep all causal history back to the document&#x27;s CREATE operation<!-- -->
 <ul>
 <li>This guarantees accurate, delay-tolerant ordering of operations</li>
 <li>Garbage collection can still be performed on the body of operations</li>
@@ -147,10 +147,10 @@
 </ul>
 <div class="image-frame_fg61"><div class="image-frame-inner_Xabn"><div style="background-size:cover;background-repeat:no-repeat;position:relative;background-image:url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAJCAYAAAALpr0TAAAACXBIWXMAAAsTAAALEwEAmpwYAAABW0lEQVR4nGPYdOjyyr3n7r49dufdmfu3b3c9uXD4/ctrp/5/f3ipg4GBgeH////MIJohJjHffN2By5o3/v8XaWvq8Tuzd0vpyysnc389vmAOVcjIAANTpqziAdEf7531e3rp6LvHFw7//Pn4YhNI7MyZNNb//xmYwArr66eAFVZWdrgeP3Ag7+ndayn/3z81QjFRpfFagXHL2Z1yjXcW9pYXxrwolp9yvUh78Ytyyah3B6T6bq+W2fp+t/R0hoBZd2dEzLzy3WPmgxsrZk5sejU9+un9qYm/3s2N6n17zHX/3e1u398dcz8DMnrC718/3/7/8+vC////a379+X/5x++/z/7+/9/y68//HT9//X/z5///Qwz//v3je/bsmfzZq1flL1++LXvz5l3bG3fuON++fVvl4sWLMs+fP1f4//+/CNidsLD6//+/28dPn558/PT547dv36qRwxEAsZLUU1zKM4MAAAAASUVORK5CYII=&quot;)"><svg style="width:100%;height:auto;max-width:100%;margin-bottom:-4px" width="1930" height="1788"></svg><noscript><img style="width:100%;height:auto;max-width:100%;margin-bottom:-4px;position:absolute;top:0;left:0" src="/assets/ideal-img/yjs-example.6c62c90.1930.png" srcset="/assets/ideal-img/yjs-example.6c62c90.1930.png 1930w" alt="Document with maximum depth(1), useful for working with CRDTs like y-js" width="1930" height="1788"></noscript></div></div><div class="image-frame-title_UNlE">Document with maximum depth(1), useful for working with CRDTs like y-js</div></div>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="deletion">Deletion<a href="#deletion" class="hash-link" aria-label="Direct link to Deletion" title="Direct link to Deletion">​</a></h2>
-<p>namekomono offers different forms of automatic or user-indented deletion, with various degrees of privacy as sometimes you do not want to keep traces of what data has been deleted by whom.</p>
+<p>namakemono offers different forms of automatic or user-indented deletion, with various degrees of privacy as sometimes you do not want to keep traces of what data has been deleted by whom.</p>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="garbage-collection">Garbage Collection<a href="#garbage-collection" class="hash-link" aria-label="Direct link to Garbage Collection" title="Direct link to Garbage Collection">​</a></h3>
 <ul>
-<li>Pruning only takes place locally, other peers do not need to be informed about this decision</li>
+<li>Garbage collection only takes place locally, other peers do not need to be informed about this decision</li>
 </ul>
 <h4 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="operations-1">Operations<a href="#operations-1" class="hash-link" aria-label="Direct link to Operations" title="Direct link to Operations">​</a></h4>
 <ul>
@@ -160,13 +160,16 @@
 <h4 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="documents-1">Documents<a href="#documents-1" class="hash-link" aria-label="Direct link to Documents" title="Direct link to Documents">​</a></h4>
 <ul>
 <li>Some documents are only retained when they are referenced by other documents, or if a reference they contain is still alive</li>
-<li>When references expire, entire documents or collections can be automatically garbage collected</li>
+<li>When references expire, documents or entire collections can be automatically garbage collected
+without leaving a trace</li>
 <li>See <a href="#collections">&quot;Collections&quot;</a> for an example</li>
 </ul>
 <h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="tombstones">Tombstones<a href="#tombstones" class="hash-link" aria-label="Direct link to Tombstones" title="Direct link to Tombstones">​</a></h3>
 <ul>
-<li>To delete a whole document we can publish a <strong>Tombstone</strong> operation which will cause all operations of this document to be deleted</li>
-<li>This tombstone is sent to other peers and kept forever to inform them that we want this document to be deleted</li>
+<li>To delete a single document we can publish a <strong>Tombstone</strong> operation which will cause all operations for this document to be deleted</li>
+<li>This tombstone is sent other peers to inform them that we want this document to be deleted. To
+ensure the document remains deleted network wide, the tombstone should be kept until the
+document is &quot;dropped&quot; via garbage collection</li>
 <li>If we want to delete / tombstone the document we add the action field inside the header, no body is required<!-- -->
 <div class="language-rust codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#d3d0c8;--prism-background-color:#2d2d2d"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-rust codeBlock_bY9V thin-scrollbar" style="color:#d3d0c8;background-color:#2d2d2d"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#d3d0c8"><span class="token keyword" style="color:#ffcc66">struct</span><span class="token plain"> </span><span class="token type-definition class-name" style="color:#9ddab3">Header</span><span class="token plain"> </span><span class="token punctuation" style="color:#f2f0ec">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#d3d0c8"><span class="token plain">    </span><span class="token comment" style="color:#66cccc">/// Needs to be set to &quot;true&quot; to tombstone this document</span><span class="token plain"></span><br></span><span class="token-line" style="color:#d3d0c8"><span class="token plain">    tombstone</span><span class="token punctuation" style="color:#f2f0ec">:</span><span class="token plain"> </span><span class="token class-name" style="color:#9ddab3">Option</span><span class="token operator" style="color:#f2f0ec">&lt;</span><span class="token keyword" style="color:#ffcc66">bool</span><span class="token operator" style="color:#f2f0ec">&gt;</span><span class="token punctuation" style="color:#f2f0ec">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#d3d0c8"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#d3d0c8"><span class="token plain">    </span><span class="token comment" style="color:#66cccc">// .. plus all other header fields</span><span class="token plain"></span><br></span><span class="token-line" style="color:#d3d0c8"><span class="token plain"></span><span class="token punctuation" style="color:#f2f0ec">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
@@ -232,7 +235,8 @@
 </li>
 <li>These tokens can be revoked at any time<!-- -->
 <ul>
-<li>If deterministic behaviour during revocation is required, a high document depth is recommended</li>
+<li>If verifiable causal history during revocation is required, a high document depth and
+including <code>previous</code> is recommended</li>
 </ul>
 </li>
 <li>To create a capability document we publish a CREATE operation with the following <code>schema_id</code> header<!-- -->
@@ -345,12 +349,15 @@
 </ul>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="replication">Replication<a href="#replication" class="hash-link" aria-label="Direct link to Replication" title="Direct link to Replication">​</a></h2>
 <ul>
-<li>Nodes essentially ask for what documents (for example scoped by document ids, collection id, schema id, etc.) they are interested in and always prefer &quot;latest&quot; documents to be sent first (usually sorted by <code>timestamp</code>).</li>
+<li>Nodes essentially ask for what documents (for example scoped by schema id, timestamp range,
+collection ids, document ids etc.) they are interested in. As documents drop out of this scope
+they can be garbage collected. Through configuring this scope they have control over the data
+they persist locally and replicate on the network.</li>
 <li>Replication in itself is taking place by exchanging &quot;log heights&quot; since all documents can be expressed as logs, even when including forks (the forked branch is considered its own &quot;log&quot;)</li>
 <li>Log heights are tuples of <code>(document id, public key, latest known seq num)</code></li>
 <li>The latest known operation id needs to be added as well if it is known that a fork exists</li>
 <li>Nodes can not retrieve any data from any author or document if no <code>sync</code> capability was given</li>
 </ul>
-<div class="image-frame_fg61"><div class="image-frame-inner_Xabn"><div style="background-size:cover;background-repeat:no-repeat;position:relative;background-image:url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAHCAYAAAAxrNxjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxUlEQVR4nE2NPQrCQBSEV5QEGw9gp42FIgop1CoeQPQE4i0sBY+zB8gprCxioYIhpdW6f9ksZGRjEnzwHsObjxlSFIUfx/flM02n5Dctd5Lk3b/eHgHnPGRCHAhjbMSFeEmpLijQq2CitR5Ya8OPlFsh1JEAKBPyPA+01us/cJhl2cbpkqlBA0yUUqvaANAB0AXQBuA1IOdmzJhcVKAzy38zTaIxc15VR1HkU0o9p12LlHLXgABmXOvQ6ROlntsqYG+tPX8BtB+P0F7hlKkAAAAASUVORK5CYII=&quot;)"><svg style="width:100%;height:auto;max-width:100%;margin-bottom:-4px" width="2358" height="1768"></svg><noscript><img style="width:100%;height:auto;max-width:100%;margin-bottom:-4px;position:absolute;top:0;left:0" src="/assets/ideal-img/replication.71979d9.2358.png" srcset="/assets/ideal-img/replication.71979d9.2358.png 2358w" alt="Two nodes replicating data with each other" width="2358" height="1768"></noscript></div></div><div class="image-frame-title_UNlE">Two nodes replicating data with each other</div></div></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/specifications/"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Specifications</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/specifications/aquadoggo/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">aquadoggo API</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#short-overview" class="table-of-contents__link toc-highlight">Short overview</a></li><li><a href="#encoding--cryptographic-primitives" class="table-of-contents__link toc-highlight">Encoding &amp; Cryptographic Primitives</a></li><li><a href="#documents" class="table-of-contents__link toc-highlight">Documents</a></li><li><a href="#operations" class="table-of-contents__link toc-highlight">Operations</a></li><li><a href="#creating-documents" class="table-of-contents__link toc-highlight">Creating documents</a></li><li><a href="#updating-documents" class="table-of-contents__link toc-highlight">Updating documents</a></li><li><a href="#collaboration" class="table-of-contents__link toc-highlight">Collaboration</a></li><li><a href="#views" class="table-of-contents__link toc-highlight">Views</a></li><li><a href="#ordering" class="table-of-contents__link toc-highlight">Ordering</a></li><li><a href="#forks" class="table-of-contents__link toc-highlight">Forks</a></li><li><a href="#history" class="table-of-contents__link toc-highlight">History</a></li><li><a href="#deletion" class="table-of-contents__link toc-highlight">Deletion</a><ul><li><a href="#garbage-collection" class="table-of-contents__link toc-highlight">Garbage Collection</a></li><li><a href="#tombstones" class="table-of-contents__link toc-highlight">Tombstones</a></li></ul></li><li><a href="#extensions" class="table-of-contents__link toc-highlight">Extensions</a><ul><li><a href="#ephemeral-documents" class="table-of-contents__link toc-highlight">Ephemeral documents</a></li><li><a href="#schemas" class="table-of-contents__link toc-highlight">Schemas</a></li><li><a href="#collections" class="table-of-contents__link toc-highlight">Collections</a></li><li><a href="#capabilities" class="table-of-contents__link toc-highlight">Capabilities</a></li><li><a href="#encryption" class="table-of-contents__link toc-highlight">Encryption</a></li></ul></li><li><a href="#replication" class="table-of-contents__link toc-highlight">Replication</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer_J6tW"><img class="footer-img__0Xc" src="/images/deepsea-panda.svg" width="100"><div><img class="supporters-img_P2oV" src="/images/nlnet-logo.svg" width="140"><img class="supporters-img_P2oV" src="/images/ngi-logo.png" width="200"><img class="supporters-img_P2oV" src="/images/eu-flag-logo.png" width="78"><p class="footer-text_MXRq">This project has received funding from the European Union’s Horizon 2020 research and innovation programme within the framework of the NGI-POINTER Project funded under grant agreement No 871528, NGI-ASSURE No 957073 and NGI0-ENTRUST No 101069594</p></div><p class="footer-text_MXRq">CC BY-SA 4.0<!-- --> - <a href="/contact">Contact</a> -<!-- --> <a href="https://autonomous.zone/@p2panda" target="_blank" rel="noreferrer">Fediverse</a></p></footer></div>
+<div class="image-frame_fg61"><div class="image-frame-inner_Xabn"><div style="background-size:cover;background-repeat:no-repeat;position:relative;background-image:url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAHCAYAAAAxrNxjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAxUlEQVR4nE2NPQrCQBSEV5QEGw9gp42FIgop1CoeQPQE4i0sBY+zB8gprCxioYIhpdW6f9ksZGRjEnzwHsObjxlSFIUfx/flM02n5Dctd5Lk3b/eHgHnPGRCHAhjbMSFeEmpLijQq2CitR5Ya8OPlFsh1JEAKBPyPA+01us/cJhl2cbpkqlBA0yUUqvaANAB0AXQBuA1IOdmzJhcVKAzy38zTaIxc15VR1HkU0o9p12LlHLXgABmXOvQ6ROlntsqYG+tPX8BtB+P0F7hlKkAAAAASUVORK5CYII=&quot;)"><svg style="width:100%;height:auto;max-width:100%;margin-bottom:-4px" width="2358" height="1768"></svg><noscript><img style="width:100%;height:auto;max-width:100%;margin-bottom:-4px;position:absolute;top:0;left:0" src="/assets/ideal-img/replication.71979d9.2358.png" srcset="/assets/ideal-img/replication.71979d9.2358.png 2358w" alt="Two nodes replicating data with each other" width="2358" height="1768"></noscript></div></div><div class="image-frame-title_UNlE">Two nodes replicating data with each other</div></div></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/specifications/"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Specifications</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/specifications/aquadoggo/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">aquadoggo API</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#short-overview" class="table-of-contents__link toc-highlight">Short overview</a></li><li><a href="#encoding--cryptographic-primitives" class="table-of-contents__link toc-highlight">Encoding &amp; Cryptographic Primitives</a></li><li><a href="#documents" class="table-of-contents__link toc-highlight">Documents</a></li><li><a href="#operations" class="table-of-contents__link toc-highlight">Operations</a></li><li><a href="#creating-documents" class="table-of-contents__link toc-highlight">Creating documents</a></li><li><a href="#updating-documents" class="table-of-contents__link toc-highlight">Updating documents</a></li><li><a href="#collaboration" class="table-of-contents__link toc-highlight">Collaboration</a></li><li><a href="#ordering" class="table-of-contents__link toc-highlight">Ordering</a></li><li><a href="#views" class="table-of-contents__link toc-highlight">Views</a></li><li><a href="#forks" class="table-of-contents__link toc-highlight">Forks</a></li><li><a href="#history" class="table-of-contents__link toc-highlight">History</a></li><li><a href="#deletion" class="table-of-contents__link toc-highlight">Deletion</a><ul><li><a href="#garbage-collection" class="table-of-contents__link toc-highlight">Garbage Collection</a></li><li><a href="#tombstones" class="table-of-contents__link toc-highlight">Tombstones</a></li></ul></li><li><a href="#extensions" class="table-of-contents__link toc-highlight">Extensions</a><ul><li><a href="#ephemeral-documents" class="table-of-contents__link toc-highlight">Ephemeral documents</a></li><li><a href="#schemas" class="table-of-contents__link toc-highlight">Schemas</a></li><li><a href="#collections" class="table-of-contents__link toc-highlight">Collections</a></li><li><a href="#capabilities" class="table-of-contents__link toc-highlight">Capabilities</a></li><li><a href="#encryption" class="table-of-contents__link toc-highlight">Encryption</a></li></ul></li><li><a href="#replication" class="table-of-contents__link toc-highlight">Replication</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer_J6tW"><img class="footer-img__0Xc" src="/images/deepsea-panda.svg" width="100"><div><img class="supporters-img_P2oV" src="/images/nlnet-logo.svg" width="140"><img class="supporters-img_P2oV" src="/images/ngi-logo.png" width="200"><img class="supporters-img_P2oV" src="/images/eu-flag-logo.png" width="78"><p class="footer-text_MXRq">This project has received funding from the European Union’s Horizon 2020 research and innovation programme within the framework of the NGI-POINTER Project funded under grant agreement No 871528, NGI-ASSURE No 957073 and NGI0-ENTRUST No 101069594</p></div><p class="footer-text_MXRq">CC BY-SA 4.0<!-- --> - <a href="/contact">Contact</a> -<!-- --> <a href="https://autonomous.zone/@p2panda" target="_blank" rel="noreferrer">Fediverse</a></p></footer></div>
 </body>
 </html>
