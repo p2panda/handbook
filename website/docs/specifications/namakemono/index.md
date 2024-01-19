@@ -327,7 +327,8 @@ Capabilities are in the workings for 2024. Watch this space!
 * Capabilites are documents which grant permissions to certain public keys
     * It's like a token given to somebody else and they can use this token to proof now that they are allowed to do something
 * These tokens can be revoked at any time
-    * If deterministic behaviour during revocation is required, a high document depth is recommended
+    * If verifiable causal history during revocation is required, a high document depth and
+      including `previous` is recommended
 * To create a capability document we publish a CREATE operation with the following `schema_id` header
     * `schema_id`: `caps_v1`
         * System schema identifier for capabilities documents
