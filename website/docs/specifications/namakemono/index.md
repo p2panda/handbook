@@ -222,7 +222,7 @@ namakemono offers different forms of automatic or user-indented deletion, with v
 
 ### Garbage Collection
 
-* Pruning only takes place locally, other peers do not need to be informed about this decision
+* Garbage collection only takes place locally, other peers do not need to be informed about this decision
 
 #### Operations
 
@@ -232,13 +232,16 @@ namakemono offers different forms of automatic or user-indented deletion, with v
 #### Documents
 
 * Some documents are only retained when they are referenced by other documents, or if a reference they contain is still alive
-* When references expire, entire documents or collections can be automatically garbage collected
+* When references expire, documents or entire collections can be automatically garbage collected
+  without leaving a trace
 * See ["Collections"](#collections) for an example
 
 ### Tombstones
 
-* To delete a whole document we can publish a **Tombstone** operation which will cause all operations of this document to be deleted
-* This tombstone is sent to other peers and kept forever to inform them that we want this document to be deleted
+* To delete a single document we can publish a **Tombstone** operation which will cause all operations for this document to be deleted
+* This tombstone is sent other peers to inform them that we want this document to be deleted. To
+  ensure the document remains deleted network wide, the tombstone should be kept until the
+  document is "dropped" via garbage collection
 * If we want to delete / tombstone the document we add the action field inside the header, no body is required
     ```rust
     struct Header {
