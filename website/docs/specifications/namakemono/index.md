@@ -149,15 +149,6 @@ If you have any comments or feedback on this specification. Please [contact us](
     />
 * By default it is not permitted to write to any document if you're not the original author. Through ["Capabilities"](#capabilities) we can add more authors, giving them the permission to write to your documents
 
-## Views
-
-* Document views represent the immutable state of a document at a particular point in its history of edits
-    * Every change of a document results in a new document view
-* A document view is identified by its set of graph tips: the document view id
-    * Each graph tip is represented as an operation id
-* It's possible to replicate the exact state of a document from the document view id, as long as the history was preserved
-* Document views are required for `previous` links, extensions, like capabilities or encryption
-
 ## Ordering
 
 * We need a way to determine which operations took place before others when collaborating on the same document
@@ -184,6 +175,15 @@ If you have any comments or feedback on this specification. Please [contact us](
       title="Ordering operations of a document by timestamp"
       url={require('./assets/ordering.png')}
     />
+
+## Views
+
+* Document views represent the immutable state of a document at a particular point in its history of edits
+    * Every change of a document results in a new document view
+* A document view is identified by its set of graph tips: the document view id
+    * Each graph tip is represented as an operation id
+* It's possible to replicate the exact state of a document from the document view id, as long as the history was preserved
+* Document views are required for `previous` links, extensions, like capabilities or encryption
 
 ## Forks
 
