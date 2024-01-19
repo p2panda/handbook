@@ -204,7 +204,7 @@ If you have any comments or feedback on this specification. Please [contact us](
     * **Shallow documents**: only keep the latest `n` operations
         * As new operations arrive from each author, they replace older versions, these older operations can be garbage collected
         * In this case causal ordering (`previous` links) between operations is sometimes lost and operation ordering falls-back to using `timestamp`
-    * **Deep documents**: keep all causal history back to root
+    * **Deep documents**: keep all causal history back to the document's CREATE operation
         * This guarantees accurate, delay-tolerant ordering of operations
         * Garbage collection can still be performed on the body of operations
         * Headers are retained for the lifetime of the document
