@@ -218,7 +218,7 @@ If you have any comments or feedback on this specification. Please [contact us](
 
 ## Deletion
 
-namekomono offers different forms of automatic or user-indented deletion, with various degrees of privacy as sometimes you do not want to keep traces of what data has been deleted by whom.
+namakemono offers different forms of automatic or user-indented deletion, with various degrees of privacy as sometimes you do not want to keep traces of what data has been deleted by whom.
 
 ### Garbage Collection
 
