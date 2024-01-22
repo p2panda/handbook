@@ -60,7 +60,7 @@ Ok, we want to create our own schema. To get the process started, make sure you'
 ./fishy init
 ```
 
-A dialogue will ask you for the name of your first schema. Enter a name, for example cafe and press `enter` (don't worry, you can change this later). You will now find a `schema.toml` and `secret.txt` file in your folder.
+A dialogue will ask you for the name of your first schema. Enter a name, for example "cafes" and press `enter` (don't worry, you can change this later). You will now find a `schema.toml` and `secret.txt` file in your folder.
 
 The `schema.toml` contains some example schema definitions which we will edit in a moment, the `secret.txt` contains the private key which will be used for signing commits when building the schema.
 
@@ -97,8 +97,8 @@ The list of fields describe key-value pairs comprising of the field name, and it
 
 - `relation`, which can be a reference to another document.
 - `relation_list`, which can be a list of references to many documents!
-- `pinned_relation`, which can be a reference to a _document view_. This is a document in a past, historical version. Like an _archived_ version you wanted to keep. So cool.
-- `pinned_relation_list`, which is a list of document views! 🤯
+- `pinned_relation`, which can be a reference to a _document view_. This is a document in a past, historical version. Like an _archived_ version you wanted to keep.
+- `pinned_relation_list`, which is a list of document views!
 
 If we look at the `cafes` field in our `[icecream.fields]` list, you can see that there is an additional `schema` value in the field type object. This indicates that any documents which are related to in the `cafe` field will be of the type `cafe`, the name used here refers to the schema defined earlier in the file.
 
