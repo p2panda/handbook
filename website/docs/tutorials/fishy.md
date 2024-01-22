@@ -282,7 +282,7 @@ You can now visit [http://localhost:2020/graphql](http://localhost:2020/graphql)
 
 ## Querying `icecreams` documents
 
-We've created a new field now, so we can also directly inspect it via the GraphQL playground of the `aquadoggo` node. For this you can just surf to [http://localhost:2020/graphql](http://localhost:2020/graphql) and run the following query, replacing <ICECREAMS_SCHEMA_ID> with the schema id output when you ran `deploy` earlier:
+We've created a new field now, so we can also directly inspect it via the GraphQL playground of the `aquadoggo` node. For this you can just surf to [http://localhost:2020/graphql](http://localhost:2020/graphql) and run the following query, replacing `<ICECREAMS_SCHEMA_ID>` with the schema id output when you ran `deploy` earlier:
 
 ```graphql
 {
