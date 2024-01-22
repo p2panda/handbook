@@ -18,79 +18,105 @@ Nodes are usually agnostic to the applications using them, this means that one n
 
 ## What do I need?
 
-- Rust
 - Terminal
 - Browser
-
-:::info Never worked with Rust before?
-
-This tutorial requires you to have a working Rust environment. If you have never worked with Rust before this is no problem! Setting it up is fairly easy and besides using some basic command line commands there is no more Rust knowledge required to make `aquadoggo` run on your computer.
-
-:::
-
-<details>
-    <summary>How do I install Rust?</summary>
-    Make sure you have a working Rust environment installed on your computer before you begin with the tutorial. You can check this by running `rustc --version` in your terminal. This tutorial was written with Rust version `1.70.0` but it will probably also work with other versions.
-
-    If you don't have Rust installed yet you can follow the steps on the official Rust website: [How to install Rust](https://www.rust-lang.org/tools/install).
-</details>
 
 ## Download `aquadoggo`
 
 Let's download `aquadoggo`! For this we first download the whole git repository with the source code inside:
 
-```bash
-# Download git repository
-git clone https://github.com/p2panda/aquadoggo.git
+Head over to the [Releases](https://github.com/p2panda/aquadoggo/releases) page to download the pre-compiled binary for your platform. This tutorial was written using `v0.7.0`.
 
-# Enter the folder you've just created
-cd aquadoggo
+Or on the command line:
+
+```bash
+# Download and unpack aquadoggo v0.7.0
+curl -L https://github.com/p2panda/aquadoggo/releases/download/v0.7.0/aquadoggo-v0.7.0-x86_64-unknown-linux-gnu.tar.gz | tar -xz
 ```
+
+For the rest of the tutorial we will run aquadoggo simply using the command `./aquadoggo`. If required, in your own commands adjust this to match the name of the binary you downloaded or rename it to accordingly.
 
 ## Start the node
 
-To run the node now you only have to run this command inside the project's folder:
+To start the node now you only have to run the following command. Make sure you're in the directory where you downloaded the aquadoggo binary!
 
 ```bash
-cargo run
+./aquadoggo
 ```
 
-This will automatically download all required Rust dependencies, compile the application and finally start it. Probably you will see a lot of logs now around what the Rust compiler is doing. Depending on your computer and network connection this might take a couple of minutes. The good thing though is, that you only have to do this once, the next time you run the command, it will start the program directly.
-
-When the compilation finished and the program started you will see .. almost nothing!
+You should see roughly this output:
 
 ```
-    Finished dev [unoptimized + debuginfo] target(s) in 0.10s
-     Running `target/debug/aquadoggo`
+                       ██████ ███████ ████
+                      ████████       ██████
+                      ██████            ███
+                       █████              ██
+                       █     ████      █████
+                      █     ██████   █ █████
+                     ██      ████   ███ █████
+                    █████         ██████    █
+                   ███████                ██
+                   █████████   █████████████
+                   ███████████      █████████
+                   █████████████████         ████
+              ██████    ███████████              ██
+          ██████████        █████                 █
+           █████████        ██          ███       ██
+             ██████        █            █           ██
+                ██       ██             ███████     ██
+              ███████████                      ██████
+████████     ████████████                   ██████
+████   ██████ ██████████            █   ████
+  █████████   ████████       ███    ███████
+    ████████             ██████    ████████
+█████████  ████████████████████████   ███
+█████████                      ██
+
+aquadoggo v0.7.0
+
+No config file provided
+
+Configuration
+
+Allow schema IDs: * (any schema id)
+Database URL: memory (data is not persisted)
+mDNS: enabled
+Private key: ephemeral (not persisted)
+Relay mode: disabled
+
+Node is ready!
+
+Go to http://0.0.0.0:2020/graphql to use GraphQL playground
+Peer id: 12D3KooWRfiHJzaRAoBAEkS4g9n9EP5x7muN6QXqpALH3HRBxEdn
+Node is listening on 0.0.0.0:2022
 ```
 
-This is because by default the program will not spit out any information except when you explicitly asked about it.
+Well done!! You have a running `aquadoggo` node :-)
 
-The node is already running, you are done!
+Let's unpack the output a little. There's a cute panda riding an aquadoggo of course, then version, then `"No Config file provided`" followed by some default configuration values. We wanted it to be easy to get started and play around with `aquadoggo` and so default configurations values are chosen to help this. With this configuration the node can be considered "ephemeral" as it doesn't persist any data between runs. Additionally it is configured to discover other nodes on the local network, ask them what schema they know about, and start supporting these schema itself. This again is behavior quite handy for development, but unlikely to be what you want in production.
 
 ### See more logs
 
 We can quit the node by pressing `CTRL` + `C` in the regarding terminal. Let's start it again, but this time with more logging enabled:
 
 ```bash
-RUST_LOG=aquadoggo=info cargo run
+./aquadoggo --log-level=info
 ```
 
-This will enable logs coming directly from `aquadoggo` and only the most important ones, like basic system informations, warnings and errors. We are enabling logging with the environment variable `RUST_LOG`.
-
-Ah, this looks more interesting now:
+As well as the above, you should now get these more detailed logs:
 
 ```
-    Finished dev [unoptimized + debuginfo] target(s) in 0.10s
-     Running `target/debug/aquadoggo`
-[2023-08-07T12:52:59Z INFO  aquadoggo::manager] Start materializer service
-[2023-08-07T12:52:59Z INFO  aquadoggo::materializer::worker] Register reduce worker with pool size 16
-[2023-08-07T12:52:59Z INFO  aquadoggo::materializer::worker] Register dependency worker with pool size 16
-[2023-08-07T12:52:59Z INFO  aquadoggo::materializer::worker] Register schema worker with pool size 16
-[2023-08-07T12:52:59Z INFO  aquadoggo::manager] Start http service
-[2023-08-07T12:52:59Z INFO  aquadoggo::manager] Start network service
-[2023-08-07T12:52:59Z INFO  aquadoggo::network::service] Local peer id: <NODE_PEER_ID>
-[2023-08-07T12:52:59Z INFO  aquadoggo::manager] Start replication service
+[2024-01-22T15:44:50Z INFO  aquadoggo::manager] Start materializer service
+[2024-01-22T15:44:50Z INFO  aquadoggo::materializer::worker] Register reduce worker with pool size 16
+[2024-01-22T15:44:50Z INFO  aquadoggo::materializer::worker] Register dependency worker with pool size 16
+[2024-01-22T15:44:50Z INFO  aquadoggo::materializer::worker] Register schema worker with pool size 16
+[2024-01-22T15:44:50Z INFO  aquadoggo::materializer::worker] Register blob worker with pool size 16
+[2024-01-22T15:44:50Z INFO  aquadoggo::materializer::worker] Register garbage_collection worker with pool size 16
+[2024-01-22T15:44:50Z INFO  aquadoggo::manager] Start http service
+[2024-01-22T15:44:50Z INFO  aquadoggo::manager] Start network service
+[2024-01-22T15:44:50Z INFO  aquadoggo::network::service] Networking service initializing...
+[2024-01-22T15:44:50Z INFO  aquadoggo::network::service] Network service ready!
+[2024-01-22T15:44:50Z INFO  aquadoggo::manager] Start replication service
 ```
 
 If you want to see even more you can change the log verbosity from `info` to `debug` or even `trace`, but then you will see a whole flood of information you might not always need.
@@ -138,7 +164,7 @@ It will return the following, relative unspectacular response in the right area:
 }
 ```
 
-Still, this is already doing a lot! With this query we asked our `aquadoggo` if it knows any schemas and since we have just started it it doesn't know any yet! This is why the response is empty .. It's soon time to teach the `aquadoggo` some tricks but this is part of the next [how to create a schema tutorial](/tutorials/send-to-node). For now we get to know the doggo a little bit better.
+Still, this is already doing a lot! With this query we asked our `aquadoggo` if it knows any schemas and since we have just started it it doesn't know any yet! This is why the response is empty .. It's soon time to teach the `aquadoggo` some tricks but this is part of the next [how to create a schema tutorial](/tutorials/fishy). For now we get to know the doggo a little bit better.
 
 ### Documentation
 
@@ -157,54 +183,42 @@ These queries serve to find out which schemas exist, they will be used by [clien
 
 Now we learned how to start a node and how to interact with it via GraphQL! Let's see now how we can configure and adjust it to our special needs. This is mainly a collection of _cool tricks_ and not a full documentation of `aquadoggo`, also you probably might not need all of this in the beginning, but maybe it comes in handy soon!
 
-### Data directory
+:::info
 
-Whenever we start a new node it will create a directory on your computer where it stores the database inside. On Linux this directory is by default under `~/.local/share/aquadoggo` and `/Users/<username>/Library/Application Support/aquadoggo` on MacOS systems.
-
-We can use the `--data-dir` command line argument to change the path of this folder to something else. For example:
-
-```bash
-cargo run -- --data-dir ~/good-doggo
-```
-
-This can be useful if you want to temporarily experiment with a fresh, new `aquadoggo` installation without deleting your previous database.
-
-:::note What are these strange `--`?
-
-You might wonder why we have these `--` two dashes right before we set the argument. This is required to tell `cargo` that we're _not_ setting an argument for it but for `aquadoggo`. You can try removing them, `cargo` will tell you that it doesn't know what to do with `--data-dir`.
+If you like spoilers and just want to dive into the full config options then our [example config.toml file](https://github.com/p2panda/aquadoggo/blob/main/aquadoggo_cli/config.toml) is a good place to start!
 
 :::
 
-### Delete database
+### Persistent storage
 
-Especially during development you might want to delete your database, you can do this by simply removing the data directory:
+In most cases we will want to persist our nodes identity and database on the filesystem. In order to configure this behavior we the use the `--database-url`, `--blobs-base-path` and `--private-key` command line arguments.
+
+This is how we would configure the node with an SQLIte database, blob storage and a private key both stored at a suitable path for a Linux machine:
 
 ```bash
-# Remove database on Linux
-rm -rf ~/.local/share/aquadoggo
+./aquadoggo \
+  --database-url="sqlite:$HOME/.local/share/aquadoggo/db.sqlite3" \
+  --blobs-base-path = "$HOME/.local/share/aquadoggo" \
+  --private-key="$HOME/.local/share/aquadoggo/private-key.txt"
+```
 
-# Remove database on Mac OS
-rm -rf ~/Library/Application Support/aquadoggo
+`aquadoggo` supports both `SQLite` and `PostgreSQL` databases, more on this below.
+
+### Delete node data
+
+Especially during development you might want to delete your database, blobs and even your identity. You can do this by simply removing the data directory:
+
+```bash
+rm -rf $HOME/.local/share/aquadoggo
 ```
 
 Make sure that `aquadoggo` is not running anymore before you delete that folder.
 
 :::caution Watch out!
 
-This is _really_ deleting everything you stored in your node.
+This is _really_ deleting everything you stored in your node _and_ your node key pair.
 
 :::
-
-### HTTP port
-
-By default `aquadoggo` starts an HTTP server on port `2020`. If you want to change this you can use the `HTTP_PORT` environment variable like that:
-
-```bash
-# This changes the GraphQL endpoint to http://localhost:4040/graphql
-HTTP_PORT=4040 cargo run
-```
-
-This is useful if for whatever reason your port `2020` is already occupied or if you want to run _more than one_ aquadoggo.
 
 ### PostgreSQL or SQLite
 
@@ -212,32 +226,21 @@ This is useful if for whatever reason your port `2020` is already occupied or if
 
 Sometimes you want to use PostgreSQL though, maybe because you are planning to host your `aquadoggo` on a server where it will be used by hundreds of users at the same time. For this of course you need a [running PostgreSQL database](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04).
 
-Just add the `DATABASE_URL` environment variable in front of the `cargo run` command to set the new URL for the database:
+Just change the `--database-url` command line argument to now use a PostgreSQL database:
 
 ```bash
 # Use an external PostgreSQL database
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/aquadoggo cargo run
+./aquadoggo --database-url="postgresql://postgres:postgres@localhost:5432/aquadoggo"
 ```
 
 :::tip Explore SQLite
 
-By default `aquadoggo` will always use [SQLite](https://www.sqlite.org/index.html), if you have an `sqlite3` client installed you can explore the database like that:
+If using an [SQLite](https://www.sqlite.org/index.html) database, and you have an `sqlite3` client installed you can explore the database like that:
 
 ```bash
 # Explore the SQLite database (on Linux)
-sqlite3 ~/.local/share/aquadoggo/aquadoggo-node.sqlite3
+sqlite3 $HOME/.local/share/aquadoggo/aquadoggo-node.sqlite3
 ```
-
-:::
-
-:::tip Run SQLite in-memory
-
-Another cool SQLite feature is that you can just store the database _in memory_, this means that it will be gone after you quit `aquadoggo`. This is also very useful if you really just want to try something out without storing the data somewhere longer.
-
-```bash
-DATABASE_URL=sqlite::memory: cargo run
-```
-
 :::
 
 :::info Migrations
@@ -246,38 +249,38 @@ DATABASE_URL=sqlite::memory: cargo run
 
 :::
 
-### Supported Schema IDs
+### HTTP port
 
-By default, your `aquadoggo` doesn't restrict the schema it replicates and materializes, it is interested in _anything_ it may come in contact with on the network. If you want to restrict this, you can do so by defining a list of `supported_schema_ids` in a `config.toml` file.
-
-There is an example of how this file looks at `./aquadoggo_cli/example_config.toml`. In order to configure `supported_schema_ids`, first copy this file into the directory where you are running `aquadoggo`.
+By default `aquadoggo` starts an HTTP server on port `2020`. If you want to change this you can use the `--http-port` command line argument like this
 
 ```bash
-# Copy the example config file
-cp ./aquadoggo_cli/example_config.toml ./config.toml
+# This changes the http endpoint to http://localhost:4040
+./aquadoggo --http-port=4040
 ```
 
-Then you can add the ids of schema you want your node to support. A configuration which looks like this would support no schema:
+This is useful if for whatever reason your port `2020` is already occupied or if you want to run _more than one_ aquadoggo.
 
-```toml
-supported_schema_ids = []
+### Supported Schema IDs
 
+By default, your `aquadoggo` doesn't restrict the schema it replicates and materializes, it is interested in _anything_ it may come in contact with on the network. If you want to restrict this, you can do so by defining a list of `allowed-schema-ids`.
+
+```bash
+./aquadoggo \
+  --allow-schema-ids="mushrooms_0020c3accb0b0c8822ecc0309190e23de5f7f6c82f660ce08023a1d74e055a3d7c4d" \
+  --allow-schema-ids="mushroom_findings_0020aaabb3edecb2e8b491b0c0cb6d7d175e4db0e9da6003b93de354feb9c52891d0"
 ```
 
-A config like this would enable support of two in-built `p2panda` system schema, and one user defined application schema:
+Now it will only ever look for and replicate documents which follow the `mushrooms` and `mushroom_findings` schema.
 
-```toml
-supported_schema_ids = [
-    # Built-in system schema
-    "schema_field_definition_v1",
-    "schema_definition_v1",
+### Discovery
 
-    # User published application schema
-    "blog_0020a01f72a5f28f6a559b4942e3525de2bb2413d05897526fe2250e3b57384983a2",
-]
-```
+mDNS, relay addresses, relay mode
 
-Restart your node for the new configuration to take effect. Your `aquadoggo` will now only speak with other nodes which support the same schema, and it will only build publish and query endpoints for schema which are listed in the configuration file.
+### Peers
+
+peer ids, allow and block lists
+
+## `config.toml`
 
 ## Done!
 
