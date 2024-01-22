@@ -100,13 +100,13 @@ The list of fields describe key-value pairs comprising of the field name, and it
 - `pinned_relation`, which can be a reference to a _document view_. This is a document in a past, historical version. Like an _archived_ version you wanted to keep.
 - `pinned_relation_list`, which is a list of document views!
 
-If we look at the `cafes` field in our `[icecream.fields]` list, you can see that there is an additional `schema` value in the field type object. This indicates that any documents which are related to in the `cafe` field will be of the type `cafe`, the name used here refers to the schema defined earlier in the file.
+If we look at the `cafes` field in our `[icecreams.fields]` list, you can see that there is an additional `schema` value in the field type object. This indicates that any documents which are related to in the `cafes` field will be of the type `cafes`, the name used here refers to the schema defined earlier in the file.
 
 :::info Why relations?
 
 One benefit of defining relations between schemas is that the node's query API becomes even more powerful. If I want to check all the cafes where my favorite ice cream flavours are sold, I can write the following query:
 
-```
+```graphql
 {
   all_<ICECREAMS_SCHEMA_ID> {
     documents {
@@ -128,7 +128,7 @@ One benefit of defining relations between schemas is that the node's query API b
 }
 ```
 
-We can write nested queries like this because we defined a relation between `icecream` and `cafe`!!
+We can write nested queries like this because we defined a relation between `icecreams` and `cafes`!!
 
 :::
 
@@ -284,7 +284,7 @@ You can now visit [http://localhost:2020/graphql](http://localhost:2020/graphql)
 
 We've created a new field now, so we can also directly inspect it via the GraphQL playground of the `aquadoggo` node. For this you can just surf to [http://localhost:2020/graphql](http://localhost:2020/graphql) and run the following query, replacing <ICECREAMS_SCHEMA_ID> with the schema id output when you ran `deploy` earlier:
 
-```
+```graphql
 {
   all_<ICECREAMS_SCHEMA_ID> {
     documents {
@@ -306,7 +306,7 @@ We've created a new field now, so we can also directly inspect it via the GraphQ
 }
 ```
 
-It unfortunately won't return any results as we didn't publish any documents yet, and doing so is outside the scope of this tutorial. However check-out our other tutorials on publishing data using our TypeScript SDK `shirokuma` or our tiny rust CLI client `send-to-node`.
+It unfortunately won't return any results as we didn't publish any documents yet, and doing so is outside the scope of this tutorial. However check-out the [Let's build a mushroom app!](/tutorials/mushroom-app) tutorial on publishing data using our TypeScript SDK [`shirokuma`](https://github.com/p2panda/shirokuma) or try out our tiny CLI client [`send-to-node`](https://github.com/p2panda/send-to-node).
 
 ## Bonus Round: Updating a schema
 
@@ -369,6 +369,8 @@ Public key used for signing: 8e4e1af5417f64306862b123ab621739f025449e0da23dc0e10
 
 Do you want to commit these changes (2 total)? [y/n]
 ```
+
+(in the actual output the changes are highlighted in nice colours....)
 
 Confirming here will update the `schema.lock` file, then all we need to do is `deploy` again:
 
