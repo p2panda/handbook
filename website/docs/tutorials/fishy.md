@@ -282,7 +282,7 @@ You can now visit [http://localhost:2020/graphql](http://localhost:2020/graphql)
 
 ## Querying `icecreams` documents
 
-We've created a new field now, so we can also directly inspect it via the GraphQL playground of the `aquadoggo` node. For this you can just surf to [http://localhost:2020/graphql](http://localhost:2020/graphql) and run the following query, replacing `<ICECREAMS_SCHEMA_ID>` with the schema id output when you ran `deploy` earlier:
+We've created a new field now, so we can also directly inspect it via the GraphQL playground of the `aquadoggo` node. For this you can just surf to [http://localhost:2020/graphql](http://localhost:2020/graphql) and run the following query, replacing ICECREAMS_SCHEMA_ID with the schema id output when you ran `deploy` earlier:
 
 ```graphql
 {
@@ -307,6 +307,16 @@ We've created a new field now, so we can also directly inspect it via the GraphQ
 ```
 
 It unfortunately won't return any results as we didn't publish any documents yet, and doing so is outside the scope of this tutorial. However check-out the [Let's build a mushroom app!](/tutorials/mushroom-app) tutorial on publishing data using our TypeScript SDK [`shirokuma`](https://github.com/p2panda/shirokuma) or try out our tiny CLI client [`send-to-node`](https://github.com/p2panda/send-to-node).
+
+```jsx live
+function MyPlayground(props) {
+  return (
+    <div>
+      <AddIcecream></AddIcecream>
+    </div>
+  );
+}
+```
 
 ## Bonus Round: Updating a schema
 

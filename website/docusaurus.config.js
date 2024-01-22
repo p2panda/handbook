@@ -116,6 +116,8 @@ const config = {
         additionalLanguages: ['rust', 'bash', 'graphql', 'toml'],
       },
     }),
+
+  themes: ['@docusaurus/theme-live-codeblock'],
 };
 
 module.exports = config;
