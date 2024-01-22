@@ -1,5 +1,5 @@
 ---
-title: 'Tutorial: Create a schema using `fishy`'
+title: 'Tutorial: Create a schema'
 ---
 
 In this tutorial we want to register a new schema using the [`fishy`](https://github.com/p2panda/fishy) command line tool and [`aquadoggo`](https://github.com/p2panda/aquadoggo) node.
