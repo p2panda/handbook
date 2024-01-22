@@ -113,7 +113,7 @@ const config = {
       },
       prism: {
         theme: require('./src/codeTheme'),
-        additionalLanguages: ['rust', 'bash'],
+        additionalLanguages: ['rust', 'bash', 'graphql', 'toml'],
       },
     }),
 };
