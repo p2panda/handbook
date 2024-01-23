@@ -87,5 +87,5 @@
   padding-right: 20px;
   border-radius: 20px;
   max-height: 100px;
-  overflow: scroll;
+  overflow: scroll hidden;
 }
