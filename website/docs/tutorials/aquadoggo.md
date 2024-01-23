@@ -324,6 +324,6 @@ let config = Configuration::default();
 let node = Node::start(config).await;
 ```
 
-This is very similar to using the command line application, just that you can ship your applications now with a node running _inside_! Users will then automatically start the node whenever they start the application. Together with [Tauri](https://tauri.studio) your applications can even be written in JavaScript and still use `aquadoggo` internally - even when you're not a Rust developer! Our tauri x p2panda [example project](https://github.com/p2panda/tauri-example) will help you get started with right away.
+This is very similar to using the command line application, just that you can ship your applications now with a node running _inside_! Users will then automatically start the node whenever they start the application. Together with [Tauri](https://tauri.app) your applications can even be written in JavaScript and still use `aquadoggo` internally - even when you're not a Rust developer! Our tauri x p2panda [example project](https://github.com/p2panda/tauri-example) will help you get started with right away.
 
 :::

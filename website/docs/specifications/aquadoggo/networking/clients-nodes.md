@@ -76,4 +76,4 @@ Although NO1 and NO2 must be fulfilled by a node for all entries arriving via th
 [publishing]: /specifications/aquadoggo/APIs/publishing
 [queries]: /specifications/aquadoggo/APIs/queries
 [replication]: /specifications/aquadoggo/APIs/replication
-[tauri]: https://tauri.studio/
+[tauri]: https://tauri.app/
