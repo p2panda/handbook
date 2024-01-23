@@ -308,7 +308,7 @@ We've created a new field now, so we can also directly inspect it via the GraphQ
 
 Of course, this query won't return any results because we didn't create any `cafes` or `icecreams` documents yet. So let's publish some!
 
-Using the form below you should be able to publish a cafe documents to your local node. Take the schema id which fishy output after you created your `cafes` schema earlier (eg `cafes_002092aa71ef4d4b52bd082c15b208d4c1aa7134181beb0e5f75542f794717d10617`) and assign it to the `schemaId` value in the code below. Then try clicking `Create`. It should publish a cafe document to your local!!
+Using the form below you can publish a cafe documents to your local node. Take the schema id which fishy output after you created your `cafes` schema earlier (eg `cafes_002092aa71ef4d4b52bd082c15b208d4c1aa7134181beb0e5f75542f794717d10617`) and assign it to the `schemaId` value in the code editor below. Then try clicking `Create`. It should publish a cafe document to your local node!!
 
 :::info
 
@@ -330,6 +330,25 @@ function CafeApp(props) {
       <CafeForm createCafe={createCafe}></CafeForm>
     </App>
   );
+}
+```
+
+You can now query your cafes in the graphql playground like so:
+
+```graphql
+{
+  all_<CAFES_SCHEMA_ID> {
+    documents {
+      fields {
+        name
+        address
+        opening_year
+      }
+      meta {
+        documentId
+      }
+    }  
+  }
 }
 ```
 
