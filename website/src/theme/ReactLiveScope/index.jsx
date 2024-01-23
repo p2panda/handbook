@@ -1,24 +1,30 @@
 import React from 'react';
 
-import { InitWasm } from './InitWasm';
-import { P2pandaContext, P2pandaProvider } from './P2pandaContext';
-import { MessageProvider } from './MessageContext';
-import { CafeForm } from './CafeForm';
-import { Main } from './Main';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
-import './styles.css';
-
-export const App = ({ children, header = '' }) => {
+export function App(props) {
   return (
-    <InitWasm>
-      <P2pandaProvider>
-        <MessageProvider>
-          <Main header={header}>{children}</Main>
-        </MessageProvider>
-      </P2pandaProvider>
-    </InitWasm>
+    <BrowserOnly fallback={<div>...</div>}>
+      {() => {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
+        const Component = require('./App').App;
+        return <Component {...props} />;
+      }}
+    </BrowserOnly>
   );
-};
+}
+
+export function CafeForm(props) {
+  return (
+    <BrowserOnly fallback={<div>...</div>}>
+      {() => {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
+        const Component = require('./CafeForm').CafeForm;
+        return <Component {...props} />;
+      }}
+    </BrowserOnly>
+  );
+}
 
 // Add react-live imports you need here
 const ReactLiveScope = {
@@ -26,7 +32,6 @@ const ReactLiveScope = {
   ...React,
   App,
   CafeForm,
-  P2pandaContext,
 };
 
 export default ReactLiveScope;

@@ -326,7 +326,7 @@ function CafeApp(props) {
   };
 
   return (
-    <App header='🐼 🍦'>
+    <App header="🐼 🍦">
       <CafeForm createCafe={createCafe}></CafeForm>
     </App>
   );
