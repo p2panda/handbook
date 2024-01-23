@@ -312,7 +312,7 @@ Using the form below you should be able to publish a cafe documents to your loca
 
 :::info
 
-The code below is using `Session` which is imported from our TypeScript SDK `shirokuma`. It's outside the scope of this tutorial to go into detail on document creation, check-out the [Let's build a mushroom app!](/tutorials/mushroom-app) tutorial on publishing data using [`shirokuma`](https://github.com/p2panda/shirokuma) or try out our tiny CLI client [`send-to-node`](https://github.com/p2panda/send-to-node).
+The code below is using `Session` which is imported from our TypeScript SDK `shirokuma` and helps handle your clients connection to a node. It's outside the scope of this tutorial to go into detail on document creation, but check-out the [Let's build a mushroom app!](/tutorials/mushroom-app) tutorial on publishing data using [`shirokuma`](https://github.com/p2panda/shirokuma) or try out our tiny CLI client [`send-to-node`](https://github.com/p2panda/send-to-node).
 
 :::
 
@@ -326,9 +326,9 @@ function CafeApp(props) {
   };
 
   return (
-    <Root>
+    <App header='🐼 🍦'>
       <CafeForm createCafe={createCafe}></CafeForm>
-    </Root>
+    </App>
   );
 }
 ```
