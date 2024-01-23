@@ -282,7 +282,7 @@ You can now visit [http://localhost:2020/graphql](http://localhost:2020/graphql)
 
 ## Querying `icecreams` documents
 
-We've created a new field now, so we can also directly inspect it via the GraphQL playground of the `aquadoggo` node. For this you can just surf to [http://localhost:2020/graphql](http://localhost:2020/graphql) and run the following query, replacing `<ICECREAMS_SCHEMA_ID>` with the schema id output when you ran `deploy` earlier:
+We've created a new field now, so we can also directly inspect it via the GraphQL playground of the `aquadoggo` node. For this you can just surf to [http://localhost:2020/graphql](http://localhost:2020/graphql) and run the following query, replacing ICECREAMS_SCHEMA_ID with the schema id output when you ran `deploy` earlier:
 
 ```graphql
 {
@@ -306,7 +306,32 @@ We've created a new field now, so we can also directly inspect it via the GraphQ
 }
 ```
 
-It unfortunately won't return any results as we didn't publish any documents yet, and doing so is outside the scope of this tutorial. However check-out the [Let's build a mushroom app!](/tutorials/mushroom-app) tutorial on publishing data using our TypeScript SDK [`shirokuma`](https://github.com/p2panda/shirokuma) or try out our tiny CLI client [`send-to-node`](https://github.com/p2panda/send-to-node).
+Of course, this query won't return any results because we didn't create any `cafes` or `icecreams` documents yet. So let's publish some!
+
+Using the form below you should be able to publish a cafe documents to your local node. Take the schema id which fishy output after you created your `cafes` schema earlier (eg `cafes_002092aa71ef4d4b52bd082c15b208d4c1aa7134181beb0e5f75542f794717d10617`) and assign it to the `schemaId` value in the code below. Then try clicking `Create`. It should publish a cafe document to your local!!
+
+:::info
+
+The code below is using `Session` which is imported from our TypeScript SDK `shirokuma` and helps handle your clients connection to a node. It's outside the scope of this tutorial to go into detail on document creation, but check-out the [Let's build a mushroom app!](/tutorials/mushroom-app) tutorial on publishing data using [`shirokuma`](https://github.com/p2panda/shirokuma) or try out our tiny CLI client [`send-to-node`](https://github.com/p2panda/send-to-node).
+
+:::
+
+```jsx live
+function CafeApp(props) {
+  const createCafe = async (session, values) => {
+    return await session.create(values, {
+      endpoint: 'http://localhost:2020/graphql',
+      schemaId: '', // 👈 change this to your own schema id.
+    });
+  };
+
+  return (
+    <App header='🐼 🍦'>
+      <CafeForm createCafe={createCafe}></CafeForm>
+    </App>
+  );
+}
+```
 
 ## Bonus Round: Updating a schema
 
