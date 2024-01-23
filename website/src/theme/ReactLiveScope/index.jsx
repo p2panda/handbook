@@ -2,6 +2,8 @@ import React from 'react';
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
+import './styles.css';
+
 export function App(props) {
   return (
     <BrowserOnly fallback={<div>...</div>}>
