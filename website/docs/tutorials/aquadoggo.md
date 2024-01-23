@@ -93,7 +93,7 @@ Node is listening on 0.0.0.0:2022
 
 Well done!! You have a running `aquadoggo` node :-)
 
-Let's unpack the output a little. There's a cute panda riding an aquadoggo of course, then version, then `"No Config file provided`" followed by some default configuration values. We wanted it to be easy to get started and play around with `aquadoggo` and so default configurations values are chosen to help this. With this configuration the node can be considered "ephemeral" as it doesn't persist any data between runs. Additionally it is configured to discover other nodes on the local network, ask them what schema they know about, and start supporting these schema itself. This again is behavior quite handy for development, but unlikely to be what you want in production.
+Let's unpack the output a little. There's a cute panda riding an aquadoggo of course, then version, then a warning about us not providing a config file, followed by some (default) configuration values. We wanted it to be simple to get started and playing around with `aquadoggo` so a easy-to-use default configuration is provided. With this configuration the node can be considered "ephemeral" as it doesn't persist any data between runs. Additionally it is configured to discover other nodes on the local network, ask them what schema they know about, and start supporting these schema itself. Although unlikely to be the behavior you want in a production environment, it is quite handy for getting started during development.
 
 ### See more logs
 
@@ -181,7 +181,7 @@ These queries serve to find out which schemas exist, they will be used by [clien
 
 ## Configuration
 
-Now we learned how to start a node and how to interact with it via GraphQL! Let's see now how we can configure and adjust it to our special needs. This is mainly a collection of _cool tricks_ and not a full documentation of `aquadoggo`, also you probably might not need all of this in the beginning, but maybe it comes in handy soon!
+Now we learned how to start a node and how to interact with it via GraphQL! Let's see now how we can configure and adjust it to our particular needs. This is mainly a collection of _cool tricks_ and not a full documentation of `aquadoggo`, also you probably might not need all of this in the beginning, but maybe it comes in handy soon!
 
 :::info
 
@@ -193,16 +193,16 @@ If you like spoilers and just want to dive into the full config options then our
 
 In most cases we will want to persist our nodes identity and database on the filesystem. In order to configure this behavior we the use the `--database-url`, `--blobs-base-path` and `--private-key` command line arguments.
 
-This is how we would configure the node with an SQLIte database, blob storage and a private key both stored at a suitable path for a Linux machine:
+This is how we would configure the node with an `SQLite` database, blob storage and a private key all stored at a suitable path for a Linux machine:
 
 ```bash
 ./aquadoggo \
   --database-url="sqlite:$HOME/.local/share/aquadoggo/db.sqlite3" \
-  --blobs-base-path = "$HOME/.local/share/aquadoggo" \
+  --blobs-base-path="$HOME/.local/share/aquadoggo" \
   --private-key="$HOME/.local/share/aquadoggo/private-key.txt"
 ```
 
-`aquadoggo` supports both `SQLite` and `PostgreSQL` databases, more on this below.
+`aquadoggo` supports both `SQLite` and `PostgreSQL` databases, more on this later.
 
 ### Delete node data
 
@@ -241,6 +241,7 @@ If using an [SQLite](https://www.sqlite.org/index.html) database, and you have a
 # Explore the SQLite database (on Linux)
 sqlite3 $HOME/.local/share/aquadoggo/aquadoggo-node.sqlite3
 ```
+
 :::
 
 :::info Migrations
@@ -260,31 +261,58 @@ By default `aquadoggo` starts an HTTP server on port `2020`. If you want to chan
 
 This is useful if for whatever reason your port `2020` is already occupied or if you want to run _more than one_ aquadoggo.
 
-### Supported Schema IDs
+### Allowed Schema IDs
 
 By default, your `aquadoggo` doesn't restrict the schema it replicates and materializes, it is interested in _anything_ it may come in contact with on the network. If you want to restrict this, you can do so by defining a list of `allowed-schema-ids`.
 
 ```bash
+# This node will replicate documents for these two schema and build custom GraphQL API for queries.
 ./aquadoggo \
   --allow-schema-ids="mushrooms_0020c3accb0b0c8822ecc0309190e23de5f7f6c82f660ce08023a1d74e055a3d7c4d" \
   --allow-schema-ids="mushroom_findings_0020aaabb3edecb2e8b491b0c0cb6d7d175e4db0e9da6003b93de354feb9c52891d0"
 ```
 
-Now it will only ever look for and replicate documents which follow the `mushrooms` and `mushroom_findings` schema.
-
 ### Discovery
 
-mDNS, relay addresses, relay mode
+Node discovery is configurable through the arguments `--mdns`, `--relay-addresses` and `--relay-mode`.
+
+You can configure your node to discover local nodes via mDNS (on by default) and by registering on relay node. A relay node will share addresses for other nodes they learn about.
+
+```bash
+./aquadoggo \
+  --relay-addresses="192.0.2.16:2022" \
+  --relay-addresses="192.0.2.17:2022"
+```
+
+If nodes are discovered via a relay then forming a direct connection between peers is first attempted (using NAT traversal techniques where required), if this fails then the connection is routed through the relay.
+
+If you want your node to itself act as a relay set the `--relay-mode` flag.
 
 ### Peers
 
-peer ids, allow and block lists
+You can configure which peers you connect to using the `--direct-node-addresses`, `--allow-peer-ids` and `--block-peer-ids` arguments.
+
+`--direct-node-addresses` is useful when you want to connect to nodes with static reachable addresses. Allowing and blocking peers is useful when you want to control the peers you connect to by their id when using relay or mDNS discovery techniques.
+
+Running a node which will only connect to a list of allowed peers (discovered via mDNS or relay) would look like this:
+
+```bash
+./aquadoggo \
+  --relay-addresses="192.0.2.16:2022" \
+  --allow-peer-ids="12D3KooWCw68m5CRcV8vD9iuR325oKwJHLYqTYH5mYwD6k2QV4nm" \
+  --allow-peer-ids="12D3KooWCjiCXB1WPy9AYn73zjmwkVeUqLsrwgWFvsJhe69ivnCn" \
+  --allow-peer-ids="12D3KooWFiLbne3UtoHPCBbZ8HG3JV6d1rdTDee3XVKRqDAxbGsK"
+```
 
 ## `config.toml`
 
+Right about now you'd be forgiven for thinking that this is _a lot_ of command line arguments to work with. `aquadoggo` is able to read all these configurations (and more!) from a `config.toml` file, and also via environment variables. The order in which configuration methods are read is 1) config file 2) command line arguments 3) environment variables. This is useful in order to override your default `config.toml` values at runtime.
+
+Check the extensively documented `aquadoggo` cli [example config file](https://github.com/p2panda/aquadoggo/blob/main/aquadoggo_cli/config.toml) to read about all possible configuration options.
+
 ## Done!
 
-Super, you know now how to start an aquadoggo on your computer or server! This is the first step towards running a p2panda application on your computer or building a new one. Check out the [next tutorial](/tutorials/send-to-node) on how to send data to your running node.
+Super, you know now how to start an aquadoggo on your computer or server! This is the first step towards running a p2panda application on your computer or building a new one. Check out the [next tutorial](/tutorials/fishy) on how to send data to create schema on your running node.
 
 :::tip Extra: Embed a node
 
@@ -296,6 +324,6 @@ let config = Configuration::default();
 let node = Node::start(config).await;
 ```
 
-This is very similar to using the command line application, just that you can ship your applications now with a node running _inside_! Users will then automatically start the node whenever they start the application. Together with [Tauri](https://tauri.studio) your applications can even be written in JavaScript and still use `aquadoggo` internally - even when you're not a Rust developer!
+This is very similar to using the command line application, just that you can ship your applications now with a node running _inside_! Users will then automatically start the node whenever they start the application. Together with [Tauri](https://tauri.studio) your applications can even be written in JavaScript and still use `aquadoggo` internally - even when you're not a Rust developer! Our tauri x p2panda [example project](https://github.com/p2panda/tauri-example) will help you get started with right away.
 
 :::
