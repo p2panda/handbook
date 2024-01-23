@@ -4,16 +4,16 @@ import { InitWasm } from './InitWasm';
 import { P2pandaContext, P2pandaProvider } from './P2pandaContext';
 import { MessageProvider } from './MessageContext';
 import { CafeForm } from './CafeForm';
-import { App } from './App';
+import { Main } from './Main';
 
 import './styles.css';
 
-export const Root = ({ children }) => {
+export const App = ({ children, header = '' }) => {
   return (
     <InitWasm>
       <P2pandaProvider>
         <MessageProvider>
-          <App>{children}</App>
+          <Main header={header}>{children}</Main>
         </MessageProvider>
       </P2pandaProvider>
     </InitWasm>
@@ -24,7 +24,7 @@ export const Root = ({ children }) => {
 const ReactLiveScope = {
   React,
   ...React,
-  Root,
+  App,
   CafeForm,
   P2pandaContext,
 };

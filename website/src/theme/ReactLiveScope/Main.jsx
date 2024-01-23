@@ -3,10 +3,6 @@ import { React, useContext } from 'react';
 import { Header } from './Header';
 import { MessageContext } from './MessageContext';
 
-const Main = ({ children }) => {
-  return <main>{children}</main>;
-};
-
 export const Error = () => {
   const { error } = useContext(MessageContext);
 
@@ -19,11 +15,11 @@ export const Success = () => {
   return success ? <div className="success">{success}</div> : null;
 };
 
-export const App = ({ children }) => {
+export const Main = ({ children, header }) => {
   return (
     <div className="app">
-      <Header />
-      <Main>{children}</Main>
+      <Header header={header} />
+      <main>{children}</main>
       <Error></Error>
       <Success></Success>
     </div>
