@@ -8,9 +8,13 @@ It's good to know how to run your own node if you want to start developing p2pan
 
 We will use the reference node implementation [`aquadoggo`](https://github.com/p2panda/aquadoggo) for this, which is a command line application written in Rust.
 
-:::note What is a _node_?
+## But what _is_ an `aquadoggo`?
 
-Nodes are the actual participants in an p2panda network: They validate and store data coming from clients and make sure to send it to other nodes.
+`aquadoggo` are nodes in a p2panda network, they perform several important tasks related to discovering and communicating with other nodes, as well as offering APIs used when building client applications. The core tasks are:
+
+- discover and replicate with other p2panda nodes
+- find data on the network following registered schema ids
+- serve GraphQL and HTTP endpoints used by client applications 
 
 Nodes are usually agnostic to the applications using them, this means that one node could potentially support hundreds of different p2panda applications. Having one node running on your computer is therefore already enough! You can read more about nodes in the regarding [Learn](/learn/networks) section.
 
