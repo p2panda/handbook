@@ -18,6 +18,11 @@ const CYAN = '#81e0ff';
 const GREEN = '#8dffe3';
 const PINK = '#ff7dbf';
 
+const ZOO_ADVENTURES_SCHEMA_ID =
+  'zoo_adventures_0020da644e6a1fb01af8f945c114ee8534a2ee740c38c707c94e41928281a32a0d8e';
+const ZOO_ADVENTURES_DOCUMENT_ID =
+  '0020823aa6ad04b6b0087b200385192f2afec7955e7c808c6565bf432544c9fa86c7';
+
 function Pentagon(props: {
   size: number;
   color: string;
@@ -112,7 +117,11 @@ function Zoo(): JSX.Element {
                       : `url(${backgroundUrl})`,
                 }}
               >
-                <ZooAdventures updateIntervalMs={5000} />
+                <ZooAdventures
+                  schemaId={ZOO_ADVENTURES_SCHEMA_ID}
+                  documentId={ZOO_ADVENTURES_DOCUMENT_ID}
+                  updateIntervalMs={5000}
+                />
               </div>
             );
           }}
