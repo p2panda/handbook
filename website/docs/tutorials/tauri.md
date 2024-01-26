@@ -1,5 +1,5 @@
 ---
-title: 'Tutorial: Embed node in a Tauri app'
+title: 'Tutorial: Embed `aquadoggo` in Tauri'
 ---
 
 In this tutorial we will see how to embed an `aquadoggo` node in a Tauri app. Tauri is a framework for building apps which have a Rust backend and WebView frontend which will compile for all major desktop platforms (mobile coming soon). This means we can easily package our `aquadoggo` node alongside a frontend written in your favorite web framework (or none at all!).
