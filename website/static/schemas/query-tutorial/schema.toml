@@ -1,0 +1,26 @@
+[vocabulary]
+description = "Japanese-Language Proficiency Test vocabulary from N5 to N1"
+
+[vocabulary.fields]
+word = { type = "str" }
+meaning = { type = "str" }
+furigana = { type = "str" }
+romaji = { type = "str" }
+level = { type = "int" }
+
+[study_set]
+description = "Custom JLPT vocabulary study set"
+
+[study_set.fields]
+title = { type = "str" }
+description = { type = "str" }
+vocabulary = { type = "relation_list", schema = { name = "study_set_items" } }
+
+[study_set_items]
+description = "Item in a custom JLPT vocabulary study set"
+
+[study_set_items.fields]
+vocabulary = { type = "relation", schema = { name = "vocabulary" } }
+date_added = { type = "int" }
+rating = { type = "float" }
+last_studied = { type = "int" }
