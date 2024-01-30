@@ -102,6 +102,11 @@
 }
 
 #query-tutorial-results button {
-  margin: 4px;
+  padding: 10px;
+  margin: 5px;
+  outline: 0;
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
   background-color: #666;
 }

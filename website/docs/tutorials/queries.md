@@ -33,15 +33,16 @@ last_studied = { type = "int" }
 
 ```jsx live
 function BootstrapNodeApp(props) {
-  const VOCABULARY_SCHEMA_ID =
+  // window.ENDPOINT = 'http://wolke.liebechaos.org:2020';
+  window.ENDPOINT = 'http://localhost:2020';
+  const SCHEMA_ID =
     'vocabulary_0020a14f78ab4950661db6e5a44849c3770735cb723abc08097d65bbfe0ad8ddcd11';
-  const ENDPOINT = 'http://wolke.liebechaos.org:2020';
 
   return (
-    <App header="🐬 🆗" endpoint={ENDPOINT}>
+    <App header="🐬 🆗" endpoint={window.ENDPOINT}>
       <BootstrapNode
         schemaLockUrl="/schemas/query-tutorial/schema.lock"
-        schemaId={VOCABULARY_SCHEMA_ID}
+        schemaId={SCHEMA_ID}
       ></BootstrapNode>
     </App>
   );
@@ -50,12 +51,11 @@ function BootstrapNodeApp(props) {
 
 ```jsx live
 function QueriesApp(props) {
-  const VOCABULARY_SCHEMA_ID =
+  const SCHEMA_ID =
     'vocabulary_0020a14f78ab4950661db6e5a44849c3770735cb723abc08097d65bbfe0ad8ddcd11';
-  const ENDPOINT = 'http://wolke.liebechaos.org:2020';
-  
+
   const query = `
-    all_${VOCABULARY_SCHEMA_ID}(filter: { word: { contains: "狭" }}) {
+    all_${SCHEMA_ID}(filter: { word: { contains: "狭" }}) {
       totalCount
       documents {
         fields {
@@ -66,10 +66,6 @@ function QueriesApp(props) {
     }
   `;
 
-  return (
-    <App header="👺 📚" endpoint={ENDPOINT}>
-      <QueryTutorial query={query}></QueryTutorial>
-    </App>
-  );
+  return <QueryTutorial query={query}></QueryTutorial>;
 }
 ```
