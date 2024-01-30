@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { KeyPair, Session } from 'shirokuma';
+import { GraphQLClient } from 'graphql-request';
 
 const LOCAL_STORAGE_KEY = 'privateKey';
 
@@ -22,17 +23,20 @@ export const P2pandaContext = React.createContext({
   publicKey: null,
   keyPair: null,
   session: null,
+  graphQLClient: null,
 });
 
 export const P2pandaProvider = ({ children }) => {
   const state = useMemo(() => {
     const keyPair = getKeyPair();
     const session = new Session(ENDPOINT).setKeyPair(keyPair);
+    const graphQLClient = new GraphQLClient(ENDPOINT);
 
     return {
       keyPair,
       publicKey: keyPair.publicKey(),
       session,
+      graphQLClient,
     };
   }, []);
 

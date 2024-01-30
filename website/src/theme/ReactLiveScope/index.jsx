@@ -28,12 +28,25 @@ export function CafeForm(props) {
   );
 }
 
+export function QueryTutorial(props) {
+  return (
+    <BrowserOnly fallback={<div>...</div>}>
+      {() => {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
+        const Component = require('./QueryTutorial').QueryTutorial;
+        return <Component {...props} />;
+      }}
+    </BrowserOnly>
+  );
+}
+
 // Add react-live imports you need here
 const ReactLiveScope = {
   React,
   ...React,
   App,
   CafeForm,
+  QueryTutorial,
 };
 
 export default ReactLiveScope;

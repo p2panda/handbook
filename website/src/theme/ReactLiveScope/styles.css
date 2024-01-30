@@ -89,3 +89,19 @@
   max-height: 100px;
   overflow: scroll hidden;
 }
+
+#query-tutorial-results {
+  text-align: right;
+  max-height: 400px;
+  height: 400px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+  overflow: scroll;
+  font-size: medium;
+}
+
+#query-tutorial-results button {
+  margin: 4px;
+  background-color: #666;
+}
