@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { KeyPair, Session } from 'shirokuma';
 import { GraphQLClient } from 'graphql-request';
 
@@ -24,21 +24,43 @@ export const P2pandaContext = React.createContext({
   keyPair: null,
   session: null,
   graphQLClient: null,
+  endpoint: null,
 });
 
 export const P2pandaProvider = ({ children, endpoint = ENDPOINT }) => {
+  const [ep, setEndpoint] = useState(endpoint);
   const state = useMemo(() => {
     const keyPair = getKeyPair();
-    const session = new Session(`${endpoint}/graphql`).setKeyPair(keyPair);
-    const graphQLClient = new GraphQLClient(`${endpoint}/graphql`);
+    const session = new Session(`${ep}/graphql`).setKeyPair(keyPair);
+    const graphQLClient = new GraphQLClient(`${ep}/graphql`);
 
     return {
       keyPair,
       publicKey: keyPair.publicKey(),
       session,
       graphQLClient,
+      ep,
     };
-  }, [endpoint]);
+  }, [ep]);
+
+  // This component is used in live code editors which are independent components which only
+  // re-render when the code is changed. To keep them all in sync with a global `endpoint` we do
+  // this work-around.
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    const timerID = setInterval(() => {
+      // eslint-disable-next-line no-undef
+      if (window.ENDPOINT && window.ENDPOINT != endpoint) {
+        // eslint-disable-next-line no-undef
+        setEndpoint(window.ENDPOINT);
+      }
+    }, 1000);
+
+    return function cleanup() {
+      // eslint-disable-next-line no-undef
+      clearInterval(timerID);
+    };
+  });
 
   return (
     <P2pandaContext.Provider value={state}>{children}</P2pandaContext.Provider>
