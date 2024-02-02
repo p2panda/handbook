@@ -55,12 +55,17 @@
 
 .app textarea,
 .app input[type='text'],
-.app input[type='number'] {
+.app input[type='number'],
+.app select {
   width: 80%;
   padding: 10px;
   border-radius: 5px;
   font-family: monospace;
   border: #6bd595 2px solid;
+}
+
+.app select {
+  font-size: 16px;
 }
 
 .app label span {

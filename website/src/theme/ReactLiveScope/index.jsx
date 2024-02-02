@@ -40,12 +40,24 @@ export function QueryTutorial(props) {
   );
 }
 
-export function BootstrapNode(props) {
+export function StudySetForm(props) {
   return (
     <BrowserOnly fallback={<div>...</div>}>
       {() => {
         // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
-        const Component = require('./BootstrapNode').BootstrapNode;
+        const Component = require('./StudySetForm').StudySetForm;
+        return <Component {...props} />;
+      }}
+    </BrowserOnly>
+  );
+}
+
+export function QueryTutorialNodeBootstrap(props) {
+  return (
+    <BrowserOnly fallback={<div>...</div>}>
+      {() => {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
+        const Component = require('./QueryTutorialNodeBootstrap').QueryTutorialNodeBootstrap;
         return <Component {...props} />;
       }}
     </BrowserOnly>
@@ -57,9 +69,10 @@ const ReactLiveScope = {
   React,
   ...React,
   App,
-  BootstrapNode,
   CafeForm,
+  StudySetForm,
   QueryTutorial,
+  QueryTutorialNodeBootstrap,
 };
 
 export default ReactLiveScope;
