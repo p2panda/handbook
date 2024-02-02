@@ -2,13 +2,13 @@ import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { OperationFields } from 'shirokuma';
 import { gql } from 'graphql-request';
 
-import { P2pandaContext } from './P2pandaContext';
-import { MessageContext } from './MessageContext';
+import { P2pandaContext } from '../P2pandaContext';
+import { MessageContext } from '../MessageContext';
 import {
   STUDY_SET_MEMBERS_SCHEMA_ID,
   STUDY_SETS_SCHEMA_ID,
   VOCAB_SCHEMA_ID,
-} from './consts';
+} from '../consts';
 
 export const StudySetForm = ({ studySetsQuery, vocabularyQuery }) => {
   const { graphQLClient, session } = useContext(P2pandaContext);

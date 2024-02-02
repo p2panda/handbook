@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { gql } from 'graphql-request';
 import JsonView from 'react18-json-view';
 import 'react18-json-view/src/style.css';
-import { P2pandaContext } from './P2pandaContext';
+import { P2pandaContext } from '../P2pandaContext';
 
 export const QueryTutorial = ({ query }) => {
   const [result, setResult] = useState('No results');

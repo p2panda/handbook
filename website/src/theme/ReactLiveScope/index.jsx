@@ -21,7 +21,7 @@ export function CafeForm(props) {
     <BrowserOnly fallback={<div>...</div>}>
       {() => {
         // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
-        const Component = require('./CafeForm').CafeForm;
+        const Component = require('./fishy-tutorial/CafeForm').CafeForm;
         return <Component {...props} />;
       }}
     </BrowserOnly>
@@ -33,7 +33,7 @@ export function QueryTutorial(props) {
     <BrowserOnly fallback={<div>...</div>}>
       {() => {
         // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
-        const Component = require('./QueryTutorial').QueryTutorial;
+        const Component = require('./query-tutorial/QueryTutorial').QueryTutorial;
         return <Component {...props} />;
       }}
     </BrowserOnly>
@@ -45,7 +45,7 @@ export function StudySetForm(props) {
     <BrowserOnly fallback={<div>...</div>}>
       {() => {
         // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
-        const Component = require('./StudySetForm').StudySetForm;
+        const Component = require('./query-tutorial/StudySetForm').StudySetForm;
         return <Component {...props} />;
       }}
     </BrowserOnly>
@@ -57,7 +57,7 @@ export function QueryTutorialNodeBootstrap(props) {
     <BrowserOnly fallback={<div>...</div>}>
       {() => {
         // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
-        const Component = require('./QueryTutorialNodeBootstrap').QueryTutorialNodeBootstrap;
+        const Component = require('./query-tutorial/QueryTutorialNodeBootstrap').QueryTutorialNodeBootstrap;
         return <Component {...props} />;
       }}
     </BrowserOnly>

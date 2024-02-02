@@ -3,11 +3,10 @@ import toml from 'toml';
 import { gql } from 'graphql-request';
 import 'react18-json-view/src/style.css';
 
-import { P2pandaContext } from './P2pandaContext';
-import { MessageContext } from './MessageContext';
-import { NodeStatusContext } from './NodeStatusContext';
-import { publish } from './queries';
-import { VOCAB_SCHEMA_ID, STUDY_SETS_SCHEMA_ID, SCHEMA_LOCK } from './consts';
+import { P2pandaContext } from '../P2pandaContext';
+import { MessageContext } from '../MessageContext';
+import { NodeStatusContext } from '../NodeStatusContext';
+import { VOCAB_SCHEMA_ID, STUDY_SETS_SCHEMA_ID, SCHEMA_LOCK } from '../consts';
 
 const POLLING_INTERVAL = 1000;
 
@@ -71,7 +70,7 @@ export const QueryTutorialNodeBootstrap = () => {
       const data = await response.text();
       const schemaLock = toml.parse(data);
       for (const { entry, operation } of Array.from(schemaLock.commits)) {
-        await publish(graphQLClient, entry, operation);
+        await session.publish(entry, operation);
       }
       setSchemaMigrated(true);
     } catch (err) {
