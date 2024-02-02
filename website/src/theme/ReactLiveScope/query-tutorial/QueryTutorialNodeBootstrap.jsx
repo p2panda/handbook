@@ -111,15 +111,15 @@ export const QueryTutorialNodeBootstrap = () => {
     <div id="bootstrap-node">
       <div>
         node online:
-        {nodeOnline ? <span> &#9989;</span> : <span> &#10062;</span>}
+        {nodeOnline ? <span> &#9989;</span> : <span> ❌</span>}
       </div>
       <div>
         schema deployed:
-        {schemaReady ? <span> &#9989;</span> : <span> &#10062;</span>}
+        {schemaReady ? <span> &#9989;</span> : <span> ❌</span>}
       </div>
       <div>
         seed data published:{' '}
-        {seedDataPublished ? <span> &#9989;</span> : <span> &#10062;</span>}
+        {seedDataPublished ? <span> &#9989;</span> : <span> ❌</span>}
       </div>
       <button disabled={schemaDisabled} onClick={migrateSchema}>
         Deploy Schema

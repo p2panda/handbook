@@ -4,18 +4,13 @@ import { gql } from 'graphql-request';
 
 import { P2pandaContext } from '../P2pandaContext';
 import { MessageContext } from '../MessageContext';
-import {
-  STUDY_SET_MEMBERS_SCHEMA_ID,
-  STUDY_SETS_SCHEMA_ID,
-  VOCAB_SCHEMA_ID,
-} from '../consts';
+import { STUDY_SET_MEMBERS_SCHEMA_ID, STUDY_SETS_SCHEMA_ID } from '../consts';
 
-export const StudySetForm = ({ studySetsQuery, vocabularyQuery }) => {
+export const StudySetForm = ({ studySetsQuery }) => {
   const { graphQLClient, session } = useContext(P2pandaContext);
   const { setError, setSuccess } = useContext(MessageContext);
 
   const [studySets, setStudySets] = useState([]);
-  const [vocabulary, setVocabulary] = useState([]);
   const [busy, setBusy] = useState([]);
 
   const getStudySets = useCallback(async () => {
@@ -42,26 +37,6 @@ export const StudySetForm = ({ studySetsQuery, vocabularyQuery }) => {
     getStudySets();
   }, [graphQLClient, setStudySets, setError, studySetsQuery, getStudySets]);
 
-  useEffect(() => {
-    if (!vocabularyQuery) {
-      return;
-    }
-
-    const getVocabulary = async () => {
-      try {
-        const result = await graphQLClient.request(gql`
-          ${vocabularyQuery}
-        `);
-        setVocabulary(
-          Array.from(result[`all_${VOCAB_SCHEMA_ID}`]['documents']),
-        );
-      } catch (err) {
-        setError(`${err}`);
-      }
-    };
-    getVocabulary();
-  }, [graphQLClient, setVocabulary, setError, vocabularyQuery]);
-
   const onSubmit = async (vocabularyId, studySetDocumentId) => {
     setError(null);
     setSuccess(null);
@@ -77,11 +52,11 @@ export const StudySetForm = ({ studySetsQuery, vocabularyQuery }) => {
       fields.insert('study_set', 'relation', studySetDocumentId);
       fields.insert('rating', 'float', 0.0);
 
-      let documentId = await session.create(fields, {
+      await session.create(fields, {
         schemaId: STUDY_SET_MEMBERS_SCHEMA_ID,
       });
 
-      setSuccess(`Created study set item: ${documentId}`);
+      setSuccess(`Added vocabulary to study set: ${studySetDocumentId}`);
     } catch (e) {
       setError(e.message);
     } finally {
@@ -90,16 +65,11 @@ export const StudySetForm = ({ studySetsQuery, vocabularyQuery }) => {
   };
 
   return (
-    <Form
-      studySets={studySets}
-      vocabulary={vocabulary}
-      onAddVocabulary={onSubmit}
-      busy={busy}
-    ></Form>
+    <Form studySets={studySets} onAddVocabulary={onSubmit} busy={busy}></Form>
   );
 };
 
-const Form = ({ studySets, vocabulary, onAddVocabulary, busy }) => {
+const Form = ({ studySets, onAddVocabulary, busy }) => {
   const [values, setValues] = useState({
     studySet: '',
     vocabulary: '',
@@ -115,6 +85,7 @@ const Form = ({ studySets, vocabulary, onAddVocabulary, busy }) => {
       };
     });
   };
+
   const renderStudySetItems = () => {
     if (!studySets) {
       return (
@@ -134,59 +105,39 @@ const Form = ({ studySets, vocabulary, onAddVocabulary, busy }) => {
     });
   };
 
-  const renderVocabularyItems = () => {
-    if (!vocabulary) {
-      return (
-        <option key={0} value={''}>
-          {'no data'}
-        </option>
-      );
-    }
-    return vocabulary.map((item) => {
-      const id = item['meta']['documentId'];
-      const { word, meaning } = item['fields'];
-      return (
-        <option key={id} value={id}>
-          {word}: {meaning}
-        </option>
-      );
-    });
-  };
-
   const onSubmit = (event) => {
     event.preventDefault();
     onAddVocabulary(values['vocabulary'], values['studySet']);
+    setValues({ studySet: '', vocabulary: '' });
   };
 
   const disabled = !values.studySet || !values.vocabulary || busy;
 
   return (
     <div className="study-set-items-form">
-      <h2>Add Study Set Item</h2>
+      <h2>Add vocabulary to a study set</h2>
       <form onSubmit={onSubmit}>
         <fieldset>
-          <label htmlFor="studySet">Study Set Id</label>
+          <label htmlFor="studySet">Study Sets</label>
           <select
-            type="text"
             id="studySet"
             name="studySet"
-            size={5}
+            size={3}
+            value={values['studySet']}
             onChange={onChange}
           >
             {renderStudySetItems()}
           </select>
         </fieldset>
         <fieldset>
-          <label htmlFor="vocabulary">Study Set Id</label>
-          <select
+          <label htmlFor="vocabulary">Vocabulary ID</label>
+          <input
             type="text"
             id="vocabulary"
             name="vocabulary"
-            size={10}
+            value={values['vocabulary']}
             onChange={onChange}
-          >
-            {renderVocabularyItems()}
-          </select>
+          />
         </fieldset>
         <input type="submit" value="Add" disabled={disabled} />
       </form>
