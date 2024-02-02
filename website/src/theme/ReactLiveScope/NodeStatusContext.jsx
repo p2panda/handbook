@@ -16,21 +16,23 @@ export const NodeStatusProvider = ({ children }) => {
 
   useEffect(() => {
     const checkNode = async () => {
-      const query = gql`
-        query checkNode {
-          all_schema_definition_v1 {
-            totalCount
-          }
-        }
-      `;
-
       try {
-        await graphQLClient.request(query);
-        setNodeOnline(true);
-        setError(null);
-      } catch {
-        setNodeOnline(false);
-        setError('Node offline');
+        await graphQLClient.request(gql`
+          query checkNode {
+            all_schema_definition_v1 {
+              totalCount
+            }
+          }
+        `);
+        if (!nodeOnline) {
+          setError(null);
+          setNodeOnline(true);
+        }
+      } catch (err) {
+        if (nodeOnline) {
+          setNodeOnline(false);
+          setError('Node offline');
+        }
       }
     };
 
@@ -41,7 +43,7 @@ export const NodeStatusProvider = ({ children }) => {
 
     // eslint-disable-next-line no-undef
     return () => clearInterval(intervalId); // Cleanup on component unmount
-  }, [graphQLClient, setError]);
+  }, [graphQLClient, nodeOnline, setError]);
 
   return (
     <NodeStatusContext.Provider value={{ nodeOnline }}>
