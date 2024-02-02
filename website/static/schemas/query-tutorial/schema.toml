@@ -8,19 +8,19 @@ furigana = { type = "str" }
 romaji = { type = "str" }
 level = { type = "int" }
 
-[study_set]
+[study_sets]
 description = "Custom JLPT vocabulary study set"
 
-[study_set.fields]
+[study_sets.fields]
 title = { type = "str" }
 description = { type = "str" }
-vocabulary = { type = "relation_list", schema = { name = "study_set_items" } }
 
-[study_set_items]
+[study_set_members]
 description = "Item in a custom JLPT vocabulary study set"
 
-[study_set_items.fields]
-vocabulary = { type = "relation", schema = { name = "vocabulary" } }
+[study_set_members.fields]
+study_set = { type = "relation", schema = { name = "study_sets" } }
+member = { type = "relation", schema = { name = "vocabulary" } }
 date_added = { type = "int" }
 rating = { type = "float" }
 last_studied = { type = "int" }

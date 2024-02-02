@@ -1,0 +1,14 @@
+[
+    {
+        "title": "Currently studying",
+        "description": "Vocabulary I'm currently studying and should look at every day"
+    },
+    {
+        "title": "Interesting kanji",
+        "description": "Words which have really interesting kanji"
+    },
+    {
+        "title": "Useful vocabulary",
+        "description": "Vocabulary which is day-to-day very useful"
+    }
+]
