@@ -43,6 +43,7 @@ export const StudySetForm = ({ studySetsQuery }) => {
 
     try {
       setBusy(true);
+      // TODO: need semi random time and rating here...
       const timestamp = Number(new Date().getTime());
       const fields = new OperationFields({
         date_added: timestamp,
@@ -52,11 +53,13 @@ export const StudySetForm = ({ studySetsQuery }) => {
       fields.insert('study_set', 'relation', studySetDocumentId);
       fields.insert('rating', 'float', 0.0);
 
-      await session.create(fields, {
+      const studySetItemDocumentId = await session.create(fields, {
         schemaId: STUDY_SET_MEMBERS_SCHEMA_ID,
       });
 
-      setSuccess(`Added vocabulary to study set: ${studySetDocumentId}`);
+      setSuccess(
+        `Created study set member with document id: ${studySetItemDocumentId}`,
+      );
     } catch (e) {
       setError(e.message);
     } finally {
