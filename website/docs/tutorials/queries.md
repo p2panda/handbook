@@ -154,8 +154,8 @@ function BootstrapNodeApp(props) {
   window.ENDPOINT = 'http://localhost:2020';
 
   return (
-    <App header="🐬 🆗" endpoint={window.ENDPOINT}>
-      <QueryTutorialNodeBootstrap></QueryTutorialNodeBootstrap>
+    <App header="🐬 🆗">
+      <BootstrapNode></BootstrapNode>
     </App>
   );
 }
@@ -184,7 +184,7 @@ GraphQL api in the background and we can start querying data.
 Let's start with a query over all vocabulary documents. The seed data contained 100 words from
 level N5 Japanese vocabulary. We want to retrieve the actual Japanese `word` and it's english
 `meaning` from the document's fields, and we want to filter on sub-strings from the `meaning`
-field and match against a particular level.
+field and match against a certain levels.
 
 Additionally we want to take the `documentId` from the `meta` fields section. This is the unique
 id of a document and we'll be using it later.
@@ -198,23 +198,25 @@ function QueriesApp(props) {
     'vocabulary_0020840f74f3a3ca502c80b12ba54e5738c435d27e9c0717214a38173a3e31a75752';
 
   const MEANING = '';
-  const LEVEL = 5;
+  const LEVEL = [4, 5];
 
   const query = `
-    all_${SCHEMA_ID}(
-      filter: { 
-        meaning: { contains: "${MEANING}" }, 
-        level: { eq: ${LEVEL}}
-      }
-    ) {
-      totalCount
-      documents {
-        fields {
-          word
-          meaning
+    query {
+      all_${SCHEMA_ID}(
+        filter: { 
+          meaning: { contains: "${MEANING}" }, 
+          level: { in: [${LEVEL}] }
         }
-        meta {
-          documentId
+      ) {
+        totalCount
+        documents {
+          fields {
+            word
+            meaning
+          }
+          meta {
+            documentId
+          }
         }
       }
     }
@@ -222,7 +224,7 @@ function QueriesApp(props) {
 
   return (
     <App header="🔍 🗟">
-      <QueryTutorial query={query} endpoint={window.ENDPOINT}></QueryTutorial>
+      <Query query={query}></Query>
     </App>
   );
 }
@@ -230,16 +232,16 @@ function QueriesApp(props) {
 
 All the filters available to you are:
 
-* `in`: Filter by values in set.  
-* `notIn`: Filter by values not in set.  
-* `eq`: Filter by equal to.  
-* `notEq`: Filter by not equal to.  
-* `gte`: Filter by greater than or equal to.  
-* `gt`: Filter by greater than.  
-* `lte`: Filter by less than or equal to.  
-* `lt`: Filter by less than.  
-* `contains`: Filter for items which contain given value.  
-* `notContains`: Filter for items which don't contain given value.  
+- `in`: Filter by values in set.
+- `notIn`: Filter by values not in set.
+- `eq`: Filter by equal to.
+- `notEq`: Filter by not equal to.
+- `gte`: Filter by greater than or equal to.
+- `gt`: Filter by greater than.
+- `lte`: Filter by less than or equal to.
+- `lt`: Filter by less than.
+- `contains`: Filter for items which contain given value.
+- `notContains`: Filter for items which don't contain given value.
 
 ## Step 3: Using relations
 
@@ -248,10 +250,10 @@ We want to be able to add vocabulary documents to our custom `schema_sets` docum
 can group words together and track our progress in learning them. There are already some example
 study sets published to the node, let's add some vocabulary to them.
 
-If we look at the `schema_set_members` schema above, we'll see that there is a field called
+If we look at the `study_set_members` schema above, we'll see that there is a field called
 `member` which is of type `relation` which points to a vocabulary document. Additionally we can
-see the `schema_set` field is also a relation pointing to a `schema_sets` document. With these two
-fields we can join a vocabulary document to a schema set document, that's exactly what we want.
+see the `study_set` field is also a relation pointing to a `study_sets` document. With these two
+fields we can join a vocabulary document to a study set document, that's exactly what we want.
 
 The other fields (`data_added`, `last_studied` and `rating`) are all metadata attached to this
 particular entry in this particular study set.
@@ -273,7 +275,7 @@ function QueriesApp(props) {
   // We use this query to get back 3 study sets and use them in our form element. You don't
   // need to change this, it's just here for demonstration purposes. We'll learn more about
   // this "first" argument in Step 6.
-  const studySetsQuery = `
+  const query = `
     query {
       all_${STUDY_SETS_SCHEMA_ID}(first: 3) {
         documents {
@@ -289,8 +291,53 @@ function QueriesApp(props) {
   `;
 
   return (
-    <App header="💕 🗂️" endpoint={window.ENDPOINT}>
-      <StudySetForm studySetsQuery={studySetsQuery}></StudySetForm>
+    <App header="💕 🗂️">
+      <StudySetForm studySetsQuery={query}></StudySetForm>
+    </App>
+  );
+}
+```
+
+Submitting the above form created a new `study_set_members` document which we can now query the
+node for, selecting values from the documents it relates to.
+
+**ACTION**: Copy the document ID which popped up under the form after you clicked "Add" and paste
+it into the code below, replacing `<DOCUMENT_ID>`. You'll see that the results come back with
+values included from the related `study_sets` and `vocabulary` documents.
+
+```jsx live
+function QueriesApp(props) {
+  const SCHEMA_ID =
+    'study_set_members_0020c2500c3088b01a98f4a7cfdab6037371ac64d4b929d4677daf39a3aa0c257612';
+
+  const STUDY_SET_ITEM_DOCUMENT_ID = '<DOCUMENT_ID>';
+
+  const query = `
+    query {
+      ${SCHEMA_ID}(id: "${STUDY_SET_ITEM_DOCUMENT_ID}") {
+        fields {
+          date_added
+          last_studied
+          rating
+          member {
+            fields {
+              word
+              meaning
+            }
+          }
+          study_set {
+            fields {
+              title
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  return (
+    <App header="🔍 🗟">
+      <Query query={query}></Query>
     </App>
   );
 }
@@ -298,8 +345,104 @@ function QueriesApp(props) {
 
 ## Step 5: Ordered collection queries
 
-TODO
+A common approach to learning new vocabulary for any language is to priorities looking at words
+which you don't know very well, or which you haven't looked at in a while. The query below models
+this behavior by requesting to order the resulting collection by `last_studied` timestamp from
+oldest first. We additionally filter by `rating` as we want to only look at words where our rating
+is low. And we want to look at one word at a time, so we just get the first word.
+
+**ACTION**: Currently the query looks at vocabulary from _all_ study sets, this is likely not the
+behavior we want, normally you'd be interested in words from one single study set. Try adding in a
+filter on the `study_set` field containing the `documentId`.
+
+```jsx live
+function QueriesApp(props) {
+  const SCHEMA_ID =
+    'study_set_members_0020c2500c3088b01a98f4a7cfdab6037371ac64d4b929d4677daf39a3aa0c257612';
+
+  const RATING = 5;
+
+  const query = `
+    query {
+      all_${SCHEMA_ID}(
+        first: 1
+        orderBy: last_studied
+        orderDirection: ASC
+        filter: { rating: { lte: ${RATING} } }
+      ) {
+        totalCount
+        documents {
+          fields {
+            date_added
+            last_studied
+            rating
+            member {
+              fields {
+                word
+                meaning
+              }
+            }
+            study_set {
+              fields {
+                title
+              }
+              meta {
+                documentId
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  return (
+    <App header="🔍 🗟">
+      <Query query={query}></Query>
+    </App>
+  );
+}
+```
 
 ## Step 6: Pagination
 
-TODO
+Ok, finally, pagination. When you're querying over larger collections of data, you want to be able
+to get back smaller chunks at a time, and incrementally fetch the "next" batch. This is called
+pagination, you get one page at a time, which contains a specified number of items. The
+`aquadoggo` API we're working with now implements cursor based pagination. Each item in your query
+result can be identified by a cursor, and we can choose which cursor a queries results should
+start after. This allows us to paginate over large query results from our application.
+
+```jsx live
+function QueriesApp(props) {
+  const SCHEMA_ID =
+    'vocabulary_0020840f74f3a3ca502c80b12ba54e5738c435d27e9c0717214a38173a3e31a75752';
+
+  const queryBuilder = (after) => `
+    query {
+      all_${SCHEMA_ID}(
+        first: 10
+        ${after ? `after: "${after}",` : ''} 
+      ) {
+        totalCount
+        hasNextPage
+        endCursor
+        documents {
+          fields {
+            word
+          }
+          meta {
+            documentId
+          }
+        }
+      }
+    }
+  `;
+
+  return (
+    <App header="🔍 🗟">
+      <PaginatedQuery queryBuilder={queryBuilder} endCursor=""></PaginatedQuery>
+    </App>
+  );
+}
+```
