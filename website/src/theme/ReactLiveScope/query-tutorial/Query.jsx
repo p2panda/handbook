@@ -4,14 +4,14 @@ import JsonView from 'react18-json-view';
 import 'react18-json-view/src/style.css';
 import { P2pandaContext } from '../P2pandaContext';
 
-export const QueryTutorial = ({ query }) => {
+export const Query = ({ query }) => {
   const [result, setResult] = useState('No results');
   const { graphQLClient } = useContext(P2pandaContext);
 
   const makeQuery = useCallback(async () => {
     try {
       const result = await graphQLClient.request(gql`
-        query {${query}}
+        ${query}
       `);
       setResult(result);
     } catch (err) {

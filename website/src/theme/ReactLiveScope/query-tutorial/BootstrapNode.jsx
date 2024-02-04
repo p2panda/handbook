@@ -10,7 +10,7 @@ import { VOCAB_SCHEMA_ID, STUDY_SETS_SCHEMA_ID, SCHEMA_LOCK } from '../consts';
 
 const POLLING_INTERVAL = 1000;
 
-export const QueryTutorialNodeBootstrap = () => {
+export const BootstrapNode = () => {
   const { session, graphQLClient } = useContext(P2pandaContext);
   const { nodeOnline } = useContext(NodeStatusContext);
   const { setError } = useContext(MessageContext);

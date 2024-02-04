@@ -28,12 +28,12 @@ export function CafeForm(props) {
   );
 }
 
-export function QueryTutorial(props) {
+export function Query(props) {
   return (
     <BrowserOnly fallback={<div>...</div>}>
       {() => {
         // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
-        const Component = require('./query-tutorial/QueryTutorial').QueryTutorial;
+        const Component = require('./query-tutorial/Query').Query;
         return <Component {...props} />;
       }}
     </BrowserOnly>
@@ -52,12 +52,24 @@ export function StudySetForm(props) {
   );
 }
 
-export function QueryTutorialNodeBootstrap(props) {
+export function BootstrapNode(props) {
   return (
     <BrowserOnly fallback={<div>...</div>}>
       {() => {
         // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
-        const Component = require('./query-tutorial/QueryTutorialNodeBootstrap').QueryTutorialNodeBootstrap;
+        const Component = require('./query-tutorial/BootstrapNode').BootstrapNode;
+        return <Component {...props} />;
+      }}
+    </BrowserOnly>
+  );
+}
+
+export function PaginatedQuery(props) {
+  return (
+    <BrowserOnly fallback={<div>...</div>}>
+      {() => {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
+        const Component = require('./query-tutorial/PaginatedQuery').PaginatedQuery;
         return <Component {...props} />;
       }}
     </BrowserOnly>
@@ -71,8 +83,9 @@ const ReactLiveScope = {
   App,
   CafeForm,
   StudySetForm,
-  QueryTutorial,
-  QueryTutorialNodeBootstrap,
+  Query,
+  BootstrapNode,
+  PaginatedQuery,
 };
 
 export default ReactLiveScope;
