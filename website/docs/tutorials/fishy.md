@@ -326,7 +326,7 @@ function CafeApp(props) {
   };
 
   return (
-    <App header="🐼 🍦">
+    <App header="🐼 🍦" sayHello={true}>
       <CafeForm createCafe={createCafe}></CafeForm>
     </App>
   );
@@ -347,7 +347,7 @@ You can now query your cafes in the graphql playground like so:
       meta {
         documentId
       }
-    }  
+    }
   }
 }
 ```
