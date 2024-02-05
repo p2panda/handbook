@@ -24,8 +24,8 @@ now).
 
 We're going to look mostly at the generated GraphQL endpoints in this tutorial, and some previous
 knowledge of p2panda schema is assumed. If you need, take a look at the ["Create a
-schema"](tutorials/fishy) tutorial to learn about schema, or if it all feels unfamiliar then you
-can start from the beginning with ["Set up a local node"](tutorials/aquadoggo/).
+schema"](/tutorials/fishy) tutorial to learn about schema, or if it all feels unfamiliar then you
+can start from the beginning with ["Set up a local node"](/tutorials/aquadoggo/).
 
 :::warning This isn't a GraphQL tutorial
 
