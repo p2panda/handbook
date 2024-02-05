@@ -44,7 +44,6 @@ export const StudySetForm = ({ studySetsQuery }) => {
 
     try {
       setBusy(true);
-      // TODO: need semi random time and rating here...
       const timestamp = Number(new Date().getTime());
       const fields = new OperationFields({
         date_added: timestamp,
