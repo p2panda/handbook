@@ -9,7 +9,7 @@ export const Query = ({ query }) => {
   const [result, setResult] = useState('No results, is your node online?');
   const { graphQLClient } = useContext(P2pandaContext);
   const { setError } = useContext(MessageContext);
-  
+
   const makeQuery = useCallback(async () => {
     try {
       const result = await graphQLClient.request(gql`
