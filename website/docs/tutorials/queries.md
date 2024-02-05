@@ -38,7 +38,7 @@ homepage](https://graphql.org/) has useful learning resources.
 ## What do I need?
 
 - Browser
-- `aquadoggo` node (recommended, but optional)
+- `aquadoggo` node
 
 ## What is `aquadoggo`?
 
