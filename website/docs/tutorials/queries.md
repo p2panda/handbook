@@ -38,6 +38,7 @@ homepage](https://graphql.org/) has useful learning resources.
 ## What do I need?
 
 - Browser
+- terminal
 - `aquadoggo` node
 
 ## What is `aquadoggo`?
@@ -225,7 +226,7 @@ function QueriesApp(props) {
   `;
 
   return (
-    <App header="🔍 🗟">
+    <App header="🔍 🗎">
       <Query query={query}></Query>
     </App>
   );
@@ -340,7 +341,7 @@ function QueriesApp(props) {
   `;
 
   return (
-    <App header="🔍 🗟">
+    <App header="🔍 🗎">
       <Query query={query}></Query>
     </App>
   );
@@ -403,7 +404,7 @@ function QueriesApp(props) {
   `;
 
   return (
-    <App header="🔍 🗟">
+    <App header="🔍 🗎">
       <Query query={query}></Query>
     </App>
   );
@@ -446,7 +447,7 @@ function QueriesApp(props) {
   `;
 
   return (
-    <App header="🔍 🗟">
+    <App header="🔍 🗎">
       <PaginatedQuery queryBuilder={queryBuilder} endCursor=""></PaginatedQuery>
     </App>
   );

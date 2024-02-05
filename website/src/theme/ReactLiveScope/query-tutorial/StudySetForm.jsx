@@ -5,12 +5,13 @@ import { gql } from 'graphql-request';
 import { P2pandaContext } from '../P2pandaContext';
 import { MessageContext } from '../MessageContext';
 import { STUDY_SET_MEMBERS_SCHEMA_ID, STUDY_SETS_SCHEMA_ID } from '../consts';
+import { NodeStatusContext } from '../NodeStatusContext';
 
 export const StudySetForm = ({ studySetsQuery }) => {
   const { graphQLClient, session } = useContext(P2pandaContext);
   const { setError, setSuccess } = useContext(MessageContext);
 
-  const [studySets, setStudySets] = useState([]);
+  const [studySets, setStudySets] = useState(null);
   const [busy, setBusy] = useState([]);
 
   const getStudySets = useCallback(async () => {
@@ -78,6 +79,7 @@ export const StudySetForm = ({ studySetsQuery }) => {
 };
 
 const Form = ({ studySets, onAddVocabulary, busy, onRefresh }) => {
+  const { nodeOnline } = useContext(NodeStatusContext);
   const [values, setValues] = useState({
     studySet: '',
     vocabulary: '',
@@ -98,7 +100,7 @@ const Form = ({ studySets, onAddVocabulary, busy, onRefresh }) => {
     if (!studySets) {
       return (
         <option key={0} value={''}>
-          {'no data'}
+          no study sets found...
         </option>
       );
     }
@@ -119,17 +121,21 @@ const Form = ({ studySets, onAddVocabulary, busy, onRefresh }) => {
     setValues({ studySet: '', vocabulary: '' });
   };
 
-  const disabled = !values.studySet || !values.vocabulary || busy;
+  const disabled =
+    !values.studySet || !values.vocabulary || busy || !nodeOnline;
 
   return (
     <div id="study-sets-form">
       <div className="button-wrapper">
-        <button onClick={onRefresh}>&#8635;</button>
+        <button disabled={disabled} onClick={onRefresh}>
+          &#8635;
+        </button>
       </div>
       <form onSubmit={onSubmit}>
         <fieldset>
           <label htmlFor="studySet">Study Sets</label>
           <select
+            disabled={disabled}
             id="studySet"
             name="studySet"
             size={3}
@@ -142,6 +148,7 @@ const Form = ({ studySets, onAddVocabulary, busy, onRefresh }) => {
         <fieldset>
           <label htmlFor="vocabulary">Vocabulary ID</label>
           <input
+            disabled={disabled}
             type="text"
             id="vocabulary"
             name="vocabulary"
