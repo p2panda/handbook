@@ -23,6 +23,7 @@ export const StudySetForm = ({ studySetsQuery }) => {
         result[`all_${STUDY_SETS_SCHEMA_ID}`]['documents'],
       );
       setStudySets(set);
+      setError(null);
     } catch (err) {
       setError(`${err}`);
     } finally {
@@ -68,11 +69,16 @@ export const StudySetForm = ({ studySetsQuery }) => {
   };
 
   return (
-    <Form studySets={studySets} onAddVocabulary={onSubmit} busy={busy}></Form>
+    <Form
+      studySets={studySets}
+      onAddVocabulary={onSubmit}
+      onRefresh={getStudySets}
+      busy={busy}
+    ></Form>
   );
 };
 
-const Form = ({ studySets, onAddVocabulary, busy }) => {
+const Form = ({ studySets, onAddVocabulary, busy, onRefresh }) => {
   const [values, setValues] = useState({
     studySet: '',
     vocabulary: '',
@@ -117,8 +123,10 @@ const Form = ({ studySets, onAddVocabulary, busy }) => {
   const disabled = !values.studySet || !values.vocabulary || busy;
 
   return (
-    <div className="study-set-items-form">
-      <h2>Add vocabulary to a study set</h2>
+    <div id="study-sets-form">
+      <div className="button-wrapper">
+        <button onClick={onRefresh}>&#8635;</button>
+      </div>
       <form onSubmit={onSubmit}>
         <fieldset>
           <label htmlFor="studySet">Study Sets</label>

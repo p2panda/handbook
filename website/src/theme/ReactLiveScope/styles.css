@@ -107,7 +107,8 @@
   font-size: medium;
 }
 
-#query-tutorial-results button {
+#query-tutorial-results button,
+#study-sets-form button {
   padding: 10px;
   margin: 5px;
   outline: 0;
@@ -115,4 +116,9 @@
   border-radius: 3px;
   cursor: pointer;
   background-color: #666;
+}
+
+.button-wrapper {
+  width: 100%;
+  text-align: right;
 }
