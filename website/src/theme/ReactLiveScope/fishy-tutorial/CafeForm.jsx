@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
-import { P2pandaContext } from './P2pandaContext';
-import { MessageContext } from './MessageContext';
+import { P2pandaContext } from '../P2pandaContext';
+import { MessageContext } from '../MessageContext';
 
 export const CafeForm = ({ createCafe }) => {
   const { session } = useContext(P2pandaContext);

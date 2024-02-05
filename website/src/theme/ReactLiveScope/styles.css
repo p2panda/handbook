@@ -27,6 +27,7 @@
 .app input[type='submit'],
 .app button {
   padding: 10px;
+  margin: 4px;
   outline: 0;
   border: 0;
   border-radius: 3px;
@@ -55,12 +56,17 @@
 
 .app textarea,
 .app input[type='text'],
-.app input[type='number'] {
+.app input[type='number'],
+.app select {
   width: 80%;
   padding: 10px;
   border-radius: 5px;
   font-family: monospace;
   border: #6bd595 2px solid;
+}
+
+.app select {
+  font-size: 16px;
 }
 
 .app label span {
@@ -88,4 +94,31 @@
   border-radius: 20px;
   max-height: 100px;
   overflow: scroll hidden;
+}
+
+#query-tutorial-results {
+  text-align: right;
+  max-height: 400px;
+  height: 400px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+  overflow: scroll;
+  font-size: medium;
+}
+
+#query-tutorial-results button,
+#study-sets-form button {
+  padding: 10px;
+  margin: 5px;
+  outline: 0;
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #666;
+}
+
+.button-wrapper {
+  width: 100%;
+  text-align: right;
 }
