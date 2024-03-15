@@ -97,10 +97,11 @@ If you have any comments or feedback on this specification. Please [contact us](
         /// `backlink` or `previous` link (see below)
         timestamp: u64,
 
-        /// Number of operations this author has published to this document, begins
-        /// with `0` and is always incremented by `1` with each new operation by the
-        /// same author
-        seq_num: u64,
+        /// Logical scalar clock tracking local view on the global depth of a document. Begins
+        /// with `0` and is incremented by `1` with each new operation. If a higher depth is
+        /// observed on an operation by another author then that value should be taken as the
+        /// current depth before incrementing
+        depth: u64,
     }
     ```
 * The Body is not further defined, it can be any arbitrary bytes
@@ -341,12 +342,12 @@ Capabilities are in the workings for 2024. Watch this space!
         * Which document does this capability apply to
     * `public_key`
         * Whom do I give this permission
-    * `seq_num` (for `update` and `tombstone` actions)
+    * `depth` (for `update` and `tombstone` actions)
         * From which point in an authors contribution history do I give permission to this author?
             * If not known, `0` is chosen
         * When revoking: From which point on do I remove this permission?
-        * If revoking permission after a malicious fork it is recommended to revoke from `seq_num` @ fork - 1
-        * To completly remove a malicious actor it is possible to revoke all previously given capabilities by removing them from `seq_num` 0 on
+        * If revoking permission after a malicious fork it is recommended to revoke from `depth` @ fork - 1
+        * To completly remove a malicious actor it is possible to revoke all previously given capabilities by removing them from `depth` 0 on
     * `action`
         * `read`
         * `create`
