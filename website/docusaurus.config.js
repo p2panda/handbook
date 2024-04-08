@@ -68,6 +68,7 @@ const config = {
             label: 'About',
           },
           {
+<<<<<<< HEAD
             position: 'left',
             to: 'blog',
             label: 'News',
@@ -80,6 +81,13 @@ const config = {
           //   position: 'left',
           //   label: 'Learn',
           // },
+=======
+            type: 'doc',
+            docId: 'learn/index',
+            position: 'left',
+            label: 'Learn',
+          },
+>>>>>>> main
           {
             type: 'doc',
             docId: 'tutorials/index',
@@ -128,9 +136,11 @@ const config = {
       },
       prism: {
         theme: require('./src/codeTheme'),
-        additionalLanguages: ['rust', 'bash'],
+        additionalLanguages: ['rust', 'bash', 'graphql', 'toml'],
       },
     }),
+
+  themes: ['@docusaurus/theme-live-codeblock'],
 };
 
 module.exports = config;

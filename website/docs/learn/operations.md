@@ -2,6 +2,12 @@
 title: Operations and Documents
 ---
 
+:::danger Slightly outdated
+
+While a lot in this document is still true for p2panda we've slightly adjusted our core data types to look a little bit different. You can read more about it in our [namakemono specification](/specifications/namakemono). This section will be adjusted soon!
+
+:::
+
 import ImageFrame from '@site/src/components/ImageFrame';
 
 Most of the time, whenever we do something, we usually do it in multiple steps. For example when we cook a good curry for our friends.

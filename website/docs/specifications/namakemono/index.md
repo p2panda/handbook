@@ -4,17 +4,46 @@ title: namakemono
 
 import ImageFrame from '@site/src/components/ImageFrame';
 
-> 🦥 Slow and forgetful
+> 🦥 namakemono = Sloth (Japanese) = Slow and forgetful = very delay-tolerant, offline-first and privacy-respecting 🩷
 
-**namakemono** is a linked-list data type designed for distributed applications which are offline-first and highly delay-tolerant. It is used as the main building block of the p2panda ecosystem.
+**namakemono** is a protocol for peer-to-peer and federated applications. It gives them sloth-superpowers: offline-first collaboration, fine-grained permissions, data validation, schema migration, decentralised MLS encryption, low memory footprint, efficient replication and privacy-respecting deletion.
 
 <ImageFrame
-  title="Data in this list is secured by signatures and cryptographic backlinks"
+  title="Sloth-Superpowers!"
+  url={require('./assets/extensions.png')}
+/>
+
+**namakemono** was designed to solve common privacy- and efficiency problems when building collaborative applications in peer-to-peer systems. This includes:
+
+* **Offline-first collaboration:** Create and edit data with others, even when you're offline. Distributed systems usually compromise on "how long" you can be offline, namakemono gives you the tools to stay offline as long as you want
+* **Fine-grained capabilities:** Full control over your data by defining who can sync, create, update or delete what. Usually capability system require nodes to be online, namakemono allows capabilities to be offline-first
+* **End-to-end encryption:** Secure and scaleable group encryption with a decentralised variant of the Messaging-Layer-Security (MLS) protocol
+* **Don't grow data forever, except if you want to:** Keep the history of all changes if you need them, or delete old data instantly when your application does not require it, even of other authors
+* **Hybrid networks:** Use namakemono in both peer-to-peer or federated networks, or even both of them at the same time
+* **Privacy-respecting deletion:** Delete whole collections of data with one tombstone or let data disappear by itself, giving it an expiry date
+* **Schemas:** Define and distribute versioned and migratable schemas of your choice to validate incoming data
+* **Collections:** Structure hierarchies of data collections, combining them with permissions to model user-roles, moderation, admin access and more typical application concerns
+* **Re-use your key-pair:** .. on multiple devices without being afraid of accidental forks
+* **Efficient and partial sync:** namakemono is still a linked-list and can leverage from fast, simple and efficient log-replication
+* **Flexible:** Use any CRDT, database, transport, data validation format, encoding, digital signature algorithm or hashing algorithm you want!
+
+:::note Status: Draft
+
+namakemono is based on the original p2panda specification and can be seen as the next, simplified iteration. It helps us to leverage from the best parts we've came up with so far over the last years, separate application concerns more from the protocol ("bring your own CRDT") and remove the Bamboo append-only log data type (as we realized we haven't used it in the form it was designed for).
+
+If you have any comments or feedback on this specification. Please [contact us](/contact)!
+
+:::
+
+## Short overview
+
+<ImageFrame
+  title="namakemono is a little bit like a typical append-only log, secured by signatures and cryptographic backlinks, but with a few tricks!"
   url={require('./assets/linked-list.png')}
 />
 
 <ImageFrame
-  title="Old data can be automatically deleted, history can be kept if desired"
+  title="Old data in the log + metadata can be removed directly as soon as new data arrives! How much history you want to keep is configurable"
   url={require('./assets/log-depth.png')}
 />
 
@@ -23,18 +52,10 @@ import ImageFrame from '@site/src/components/ImageFrame';
   url={require('./assets/key-reuse.png')}
 />
 
-**namakemono** comes with helpful extensions which gives your application sloth-superpowers, like:
-
 <ImageFrame
-  title="Sloth-Superpowers you need to build a p2p application"
-  url={require('./assets/extensions.png')}
+  title="Multiple authors can collaborate on the same document - in this example with maximum depth(2)"
+  url={require('./assets/document.png')}
 />
-
-:::note Status: Draft
-
-namakemono is based on the original p2panda specification and can be seen as the next, simplified iteration which helps us to separate application concerns more from the protocol ("bring your own CRDT") and remove the Bamboo append-only log data type as we haven't used it in the form it was designed for.
-
-:::
 
 ## Encoding & Cryptographic Primitives
 
@@ -51,8 +72,9 @@ namakemono is based on the original p2panda specification and can be seen as the
 
 ## Operations
 
-* An Operation consists of a **Header** and a **Body**
-* The Header contains _always_ the following fields:
+* Every item in the linked-list is called an **Operation**
+* An operation consists of a **Header** and a **Body**
+* The header contains _always_ the following fields:
     ```rust
     struct Header {
         /// Version of the operation format, currently `1`
@@ -87,19 +109,22 @@ namakemono is based on the original p2panda specification and can be seen as the
     ```
 * Since the header is stored separately from the body, the body can be deleted at any point without any consequences for the data type
 
-## Creating & updating documents
+## Creating documents
 
-* As soon as an operation is published in this previously defined form it is considered a CREATE operation. CREATE operations define a new document
+* As soon as an operation is published it is considered a CREATE operation. CREATE operations define a new document
     <ImageFrame
       title="Creating a new Salmon Cake recipe document with a CREATE operation"
       url={require('./assets/operation-example.png')}
     />
-* The hash of this CREATE operation is used as the identifier of the whole document
+* The hash of this CREATE operation is used as the identifier of the whole document for its entire lifetime
     <ImageFrame
       title="Generating a hash from the operation header"
       url={require('./assets/hashing.png')}
     />
-* This CREATE operation header should be kept for the lifetime of it's document, its signature is the proof of authorship for the owner (the owner can delegate capabilities later)
+* This header of the CREATE operation should be kept for the lifetime of it's document, its signature is the proof of authorship for the owner (the owner can delegate capabilities later)
+
+## Updating documents
+
 * If we want to refer to this document with another UPDATE operation, changing the state of a document, we add the following fields to the header:
     ```rust
     struct Header {
@@ -109,6 +134,27 @@ namakemono is based on the original p2panda specification and can be seen as the
         /// Hash of the CREATE operation aka "document ID" we refer to with this update
         document_id: Hash,
 
+        // ... plus same fields as above
+    }
+    ```
+* The `seq_num` needs to be incremented by `1` and the operation is appended to the author's log for this document
+
+## Collaboration
+
+* If multiple users want to write to the same document, they refer to the same `document_id` when publishing UPDATE operations
+* Here we have three different authors (Blue, Orange, Yellow) writing to the same document with ID `0x2bac` which was created by Blue:
+    <ImageFrame
+      title="Writing to the same document which was created by the Blue author"
+      url={require('./assets/collaboration.png')}
+    />
+* By default it is not permitted to write to any document if you're not the original author. Through ["Capabilities"](#capabilities) we can add more authors, giving them the permission to write to your documents
+
+## Ordering
+
+* We need a way to determine which operations took place before others when collaborating on the same document
+* Through adding `previous` links in the operation header we can determine a causal order of _which_ operations were created _before_ others (similar to vector clocks):
+    ```rust
+    struct Header {
         /// Optional list of hashes of the operations we refer to as the
         /// "previous" ones. These are operations from other authors
         previous: Option<Hash[]>,
@@ -116,32 +162,10 @@ namakemono is based on the original p2panda specification and can be seen as the
         // ... plus same fields as above
     }
     ```
-
-## Collaboration
-
-* If multiple users want to write to the same document, they refer to the same `document_id` when publishing UPDATE operations
-* Here we have three different authors (blue, orange, yellow) writing to the same document with ID `0x2bac` which was created by blue:
-    <ImageFrame
-      title="Writing to the same document which was created by the blue author"
-      url={require('./assets/collaboration.png')}
-    />
-* By default it is not permitted to write to any document if you're not the original author. Through "Capabilities" we can add more authors, giving them the permission to write to your documents
-
-## Views
-
-* Document views represent the immutable state of a document at a particular point in its history of edits
-    * Every change of a document results in a new document view
-* A document view is identified by its set of graph tips: the document view id
-    * Each graph tip is represented as an operation id
-* It's possible to replicate the exact state of a document from the document view id, as long as the history was preserved
-* Document views are required for `previous` links, extensions, like capabilities or encryption
-
-## Ordering
-
-* Through the `previous` links in the operation header we can determine a causal order of _which_ operations were created _before_ others
-    * We apply a topological sorting algorithm on top of the DAG formed by the `previous` links to determine this ordering
-    * This algorithm sorts all operations of all authors from "earliest" to "latest", the last operation in this sorted list is the "last" write
-* Using `previous` links is optional as it depends on the application if this level of cryptographic security over ordering is required. When using these links timestaps are more secure as it is not possible to publish a lower timestamp than the ones of the previous operations
+* We apply a topological sorting algorithm on top of the DAG formed by the `previous` links to determine this ordering
+* This algorithm sorts all operations of all authors from "earliest" to "latest", the last operation in this sorted list is the "last" write
+* Using `previous` links is optional as it depends on the application if this level of cryptographic security over ordering is required.
+* When using `previous` links the `timestamp` fields become more secure as it is not allowed to publish an earlier timestamp than the previous one
     <ImageFrame
       title="Ordering operations of a document by previous links"
       url={require('./assets/previous-ordering.png')}
@@ -151,6 +175,15 @@ namakemono is based on the original p2panda specification and can be seen as the
       title="Ordering operations of a document by timestamp"
       url={require('./assets/ordering.png')}
     />
+
+## Views
+
+* Document views represent the immutable state of a document at a particular point in its history of edits
+    * Every change of a document results in a new document view
+* A document view is identified by its set of graph tips: the document view id
+    * Each graph tip is represented as an operation id
+* It's possible to replicate the exact state of a document from the document view id, as long as the history was preserved
+* Document views are required for `previous` links, extensions, like capabilities or encryption
 
 ## Forks
 
@@ -171,7 +204,7 @@ namakemono is based on the original p2panda specification and can be seen as the
     * **Shallow documents**: only keep the latest `n` operations
         * As new operations arrive from each author, they replace older versions, these older operations can be garbage collected
         * In this case causal ordering (`previous` links) between operations is sometimes lost and operation ordering falls-back to using `timestamp`
-    * **Deep documents**: keep all causal history back to root
+    * **Deep documents**: keep all causal history back to the document's CREATE operation
         * This guarantees accurate, delay-tolerant ordering of operations
         * Garbage collection can still be performed on the body of operations
         * Headers are retained for the lifetime of the document
@@ -179,17 +212,17 @@ namakemono is based on the original p2panda specification and can be seen as the
 * Example: Using a CRDT into the operation body (like [YJS](https://docs.yjs.dev/) documents, for collaborative text editing for example), you might be interested *only* in the last operations per author and merge them to receive the latest document state:
 
 <ImageFrame
-  title="Document with maximum depth = 1, useful for working with CRDTs like y-js"
+  title="Document with maximum depth(1), useful for working with CRDTs like y-js"
   url={require('./assets/yjs-example.png')}
 />
 
 ## Deletion
 
-namekomono offers different forms of automatic or user-indented deletion, with various degrees of privacy as sometimes you do not want to keep traces of what data has been deleted by whom.
+namakemono offers different forms of automatic or user-indented deletion, with various degrees of privacy as sometimes you do not want to keep traces of what data has been deleted by whom.
 
 ### Garbage Collection
 
-* Pruning only takes place locally, other peers do not need to be informed about this decision
+* Garbage collection only takes place locally, other peers do not need to be informed about this decision
 
 #### Operations
 
@@ -199,13 +232,16 @@ namekomono offers different forms of automatic or user-indented deletion, with v
 #### Documents
 
 * Some documents are only retained when they are referenced by other documents, or if a reference they contain is still alive
-* When references expire, entire documents or collections can be automatically garbage collected
+* When references expire, documents or entire collections can be automatically garbage collected
+  without leaving a trace
 * See ["Collections"](#collections) for an example
 
 ### Tombstones
 
-* To delete a whole document we can publish a **Tombstone** operation which will cause all operations of this document to be deleted
-* This tombstone is sent to other peers and kept forever to inform them that we want this document to be deleted
+* To delete a single document we can publish a **Tombstone** operation which will cause all operations for this document to be deleted
+* This tombstone is sent other peers to inform them that we want this document to be deleted. To
+  ensure the document remains deleted network wide, the tombstone should be kept until the
+  document is "dropped" via garbage collection
 * If we want to delete / tombstone the document we add the action field inside the header, no body is required
     ```rust
     struct Header {
@@ -291,7 +327,8 @@ Capabilities are in the workings for 2024. Watch this space!
 * Capabilites are documents which grant permissions to certain public keys
     * It's like a token given to somebody else and they can use this token to proof now that they are allowed to do something
 * These tokens can be revoked at any time
-    * If deterministic behaviour during revocation is required, a high document depth is recommended
+    * If verifiable causal history during revocation is required, a high document depth and
+      including `previous` is recommended
 * To create a capability document we publish a CREATE operation with the following `schema_id` header
     * `schema_id`: `caps_v1`
         * System schema identifier for capabilities documents
@@ -325,22 +362,22 @@ Capabilities are in the workings for 2024. Watch this space!
         * With this, honest peers limit the damage a malicious node can do, as they lock in any changes to the cap doc as they update the target doc. The worst a malicious node can do is withold state from both the cap and target document. Without the pointer they could withold operations from just the cap group "allowing in" operations to the target doc which already had their permissions revoked.
 
 <ImageFrame
-  title="Granting permission to the first author"
+  title="Blue granting 'write' permission to the Yellow author"
   url={require('./assets/cap-1.png')}
 />
 
 <ImageFrame
-  title="Granting permission to the second author"
+  title="Blue granting 'write' permission to the Green author"
   url={require('./assets/cap-2.png')}
 />
 
 <ImageFrame
-  title="Removing permission of first author"
+  title="Blue removing 'write' permission of the Yellow author for the future"
   url={require('./assets/cap-3.png')}
 />
 
 <ImageFrame
-  title="Retroactively removing operations of malicious author"
+  title="Blue retroactively removing operations of malicious Yellow author"
   url={require('./assets/cap-4.png')}
 />
 
@@ -372,11 +409,14 @@ Encryption is mostly handled by MLS and our "Secret Group" specification which i
 
 ## Replication
 
-* Nodes essentially ask for what documents (for example scoped by document ids, collection id, schema id, etc.) they are interested in and always prefer "latest" documents to be sent first (usually sorted by `timestamp`).
-* Replication in itself is taking place by exchanging "log heights" since all documents can be expressed as logs, even when including forks (the forked branch is considered its own "log")
-* Log heights are tuples of document id, public key, latest known seq num
-* The latest known operation id needs to be added as well if it is known that a fork exists
-* Nodes can not retrieve any data from any author or document if no `sync` capability was given
+- Nodes essentially ask for what documents (for example scoped by schema id, timestamp range,
+  collection ids, document ids etc.) they are interested in. As documents drop out of this scope
+  they can be garbage collected. Through configuring this scope they have control over the data
+  they persist locally and replicate on the network.
+- Replication in itself is taking place by exchanging "log heights" since all documents can be expressed as logs, even when including forks (the forked branch is considered its own "log")
+- Log heights are tuples of `(document id, public key, latest known seq num)`
+- The latest known operation id needs to be added as well if it is known that a fork exists
+- Nodes can not retrieve any data from any author or document if no `sync` capability was given
 
 <ImageFrame
   title="Two nodes replicating data with each other"

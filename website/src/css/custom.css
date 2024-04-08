@@ -111,7 +111,7 @@
 
 [data-theme='dark'] {
   --ifm-card-background-color: var(--ifm-background-surface-color);
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --docusaurus-highlighted-code-line-bg: rgba(117, 117, 117, 0.3);
 }
 
 /* Somehow setting --ifm-toc-border-color gets ignored in dark mode, we have to
@@ -127,6 +127,12 @@
 [data-theme='dark'] .card {
   background-color: rgb(36, 37, 38) !important;
   border-color: transparent !important;
+}
+
+/* Since docusaurus v3 the `main-wrapper` is a flex-box which breaks
+ * our landing page */
+.main-wrapper {
+  display: block !important;
 }
 
 /* Utils */

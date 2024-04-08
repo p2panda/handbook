@@ -8,15 +8,15 @@ In this tutorial we will build an web app for finding and identifying mushrooms 
 
 :::note This is not a React tutorial
 
-This tutorial assumes that you already have experience in using npm, React, Webpack and TypeScript. We want to rather focus on _using_ the JavaScript library `p2panda-js`. That being said, if you are a beginner, this is also for you as most of the code has already been written!
+This tutorial assumes that you already have experience in using npm, React, Webpack and TypeScript. We want to rather focus on _using_ the JavaScript library `shirokuma` (which is a user-friendly wrapper around `p2panda-js`). That being said, if you are a beginner, this is also for you as most of the code has already been written!
 
 :::
 
 The idea of the application is inspired by [PlantNet](https://plantnet.org): Users can create entries of different mushrooms to create some sort of community-run encyclopaedia. If you're around in the forest you can take a picture of a spotted mushroom, give it a GPS position and mark it with the mushroom database entry you _think_ it might be. You can even select multiple mushrooms if you are not sure. The uploaded pictures of all users will show up in some sort of feed.
 
 <ImageFrame
-  title="This is how the app looks like"
-  url={require('./assets/mushroom-app.png')}
+title="This is how the app looks like"
+url={require('./assets/mushroom-app.png')}
 />
 
 Of course this is a very simple mushrooming app and we can think of many cool features already now: Like users giving comments on your findings, rating them and even giving suggestions / votes which mushroom it can be - or you could show a world map of all mushroom findings with the help of the GPS positions. Or you can delete findings if they are wrong! All of this is possible with p2panda, you can hack on it if you want after reading this tutorial.
@@ -29,21 +29,23 @@ All cool polar mushroom animals know that it is not always possible to identify 
 
 ## What do I need?
 
-* NodeJS
-* Editor
-* Terminal
-* Browser
+- NodeJS
+- Editor
+- Terminal
+- Browser
 
 <details>
-    <summary>How do I install NodeJS?</summary>
+  <summary>How do I install NodeJS?</summary>
+  <div>
     You can check out the official [Installing Node.js via package manager](https://nodejs.org/en/download/package-manager/) guidelines here. But we would recommend you installing a NodeJS version manager like [nvm](https://github.com/nvm-sh/nvm), or even better [n](https://github.com/tj/n). We used the NodeJS version `18.8.0` for this tutorial.
+  </div>
 </details>
 
 ## Start node
 
 Every p2panda client needs a node to talk to, so let's start one! You can follow the [Set up a local node](/tutorials/aquadoggo) tutorial to learn how to compile a node yourself, but for this tutorial we are going to use a pre-compiled binaries.
 
-Visit the [releases](https://github.com/p2panda/aquadoggo/releases) page on the `aquadoggo` github repository and download the binary compiled for your system and unpack in a directory of your choice. In the command line, navigate to the directory where the `aquadoggo` binary is and run the following command: 
+Visit the [releases](https://github.com/p2panda/aquadoggo/releases) page on the `aquadoggo` github repository and download the binary compiled for your system and unpack in a directory of your choice. In the command line, navigate to the directory where the `aquadoggo` binary is and run the following command:
 
 ```bash
 # Start your aquadoggo node.
@@ -87,7 +89,7 @@ Usually we have to define the schemas only once, as soon as they are deployed on
 
 :::note Nodes supporting schemas
 
-Currently all nodes support all schemas automatically, later we will add features where you can _whitelist_ schema ids you want to support. This means that nodes will opt-in into supporting different sorts of applications. Some nodes will only support playing chess, some others will only support your mushroom app - maybe there is a node supporting both and more!
+A single node can support many schema, nodes share data based on the schema that they have in common. By default a node is happy to discover and support any schema it finds on the network, this is great for experimenting and during development, but in production you will want to limit this to only schema you want to support.
 
 :::
 
@@ -95,7 +97,7 @@ During development we might want to create the schema multiple times, because we
 
 :::note How do I delete my database?
 
-Check out the [aquadoggo Tutorial](/tutorials/aquadoggo) to find out.
+If you're running a node with default configurations then it is "ephemeral" and already no data will be persisted between runs. For other cases (using an SQLite db for example) check out the [aquadoggo Tutorial](/tutorials/aquadoggo) to find out.
 
 :::
 
@@ -105,29 +107,27 @@ Enough of all of this theory! How does the data now look like for our mushroom a
 
 We want users to make _encyclopaedia_ entries about all sorts of mushrooms, similar to a wiki. We keep it simple for now: The `mushroom` schema needs a `title`, a `description`, the `latin` name (because we are real mycologists) and an `edible` flag which indicates if we can eat this mushroom or if it is deadly poisonous.
 
-* `title`: String
-* `description`: String
-* `latin`: String
-* `edible`: Boolean
+- `title`: String
+- `description`: String
+- `latin`: String
+- `edible`: Boolean
 
 ### `mushroom_finding` Schema
 
 Next to the `mushroom` entries we need the `mushroom_finding` feed of the users. They want to upload a picture (as `blob`), define a `lat` and `lon` GPS position and mark which `mushrooms` they think it could have been. The users can select one or many mushrooms by simply just referring to the encyclopaedia entries.
 
-Relating to the mushroom entries is possible with a _relation list_. This is a special sort of field where we can refer to documents of the same or even another schema, simply by mentioning their identifiers.
+Relating to the mushroom entries is possible with a _relation list_. This is a special sort of field where we can refer to documents of the same or even another schema, simply by mentioning their identifiers. A relation is also used in the `blob` field, where we relate to documents of type `blob_v1`, this is an in-built document type used for publishing binary data. Documents of this type are materialized to the filesystem and served from the node at an HTTP endpoint (you'll see exactly how later).
 
-Since p2panda doesn't have any native support for binary data yet (like images or videos), we can make use of a simple trick: We encode the uploaded images as [base64](https://stackoverflow.com/questions/6150289/how-can-i-convert-an-image-into-base64-string-using-javascript) and store the image as a string inside the `blob` field.
-
-* `blob`: String
-* `lat`: Float
-* `lon`: Float
-* `mushrooms`: Relation List with `mushroom` documents
+- `blob`: Relation with `blob_v1` documents
+- `lat`: Float
+- `lon`: Float
+- `mushrooms`: Relation List with `mushroom` documents
 
 ### Register schemas
 
 :::info How to create a schema?
 
-There is another tutorial showing you [how you can create schemas](/tutorials/send-to-node) with the command line tool `send-to-node`. For this tutorial this is not necessary, but if you are wondering what is going on, you should check this out first!
+In this tutorial we are creating our schema programatically by publishing operations to the node from the front-end code. There is another tutorial showing you [how you can create schemas](/tutorials/fishy) with the command line tool `fishy`. For this tutorial this is not necessary, but it's a good next step if you want to learn more about schema creation, or for when you start developing your own application.
 
 :::
 
@@ -162,18 +162,18 @@ Your schema ids will look a little bit different since every generated schema is
 
 Designing and creating a schema is a very large part of building an p2panda application. The other part is implementing the interface! Suddenly we're back at _normal_ web development: Spending long time figuring out how to set up TypeScript, Webpack, some linters like eslint and prettier etc., building React components and views integrating a router and so on. If you are a web developer then this part will be very familiar to you, so let's focus rather on the parts which make it a _special_ p2panda application.
 
-To build something with p2panda in TypeScript or JavaScript we can use the package [`p2panda-js`](https://www.npmjs.com/package/p2panda-js). With it we can do the most important things: 1. Initialise the WebAssembly code 2. Generate a key pair 3. Create p2panda operations and entries 4. Send them to a node 5. Query documents from a node to display them in the app.
+To build something with p2panda in TypeScript or JavaScript we can use the package [`shirokuma`](https://www.npmjs.com/package/shirokuma). With it we can do the most important things: 1. Initialise the WebAssembly code 2. Generate a key pair 3. Create and send p2panda operations to a node. We query documents back from the node using a lightweight GraphQL client.
 
 Let's go through them step by step!
 
 ### Initialise WebAssembly
 
-`p2panda-js` is actually mainly developed in Rust and compiled as WebAssembly with a thin TypeScript wrapper around it to make it _feel_ more like a regular TypeScript package. Using WebAssembly is a little bit special and requires you to initialise it before you can use it.
+`shirokuma` uses `p2panda-js` under the hood, and this is actually mainly developed in Rust and compiled as WebAssembly with a thin TypeScript wrapper around it to make it _feel_ more like a regular TypeScript package. Using WebAssembly is a little bit special and requires you to initialise it before you can use it.
 
-In `p2panda-js` we can simply do this like that:
+In `shirokuma` we can simply do this like that:
 
 ```typescript
-import { initWebAssembly } from 'p2panda-js';
+import { initWebAssembly } from 'shirokuma';
 await initWebAssembly();
 ```
 
@@ -189,7 +189,7 @@ Luckily React can help us with some convenient patterns, let's look at the [`src
 
 ```typescript
 import React, { useEffect, useState } from 'react';
-import { initWebAssembly } from 'p2panda-js';
+import { initWebAssembly } from 'shirokuma';
 
 type Props = {
   children: JSX.Element;
@@ -229,17 +229,17 @@ const Root: React.FC = () => {
 
 Right after we initialised the WebAssembly we want to make sure that the user gets a key pair. This is required to give the user some sort of identity but also to sign the data the user want's to create.
 
-It is quite easy to generate a new key pair with `p2panda-js`:
+It is quite easy to generate a new key pair with `shirokuma`:
 
 ```typescript
-import { KeyPair } from 'p2panda-js';
+import { KeyPair } from 'shirokuma';
 const keyPair = new KeyPair();
 ```
 
 But we do not always want to generate a _new_ key pair every time the user comes back to the website! We should persist the private key using the [`Window.LocalStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) API:
 
 ```typescript
-import { KeyPair } from 'p2panda-js';
+import { KeyPair } from 'shirokuma';
 
 const LOCAL_STORAGE_KEY = 'privateKey';
 
@@ -259,112 +259,127 @@ function getKeyPair(): KeyPair {
 
 Now we can just call `getKeyPair` and we will either receive a new key pair when doing it for the first time or the old one if we're coming back.
 
-But how do we now share this information across the whole React application? As a React developer you might know some patterns probably: Prop drilling, Redux, Contexts .. there are many options and it is basically up to you! In the mushroom app we've decided to use the [Context](https://reactjs.org/docs/context.html) pattern which gets especially interesting if we have many components. Let's have a look at the [`src/KeyPairContext.tsx`](https://github.com/p2panda/mushroom-app-tutorial/blob/main/src/KeyPairContext.tsx) file:
+### Session
+
+`shirokuma` exports the `Session` object which offers us a useful interface for publishing operations to a node. It can be configured with an endpoint, key pair, and schema id. It can be useful to instantiate it at the beginning of your application and keep it around for making queries later. Starting a `Session` looks like this:
+
+```typescript
+import { KeyPair, Session } from 'shirokuma';
+
+const ENDPOINT = 'localhost:2020/graphql';
+
+const keyPair = new KeyPair();
+const session = new Session(ENDPOINT).setKeyPair(keyPair);
+```
+
+But how do we now share this information across the whole React application? As a React developer you might know some patterns probably: Prop drilling, Redux, Contexts .. there are many options and it is basically up to you! In the mushroom app we've decided to use the [Context](https://reactjs.org/docs/context.html) pattern which gets especially interesting if we have many components. Let's have a look at the [`src/P2pandaContext.tsx`](https://github.com/p2panda/mushroom-app-tutorial/blob/main/src/P2pandaContext.tsx) file:
 
 ```typescript
 import React, { useMemo } from 'react';
+import { KeyPair, Session } from 'shirokuma';
+import { ENDPOINT } from './constants';
+
+const LOCAL_STORAGE_KEY = 'privateKey';
+
+function getKeyPair(): KeyPair {
+  // ...
+}
 
 type Context = {
   publicKey: string | null;
   keyPair: KeyPair | null;
+  session: Session | null;
 };
 
-export const KeyPairContext = React.createContext<Context>({
+export const P2pandaContext = React.createContext<Context>({
   publicKey: null,
   keyPair: null,
+  session: null,
 });
 
 type Props = {
   children: JSX.Element;
 };
 
-export const KeyPairProvider: React.FC<Props> = ({ children }) => {
+export const P2pandaProvider: React.FC<Props> = ({ children }) => {
   const state = useMemo(() => {
     const keyPair = getKeyPair();
+    const session = new Session(ENDPOINT).setKeyPair(keyPair);
 
     return {
       keyPair,
       publicKey: keyPair.publicKey(),
+      session,
     };
   }, []);
 
   return (
-    <KeyPairContext.Provider value={state}>{children}</KeyPairContext.Provider>
+    <P2pandaContext.Provider value={state}>{children}</P2pandaContext.Provider>
   );
 };
 ```
 
-The `KeyPairProvider` helps us to establish the state of the `KeyPairContext` by calling `getKeyPair`. From that point on we populated the state with either our new or old key pair and can consume it by using `KeyPairContext.Consumer` in other components like that:
+The `P2pandaProvider` helps us to establish the state of the `P2pandaContext` by calling `getKeyPair` and instantiating a `Session`. From that point on we can consume this app state by using `P2pandaContext.Consumer` in other components like that:
 
 ```typescript
-<KeyPairContext.Consumer>
+<P2pandaContext.Consumer>
   {({ publicKey }) => {
     return <p>Hello, {publicKey}!</p>;
   }}
-</KeyPairContext.Consumer>
+</P2pandaContext.Consumer>
 ```
 
 If you need the `keyPair` already before, you can import the `useContext` hook and access all values like that:
 
 ```typescript
 import { useContext } from 'react';
-const { keyPair } = useContext(KeyPairContext);
+const { keyPair } = useContext(P2pandaContext);
 ```
 
 Really handy!
 
-We have to make sure to establish the `KeyPairProvider` in the application as well, we're doing this right at the beginning, next to `InitWasm`:
+We have to make sure to establish the `P2pandaProvider` in the application as well, we're doing this right at the beginning, next to `InitWasm`:
 
 ```typescript
 const Root: React.FC = () => {
   return (
     <InitWasm>
-      <KeyPairProvider>
+      <P2pandaProvider>
         <App />
-      </KeyPairProvider>
+      </P2pandaProvider>
     </InitWasm>
   );
 };
 ```
 
-### Create operations and entries
+### Publish operations
 
-Operations and entries are the building blocks of p2panda, they _define_ the contents of everything else: Schemas, Documents, and so on.
+Operations are the building blocks of p2panda, they are the instructions we publish to a node in order to CREATE, UPDATE and DELETE documents.
 
-:::info Entries and operations?
-
-If you haven't heard about them yet, you can read the _learn_ sections on [Entries](/learn/entries) and [Operations](/learn/operations).
-
-:::
-
-With `p2panda-js` we can create operations like that:
+`Session` offers us a long running interface for publishing operations to a node, setting it up and creating a document looks like this:
 
 ```typescript
-import { KeyPair, signAndEncodeEntry, encodeOperation } from 'p2panda-js';
+import { KeyPair, Session } from 'shirokuma';
 
 const keyPair = new KeyPair();
+const session = new Session('localhost:2020/graphql').setKeyPair(keyPair);
+const fields = {
+  title: 'Mario Mushroom',
+  latin: 'Marius Fungus',
+  edible: true,
+  description: 'It makes you grow',
+};
 
-const operation = encodeOperation({
-  action: 'create',
+const documentId = await session.create(fields, {
   schemaId: MUSHROOM_SCHEMA_ID,
-  fields: {
-    title: 'Mario Mushroom',
-    latin: 'Marius Fungus',
-    edible: true,
-    description: 'It makes you grow',
-  },
 });
-
-const entry = signAndEncodeEntry({
-  operation,
-}, keyPair);
 ```
 
 Yes! We're creating our first `mushroom` document here!
 
 :::tip Playing in NodeJS
 
-`p2panda-js` also runs in NodeJS and there you don't even need to initialise the WebAssembly! It is fun to play with the API in the interactive NodeJS environment. Just type `node` inside the the `mushroom-app-tutorial` folder, type `const p2panda = require('p2panda-js')`, hit `Enter`, and then you can directly get started, for example by writing `const keyPair = new p2panda.KeyPair()`! It is fun to create some operations, encode, decode and inspect them directly.
+`shirokuma` also runs in NodeJS and there you don't even need to initialise the WebAssembly! It is fun to play with the API in the interactive NodeJS environment. Just type `node` inside the the `mushroom-app-tutorial` folder, type `const shirokuma = require('shirokuma')`, hit `Enter`, and then you can directly get started, for example by writing `const keyPair = new shirokuma.KeyPair()`!
 
 :::
 
@@ -378,9 +393,13 @@ In the future we want to offer [Lenses](https://www.inkandswitch.com/cambria/) t
 
 :::
 
-To sign and encode a new entry we usually need to know what the sequence number, log id, backlink- and skiplink hash is. This information we get from our node and we can ask about it by doing a `nextArgs` GraphQL query!
+If we're updating or deleting a document we need to specify _what_ document we want to apply these changes on. This we do by passing in the `viewId`. The `viewId` you can get from the GraphQL API, whenever you query for the documents you want to update or delete.
 
-Let's set up a GraphQL client first:
+All of this you find in the [`src/requests.ts`](https://github.com/p2panda/mushroom-app-tutorial/blob/main/src/requests.ts) file, there you will find other queries as well, for example to create `mushroom_finding` documents.
+
+### Query documents
+
+You can use any GraphQL client to query documents back from the node, let's set ours up quickly like this:
 
 ```typescript
 import { GraphQLClient, gql } from 'graphql-request';
@@ -392,115 +411,6 @@ const client = new GraphQLClient('http://localhost:2020/graphql');
 In this tutorial we're using [`graphql-request`](https://www.npmjs.com/package/graphql-request) as a GraphQL client. We like this one because it is very simple and lightweight, but there are many others as well, for example [Apollo](https://www.apollographql.com/).
 
 :::
-
-Now we can make the `nextArgs` query to receive the required arguments:
-
-```typescript
-type NextArgs = {
-  logId: string;
-  seqNum: string;
-  backlink?: string;
-  skiplink?: string;
-};
-
-async function nextArgs(publicKey: string, viewId?: string): Promise<NextArgs> {
-  const query = gql`
-    query NextArgs($publicKey: String!, $viewId: String) {
-      nextArgs(publicKey: $publicKey, viewId: $viewId) {
-        logId
-        seqNum
-        backlink
-        skiplink
-      }
-    }
-  `;
-
-  const result = await client.request(query, {
-    publicKey,
-    viewId,
-  });
-
-  return result.nextArgs;
-}
-```
-
-:::note Why is `seqNum` and `logId` a string?
-
-p2panda supports `u64` integers for sequence numbers and log id but JavaScript only supports up to [53bit](https://262.ecma-international.org/6.0/#sec-number.max_safe_integer) to encode numbers. There is [`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt/BigInt) as well but we can't use it inside of JSON (which is the format of the GraphQL response). This is why we represent numbers in JavaScript as strings! They can be of any size then and latest when they arrive in the WebAssembly code they will be checked and correctly converted into `u64`.
-
-:::
-
-Whenever we create a new `mushroom` or `mushroom_finding` document we just have to pass in the `publicKey` to the `nextArgs` method to receive everything we need. With all of this and our key pair we can now encode the operation and finally sign the entry:
-
-```typescript
-type Mushroom = {
-  title: string;
-  description: string;
-  latin: string;
-  edible: boolean;
-};
-
-async function createMushroom(
-  keyPair: KeyPair,
-  values: Mushroom,
-): Promise<void> {
-  const args = await nextArgs(keyPair.publicKey());
-
-  const operation = encodeOperation({
-    schemaId: MUSHROOM_SCHEMA_ID,
-    fields: {
-      ...values,
-    },
-  });
-
-  const entry = signAndEncodeEntry(
-    {
-      ...args,
-      payload: operation,
-    },
-    keyPair,
-  );
-
-  await publish(entry, operation);
-}
-```
-
-### Publish data
-
-To send the entry and operation now to the node we make use of the `publish` GraphQL mutation:
-
-```typescript
-export async function publish(
-  entry: string,
-  operation: string,
-): Promise<NextArgs> {
-  const query = gql`
-    mutation Publish($entry: String!, $operation: String!) {
-      publish(entry: $entry, operation: $operation) {
-        logId
-        seqNum
-        backlink
-        skiplink
-      }
-    }
-  `;
-
-  const result = await client.request(query, {
-    entry,
-    operation,
-  });
-
-  return result.publish;
-}
-```
-
-This is it! We can now create `mushroom` documents.
-
-If we're updating or deleting a document we need to specify _what_ document we want to apply these changes on. This we do by passing in the `viewId`. The `viewId` you can get from the GraphQL API, whenever you query for the documents you want to update or delete.
-
-All of this you find in the [`src/requests.ts`](https://github.com/p2panda/mushroom-app-tutorial/blob/main/src/requests.ts) file, there you will find other queries as well, for example to create `mushroom_finding` documents.
-
-### Query documents
 
 After creating the `mushroom` documents we want to query them as well. We can do this like that:
 
@@ -558,9 +468,7 @@ See how we can also get some `meta` fields from the regarding mushroom documents
 If you want to only load one mushroom you can write something like this:
 
 ```typescript
-async function getMushroom(
-  documentId: string,
-): Promise<MushroomResponse> {
+async function getMushroom(documentId: string): Promise<MushroomResponse> {
   const query = gql`{
     mushroom: ${MUSHROOM_SCHEMA_ID}(id: "${documentId}") {
       meta {
@@ -592,9 +500,3 @@ npm start
 ```
 
 This will run the web application under [http://localhost:8080](http://localhost:8080). You can open it in your browser and start playing with it. If you're curious you can also check the GraphQL playground of the `aquadoggo` and make some queries there to compare!
-
-:::info High-Level frameworks
-
-For this tutorial we have been using `p2panda-js` which is a fairly _low-level_ API. In the future we want to offer more _high-level_ frameworks like [`shirokuma`](https://github.com/p2panda/shirokuma) which will take care of even more things for us, like internally handling the GraphQL queries, caching arguments to create entries and persisting key pairs automatically for us.
-
-:::

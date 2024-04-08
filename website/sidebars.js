@@ -11,7 +11,7 @@ const sidebars = {
   ],
   // @TODO: We need to re-write the learn section a little as things like "Bamboo" etc. got removed from the specification.
   // See related issue: https://github.com/p2panda/handbook/issues/306
-  // learn: ['learn/index', 'learn/entries', 'learn/operations', 'learn/networks'],
+  learn: ['learn/index', 'learn/entries', 'learn/operations', 'learn/networks'],
   specifications: [
     'specifications/index',
     'specifications/namakemono/index',
