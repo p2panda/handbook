@@ -27,8 +27,6 @@ Nodes are usually agnostic to the applications using them, this means that one n
 
 ## Download `aquadoggo`
 
-Let's download `aquadoggo`! For this we first download the whole git repository with the source code inside:
-
 Head over to the [Releases](https://github.com/p2panda/aquadoggo/releases) page to download the pre-compiled binary for your platform. This tutorial was written using `v0.7.0`.
 
 Or on the command line:
@@ -124,12 +122,6 @@ As well as the above, you should now get these more detailed logs:
 ```
 
 If you want to see even more you can change the log verbosity from `info` to `debug` or even `trace`, but then you will see a whole flood of information you might not always need.
-
-:::tip Even more logging
-
-If you're curious to see _even_ more then you can enable logging for _everything_ (that is, even logs from dependencies) via: `RUST_LOG=debug cargo run`.
-
-:::
 
 ## GraphQL playground
 
