@@ -68,26 +68,16 @@ const config = {
             label: 'About',
           },
           {
-<<<<<<< HEAD
             position: 'left',
             to: 'blog',
             label: 'News',
           },
-          // @TODO: We need to re-write the learn section a little as things like "Bamboo" etc. got removed from the specification.
-          // See related issue: https://github.com/p2panda/handbook/issues/306
-          // {
-          //   type: 'doc',
-          //   docId: 'learn/index',
-          //   position: 'left',
-          //   label: 'Learn',
-          // },
-=======
+          {
             type: 'doc',
             docId: 'learn/index',
             position: 'left',
             label: 'Learn',
           },
->>>>>>> main
           {
             type: 'doc',
             docId: 'tutorials/index',
