@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkhandbook=self.webpackChunkhandbook||[]).push([[2535],{5641:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Access control in a p2p world","permalink":"/blog/2024/04/08/capabilities","unlisted":false},{"title":"aquadoggo 0.7.0","permalink":"/blog/2023/11/17/aquadoggo","unlisted":false}]}')}}]);
