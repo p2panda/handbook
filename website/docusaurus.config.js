@@ -67,11 +67,12 @@ const config = {
             position: 'left',
             label: 'About',
           },
-          {
-            position: 'left',
-            to: 'blog',
-            label: 'News',
-          },
+          // @TODO: We won't make the blog public fully public until the first installment is completed
+          // {
+          //   position: 'left',
+          //   to: 'blog',
+          //   label: 'News',
+          // },
           // @TODO: We need to re-write the learn section a little as things like "Bamboo" etc. got removed from the specification.
           // See related issue: https://github.com/p2panda/handbook/issues/306
           // {
