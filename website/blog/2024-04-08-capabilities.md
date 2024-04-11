@@ -1,5 +1,5 @@
 ---
-title: Capabilities in a p2p world
+title: Access control in a p2p world
 ---
 
 _TLDR; capability based access control system designs for p2panda: https://github.com/p2panda/capabilities/blob/main/DESIGN.md_
@@ -12,7 +12,7 @@ One of our primary tasks over the next months is to design and implement an acce
 
 This model is not possible (or welcome!) in peer-to-peer systems. There is no central source of authority, so we need a way for peers to communicate authority boundaries themselves, in a away which allows all peers on the network to act as "authorizer" when handling access requests. There are many well researched approaches to designing access control systems in multi-actor systems, originating not only in network technologies, but also operating system design and asynchronous programming environments, which offer solutions to this very problem. Many of these incorporate patterns from Capability-based Security [wikipedia](https://en.wikipedia.org/wiki/Capability-based_security) systems. In the rest of this article we'll go a little deeper into what a system like this needs to look like for p2panda, look over a few systems we've spent time researching, and then share our current designs. 
 
-## Ownership in a peer-to-peer world
+## Authoring and owning data
 
 Peer-to-peer protocols such as p2panda use public-key cryptography and digital signatures to establish the identity of peers and the authenticity of messages replicated on a network. Any peer can verify that messages it receives were created by the claimed peer (public key), and that they have not been tampered with by any third parties. This technically allows peers to replicate messages freely to _anyone_, safe in the knowledge that the original author of the message can be verified and if tampering occurred it will be detected.
 
