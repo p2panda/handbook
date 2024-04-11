@@ -7,17 +7,15 @@ _TLDR; capability based access control system designs for p2panda: https://githu
 
 ## Introduction
 
-Hello 👋 welcome to the first p2panda research blog post! This is the start of series of posts where we will be publicly documenting our research process. We've always cared about making our system designs transparent and publishing tutorials and other learning resources. This is an effort to also make our research more transparent and hopefully useful to users and developers in the wider p2p ecosystem.
+Hello 👋 and welcome to the first p2panda research blog post! This is the start of series of posts where we'll be publicly documenting our research process. We've always cared about making our system designs accessible and publishing tutorials and other learning resources. This is an effort to also make our research more transparent and hopefully useful to users and developers in the wider p2p ecosystem.
 
-One of our primary tasks over the next months is to design and implement an access control system for p2panda. This is no simple matter in a leaderless peer-to-peer network. When using centralized services, we put our trust in a single provider, and delegate to them responsibility for storing data and authorizing access requests. This will likely involve agreeing user credentials (username, password) which we can later present as proof of ownership. By knowing our username and password we are allowed access to our data.
+One of our primary tasks over the next months is to design and implement an access control system for p2panda. This is no simple matter in a leaderless peer-to-peer network. When using centralized services, we put our trust in a single provider, and delegate to them responsibility for storing data and authorizing access requests. This will likely involve agreeing user credentials (username, password etc..). By knowing these credentials it is assumed we have authority to access to my data.
 
-This model is not possible (or welcome!) in peer-to-peer systems. There is no central source of authority, so we need a way for peers to communicate authority boundaries themselves, in a away which allows all peers on the network to act as "authorizer" when handling access requests. The idea of "keeping control of my data" could well be seen as paradoxical in the context of a peer-to-peer system which is fundamentally about sharing data. There are however many well researched approaches, originating not only in network technologies, but also operating system design and asynchronous programming environments, which offer solutions to this very problem.
-
-Many of these incorporate patterns from Capability-based Security [wikipedia](https://en.wikipedia.org/wiki/Capability-based_security) systems. In the rest of this article we'll go a little deeper into what a system like this needs to look like for p2panda, look over a few systems we've spent time researching, and then share our current designs. 
+This model is not possible (or welcome!) in peer-to-peer systems. There is no central source of authority, so we need a way for peers to communicate authority boundaries themselves, in a away which allows all peers on the network to act as "authorizer" when handling access requests. There are many well researched approaches to designing access control systems in multi-actor systems, originating not only in network technologies, but also operating system design and asynchronous programming environments, which offer solutions to this very problem. Many of these incorporate patterns from Capability-based Security [wikipedia](https://en.wikipedia.org/wiki/Capability-based_security) systems. In the rest of this article we'll go a little deeper into what a system like this needs to look like for p2panda, look over a few systems we've spent time researching, and then share our current designs. 
 
 ## Ownership in a peer-to-peer world
 
-Peer-to-peer protocols such as p2panda use public-key cryptography and digital signatures to establish the identity of peers and the authenticity of messages replicated on a network. Any peer can verify that messages it receives were created by the claimed peer (public key), and that they have not been tampered with by any third parties. This technically allows peers to replicate messages freely to _anyone_, safe in the knowledge that if tampering occurs it can be detected.
+Peer-to-peer protocols such as p2panda use public-key cryptography and digital signatures to establish the identity of peers and the authenticity of messages replicated on a network. Any peer can verify that messages it receives were created by the claimed peer (public key), and that they have not been tampered with by any third parties. This technically allows peers to replicate messages freely to _anyone_, safe in the knowledge that the original author of the message can be verified and if tampering occurred it will be detected.
 
 What if we don't want to share data with everyone though? Even if we know it won't be tampered with, we understandably want a stricter system where an author has control over where their data can travel, and how peers are allowed to interact with it. If we understand "authorship" as equal to "ownership" then we can say that only an owner has "read" and "write" authority over the data they created ("write" authority being relevant to long-lived mutable data). This actually now sounds a little like our centralized service described above, there is again a "single service" which controls your data, this time it's _you_ though. 
 
@@ -31,7 +29,7 @@ Don't take my word for it though, from [wikipedia](https://en.wikipedia.org/wiki
 
 ## What do we need?
 
-We came to this research with a some requirements of any capability system we might use:
+We came to this research with a set of requirements for any capability system to be used with p2panda:
 
 * authors have fine-grained control over who can access and perform actions their data
 * tokens can be distributed freely but only used by the intended recipient
@@ -57,15 +55,17 @@ In the following diagram we can see how non-hierarchical ownership can be modele
 
 I've spent a substantial amount of time researching capability systems over the last months, and I still feel like I've only scratched the surface. Here is a selection of projects I've looked into, chosen for their differing approaches and relation to our design goals.
 
-### OCapN / CapTP (Agoric, Spritely, Cap'N'Proto)
+### CapTP / OCapN (Agoric, Spritely, Cap'N'Proto)
 
-CapTP (Capability Transport Protocol) is an object-capability protocol which allows "distributed object programming over mutually suspicious networks". It's  origin is in the E programming language (from the 90s) which is described as "an object-capability programming language and platform for writing distributed, secure, and robust software". Sounds good to me so far :smile: ! There are various implementations out there, notably in Spritely, Agoric and Cap'N'Proto. There's also a (pre-)standardization effort underway for OCapN (Object Capability Network) network suite which incorporates CapTP (although mentioned here explicitly object-capability theory and CapTP has an influence on all the projects mentioned in this article).
+CapTP (Capability Transport Protocol) is an object-capability protocol which allows "distributed object programming over mutually suspicious networks". It's  origin is in the E programming language which is described as "an object-capability programming language and platform for writing distributed, secure, and robust software". Sounds good to me so far :smile: ! There are various implementations out there, notably in Spritely, Agoric and Cap'N'Proto. There's also a (pre-)standardization effort underway for OCapN (Object Capability Network) network suite which incorporates CapTP. 
 
-Despite the system properties feeling intuitively familiar (as a peer-to-peer dev), penetrating the details of the protocol design was a challenge. The reasons for this were firstly that important resources are spread across many projects (from the 90s to current day) so it took quite some searching to feel like I was getting a full picture, and secondly many of the implementations are in languages I'm not at all familiar with, so reading through codebases took some extra mental overhead. No fault to be placed anywhere for these factors (decentralization, yay!!), but it was my experience as a new-comer to the ecosystem. Certainly looking into the patterns explored by these projects is a great way to understand where the theories around object-capability models originate and how they're being implemented today. There's a radical spirit and and ambition around much of the work in this particular capability corner which is especially inspiring. 
+Despite the system properties feeling intuitively familiar, penetrating the details of the protocol design was actually a challenge. The reasons for this were firstly that important resources are spread across many projects (from the 90s to current day) so it took quite some searching to feel like I was getting a full picture, and secondly many of the implementations are in languages that I'm not familiar with, so reading through codebases took some extra mental overhead. No fault to be placed anywhere for these factors (decentralization, yay!!), but it was my experience as a new-comer to the ecosystem. Once I got through that though, the very active ecosystems and resources around these projects provided excellent insight into common approaches to capability systems. Certainly looking into the patterns explored by these projects is a great way to understand where the theories around object-capability models originate and how they're being implemented today. There's a radical spirit and and ambition around much of the work in this particular capability corner which is especially inspiring. 
+
+In terms of the features we require, it seems that the CapTP model is aimed at environments where the protocol can run over live connections between peers. Typically a capability will last for the lifetime of a connection, but no longer. I know there are features of the protocol which can be used to extend this lifetime, something which would be needed for our use, but this is at least the starting assumption I believe.  
 
 #### Links
-* [impressively commented Cap'N'Proto RPC document](https://github.com/capnproto/capnproto/blob/v2/c%2B%2B/src/capnp/rpc.capnp) (best resource for CapTP overview)
 * [spritely institute](https://spritely.institute/)
+* [impressively commented Cap'N'Proto RPC document](https://github.com/capnproto/capnproto/blob/v2/c%2B%2B/src/capnp/rpc.capnp) (best resource for CapTP overview)
 * [E programming language](http://wiki.erights.org/wiki/Main_Page)
 * [OCapN standardization effort](https://ocapn.org/)
 
@@ -73,7 +73,7 @@ Despite the system properties feeling intuitively familiar (as a peer-to-peer de
 
 UCAN (User Controlled Authorization Networks) is described as: "an extension of the popular JSON Web Token format specifically designed to enable ways of authorizing offline-first apps and distributed systems". Again, we're on the right track! Here research was quite straightforward, the design and core data types can be grasped by looking at their website landing page :pray:. Their token based approach felt fairly intuitive to pick-up, although not being super familiar with DIDs held me back a little. Their use of JWTs seems to be an explicit attempt to aid in adoption as it's a familiar format for web devs already. There's an active community around the specifications and implementations, with libraries available in Rust and TypeScript.
 
-It's impressive (and I'm grateful for) how simple and intuitive UCANs are in their design, and the specification is excellent (bonus material if you reach the end of the spec is a useful roll-call of capability systems [movers and shakers](https://github.com/ucan-wg/spec?tab=readme-ov-file#10-related-work-and-prior-art)). Of particular interest to us is their first-class support for offline-first applications.
+It's impressive (and I'm grateful for) how simple and intuitive UCANs are in their design, and the specification is excellent (bonus material if you reach the end of the spec is a useful roll-call of capability systems [movers and shakers](https://github.com/ucan-wg/spec?tab=readme-ov-file#10-related-work-and-prior-art)). Of particular interest to us is their first-class support for offline-first applications and delay tolerant networking.
 
 #### Links
 
@@ -83,11 +83,12 @@ It's impressive (and I'm grateful for) how simple and intuitive UCANs are in the
 * [Rust](https://github.com/ucan-wg/rs-ucan) & [TypeScript](https://github.com/ucan-wg/ts-ucan) implementations
 
 ### Biscuit
-[link text](https:// "title")
 
 > Biscuit is a bearer token that supports offline attenuation, can be verified by any system that knows the root public key, and provides a flexible authorization language based on logic programming. It is serialized as Protocol Buffers, and designed to be small enough for storage in HTTP cookies.
 
-If I've understand them correctly, although they allow for any peer to validate their authenticity (via public key cryptography) they can't be distributed freely, by holding the token you  biscuit tokens can't be distributed freely, holding the token imparts upon you the authority it delegates. This property means it's not suitable for our system, however I included it here for it's interesting use of a Datalog based logic language for write authorization policies. This really jumped out as powerful and incredibly versatile approach for defining access policies on your tokens.
+I've included Biscuit in particular for it's interesting use of a Datalog based logic language for writing authorization policies. This really jumped out as powerful and incredibly versatile approach to defining the rules which restrict the authority of a capability.
+
+In terms of features we need though, biscuit tokens cannot be distributed freely, rather the holder of a token gains authority to use it.
 
 #### Links
 
@@ -96,10 +97,10 @@ If I've understand them correctly, although they allow for any peer to validate 
 
 ### Our approach
 
-We found UCAN to provide almost all the features needed and after speaking with some community members it seems there are exciting developments on the next iteration of the specification which take inspiration from some of the descriptive policy features of biscuit and generally makes changes which fit our system very well. We've therefore based our designs on the (new) UCAN specification where possible. We will still rely on our internal types for all public key cryptography and we won't adopt the JWT format though, so our implementation will not be inter-operable with any other UCAN implementations.  
+Our early designs shared many common ideas and provided almost the same features as UCAN tokens. After speaking with some community members it seems there are exciting developments on the next iteration of the specification which take inspiration from some of the descriptive policy features of biscuit as well as other changes which fit our system well. We've therefore based our designs on the (new) UCAN specification where possible. It made sense that we continue to rely on our existing internal data types for identity, signing, resource addressing and encoding formats though, making p2panda tokens not inter-operable with existing UCAN implementations. 
 
-### Our Design Doc
-
-Our designs are available for your interest here: https://github.com/p2panda/capabilities/blob/main/DESIGN.md
+Our designs are published in this git repository: https://github.com/p2panda/capabilities/blob/main/DESIGN.md
 
 After some final rounds of feedback we'll be starting on the Rust implementation.
+
+Thanks for reading, see you next time!
