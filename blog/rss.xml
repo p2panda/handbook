@@ -9,14 +9,12 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
-            <title><![CDATA[capabilities]]></title>
+            <title><![CDATA[Capabilities in a p2p world]]></title>
             <link>https://p2panda.org/blog/2024/04/08/capabilities</link>
             <guid>https://p2panda.org/blog/2024/04/08/capabilities</guid>
             <pubDate>Mon, 08 Apr 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[---]]></description>
-            <content:encoded><![CDATA[<hr>
-<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="title-capabilities-in-a-p2p-world">title: Capabilities in a p2p world<a href="https://p2panda.org/blog/2024/04/08/capabilities#title-capabilities-in-a-p2p-world" class="hash-link" aria-label="Direct link to title: Capabilities in a p2p world" title="Direct link to title: Capabilities in a p2p world">​</a></h2>
-<p><em>TLDR; capability based access control system designs for p2panda: <a href="https://github.com/p2panda/capabilities/blob/main/DESIGN.md" target="_blank" rel="noopener noreferrer">https://github.com/p2panda/capabilities/blob/main/DESIGN.md</a></em></p>
+            <description><![CDATA[TLDR; capability based access control system designs for p2panda//github.com/p2panda/capabilities/blob/main/DESIGN.md]]></description>
+            <content:encoded><![CDATA[<p><em>TLDR; capability based access control system designs for p2panda: <a href="https://github.com/p2panda/capabilities/blob/main/DESIGN.md" target="_blank" rel="noopener noreferrer">https://github.com/p2panda/capabilities/blob/main/DESIGN.md</a></em></p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="introduction">Introduction<a href="https://p2panda.org/blog/2024/04/08/capabilities#introduction" class="hash-link" aria-label="Direct link to Introduction" title="Direct link to Introduction">​</a></h2>
 <p>Hello 👋 and welcome to the first p2panda research blog post! This is the start of series of posts where we'll be publicly documenting our research process. We've always cared about making our system designs accessible and publishing tutorials and other learning resources. This is an effort to also make our research more transparent and hopefully useful to users and developers in the wider p2p ecosystem.</p>
 <p>One of our primary tasks over the next months is to design and implement an access control system for p2panda. This is no simple matter in a leaderless peer-to-peer network. When using centralized services, we put our trust in a single provider, and delegate to them responsibility for storing data and authorizing access requests. This will likely involve agreeing user credentials (username, password etc..). By knowing these credentials it is assumed we have authority to access to my data.</p>
@@ -85,7 +83,7 @@
 <p>Our designs are published in this git repository: <a href="https://github.com/p2panda/capabilities/blob/main/DESIGN.md" target="_blank" rel="noopener noreferrer">https://github.com/p2panda/capabilities/blob/main/DESIGN.md</a></p>
 <p>After some final rounds of feedback we'll be starting on the Rust implementation.</p>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="thanks">Thanks<a href="https://p2panda.org/blog/2024/04/08/capabilities#thanks" class="hash-link" aria-label="Direct link to Thanks" title="Direct link to Thanks">​</a></h2>
-<p>This research wouldn't have been possible without the support we received from the NLNet foundation! Also many thanks to our friends at SSB, Willow, Digital Democracy and Cable for their conversations, feedback and general sharing of excellent related work along the way.</p>
+<p>This research wouldn't have been possible without the support we received from the <a href="https://nlnet.nl/" target="_blank" rel="noopener noreferrer">NLNet</a> foundation! Also many thanks to our friends at <a href="https://www.scuttlebutt.nz/" target="_blank" rel="noopener noreferrer">SSB</a>, <a href="https://willowprotocol.org/" target="_blank" rel="noopener noreferrer">Willow</a>, <a href="https://www.digital-democracy.org/" target="_blank" rel="noopener noreferrer">Digital Democracy</a> and <a href="https://github.com/cabal-club/cable" target="_blank" rel="noopener noreferrer">Cable</a> for their conversations, feedback and general sharing of excellent related work along the way.</p>
 <p>Thanks for reading, see you next time!</p>]]></content:encoded>
         </item>
         <item>
