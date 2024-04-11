@@ -1,4 +1,3 @@
-
 ---
 title: Capabilities in a p2p world
 ---
@@ -105,6 +104,6 @@ After some final rounds of feedback we'll be starting on the Rust implementation
 
 ## Thanks
 
-This research wouldn't have been possible without the support we received from the NLNet foundation! Also many thanks to our friends at SSB, Willow, Digital Democracy and Cable for their conversations, feedback and general sharing of excellent related work along the way.
+This research wouldn't have been possible without the support we received from the [NLNet](https://nlnet.nl/) foundation! Also many thanks to our friends at [SSB](https://www.scuttlebutt.nz/), [Willow](https://willowprotocol.org/), [Digital Democracy](https://www.digital-democracy.org/) and [Cable](https://github.com/cabal-club/cable) for their conversations, feedback and general sharing of excellent related work along the way.
 
 Thanks for reading, see you next time!
