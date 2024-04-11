@@ -43,11 +43,60 @@ A requirement of our system is that it allows developers to build apps which mod
 
 The below diagram sketches the access control boundaries for a festival and its schedule of events. The application data has a hierarchical ownership structure. There is an admin group which owns the festival and collection of events, organisers are delegated `collection/add` authority so they can add events to the collection, they own any events they create. Visitors are given `document/read` authority for the festival info and all its events.
 
-![](https://laub.liebechaos.org/uploads/6b5055c1-70bd-4446-808b-fff3caaaa9af.png)
+```
+owner=admins────────────────────────┐
+visitor:read                        │
+│                                   │
+│          FESTIVAL INFO            │
+│                                   │
+│    owner=admins──────────────┐    │
+│    organiser:add             │    │
+│    │                         │    │
+│    │         EVENTS          │    │
+│    │                         │    │
+│    │   owner=organiser───┐   │    │
+│    │   │                 │   │    │
+│    │   │      EVENT      │   │    │
+│    │   │                 │   │    │
+│    │   └─────────────────┘   │    │
+│    │                         │    │
+│    │   owner=organiser───┐   │    │
+│    │   │                 │   │    │
+│    │   │      EVENT      │   │    │
+│    │   │                 │   │    │
+│    │   └─────────────────┘   │    │
+│    │                         │    │
+│    │   owner=organiser───┐   │    │
+│    │   │                 │   │    │
+│    │   │      EVENT      │   │    │
+│    │   │                 │   │    │
+│    │   └─────────────────┘   │    │
+│    │                         │    │
+│    │                         │    │
+│    └─────────────────────────┘    │
+│                                   │
+└───────────────────────────────────┘
+```
 
 In the following diagram we can see how non-hierarchical ownership can be modelled with a photo sharing app. The app displays to the user a collection of photos, this isn't an "owned" collection as no peer has overall authority over it, each user will have their own photo collection. All they need is read authority for any published photos.
 
-![](https://laub.liebechaos.org/uploads/3c5801fc-308e-43d1-8ca7-f229f9118a2e.png)
+```
+owner=anna─────────┐   owner=billie───────┐
+me:read            │   me:read            │
+│                  │   │                  │
+│      PHOTO       │   │      PHOTO       │
+│                  │   │                  │
+│                  │   │                  │
+└──────────────────┘   └──────────────────┘
+
+owner=claire───────┐   owner=diana────────┐
+me:read            │   me:read            │
+│                  │   │                  │
+│      PHOTO       │   │      PHOTO       │
+│                  │   │                  │
+│                  │   │                  │
+└──────────────────┘   └──────────────────┘
+```
 
 ## Research
 
