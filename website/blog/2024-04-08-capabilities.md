@@ -91,8 +91,8 @@ In terms of features we need though, biscuit tokens cannot be distributed freely
 
 #### Links
 
-* [homepage](https://github.com/biscuit-auth/biscuit/blob/main/SPECIFICATIONS.md)
-* [docs](https://doc.biscuitsec.org/getting-started)
+* [Homepage](https://github.com/biscuit-auth/biscuit/blob/main/SPECIFICATIONS.md)
+* [Documentation](https://doc.biscuitsec.org/getting-started)
 
 ## Our approach
 
