@@ -78,7 +78,7 @@ visitor:read                        │
 └───────────────────────────────────┘
 ```
 
-In the following diagram we can see how non-hierarchical ownership can be modelled with a photo sharing app. The app displays to the user a collection of photos, this isn't an "owned" collection as no peer has overall authority over it, each user will have their own photo collection. All they need is read authority for any published photos.
+In the following diagram we can see how non-hierarchical ownership can be modelled with a photo sharing app. The app displays to the user a collection of photos, this isn't an "owned" collection as no peer has overall authority over it, each user will have their own photo collection. All they need is "read" authority for any published photos.
 
 ```
 owner=anna─────────┐   owner=billie───────┐
