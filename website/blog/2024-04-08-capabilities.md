@@ -95,12 +95,16 @@ In terms of features we need though, biscuit tokens cannot be distributed freely
 * [homepage](https://github.com/biscuit-auth/biscuit/blob/main/SPECIFICATIONS.md)
 * [docs](https://doc.biscuitsec.org/getting-started)
 
-### Our approach
+## Our approach
 
 Our early designs shared many common ideas and provided almost the same features as UCAN tokens. After speaking with some community members it seems there are exciting developments on the next iteration of the specification which take inspiration from some of the descriptive policy features of biscuit as well as other changes which fit our system well. We've therefore based our designs on the (new) UCAN specification where possible. It made sense that we continue to rely on our existing internal data types for identity, signing, resource addressing and encoding formats though, making p2panda tokens not inter-operable with existing UCAN implementations. 
 
 Our designs are published in this git repository: https://github.com/p2panda/capabilities/blob/main/DESIGN.md
 
 After some final rounds of feedback we'll be starting on the Rust implementation.
+
+## Thanks
+
+This research wouldn't have been possible without the support we received from the NLNet foundation! Also many thanks to our friends at SSB, Willow, Digital Democracy and Cable for their conversations, feedback and general sharing of excellent related work along the way.
 
 Thanks for reading, see you next time!
