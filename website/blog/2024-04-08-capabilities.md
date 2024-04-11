@@ -1,5 +1,7 @@
 ---
 title: Access control in a p2p world
+authors: 
+  name: Sam Andreae
 ---
 
 _TLDR; capability based access control system designs for p2panda: [Read Design Document on GitHub](https://github.com/p2panda/access-control)_
