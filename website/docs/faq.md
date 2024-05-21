@@ -28,7 +28,7 @@ p2panda has been designed with browser-friendliness in mind as it is still very 
 
 ## Does p2panda encrypt data?
 
-By default all published data is not encrypted. p2panda plans a decentralised variant of [Messaging Layer Security](https://messaginglayersecurity.rocks/) (MLS) under the hood for strong encryption. For the upcoming funding period we are working on a dMLS client API which will make using encryption seamless for developers.
+By default all published data is currently not encrypted. p2panda plans to implement the Key Agreement for [Decentralized Secure Group Messaging with Strong Security Guarantees (DCGKA)](https://eprint.iacr.org/2020/1281.pdf) specification this year for offline-first group encryption with Post-Compromise-Security and Forward-Secrecy.
 
 ## Does p2panda run on smartphones?
 

@@ -14,7 +14,6 @@ title: Roadmap
 - [x] CBOR encoding
 - [x] Materialisation of data from operations
 - [x] Schemas describing the format of operations
-- [x] OpenMLS group encryption
 - [x] Schema migrations
 - [x] Multi-writer materialisation in `aquadoggo`
 - [x] System Schemas in `aquadoggo`
@@ -33,8 +32,9 @@ title: Roadmap
 
 ## Now
 
-- [ ] Build an Android app with Flutter using p2panda
-- [ ] High-level data encryption API using MLS
+- [ ] Build an Android "Meli" app with Flutter using p2panda
+- [ ] Implement Key Agreement for Decentralized Secure Group Messaging with
+Strong Security Guarantees (DCGKA) for group encryption
 - [ ] Capabilities for fine-grained user permissions and roles
 - [ ] Shared identities across multiple devices
 

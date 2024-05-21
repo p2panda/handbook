@@ -6,7 +6,7 @@ import ImageFrame from '@site/src/components/ImageFrame';
 
 > 🦥 namakemono = Sloth (Japanese) = Slow and forgetful = very delay-tolerant, offline-first and privacy-respecting 🩷
 
-**namakemono** is a protocol for peer-to-peer and federated applications. It gives them sloth-superpowers: offline-first collaboration, fine-grained permissions, data validation, schema migration, decentralised MLS encryption, low memory footprint, efficient replication and privacy-respecting deletion.
+**namakemono** is a protocol for peer-to-peer and federated applications. It gives them sloth-superpowers: offline-first collaboration, fine-grained permissions, data validation, schema migration, decentralised group encryption, low memory footprint, efficient replication and privacy-respecting deletion.
 
 <ImageFrame
   title="Sloth-Superpowers!"
@@ -17,7 +17,7 @@ import ImageFrame from '@site/src/components/ImageFrame';
 
 * **Offline-first collaboration:** Create and edit data with others, even when you're offline. Distributed systems usually compromise on "how long" you can be offline, namakemono gives you the tools to stay offline as long as you want
 * **Fine-grained capabilities:** Full control over your data by defining who can sync, create, update or delete what. Usually capability system require nodes to be online, namakemono allows capabilities to be offline-first
-* **End-to-end encryption:** Secure and scaleable group encryption with a decentralised variant of the Messaging-Layer-Security (MLS) protocol
+* **End-to-end encryption:** Secure group encryption with PCS and FS
 * **Don't grow data forever, except if you want to:** Keep the history of all changes if you need them, or delete old data instantly when your application does not require it, even of other authors
 * **Hybrid networks:** Use namakemono in both peer-to-peer or federated networks, or even both of them at the same time
 * **Privacy-respecting deletion:** Delete whole collections of data with one tombstone or let data disappear by itself, giving it an expiry date
@@ -320,105 +320,17 @@ Operations can be extended with certain features we usually want for high-level 
 
 :::note
 
-Capabilities are in the workings for 2024. Watch this space!
+Capabilities are in the workings for 2024. Read our specification here: https://github.com/p2panda/access-control
 
 :::
-
-* Capabilites are documents which grant permissions to certain public keys
-    * It's like a token given to somebody else and they can use this token to proof now that they are allowed to do something
-* These tokens can be revoked at any time
-    * If verifiable causal history during revocation is required, a high document depth and
-      including `previous` is recommended
-* To create a capability document we publish a CREATE operation with the following `schema_id` header
-    * `schema_id`: `caps_v1`
-        * System schema identifier for capabilities documents
-* Capabilities can be given to UPDATE or DELETE documents
-* When using Collections they can also be given to CREATE documents within that Collection
-* Capabilities are given by stating:
-    * `type`
-        * Can be either `1` add permission or `0`: revoke permission
-    * `document_id`
-        * Which document does this capability apply to
-    * `public_key`
-        * Whom do I give this permission
-    * `seq_num` (for `update` and `tombstone` actions)
-        * From which point in an authors contribution history do I give permission to this author?
-            * If not known, `0` is chosen
-        * When revoking: From which point on do I remove this permission?
-        * If revoking permission after a malicious fork it is recommended to revoke from `seq_num` @ fork - 1
-        * To completly remove a malicious actor it is possible to revoke all previously given capabilities by removing them from `seq_num` 0 on
-    * `action`
-        * `read`
-        * `create`
-        * `update`
-        * `tombstone`
-        * `sync`
-            * We want to support federation, for these cases we're explicitly separating "reading" from "syncing"
-    * `create_allowance` (for `create` action)
-        * When handing out `create` action capabilities an allowance can be specified as an unsigned integer, this limits the number of documents which can be created by this author in the target collection. Documents are selected in timestamp order, newest first.
-* Other authors need to now refer to the most recent known document view id for when they publish an operation. They do this by stating the document View Id in the extension of their Operation
-    * `capability`: `Hash[]`
-        * List of operation ids representing the latest known version of this capability document
-        * With this, honest peers limit the damage a malicious node can do, as they lock in any changes to the cap doc as they update the target doc. The worst a malicious node can do is withold state from both the cap and target document. Without the pointer they could withold operations from just the cap group "allowing in" operations to the target doc which already had their permissions revoked.
-
-<ImageFrame
-  title="Blue granting 'write' permission to the Yellow author"
-  url={require('./assets/cap-1.png')}
-/>
-
-<ImageFrame
-  title="Blue granting 'write' permission to the Green author"
-  url={require('./assets/cap-2.png')}
-/>
-
-<ImageFrame
-  title="Blue removing 'write' permission of the Yellow author for the future"
-  url={require('./assets/cap-3.png')}
-/>
-
-<ImageFrame
-  title="Blue retroactively removing operations of malicious Yellow author"
-  url={require('./assets/cap-4.png')}
-/>
-
-* Capability documents can again refer to "parent" capability documents
-    * This allows for neat application patterns like granting admin access / access to changing access for other users in an application
-
-<ImageFrame
-  title="Nesting capabilities to express complex user hierarchies and roles"
-  url={require('./assets/caps-nesting.png')}
-/>
 
 ### Encryption
 
 :::note
 
-Encryption is mostly handled by MLS and our "Secret Group" specification which is heavily in the workings in our roadmap 2024. Go to https://arewemlsyet.com/ for more information around decentralised MLS.
+Encryption is mostly handled by decentralized continuous group key agreement (DCGKA) and our "Secret Group" specification which is heavily in the workings in our roadmap 2024, allowing offline-first PCS and FS double-ratchet encryption or "long-living" symmetrical encryption. You can read the paper https://eprint.iacr.org/2020/1281.pdf for more information around the approach we implement.
 
 :::
 
-* Operations refer to the MLS group and Epoch they used by using the document View Id of the MLS Group
-    * `secret`: `Hash[]`
-* Both header and body can be fully encrypted if no federation is required for the application
-* If federation should be supported header data needs to stay plain-text and only the body can be encrypted
-    * Exceptions are possible but this greatly depends on where trust is established in the application
-    * This is a trade-off which needs to be decided by the application (no meta data leakage vs. federation support)
-        * Federation is essentially "shared computing" where nodes do the "heavy work" for lightweight clients
-* System documents (capabilities, secret groups / MLS etc.) can never be encrypted
-    * Except when sharing encryption secrets is dealt with through another channels but this is out of scope for this specification
-
 ## Replication
 
-- Nodes essentially ask for what documents (for example scoped by schema id, timestamp range,
-  collection ids, document ids etc.) they are interested in. As documents drop out of this scope
-  they can be garbage collected. Through configuring this scope they have control over the data
-  they persist locally and replicate on the network.
-- Replication in itself is taking place by exchanging "log heights" since all documents can be expressed as logs, even when including forks (the forked branch is considered its own "log")
-- Log heights are tuples of `(document id, public key, latest known seq num)`
-- The latest known operation id needs to be added as well if it is known that a fork exists
-- Nodes can not retrieve any data from any author or document if no `sync` capability was given
-
-<ImageFrame
-  title="Two nodes replicating data with each other"
-  url={require('./assets/replication.png')}
-/>
