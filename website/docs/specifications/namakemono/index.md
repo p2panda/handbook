@@ -334,3 +334,8 @@ Encryption is mostly handled by decentralized continuous group key agreement (DC
 
 ## Replication
 
+:::note
+
+We use a set reconciliation protocol for efficient replication of p2panda operations. You can read the paper on our implementation here: https://arxiv.org/abs/2212.13567
+
+:::
