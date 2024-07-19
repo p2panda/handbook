@@ -313,7 +313,7 @@ fn main() {
 }
 ```
 
-We will want access to logs from our application and any important dependencies (especially from `aqaudoggo`) to do that we're building a `Logger` instance which will capture and make available any logs bubbling up.
+We will want access to logs from our application and any important dependencies (especially from `aquadoggo`) to do that we're building a `Logger` instance which will capture and make available any logs bubbling up.
 
 Now if we start the app, `aquadoggo` should launch in the background. We can access the logs to check this is happening correctly:
 
