@@ -120,7 +120,7 @@ As we saw from the logging, a node _did_ start up, so where did it come from?
 
 ### Add `aquadoggo` to `Cargo.toml`
 
-The absolute first thing we need to do to use `aquadoggo` in any rust project is to add it as a dependency in our `Cargo.toml` file. We'll need `p2panda-rs` for creating an identity for the node too so let's add that now as well.
+The absolute first thing we need to do to use `aquadoggo` in any Rust project is to add it as a dependency in our `Cargo.toml` file. We'll need `p2panda-rs` for creating an identity for the node too so let's add that now as well.
 
 ```toml
 [dependencies]
@@ -210,7 +210,7 @@ And here is a brief explanation of the other files and folders used by the Tauri
 
 #### `icons`
 
-- icons for your app in many platform specific shapes and sizes. We won't do anything here in this tutorial check the Tauri docs on how to [generate your own icons](https://tauri.app/v1/api/cli#icon).
+- icons for your app in many platform specific shapes and sizes. We won't do anything here in this tutorial. Check the Tauri docs on how to [generate your own icons](https://tauri.app/v1/api/cli#icon).
 
 #### `resources/`
 
@@ -668,7 +668,7 @@ This tutorial is already growing quite long! But we still have a little more exc
 
 Tauri commands allow you to define methods in your Rust code and automatically have them exposed in the client. We will use this now to communicate the `HTTP` port our node is using to the client app. This is just an example though, there could be many other uses for this feature.
 
-What this looks like in the (heavily redacted) rust code:
+What this looks like in the (heavily redacted) Rust code:
 
 ```rust
 use aquadoggo::Node;
