@@ -104,7 +104,7 @@ Node is listening on 0.0.0.0:2022
 Schema migration: app schemas successfully deployed on initial start-up
 ```
 
-We're using `vite` to package the frontend code and assets, you can see that a dev server is started at `http://localhost:1420/`. This is where tauri will look for the frontend app during development. Next the Rust code is compiled and eventually the app is launched. The last four lines are logging from the `aquadoggo` node which has now started up. You can go to `localhost:2020/graphql` to check the GraphQL playground is being served correctly.
+We're using `vite` to package the frontend code and assets, you can see that a dev server is started at `http://localhost:1420/`. This is where Tauri will look for the frontend app during development. Next the Rust code is compiled and eventually the app is launched. The last four lines are logging from the `aquadoggo` node which has now started up. You can go to `localhost:2020/graphql` to check the GraphQL playground is being served correctly.
 
 The app window should now have opened, it'll be a blank screen.... not very interesting... until you start clicking! Then you can draw pointless messages like this with panda gif stickers (yay!):
 
@@ -165,7 +165,7 @@ async fn main() {
 }
 ```
 
-You can see the complete runtime life of a node in the above code, mostly it spends it's time running in the background, responding to HTTP and GraphQL requests from clients, and replicating with other nodes. The main point of interest for this tutorial is how we wrap this simple code into a tauri app and configure the node at runtime.
+You can see the complete runtime life of a node in the above code, mostly it spends it's time running in the background, responding to HTTP and GraphQL requests from clients, and replicating with other nodes. The main point of interest for this tutorial is how we wrap this simple code into a Tauri app and configure the node at runtime.
 
 ## Tauri integration
 
@@ -189,7 +189,7 @@ Let's take a look into the project directory `src-tauri/`:
 
 To anyone who's worked with the Rust programming language much of this will look very familiar. We have a `Cargo.toml` and `Cargo.lock` for managing dependencies, and a `src/` folder where our project code lives. Everything else here are Tauri specific conventions.
 
-If you check the `Cargo.toml` file you'll see that we're importing the tauri crate as a dependency:
+If you check the `Cargo.toml` file you'll see that we're importing the `tauri` crate as a dependency:
 
 ```toml
 [dependencies]
@@ -206,15 +206,15 @@ And here is a brief explanation of the other files and folders used by the Tauri
 
 #### `build.rs`
 
-- the default tauri build file, we won't do anything here in this tutorial.
+- the default Tauri build file, we won't do anything here in this tutorial.
 
 #### `icons`
 
-- icons for your app in many platform specific shapes and sizes. We won't do anything here in this tutorial check the tauri docs on how to [generate your own icons](https://tauri.app/v1/api/cli#icon).
+- icons for your app in many platform specific shapes and sizes. We won't do anything here in this tutorial check the Tauri docs on how to [generate your own icons](https://tauri.app/v1/api/cli#icon).
 
 #### `resources/`
 
-- resources we want access to at application runtime can be placed here and retrieved via the tauri API.
+- resources we want access to at application runtime can be placed here and retrieved via the Tauri API.
 
 #### `Tauri.toml`
 
@@ -222,13 +222,13 @@ And here is a brief explanation of the other files and folders used by the Tauri
 
 :::info Where did all this come from?
 
-You can scaffold a tauri project using their `create-tauri-app` tool which is available via `cargo`, `npm` and more. This very project was scaffolded in that way. More information on their ["Quick Start"](https://tauri.app/v1/guides/getting-started/setup/) page.
+You can scaffold a Tauri project using their `create-tauri-app` tool which is available via `cargo`, `npm` and more. This very project was scaffolded in that way. More information on their ["Quick Start"](https://tauri.app/v1/guides/getting-started/setup/) page.
 
 :::
 
-Ok, let's get into some code now, we'll step through building a tauri app, starting our node and getting access to useful logs.
+Ok, let's get into some code now, we'll step through building a Tauri app, starting our node and getting access to useful logs.
 
-#### Build the tauri app
+#### Build the Tauri app
 
 ```rust
 // src/main.rs
@@ -239,7 +239,7 @@ fn main() {
 }
 ```
 
-This is the tauri builder, the code above builds an app which... doesn't do anything... let's already add our `aquadoggo`.
+This is the Tauri builder, the code above builds an app which... doesn't do anything... let's already add our `aquadoggo`.
 
 ### Launching `aquadoggo`
 
@@ -483,7 +483,7 @@ To do this we make use of the Tauri `resources` directory. We can see that this 
 resources = [ "resources/*" ]
 ```
 
-Doing this means that any files in the `resources` directory will be bundled together with our app during compilation and we can access them via the [`resolve_resource`](https://docs.rs/tauri/1.5.4/tauri/struct.PathResolver.html#method.resolve_resource) method we get from the tauri crates `PathResolver`.
+Doing this means that any files in the `resources` directory will be bundled together with our app during compilation and we can access them via the [`resolve_resource`](https://docs.rs/tauri/1.5.4/tauri/struct.PathResolver.html#method.resolve_resource) method we get from the `tauri` crate's `PathResolver`.
 
 At this point we will also perform a little refactor as our app setup code is growing. We'll introduce a new module `config` and export a method for handling all of the above. We won't look into this module code in detail as it is fairly generic, see `src/config.rs` if you want to know more. We also add our default `config.toml` file to `resources/config.toml`. Our setup code now looks like this:
 
