@@ -658,7 +658,7 @@ Ok, we're pretty much done with the setup code! We have a Tauri app that launche
 
 :::info But what about the panda stickers?!
 
-There is a JavaScript client app wrapped in this project of course, otherwise none of the clicky panda sticker fun would be possible. Have a look into the `src/` directory to explore the code. It's a very simple client, but still demonstrates the powerful query API that our node is exploring. Int `scr/queries.js` you will find all the GraphQL queries the client uses, they make use of filtering, ordering and paginating document collections. Hopefully it demonstrates that thoughtful schema and query design can reduce the need for complex app logic greatly.
+There is a JavaScript client app wrapped in this project of course, otherwise none of the clicky panda sticker fun would be possible. Have a look into the `src/` directory to explore the code. It's a very simple client, but still demonstrates the powerful query API that our node is exporting. In `src/queries.js` you will find all the GraphQL queries the client uses, they make use of filtering, ordering and paginating document collections. Hopefully it demonstrates that thoughtful schema and query design can reduce the need for complex app logic greatly.
 
 :::
 
@@ -783,7 +783,7 @@ pub fn app_data_dir(app: &AppHandle) -> Result<PathBuf, anyhow::Error> {
 
 ### Multiple nodes / replication
 
-During development it's really useful to be able to start many nodes and observe local discovery and replication of data. We built this into the p2panda Tauri boilerplate for you. To launch multiple app instances simple simple run the following commands:
+During development it's really useful to be able to start many nodes and observe local discovery and replication of data. We built this into the p2panda Tauri boilerplate for you. To launch multiple app instances simply run the following commands:
 
 ```bash
 # Start a dev server for the client code which will be shared across app instances.
@@ -798,7 +798,7 @@ npm run peer
 # etc....
 ```
 
-Eventually you'll will end up with something which looks like this:
+Eventually you will end up with something which looks like this:
 
 ![tauri example screenshot with many peers](https://raw.githubusercontent.com/p2panda/.github/main/assets/tauri-example-screenshot.png)
 
