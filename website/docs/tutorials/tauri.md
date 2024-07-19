@@ -380,7 +380,7 @@ fn setup_handler(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error +
 
 ### Persistent storage
 
-There are actually two places where application data will be persisted from, one is the backend where we are working now, this will be things like the `aquadoggo` identity, config and database, the other is from the frontend client code. When working in the browser we're quite used to using LocalStorage to persist data between sessions. We use this very same pattern in Tauri, except we now have control over where and how this data is stored on the filesystem.
+There are actually two places from which application data will be persisted: one is the backend where we are working now, this will be things like the `aquadoggo` identity, config and database, the other is from the frontend client code. When working in the browser we're quite used to using LocalStorage to persist data between sessions. We use this very same pattern in Tauri, except we now have control over where and how this data is stored on the filesystem.
 
 On a Linux platform the app data directory will be `~/.local/share/{identifier}` with `{identifier}` coming from your `Tauri.toml` configuration file:
 
@@ -463,7 +463,7 @@ fn setup_handler(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error +
 }
 ```
 
-There's a bit more going on in `setup_handler` now. First we get a handle on the running app from which we can access global state and configuration values. From this we get the recommended app data directory path and create it if it doesn't exist yet (it won't if this is the first time the app is run). We then set the data directory for our `WebView`, load or generate a new keypair, configure node storage locations for our database and blobs.
+There's a bit more going on in `setup_handler` now. First we get a handle on the running app from which we can access global state and configuration values. From this we get the recommended app data directory path and create it if it doesn't exist yet (it won't if this is the first time the app is run). We then set the data directory for our `WebView`, load or generate a new keypair, and configure node storage locations for our database and blobs.
 
 We're using a new crate module `key_pair` for the logic around loading or generating our node identity, we won't look into that now as it's not so interesting for this tutorial, but feel free to head over to `src/key_pair.rs` if you want to know more.
 
@@ -804,7 +804,7 @@ Eventually you will end up with something which looks like this:
 
 :::info Why are there different color pandas?
 
-Glad you asked! Panda color is deterministically generated from your clients public key ;-p this means we can see which authors published which pandas once data starts replicating around. Cool, right?!
+Glad you asked! Panda color is deterministically generated from your client's public key ;-p this means we can see which authors published which pandas once data starts replicating around. Cool, right?!
 
 :::
 
