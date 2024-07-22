@@ -104,7 +104,7 @@ Node is listening on 0.0.0.0:2022
 Schema migration: app schemas successfully deployed on initial start-up
 ```
 
-We're using `vite` to package the frontend code and assets, you can see that a dev server is started at `http://localhost:1420/`. This is where tauri will look for the frontend app during development. Next the Rust code is compiled and eventually the app is launched. The last four lines are logging from the `aquadoggo` node which has now started up. You can go to `localhost:2020/graphql` to check the GraphQL playground is being served correctly.
+We're using `vite` to package the frontend code and assets, you can see that a dev server is started at `http://localhost:1420/`. This is where Tauri will look for the frontend app during development. Next the Rust code is compiled and eventually the app is launched. The last four lines are logging from the `aquadoggo` node which has now started up. You can go to `localhost:2020/graphql` to check the GraphQL playground is being served correctly.
 
 The app window should now have opened, it'll be a blank screen.... not very interesting... until you start clicking! Then you can draw pointless messages like this with panda gif stickers (yay!):
 
@@ -120,7 +120,7 @@ As we saw from the logging, a node _did_ start up, so where did it come from?
 
 ### Add `aquadoggo` to `Cargo.toml`
 
-The absolute first thing we need to do to use `aquadoggo` in any rust project is to add it as a dependency in our `Cargo.toml` file. We'll need `p2panda-rs` for creating an identity for the node too so let's add that now as well.
+The absolute first thing we need to do to use `aquadoggo` in any Rust project is to add it as a dependency in our `Cargo.toml` file. We'll need `p2panda-rs` for creating an identity for the node too so let's add that now as well.
 
 ```toml
 [dependencies]
@@ -165,7 +165,7 @@ async fn main() {
 }
 ```
 
-You can see the complete runtime life of a node in the above code, mostly it spends it's time running in the background, responding to HTTP and GraphQL requests from clients, and replicating with other nodes. The main point of interest for this tutorial is how we wrap this simple code into a tauri app and configure the node at runtime.
+You can see the complete runtime life of a node in the above code, mostly it spends it's time running in the background, responding to HTTP and GraphQL requests from clients, and replicating with other nodes. The main point of interest for this tutorial is how we wrap this simple code into a Tauri app and configure the node at runtime.
 
 ## Tauri integration
 
@@ -189,7 +189,7 @@ Let's take a look into the project directory `src-tauri/`:
 
 To anyone who's worked with the Rust programming language much of this will look very familiar. We have a `Cargo.toml` and `Cargo.lock` for managing dependencies, and a `src/` folder where our project code lives. Everything else here are Tauri specific conventions.
 
-If you check the `Cargo.toml` file you'll see that we're importing the tauri crate as a dependency:
+If you check the `Cargo.toml` file you'll see that we're importing the `tauri` crate as a dependency:
 
 ```toml
 [dependencies]
@@ -206,15 +206,15 @@ And here is a brief explanation of the other files and folders used by the Tauri
 
 #### `build.rs`
 
-- the default tauri build file, we won't do anything here in this tutorial.
+- the default Tauri build file, we won't do anything here in this tutorial.
 
 #### `icons`
 
-- icons for your app in many platform specific shapes and sizes. We won't do anything here in this tutorial check the tauri docs on how to [generate your own icons](https://tauri.app/v1/api/cli#icon).
+- icons for your app in many platform specific shapes and sizes. We won't do anything here in this tutorial. Check the Tauri docs on how to [generate your own icons](https://tauri.app/v1/api/cli#icon).
 
 #### `resources/`
 
-- resources we want access to at application runtime can be placed here and retrieved via the tauri API.
+- resources we want access to at application runtime can be placed here and retrieved via the Tauri API.
 
 #### `Tauri.toml`
 
@@ -222,13 +222,13 @@ And here is a brief explanation of the other files and folders used by the Tauri
 
 :::info Where did all this come from?
 
-You can scaffold a tauri project using their `create-tauri-app` tool which is available via `cargo`, `npm` and more. This very project was scaffolded in that way. More information on their ["Quick Start"](https://tauri.app/v1/guides/getting-started/setup/) page.
+You can scaffold a Tauri project using their `create-tauri-app` tool which is available via `cargo`, `npm` and more. This very project was scaffolded in that way. More information on their ["Quick Start"](https://tauri.app/v1/guides/getting-started/setup/) page.
 
 :::
 
-Ok, let's get into some code now, we'll step through building a tauri app, starting our node and getting access to useful logs.
+Ok, let's get into some code now, we'll step through building a Tauri app, starting our node and getting access to useful logs.
 
-#### Build the tauri app
+#### Build the Tauri app
 
 ```rust
 // src/main.rs
@@ -239,7 +239,7 @@ fn main() {
 }
 ```
 
-This is the tauri builder, the code above builds an app which... doesn't do anything... let's already add our `aquadoggo`.
+This is the Tauri builder, the code above builds an app which... doesn't do anything... let's already add our `aquadoggo`.
 
 ### Launching `aquadoggo`
 
@@ -313,7 +313,7 @@ fn main() {
 }
 ```
 
-We will want access to logs from our application and any important dependencies (especially from `aqaudoggo`) to do that we're building a `Logger` instance which will capture and make available any logs bubbling up.
+We will want access to logs from our application and any important dependencies (especially from `aquadoggo`) to do that we're building a `Logger` instance which will capture and make available any logs bubbling up.
 
 Now if we start the app, `aquadoggo` should launch in the background. We can access the logs to check this is happening correctly:
 
@@ -380,7 +380,7 @@ fn setup_handler(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error +
 
 ### Persistent storage
 
-There are actually two places where application data will be persisted from, one is the backend where we are working now, this will be things like the `aquadoggo` identity, config and database, the other is from the frontend client code. When working in the browser we're quite used to using LocalStorage to persist data between sessions. We use this very same pattern in Tauri, except we now have control over where and how this data is stored on the filesystem.
+There are actually two places from which application data will be persisted: one is the backend where we are working now, this will be things like the `aquadoggo` identity, config and database, the other is from the frontend client code. When working in the browser we're quite used to using LocalStorage to persist data between sessions. We use this very same pattern in Tauri, except we now have control over where and how this data is stored on the filesystem.
 
 On a Linux platform the app data directory will be `~/.local/share/{identifier}` with `{identifier}` coming from your `Tauri.toml` configuration file:
 
@@ -463,7 +463,7 @@ fn setup_handler(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error +
 }
 ```
 
-There's a bit more going on in `setup_handler` now. First we get a handle on the running app from which we can access global state and configuration values. From this we get the recommended app data directory path and create it if it doesn't exist yet (it won't if this is the first time the app is run). We then set the data directory for our `WebView`, load or generate a new keypair, configure node storage locations for our database and blobs.
+There's a bit more going on in `setup_handler` now. First we get a handle on the running app from which we can access global state and configuration values. From this we get the recommended app data directory path and create it if it doesn't exist yet (it won't if this is the first time the app is run). We then set the data directory for our `WebView`, load or generate a new keypair, and configure node storage locations for our database and blobs.
 
 We're using a new crate module `key_pair` for the logic around loading or generating our node identity, we won't look into that now as it's not so interesting for this tutorial, but feel free to head over to `src/key_pair.rs` if you want to know more.
 
@@ -483,7 +483,7 @@ To do this we make use of the Tauri `resources` directory. We can see that this 
 resources = [ "resources/*" ]
 ```
 
-Doing this means that any files in the `resources` directory will be bundled together with our app during compilation and we can access them via the [`resolve_resource`](https://docs.rs/tauri/1.5.4/tauri/struct.PathResolver.html#method.resolve_resource) method we get from the tauri crates `PathResolver`.
+Doing this means that any files in the `resources` directory will be bundled together with our app during compilation and we can access them via the [`resolve_resource`](https://docs.rs/tauri/1.5.4/tauri/struct.PathResolver.html#method.resolve_resource) method we get from the `tauri` crate's `PathResolver`.
 
 At this point we will also perform a little refactor as our app setup code is growing. We'll introduce a new module `config` and export a method for handling all of the above. We won't look into this module code in detail as it is fairly generic, see `src/config.rs` if you want to know more. We also add our default `config.toml` file to `resources/config.toml`. Our setup code now looks like this:
 
@@ -658,7 +658,7 @@ Ok, we're pretty much done with the setup code! We have a Tauri app that launche
 
 :::info But what about the panda stickers?!
 
-There is a JavaScript client app wrapped in this project of course, otherwise none of the clicky panda sticker fun would be possible. Have a look into the `src/` directory to explore the code. It's a very simple client, but still demonstrates the powerful query API that our node is exploring. Int `scr/queries.js` you will find all the GraphQL queries the client uses, they make use of filtering, ordering and paginating document collections. Hopefully it demonstrates that thoughtful schema and query design can reduce the need for complex app logic greatly.
+There is a JavaScript client app wrapped in this project of course, otherwise none of the clicky panda sticker fun would be possible. Have a look into the `src/` directory to explore the code. It's a very simple client, but still demonstrates the powerful query API that our node is exporting. In `src/queries.js` you will find all the GraphQL queries the client uses, they make use of filtering, ordering and paginating document collections. Hopefully it demonstrates that thoughtful schema and query design can reduce the need for complex app logic greatly.
 
 :::
 
@@ -668,7 +668,7 @@ This tutorial is already growing quite long! But we still have a little more exc
 
 Tauri commands allow you to define methods in your Rust code and automatically have them exposed in the client. We will use this now to communicate the `HTTP` port our node is using to the client app. This is just an example though, there could be many other uses for this feature.
 
-What this looks like in the (heavily redacted) rust code:
+What this looks like in the (heavily redacted) Rust code:
 
 ```rust
 use aquadoggo::Node;
@@ -783,7 +783,7 @@ pub fn app_data_dir(app: &AppHandle) -> Result<PathBuf, anyhow::Error> {
 
 ### Multiple nodes / replication
 
-During development it's really useful to be able to start many nodes and observe local discovery and replication of data. We built this into the p2panda Tauri boilerplate for you. To launch multiple app instances simple simple run the following commands:
+During development it's really useful to be able to start many nodes and observe local discovery and replication of data. We built this into the p2panda Tauri boilerplate for you. To launch multiple app instances simply run the following commands:
 
 ```bash
 # Start a dev server for the client code which will be shared across app instances.
@@ -798,13 +798,13 @@ npm run peer
 # etc....
 ```
 
-Eventually you'll will end up with something which looks like this:
+Eventually you will end up with something which looks like this:
 
 ![tauri example screenshot with many peers](https://raw.githubusercontent.com/p2panda/.github/main/assets/tauri-example-screenshot.png)
 
 :::info Why are there different color pandas?
 
-Glad you asked! Panda color is deterministically generated from your clients public key ;-p this means we can see which authors published which pandas once data starts replicating around. Cool, right?!
+Glad you asked! Panda color is deterministically generated from your client's public key ;-p this means we can see which authors published which pandas once data starts replicating around. Cool, right?!
 
 :::
 
